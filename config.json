@@ -10,11 +10,11 @@
             "description": "Express Despair the Nira Way™️."
         },
         "patpatstart": {
-            "name": "hipatpat",
+            "name": "patpathi",
             "description": "Start a conversation with one of PatPat's clones."
         },
         "patpatstop": {
-            "name": "byepatpat",
+            "name": "patpatbye",
             "description": "End conversation with PatPat's clone."
         },
         "stabstabstab": {
