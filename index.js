@@ -11,12 +11,14 @@ What needs to be added?:
 
 For creating/editing embeds:
 const botEmbeds = require("./Embeds/botEmbeds");
-const roleslistEmbeds = require("./Embeds/roleslistEmbeds");
+
 
 const botCommands = require("./Commands/botCommands");
-const roleslistCommands = require("./Commands/roleslistCommands");
+
 const ruleCommands = require("./Commands/ruleCommands");
 */
+const roleslistEmbeds = require("./Embeds/roleslistEmbeds");
+const roleslistCommands = require("./Commands/roleslistCommands");
 
 const ruleEmbeds = require("./Embeds/ruleEmbeds");
 var uwuifying = require("./UWU Translator/uwuify.js");
@@ -89,11 +91,11 @@ function statusChange() {
 client.once("ready", () => {
 	console.log(`${client.user.tag} activated!`);
     setInterval(statusChange, 30000);
-
+    roleslistCommands(client, "758494476174884905");
     /*
     For creating/editing embeds:
     botCommands(client, "742548177462231120");
-    roleslistCommands(client, "758494476174884905");
+    
     ruleCommands(client, "603248229928140801");
     */
 });

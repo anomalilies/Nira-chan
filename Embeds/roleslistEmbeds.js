@@ -23,8 +23,8 @@ global.roles2 = new Discord.MessageEmbed()
     {name: "Affiliates", value: `Our <@&744728162843492404> from r/ZUTOMAYO, and other Discord servers!`},
     {name: "Meme Royalty", value: `The <@&751205513806610454> role is awarded to our most-active meme creators!`},
     {name: "Theorists", value: `The <@&756314524285534259> role is awarded to users who have spent their free-time making theories based on ZUTOMAYO MVs!`},
-    {name: "Musicians", value: `Given to our <@&758774148154523669> from <#603248158088101929>, with talents ranging from singing, to guitar!`},
     {name: "Artists", value: `Given to our most creative and active <@&758774087161741363>!`},
+    {name: "Musicians", value: `Given to our <@&758774148154523669> from <#603248158088101929>, with talents ranging from singing, to guitar!`},
     {name: "Contest Winners", value: `An exclusive role solely for our <@&761383548476325888> from <#761326959154167838>.`},
     {name: "Runner Ups", value: `Another exclusive role given to our <@&761383550741643284> from <#761326959154167838>.`},
     {name: "Contributors", value: `The <@&761383555372023860> role comes with all awarded roles and those who have entered contests, as to separate users on the member list.`}
@@ -46,5 +46,5 @@ global.roles4 = new Discord.MessageEmbed()
   .setDescription("From exclusive role shop listings!")
   .setColor(240116)
   .addFields(
-    {name: "Paint Drinker", value: `Still don't know how this meme started...`}
+    {name: "Paint Drinkers", value: `Still don't know how this meme started...`}
 )

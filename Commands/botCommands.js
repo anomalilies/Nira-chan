@@ -1,4 +1,4 @@
-/*
+///*
 module.exports = async (client, id2 = []) => {
     const channel = await client.channels.fetch(id2)
   
@@ -31,10 +31,10 @@ module.exports = async (client, id2 = []) => {
             channel.send("<:spacer:757807111756447806>")
             channel.send("Don't have Nitro, but want to still use our animated emojis (and other Easter eggs from other servers)? Use the commands below!\nPlease note that although we'll try to update this list as often as possible, we can't promise that all commands will be listed.\nFor a full, up-to-date log, simply use `-command list`!")
         }
-        else channel.messages.fetch("message_id")
+        else channel.messages.fetch("769008718552760351")
             .then(messages => {
-                messages.edit(embed_id);
+                messages.edit(roles2);
         });
     })
 }
-*/
+//*/
