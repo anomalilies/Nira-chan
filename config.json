@@ -26,6 +26,13 @@
             "description": "UWU-ify your messages!"
         }
     },
+    "allowlists": {
+        "botspamchannels": [
+            "742550881911701615", // ZZ
+            "758523455850938408", // ZZ
+            "770028576078430239"
+        ]
+    },
     "emojis": {
         "disgust": "<:niradisgust:742092526097268797>",
         "stare": "<:nirastare:742093326823587840>",
