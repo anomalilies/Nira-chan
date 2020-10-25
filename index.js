@@ -2,7 +2,7 @@ require("dotenv").config();
 const cron = require("cron");
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const { prefix, commands, emojis, patpatresponses, nira9000 } = require("./config.json");
+const { prefix, commands, allowlists, emojis, patpatresponses, nira9000 } = require("./config.json");
 
 /*
 What needs to be added?:
@@ -149,7 +149,8 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
     }
     
     // Akinator Easter Egg
-	if(newMessage.channel.id === "742550881911701615" || newMessage.channel.id === "758523455850938408") {
+    // Allowed in specific bot channels only
+	if(allowlists.botspamchannels.includes(newMessage.channel.id)) {
 		if(newMessage.content.toLowerCase().startsWith("!akinator")) {
 			const embed = new Discord.MessageEmbed()
 		  	.setAuthor(newMessage.author.tag, newMessage.author.displayAvatarURL({dynamic:true}))
@@ -221,7 +222,8 @@ client.on("message", async message => {
     }
     
     // Akinator Easter Egg
-	if(message.channel.id === "742550881911701615" || message.channel.id === "758523455850938408") {
+    // Allowed in specific bot channels only
+	if(allowlists.botspamchannels.includes(message.channel.id)) {
 		if(message.content.toLowerCase().startsWith("!akinator")) {
 			const embed = new Discord.MessageEmbed()
 		  	.setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
@@ -234,7 +236,8 @@ client.on("message", async message => {
 	}
     
     // PatPat Command
-    if (message.channel.id === "742550881911701615" || message.channel.id === "758523455850938408") {
+    // Allowed in specific bot channels only
+    if (allowlists.botspamchannels.includes(message.channel.id)) {
 
         if (message.author.id == "759338005633826817" && isTalkingWithPatPat) {
             const index = Math.floor(Math.random() * nira9000.length);

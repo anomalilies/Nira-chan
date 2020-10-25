@@ -26,6 +26,20 @@
             "description": "UWU-ify your messages!"
         }
     },
+    "allowlists": {
+        "notes": [
+            "(this field not actually used in code, only way I could add comments;",
+            " feel free to remove notes object if allowedlists.notes is too much clutter)",
+            "The IMPORTANT channel ids are: 742... and 758... as these are ZZ channels",
+            " for bot-spamming and fun-and-games, respectively.",
+            "770... id is for a bot-spamming channel on a test server."
+        ],
+        "botspamchannels": [
+            "742550881911701615",
+            "758523455850938408",
+            "770028576078430239"
+        ]
+    },
     "emojis": {
         "disgust": "<:niradisgust:742092526097268797>",
         "stare": "<:nirastare:742093326823587840>",
