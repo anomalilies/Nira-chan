@@ -1,7 +1,7 @@
 const data = {
     statuses: ["you in disgust", "(staring at) you", "you in pain (owie!)", "you -fishy", "you~wu~(♥ω♥*)!"],
 
-    // This software uses code from QuazzyWazzy/UwU-fy - see library-license.txt
+    // This software uses code from QuazzyWazzy/UwU-fy - See LICENSE!
     replacements: [
         [
             ["god"], "gawd"

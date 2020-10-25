@@ -1,4 +1,4 @@
-///*
+/*
 module.exports = async (client, id = []) => {
     const channel = await client.channels.fetch(id)
   
@@ -21,4 +21,4 @@ module.exports = async (client, id = []) => {
     });
     })
 }
-//*/
+*/
