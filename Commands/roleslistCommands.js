@@ -1,4 +1,4 @@
-///*
+/*
 module.exports = async (client, id = []) => {
     const channel = await client.channels.fetch(id)
   
@@ -16,10 +16,10 @@ module.exports = async (client, id = []) => {
             channel.send("<:spacer:757807111756447806>")
             channel.send("**Role Shop**")
         }
-        else channel.messages.fetch("770326902123528192")
+        else channel.messages.fetch("message_id")
         .then(messages => {
-            messages.edit(roles2);
+            messages.edit(role_embed);
         });
     })
 }
-//*/
+*/
