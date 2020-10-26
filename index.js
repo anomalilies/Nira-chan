@@ -113,7 +113,9 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
         if(newMessage.content.toLowerCase().startsWith("!akinator")) {
             const embed = new Discord.MessageEmbed()
                 .setAuthor(newMessage.author.tag, newMessage.author.displayAvatarURL({dynamic:true}))
-                .setDescription(`I'm ${Math.floor(Math.random() * (99-75+1)+75)}% sure your character is...\n\nACAne (Singer)`)
+                .setDescription(
+                    `I'm ${Math.floor(Math.random() * (99-75+1)+75)}% sure your character is...\n\nACAne (Singer)`
+                )
                 .setThumbnail("https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/ACAne.png")
                 .setFooter("Is this correct? (yes/no)")
                 .setColor(240116);
@@ -185,7 +187,9 @@ client.on("message", async message => {
         if(message.content.toLowerCase().startsWith("!akinator")) {
             const embed = new Discord.MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
-                .setDescription(`I'm ${Math.floor(Math.random() * (99-75+1)+75)}% sure your character is...\n\nACAne (Singer)`)
+                .setDescription(
+                    `I'm ${Math.floor(Math.random() * (99-75+1)+75)}% sure your character is...\n\nACAne (Singer)`
+                )
                 .setThumbnail("https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/ACAne.png")
                 .setFooter("Is this correct? (yes/no)")
                 .setColor(240116);
@@ -267,7 +271,9 @@ client.on("message", async message => {
 
     // Fishy Commands
     if (message.channel.id === "747201864889794721") {
-        if (message.mentions.members.first() || fishyCommands.some(word => message.content.toLowerCase().startsWith(`${prefix}`+word))) {
+        let starts_with_command = fishyCommands
+            .some(word => message.content.toLowerCase().startsWith(`${prefix}`+word));
+        if (message.mentions.members.first() || starts_with_command) {
             return;
         }
         else message.delete();
@@ -319,7 +325,8 @@ client.on("message", async message => {
     } else if (message.content.toLowerCase() === `${prefix}${commands.despair.name}`) {
         message.channel.send(`Aaaa, the tape is rewinding so fast! ${emojis.despair}`);
     } else if (message.content.toLowerCase().startsWith(`${prefix}${commands.dearmrf.name}`)) {
-        message.channel.send(`Mr. F, I have no idea what **${message.author.username}** is saying, but something tells me you best pay really close attention! ${emojis.wince}`);
+        message.channel.send(`Mr. F, I have no idea what **${message.author.username}** is saying, but something `
+            + `tells me you best pay really close attention! ${emojis.wince}`);
     } else if (message.content.toLowerCase() === `${prefix}${commands.stabstabstab.name}`) {
         message.channel.send(`pokepokepoke ${emojis.fencing}`);
     }
