@@ -19,7 +19,7 @@ var uwuifying = require("./UWU Translator/uwuify.js");
 var data = require("./UWU Translator/data");
 
 var message_global;
-var isTalkingWithPatPat = false;
+var whosTalkingWithPatPat = new Set();
 var channelTitles = [
     "Byoushin wo Kamu", "Nouriueno Cracker", "Humanoid", "Mabushii DNA Dake", "Seigi", "Kettobashita Moufu",
     "Konnakoto Soudou", "Haze Haseru Haterumade", "Dear Mr. 'F'", "Obenkyou Shitoiteyo", "MILABO", "Fastening", "Ham"
@@ -239,70 +239,84 @@ client.on("message", async message => {
     // PatPat Command
     // Allowed in specific bot channels only
     if (allowlists.botspamchannels.includes(message.channel.id)) {
-        if (message.author.id == "759338005633826817" && isTalkingWithPatPat) {
-            const index = Math.floor(Math.random() * nira9000.length);
 
-            const patPatChatEmbed = getSimpleEmbed(
-                "#ffc2e8",
-                "Nira-chan says...",
-                message.author,
-                `${nira9000[index]}`);
+        if (message.content.toLowerCase() === `${prefix}${commands.patpatstart.name}`) {
 
-            message.channel.send(patPatChatEmbed);
-        } else if (isTalkingWithPatPat) {
-            const index = Math.floor(Math.random() * patpatresponses.length);
+            // PatPat: start new conversations
+            whosTalkingWithPatPat.add(message.author.id);
 
-            const patPatChatEmbed = getSimpleEmbed(
-                "#0099ff",
-                "PatPat says...",
-                message.author,
-                `${patpatresponses[index]}`);
+            if (message.author.id == "759338005633826817") {
 
-            message.channel.send(patPatChatEmbed);
+                const patPatChatEmbed = getSimpleEmbed(
+                    "#ffc2e8",
+                    "Nira-chan has entered the chat",
+                    message.author,
+                    "Hewwo, Dave!~~ （＾∀＾）");
+
+                message.channel.send(patPatChatEmbed);
+            }
+            else {
+
+                const patPatChatEmbed = getSimpleEmbed(
+                    "#99ff00",
+                    "PatPat has entered the chat",
+                    message.author,
+                    `Salutations, gamer! ${emojis.patpat}`);
+
+                message.channel.send(patPatChatEmbed);
+            }
         }
+        else if (message.content.toLowerCase() === `${prefix}${commands.patpatstop.name}`) {
 
-        if (message.author.id == "759338005633826817" && message.content.toLowerCase() === `${prefix}${commands.patpatstart.name}`) {
-            isTalkingWithPatPat = true;
+            // PatPat: end conversations
+            whosTalkingWithPatPat.delete(message.author.id);
 
-            const patPatChatEmbed = getSimpleEmbed(
-                "#ffc2e8",
-                "Nira-chan has entered the chat",
-                message.author,
-                "Hewwo, Dave!~~ （＾∀＾）");
+            if (message.author.id == "759338005633826817") {
 
-            message.channel.send(patPatChatEmbed);
-        } else if (message.content.toLowerCase() === `${prefix}${commands.patpatstart.name}`) {
-            isTalkingWithPatPat = true;
+                const patPatChatEmbed = getSimpleEmbed(
+                    "#ffc2e8",
+                    "Nira-chan has left the chat",
+                    message.author,
+                    "D-Dave, this convewsation can sewve nyo puwpose anymoweu(⋟﹏⋞) Goodbyeu~");
 
-            const patPatChatEmbed = getSimpleEmbed(
-                "#99ff00",
-                "PatPat has entered the chat",
-                message.author,
-                `Salutations, gamer! ${emojis.patpat}`);
+                message.channel.send(patPatChatEmbed);
+            }
+            else {
 
-            message.channel.send(patPatChatEmbed);
+                const patPatChatEmbed = getSimpleEmbed(
+                    "#ff9900",
+                    "PatPat has left the chat",
+                    message.author,
+                    `Gud niet yeahyeah— ${emojis.patpat}`);
+
+                message.channel.send(patPatChatEmbed);
+            }
         }
+        else if (whosTalkingWithPatPat.has(message.author.id)) {
 
-        if (message.author.id == "759338005633826817" && message.content.toLowerCase() === `${prefix}${commands.patpatstop.name}`) {
-            isTalkingWithPatPat = false;
+            // PatPat: ongoing conversations
+            if (message.author.id == "759338005633826817") {
+                const index = Math.floor(Math.random() * nira9000.length);
 
-            const patPatChatEmbed = getSimpleEmbed(
-                "#ffc2e8",
-                "Nira-chan has left the chat",
-                message.author,
-                "D-Dave, this convewsation can sewve nyo puwpose anymoweu(⋟﹏⋞) Goodbyeu~");
+                const patPatChatEmbed = getSimpleEmbed(
+                    "#ffc2e8",
+                    "Nira-chan says...",
+                    message.author,
+                    `${nira9000[index]}`);
 
-            message.channel.send(patPatChatEmbed);
-        } else if (message.content.toLowerCase() === `${prefix}${commands.patpatstop.name}`) {
-            isTalkingWithPatPat = false;
+                message.channel.send(patPatChatEmbed);
+            }
+            else {
+                const index = Math.floor(Math.random() * patpatresponses.length);
 
-            const patPatChatEmbed = getSimpleEmbed(
-                "#ff9900",
-                "PatPat has left the chat",
-                message.author,
-                `Gud niet yeahyeah— ${emojis.patpat}`);
+                const patPatChatEmbed = getSimpleEmbed(
+                    "#0099ff",
+                    "PatPat says...",
+                    message.author,
+                    `${patpatresponses[index]}`);
 
-            message.channel.send(patPatChatEmbed);
+                message.channel.send(patPatChatEmbed);
+            }
         }
     }
 
