@@ -5,7 +5,6 @@ module.exports = async (client, id = []) => {
     channel.messages.fetch().then((messages) => {
 
         if (messages.size === 0) {
-            channel.send("<:spacer:757807111756447806>")
             channel.send("**Roles List**")
             channel.send(roles1)
             channel.send("<:spacer:757807111756447806>")
@@ -17,10 +16,10 @@ module.exports = async (client, id = []) => {
             channel.send("<:spacer:757807111756447806>")
             channel.send("**Role Shop**")
         }
-        /*else channel.messages.fetch("769008744629141525")
+        else channel.messages.fetch("770326902123528192")
         .then(messages => {
-            messages.edit(roles4);
-    });*/
+            messages.edit(roles2);
+        });
     })
 }
 //*/
