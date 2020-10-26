@@ -3,6 +3,7 @@ const cron = require("cron");
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const { prefix, commands, allowlists, emojis, patpatresponses, nira9000 } = require("./config.json");
+const rules = require("./Embeds/ruleEmbeds.json");
 
 /*
 For creating/editing embeds:
@@ -28,50 +29,6 @@ var fishyCommands = [
     "fishy", "fishytimer", "fishystats", "leaderboardfishy", "fish", "fihy", "fisy", "foshy", "fisyh", "fsihy", "fin",
     "fintimer", "fisytimer", "foshytimer", "ft", "finstats", "fisystats", "foshystats", "fs", "leaderboardfishysize"
 ];
-
-// Rules
-const serverRules = {
-    "Rule 1": {
-        "name": "1",
-        "embed": rule1
-    },
-    "Rule 2": {
-        "name": "2",
-        "embed": rule2
-    },
-    "Rule 3": {
-        "name": "3",
-        "embed": rule3
-    },
-    "Rule 4": {
-        "name": "4",
-        "embed": rule4
-    },
-    "Rule 5": {
-        "name": "5",
-        "embed": rule5
-    },
-    "Rule 6": {
-        "name": "6",
-        "embed": rule6
-    },
-    "Rule 7": {
-        "name": "7",
-        "embed": rule7
-    },
-    "Rule 8": {
-        "name": "8",
-        "embed": rule8
-    },
-    "Rule 9": {
-        "name": "9",
-        "embed": rule9
-    },
-    "Rule 10": {
-        "name": "10",
-        "embed": rule10
-    }
-}
 
 // Embeds
 function getSimpleEmbed(color, title, author, description) {
@@ -157,7 +114,7 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
             const embed = new Discord.MessageEmbed()
                 .setAuthor(newMessage.author.tag, newMessage.author.displayAvatarURL({dynamic:true}))
                 .setDescription(`I'm ${Math.floor(Math.random() * (99-75+1)+75)}% sure your character is...\n\nACAne (Singer)`)
-                .setThumbnail("https://instagram.flhr3-2.fna.fbcdn.net/v/t51.2885-15/e35/54277208_514022812460166_6312840010679348285_n.jpg?_nc_ht=instagram.flhr3-2.fna.fbcdn.net&_nc_cat=106&_nc_ohc=tMyB8LDGG9gAX-bLLtG&_nc_tp=18&oh=d3e09190ea3ce400160e0d6d61849386&oe=5FB7B5C5")
+                .setThumbnail("https://github.com/anomalilies/Nira-chan/Images/ACAne.png")
                 .setFooter("Is this correct? (yes/no)")
                 .setColor(240116);
             newMessage.channel.send(embed);
@@ -224,12 +181,12 @@ client.on("message", async message => {
 
     // Akinator Easter Egg
     // Allowed in specific bot channels only
-    if(allowlists.botspamchannels.includes(message.channel.id)) {
+    if (allowlists.botspamchannels.includes(message.channel.id)) {
         if(message.content.toLowerCase().startsWith("!akinator")) {
             const embed = new Discord.MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
                 .setDescription(`I'm ${Math.floor(Math.random() * (99-75+1)+75)}% sure your character is...\n\nACAne (Singer)`)
-                .setThumbnail("https://instagram.flhr3-2.fna.fbcdn.net/v/t51.2885-15/e35/54277208_514022812460166_6312840010679348285_n.jpg?_nc_ht=instagram.flhr3-2.fna.fbcdn.net&_nc_cat=106&_nc_ohc=tMyB8LDGG9gAX-bLLtG&_nc_tp=18&oh=d3e09190ea3ce400160e0d6d61849386&oe=5FB7B5C5")
+                .setThumbnail("https://github.com/anomalilies/Nira-chan/Images/ACAne.png")
                 .setFooter("Is this correct? (yes/no)")
                 .setColor(240116);
             message.channel.send(embed);
@@ -239,14 +196,11 @@ client.on("message", async message => {
     // PatPat Command
     // Allowed in specific bot channels only
     if (allowlists.botspamchannels.includes(message.channel.id)) {
-
         if (message.content.toLowerCase() === `${prefix}${commands.patpatstart.name}`) {
-
             // PatPat: start new conversations
             whosTalkingWithPatPat.add(message.author.id);
 
             if (message.author.id == "759338005633826817") {
-
                 const patPatChatEmbed = getSimpleEmbed(
                     "#ffc2e8",
                     "Nira-chan has entered the chat",
@@ -254,9 +208,7 @@ client.on("message", async message => {
                     "Hewwo, Dave!~~ （＾∀＾）");
 
                 message.channel.send(patPatChatEmbed);
-            }
-            else {
-
+            } else {
                 const patPatChatEmbed = getSimpleEmbed(
                     "#99ff00",
                     "PatPat has entered the chat",
@@ -265,14 +217,11 @@ client.on("message", async message => {
 
                 message.channel.send(patPatChatEmbed);
             }
-        }
-        else if (message.content.toLowerCase() === `${prefix}${commands.patpatstop.name}`) {
-
+        } else if (message.content.toLowerCase() === `${prefix}${commands.patpatstop.name}`) {
             // PatPat: end conversations
             whosTalkingWithPatPat.delete(message.author.id);
 
             if (message.author.id == "759338005633826817") {
-
                 const patPatChatEmbed = getSimpleEmbed(
                     "#ffc2e8",
                     "Nira-chan has left the chat",
@@ -280,9 +229,7 @@ client.on("message", async message => {
                     "D-Dave, this convewsation can sewve nyo puwpose anymoweu(⋟﹏⋞) Goodbyeu~");
 
                 message.channel.send(patPatChatEmbed);
-            }
-            else {
-
+            } else {
                 const patPatChatEmbed = getSimpleEmbed(
                     "#ff9900",
                     "PatPat has left the chat",
@@ -293,7 +240,6 @@ client.on("message", async message => {
             }
         }
         else if (whosTalkingWithPatPat.has(message.author.id)) {
-
             // PatPat: ongoing conversations
             if (message.author.id == "759338005633826817") {
                 const index = Math.floor(Math.random() * nira9000.length);
@@ -305,8 +251,7 @@ client.on("message", async message => {
                     `${nira9000[index]}`);
 
                 message.channel.send(patPatChatEmbed);
-            }
-            else {
+            } else {
                 const index = Math.floor(Math.random() * patpatresponses.length);
 
                 const patPatChatEmbed = getSimpleEmbed(
@@ -348,12 +293,18 @@ client.on("message", async message => {
 
     // Server Rules
     if (message.member.roles.cache.get("742061218860236840")) {
-        Object.keys(serverRules).forEach(key => {
-            if(message.content.includes(`${prefix}${serverRules[key].name}`) && !message.content.includes("http")) {
-                message.channel.send(serverRules[key].embed);
+        for (let i = 1; i <= rules.length; i++) {
+            if (message.content.includes(`${prefix}${i}`) && !message.content.includes("http")) {
+                message.channel.send(new Discord.MessageEmbed()
+                    .setTitle(rules[i - 1].title)
+                    .setDescription(rules[i - 1].description)
+                    .addFields({
+                        name: "Moderation",
+                        value: rules[i - 1].moderation
+                    }));
             }
         }
-        )};
+    }
 
     // Other Commands
     let isPrefix = message.content.toLowerCase();
