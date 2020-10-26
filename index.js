@@ -181,7 +181,7 @@ client.on("message", async message => {
 
     // Akinator Easter Egg
     // Allowed in specific bot channels only
-    if(allowlists.botspamchannels.includes(message.channel.id)) {
+    if (allowlists.botspamchannels.includes(message.channel.id)) {
         if(message.content.toLowerCase().startsWith("!akinator")) {
             const embed = new Discord.MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
@@ -196,14 +196,11 @@ client.on("message", async message => {
     // PatPat Command
     // Allowed in specific bot channels only
     if (allowlists.botspamchannels.includes(message.channel.id)) {
-
         if (message.content.toLowerCase() === `${prefix}${commands.patpatstart.name}`) {
-
             // PatPat: start new conversations
             whosTalkingWithPatPat.add(message.author.id);
 
             if (message.author.id == "759338005633826817") {
-
                 const patPatChatEmbed = getSimpleEmbed(
                     "#ffc2e8",
                     "Nira-chan has entered the chat",
@@ -211,9 +208,7 @@ client.on("message", async message => {
                     "Hewwo, Dave!~~ （＾∀＾）");
 
                 message.channel.send(patPatChatEmbed);
-            }
-            else {
-
+            } else {
                 const patPatChatEmbed = getSimpleEmbed(
                     "#99ff00",
                     "PatPat has entered the chat",
@@ -222,14 +217,11 @@ client.on("message", async message => {
 
                 message.channel.send(patPatChatEmbed);
             }
-        }
-        else if (message.content.toLowerCase() === `${prefix}${commands.patpatstop.name}`) {
-
+        } else if (message.content.toLowerCase() === `${prefix}${commands.patpatstop.name}`) {
             // PatPat: end conversations
             whosTalkingWithPatPat.delete(message.author.id);
 
             if (message.author.id == "759338005633826817") {
-
                 const patPatChatEmbed = getSimpleEmbed(
                     "#ffc2e8",
                     "Nira-chan has left the chat",
@@ -237,9 +229,7 @@ client.on("message", async message => {
                     "D-Dave, this convewsation can sewve nyo puwpose anymoweu(⋟﹏⋞) Goodbyeu~");
 
                 message.channel.send(patPatChatEmbed);
-            }
-            else {
-
+            } else {
                 const patPatChatEmbed = getSimpleEmbed(
                     "#ff9900",
                     "PatPat has left the chat",
@@ -250,7 +240,6 @@ client.on("message", async message => {
             }
         }
         else if (whosTalkingWithPatPat.has(message.author.id)) {
-
             // PatPat: ongoing conversations
             if (message.author.id == "759338005633826817") {
                 const index = Math.floor(Math.random() * nira9000.length);
@@ -262,8 +251,7 @@ client.on("message", async message => {
                     `${nira9000[index]}`);
 
                 message.channel.send(patPatChatEmbed);
-            }
-            else {
+            } else {
                 const index = Math.floor(Math.random() * patpatresponses.length);
 
                 const patPatChatEmbed = getSimpleEmbed(
