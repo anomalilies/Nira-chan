@@ -114,7 +114,7 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
             const embed = new Discord.MessageEmbed()
                 .setAuthor(newMessage.author.tag, newMessage.author.displayAvatarURL({dynamic:true}))
                 .setDescription(`I'm ${Math.floor(Math.random() * (99-75+1)+75)}% sure your character is...\n\nACAne (Singer)`)
-                .setThumbnail("https://github.com/anomalilies/Nira-chan/Images/ACAne.png")
+                .setThumbnail("https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/ACAne.png")
                 .setFooter("Is this correct? (yes/no)")
                 .setColor(240116);
             newMessage.channel.send(embed);
@@ -186,7 +186,7 @@ client.on("message", async message => {
             const embed = new Discord.MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
                 .setDescription(`I'm ${Math.floor(Math.random() * (99-75+1)+75)}% sure your character is...\n\nACAne (Singer)`)
-                .setThumbnail("https://github.com/anomalilies/Nira-chan/Images/ACAne.png")
+                .setThumbnail("https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/ACAne.png")
                 .setFooter("Is this correct? (yes/no)")
                 .setColor(240116);
             message.channel.send(embed);
