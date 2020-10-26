@@ -89,7 +89,7 @@ client.once("ready", () => {
     /*
     For creating/editing embeds:
     botCommands(client, "742548177462231120");
-        roleslistCommands(client, "758494476174884905");
+    roleslistCommands(client, "758494476174884905");
     ruleCommands(client, "603248229928140801");
     */
 });
@@ -338,12 +338,13 @@ client.on("message", async message => {
     // Other Commands
     let isPrefix = message.content.toLowerCase();
     if (isPrefix.startsWith("<@!" + client.user.id + "> help")) {
-        let messageText = `__**Nira-chan's Commands**__\n\n`;
+        let helpEmbed = new Discord.MessageEmbed()
+            .setTitle(`Nira-chan's Commands`)
+            .setColor(16761576)
         for (const key in commands) {
-            messageText += `> **${prefix}${commands[key].name}**: ${commands[key].description}\n> \n`;
+            helpEmbed.addField(`${prefix}${commands[key].name}`, `${commands[key].description}`)
         }
-        messageText = messageText.substring(0, messageText.length - 3);
-        message.channel.send(messageText);
+        message.channel.send(helpEmbed);
     }
     else if (message.content.toLowerCase() === `${prefix}${commands.despair.name}`) {
         message.channel.send(`Aaaa, the tape is rewinding so fast! ${emojis.despair}`);
