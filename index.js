@@ -4,6 +4,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const { prefix, commands, allowlists, emojis, patpatresponses, nira9000 } = require("./config.json");
 const rules = require("./Embeds/ruleEmbeds.json");
+rules.forEach((rule, i) => rule.re = new RegExp(`(\\s|^)${prefix}${i+1}(\\s|$)`));
 
 /*
 For creating/editing embeds:
@@ -15,7 +16,6 @@ const roleslistCommands = require("./Commands/roleslistCommands");
 const ruleCommands = require("./Commands/ruleCommands");
 */
 
-const ruleEmbeds = require("./Embeds/ruleEmbeds");
 var uwuifying = require("./UWU Translator/uwuify");
 var data = require("./UWU Translator/data");
 
@@ -313,17 +313,15 @@ client.on("message", async message => {
 
     // Server Rules
     if (message.member.roles.cache.get("742061218860236840")) {
-        for (let i = 1; i <= rules.length; i++) {
-            if (message.content.includes(`${prefix}${i}`) && !message.content.includes("http")) {
-                message.channel.send(new Discord.MessageEmbed()
-                    .setTitle(rules[i - 1].title)
-                    .setDescription(rules[i - 1].description)
-                    .addFields({
-                        name: "Moderation",
-                        value: rules[i - 1].moderation
-                    }));
-            }
-        }
+        rules.filter(rule => rule.re.test(message.content))
+            .map(rule => new Discord.MessageEmbed()
+                .setTitle(rule.title)
+                .setDescription(rule.description)
+                .addFields({
+                    name: "Moderation",
+                    value: rule.moderation
+                }))
+            .forEach(rule => message.channel.send(rule));
     }
 
     // Other Commands
