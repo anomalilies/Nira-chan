@@ -29,6 +29,9 @@ var fishyCommands = [
     "fishy", "fishytimer", "fishystats", "leaderboardfishy", "fish", "fihy", "fisy", "foshy", "fisyh", "fsihy", "fin",
     "fintimer", "fisytimer", "foshytimer", "ft", "finstats", "fisystats", "foshystats", "fs", "leaderboardfishysize"
 ];
+var contributorRoles = [
+    "Journalists", "Hackers", "Stans", "Editors", "Translators", "Meme Royalty", "Theorists", "Musicians", "Artists"
+];
 
 // Embeds
 function getSimpleEmbed(color, title, author, description) {
@@ -47,7 +50,7 @@ function statusChange() {
 // Ready Event
 client.once("ready", () => {
     console.log(`${client.user.tag} activated!`);
-    setInterval(statusChange, 30000);
+    setInterval(statusChange, 60000);
 
     /*
     For creating/editing embeds:
@@ -71,9 +74,22 @@ client.on("guildMemberAdd", member => {
 });
 
 // Boost Message
-client.on('guildMemberUpdate', (oldMember, newMember) => {
-    if (oldMember.premiumSince !== newMember.premiumSince) {
-      message.channel.send(`${emojis.yay}`)
+client.on("guildMemberUpdate", async (oldMember, newMember) => {
+    const isContributor = "761383555372023860";
+    const inContributorGroup = r=>contributorRoles.includes(r.name); 
+    const channel = client.channels.cache.get("603246092402032673");
+
+    if (oldMember.roles.cache.size !== newMember.roles.cache.size) {
+        if (!oldMember.roles.cache.has("744738039116464151") && newMember.roles.cache.has("744738039116464151")) {
+            channel.send(emojis.yay);
+        }
+        // Contributors Role
+        else if (!oldMember.roles.cache.has(isContributor) && newMember.roles.cache.some(inContributorGroup)) {
+            newMember.roles.add(isContributor);
+        }
+        else if (oldMember.roles.cache.has(isContributor) && !newMember.roles.cache.some(inContributorGroup)) {
+            newMember.roles.remove(isContributor);
+        }
     }
 });
 
@@ -211,7 +227,7 @@ client.on("message", async message => {
         }
     });
     if (needs_resend) {
-        message.channel.send(resend_content).then(message.channel.send(`**Message requested by: **` + originalAuthor))
+        message.channel.send(resend_content).then(message.channel.send(`**Message requested by: **` + originalAuthor));
     }
 
     // Akinator Easter Egg
@@ -314,9 +330,10 @@ client.on("message", async message => {
 
     // !work
     if (message.channel.id === "770109833713418271") {
-        if (!message.content.toLowerCase() === ("!work")) {
-            message.delete();
+        if (message.content.toLowerCase() === ("!work")) {
+            return;
         }
+        else message.delete();
     }
 
     // Rule 0(w0)
