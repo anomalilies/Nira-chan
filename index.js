@@ -67,7 +67,7 @@ scheduledMessage.start();
 
 // Welcome Message
 client.on("guildMemberAdd", member => {
-    member.guild.channels.cache.get("603246092402032673").send(`${emojis.wave}`);
+    member.guild.channels.cache.get("603246092402032673").send(emojis.wave);
 });
 
 // Boost Message
@@ -91,20 +91,20 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
     await userReactions(newMessage);
 
     // Check for NiraMojis
-    if (newMessage.content.includes(`${emojis.disgust}`)) {
+    if (newMessage.content.includes(emojis.disgust)) {
         newMessage.react("742092526097268797");
     }
-    if (newMessage.content.includes(`${emojis.stare}`)) {
+    if (newMessage.content.includes(emojis.stare)) {
         newMessage.react("742093326823587840");
     }
-    if (newMessage.content.includes(`${emojis.owie}`)) {
+    if (newMessage.content.includes(emojis.owie)) {
         newMessage.react("748995687093370902")
             .then(() => newMessage.react("765005652803321856"));
     }
 
     // PatPat Role
     if (newMessage.member.roles.cache.get("765347466169024512")) {
-        if (newMessage.content.toLowerCase().includes("patpat", `${emojis.patpat}`)) {
+        if (newMessage.content.toLowerCase().includes("patpat", emojis.patpat)) {
             newMessage.react("761487227921367051");
         }
     }
@@ -120,7 +120,9 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
         if(newMessage.content.toLowerCase().startsWith("!akinator")) {
             const embed = new Discord.MessageEmbed()
                 .setAuthor(newMessage.author.tag, newMessage.author.displayAvatarURL({dynamic:true}))
-                .setDescription(`I'm ${Math.floor(Math.random() * (99-75+1)+75)}% sure your character is...\n\nACAne (Singer)`)
+                .setDescription(
+                    `I'm ${Math.floor(Math.random() * (99-75+1)+75)}% sure your character is...\n\nACAne (Singer)`
+                )
                 .setThumbnail("https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/ACAne.png")
                 .setFooter("Is this correct? (yes/no)")
                 .setColor(240116);
@@ -150,33 +152,33 @@ client.on("message", async message => {
 
     // Check for NiraMojis
     if (message.channel.id === "603246659295510557") {
-        if (![`${emojis.disgust}`].includes(message.content)) {
+        if (![emojis.disgust].includes(message.content)) {
             return message.delete();
         }
-    } else if (message.content.includes(`${emojis.disgust}`)) {
+    } else if (message.content.includes(emojis.disgust)) {
         message.react("742092526097268797");
     }
 
     if (message.channel.id === "747663718959153906") {
-        if (![`${emojis.stare}`].includes(message.content)) {
+        if (![emojis.stare].includes(message.content)) {
             return message.delete();
         }
-    } else if (message.content.includes(`${emojis.stare}`)) {
+    } else if (message.content.includes(emojis.stare)) {
         message.react("742093326823587840");
     }
 
     if (message.channel.id === "750558283315544155") {
-        if (![`${emojis.owie}`].includes(message.content)) {
+        if (![emojis.owie].includes(message.content)) {
             return message.delete();
         }
-    } else if (message.content.includes(`${emojis.owie}`)) {
+    } else if (message.content.includes(emojis.owie)) {
         message.react("748995687093370902")
             .then(() => message.react("765005652803321856"));
     }
 
     // PatPat Role
     if (message.member.roles.cache.get("765347466169024512")) {
-        if (message.content.toLowerCase().includes("patpat", `${emojis.patpat}`)) {
+        if (message.content.toLowerCase().includes("patpat", emojis.patpat)) {
             message.react("761487227921367051");
         }
     }
@@ -192,7 +194,9 @@ client.on("message", async message => {
         if(message.content.toLowerCase().startsWith("!akinator")) {
             const embed = new Discord.MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
-                .setDescription(`I'm ${Math.floor(Math.random() * (99-75+1)+75)}% sure your character is...\n\nACAne (Singer)`)
+                .setDescription(
+                    `I'm ${Math.floor(Math.random() * (99-75+1)+75)}% sure your character is...\n\nACAne (Singer)`
+                )
                 .setThumbnail("https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/ACAne.png")
                 .setFooter("Is this correct? (yes/no)")
                 .setColor(240116);
@@ -274,7 +278,9 @@ client.on("message", async message => {
 
     // Fishy Commands
     if (message.channel.id === "747201864889794721") {
-        if (message.mentions.members.first() || fishyCommands.some(word => message.content.toLowerCase().startsWith(`${prefix}`+word))) {
+        let starts_with_command = fishyCommands
+            .some(word => message.content.toLowerCase().startsWith(`${prefix}`+word));
+        if (message.mentions.members.first() || starts_with_command) {
             return;
         }
         else message.delete();
@@ -333,7 +339,8 @@ client.on("message", async message => {
     } else if (message.content.toLowerCase() === `${prefix}${commands.despair.name}`) {
         message.channel.send(`Aaaa, the tape is rewinding so fast! ${emojis.despair}`);
     } else if (message.content.toLowerCase().startsWith(`${prefix}${commands.dearmrf.name}`)) {
-        message.channel.send(`Mr. F, I have no idea what **${message.author.username}** is saying, but something tells me you best pay really close attention! ${emojis.wince}`);
+        message.channel.send(`Mr. F, I have no idea what **${message.author.username}** is saying, but something `
+            + `tells me you best pay really close attention! ${emojis.wince}`);
     } else if (message.content.toLowerCase() === `${prefix}${commands.stabstabstab.name}`) {
         message.channel.send(`pokepokepoke ${emojis.fencing}`);
     }
