@@ -70,6 +70,13 @@ client.on("guildMemberAdd", member => {
     member.guild.channels.cache.get("603246092402032673").send(emojis.wave);
 });
 
+// Boost Message
+client.on('guildMemberUpdate', (oldMember, newMember) => {
+    if (oldMember.premiumSince !== newMember.premiumSince) {
+      message.channel.send(`${emojis.yay}`)
+    }
+});
+
 // Check Edited Messages
 async function userReactions(message) {
     {
@@ -277,6 +284,13 @@ client.on("message", async message => {
             return;
         }
         else message.delete();
+    }
+
+    // !work
+    if (message.channel.id === "770109833713418271") {
+        if (!message.content.toLowerCase() === ("!work")) {
+            message.delete();
+        }
     }
 
     // Rule 0(w0)
