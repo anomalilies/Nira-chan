@@ -188,6 +188,31 @@ client.on("message", async message => {
         message.react("742394597174673458");
     }
 
+    // Check for non-nitro user using GIF emoji to resend it with the GIF emoji
+    // Capture group 1 will have the emoji name in this case
+    const emoji_regexp = /<a?:\w+:\d+>|(?<!\\):(\w+):/g;
+    let resend_content = message.content;
+    const matches = [...resend_content.matchAll(emoji_regexp)];
+    // This variable will keep track of whether we need to resend with GIF emoji
+    let needs_resend = false;
+    matches.forEach(match => {
+        if (match[1]) {
+            // If capture group 1 caught something
+            message.guild.emojis.cache.each(emoji => {
+                // If it's an animated emoji, we need to resend
+                if (emoji.name === match[1] && emoji.animated) {
+                    // Don't make needs_resend false if it was already true
+                    needs_resend = true;
+                    resend_content = resend_content.replace(`:${emoji.name}:`, `<a:${emoji.name}:${emoji.id}>`);
+                }
+            });
+        }
+    });
+    if (needs_resend) {
+        message.channel.send(resend_content);
+        message.delete();
+    }
+
     // Akinator Easter Egg
     // Allowed in specific bot channels only
     if (allowlists.botspamchannels.includes(message.channel.id)) {

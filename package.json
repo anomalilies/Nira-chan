@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
-  "author": "anomalilies and davetan2.1, ft. the ZONE",
+  "author": "anomalilies, cubetastic33, davetan2, niradisgust",
   "license": "ISC",
   "dependencies": {
     "cron": "^1.8.2",
