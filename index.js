@@ -16,7 +16,7 @@ const ruleCommands = require("./Commands/ruleCommands");
 */
 
 const ruleEmbeds = require("./Embeds/ruleEmbeds");
-var uwuifying = require("./UWU Translator/uwuify.js");
+var uwuifying = require("./UWU Translator/uwuify");
 var data = require("./UWU Translator/data");
 
 var message_global;
