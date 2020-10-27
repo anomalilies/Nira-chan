@@ -192,6 +192,7 @@ client.on("message", async message => {
     // Capture group 1 will have the emoji name in this case
     const emoji_regexp = /<a?:\w+:\d+>|(?<!\\):(\w+):/g;
     let resend_content = message.content;
+    let originalAuthor = ("<@!" + message.author.id + ">");
     const matches = [...resend_content.matchAll(emoji_regexp)];
     // This variable will keep track of whether we need to resend with GIF emoji
     let needs_resend = false;
@@ -204,13 +205,13 @@ client.on("message", async message => {
                     // Don't make needs_resend false if it was already true
                     needs_resend = true;
                     resend_content = resend_content.replace(`:${emoji.name}:`, `<a:${emoji.name}:${emoji.id}>`);
+                    message.delete();
                 }
             });
         }
     });
     if (needs_resend) {
-        message.channel.send(resend_content);
-        message.delete();
+        message.channel.send(resend_content).then(message.channel.send(`**Message requested by: **` + originalAuthor))
     }
 
     // Akinator Easter Egg
