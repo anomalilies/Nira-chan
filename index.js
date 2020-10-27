@@ -67,7 +67,7 @@ scheduledMessage.start();
 
 // Welcome Message
 client.on("guildMemberAdd", member => {
-    member.guild.channels.cache.get("603246092402032673").send(`${emojis.wave}`);
+    member.guild.channels.cache.get("603246092402032673").send(emojis.wave);
 });
 
 // Check Edited Messages
@@ -84,20 +84,20 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
     await userReactions(newMessage);
 
     // Check for NiraMojis
-    if (newMessage.content.includes(`${emojis.disgust}`)) {
+    if (newMessage.content.includes(emojis.disgust)) {
         newMessage.react("742092526097268797");
     }
-    if (newMessage.content.includes(`${emojis.stare}`)) {
+    if (newMessage.content.includes(emojis.stare)) {
         newMessage.react("742093326823587840");
     }
-    if (newMessage.content.includes(`${emojis.owie}`)) {
+    if (newMessage.content.includes(emojis.owie)) {
         newMessage.react("748995687093370902")
             .then(() => newMessage.react("765005652803321856"));
     }
 
     // PatPat Role
     if (newMessage.member.roles.cache.get("765347466169024512")) {
-        if (newMessage.content.toLowerCase().includes("patpat", `${emojis.patpat}`)) {
+        if (newMessage.content.toLowerCase().includes("patpat", emojis.patpat)) {
             newMessage.react("761487227921367051");
         }
     }
@@ -145,33 +145,33 @@ client.on("message", async message => {
 
     // Check for NiraMojis
     if (message.channel.id === "603246659295510557") {
-        if (![`${emojis.disgust}`].includes(message.content)) {
+        if (![emojis.disgust].includes(message.content)) {
             return message.delete();
         }
-    } else if (message.content.includes(`${emojis.disgust}`)) {
+    } else if (message.content.includes(emojis.disgust)) {
         message.react("742092526097268797");
     }
 
     if (message.channel.id === "747663718959153906") {
-        if (![`${emojis.stare}`].includes(message.content)) {
+        if (![emojis.stare].includes(message.content)) {
             return message.delete();
         }
-    } else if (message.content.includes(`${emojis.stare}`)) {
+    } else if (message.content.includes(emojis.stare)) {
         message.react("742093326823587840");
     }
 
     if (message.channel.id === "750558283315544155") {
-        if (![`${emojis.owie}`].includes(message.content)) {
+        if (![emojis.owie].includes(message.content)) {
             return message.delete();
         }
-    } else if (message.content.includes(`${emojis.owie}`)) {
+    } else if (message.content.includes(emojis.owie)) {
         message.react("748995687093370902")
             .then(() => message.react("765005652803321856"));
     }
 
     // PatPat Role
     if (message.member.roles.cache.get("765347466169024512")) {
-        if (message.content.toLowerCase().includes("patpat", `${emojis.patpat}`)) {
+        if (message.content.toLowerCase().includes("patpat", emojis.patpat)) {
             message.react("761487227921367051");
         }
     }
