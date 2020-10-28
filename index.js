@@ -30,7 +30,8 @@ var fishyCommands = [
     "fintimer", "fisytimer", "foshytimer", "ft", "finstats", "fisystats", "foshystats", "fs", "leaderboardfishysize"
 ];
 var contributorRoles = [
-    "Journalists", "Hackers", "Stans", "Editors", "Translators", "Meme Royalty", "Theorists", "Musicians", "Artists"
+    "Contestants", "Journalists", "Hackers", "Stans", "Editors",
+    "Translators", "Meme Royalty", "Theorists", "Musicians", "Artists"
 ];
 
 // Embeds
