@@ -64,13 +64,6 @@ client.once("ready", () => {
     */
 });
 
-function send_through_webhook(webhook, message, username, avatarURL) {
-    webhook.send(message, {
-        username: username,
-        avatarURL: avatarURL,
-    });
-}
-
 // Monthly Server Themes
 const scheduledMessage = new cron.CronJob("0 0 1 * *", () => {
     const channel = client.channels.cache.find(channel => channel.id === "767550623767068742");
@@ -259,12 +252,18 @@ client.on("message", async message => {
                 .then(webhook => {
                     console.log(`Created webhook ${webhook}`);
                     // Resend the message with the OP's avatar and display name
-                    send_through_webhook(webhook, resend_content, message.member.displayName, message.author.displayAvatarURL());
+                    webhook.send(resend_content, {
+                        username: message.member.displayName,
+                        avatarURL: message.author.displayAvatarURL(),
+                    });
                 })
                 .catch(console.error);
         } else {
             // Resend the message with the OP's avatar and display name
-            send_through_webhook(webhook, resend_content, message.member.displayName, message.author.displayAvatarURL());
+            webhook.send(resend_content, {
+                username: message.member.displayName,
+                avatarURL: message.author.displayAvatarURL(),
+            });
         }
     }
 
