@@ -50,6 +50,23 @@ function statusChange() {
     client.user.setActivity(data.statuses[Math.floor(Math.random() * data.statuses.length)], { type: "WATCHING" });
 }
 
+// Find specific emojis in a message
+function matchEmojis(find_emojis, message_content) {
+    const emoji_regexp = /<a?:\w+:\d+>/g;
+    const matches = [...message_content.matchAll(emoji_regexp)];
+    let matched_emojis = [];
+    matches.forEach(match => {
+        if (find_emojis.includes(match[0])) {
+            matched_emojis.push(match[0]);
+            if (match[0] === emojis.owie) {
+                matched_emojis.push(emojis.cursed);
+            }
+        }
+    });
+
+    return matched_emojis;
+}
+
 // Ready Event
 client.once("ready", () => {
     console.log(`${client.user.tag} activated!`);
@@ -110,30 +127,27 @@ async function userReactions(message) {
 client.on("messageUpdate", async (oldMessage, newMessage) => {
     await userReactions(newMessage);
 
-    // Check for NiraMojis
-    if (newMessage.channel.id === "603246659295510557") {
+    // Check for NiraMojis in their channels
+    if (allowlists.disgustchannels.includes(newMessage.channel.id)) {
         if (![emojis.disgust].includes(newMessage.content)) {
             return newMessage.delete();
         }
-    } if (newMessage.content.includes(emojis.disgust)) {
-        newMessage.react("742092526097268797");
-    }
-
-    if (newMessage.channel.id === "747663718959153906") {
+    } else if (allowlists.starechannels.includes(newMessage.channel.id)) {
         if (![emojis.stare].includes(newMessage.content)) {
             return newMessage.delete();
         }
-    } if (newMessage.content.includes(emojis.stare)) {
-        newMessage.react("742093326823587840");
-    }
-
-    if (newMessage.channel.id === "750558283315544155") {
+    } else if (allowlists.owiechannels.includes(newMessage.channel.id)) {
         if (![emojis.owie].includes(newMessage.content)) {
             return newMessage.delete();
         }
-    } if (newMessage.content.includes(emojis.owie)) {
-        newMessage.react("748995687093370902")
-            .then(() => newMessage.react("765005652803321856"));
+    }
+    
+    // Check for NiraMojis everywhere
+    if (newMessage.content.includes(emojis.disgust) || newMessage.content.includes(emojis.stare) || newMessage.content.includes(emojis.owie)) {
+        const find_emojis = [emojis.disgust, emojis.stare, emojis.owie];
+        let matched_emojis = matchEmojis(find_emojis, newMessage.content)
+
+        matched_emojis.forEach(e => newMessage.react(e));
     }
 
     // PatPat Role
@@ -185,30 +199,27 @@ client.on("message", async message => {
         uwuifying.custom(str, message, data, Discord);
     }
 
-    // Check for NiraMojis
-    if (message.channel.id === "603246659295510557") {
+    // Check for NiraMojis in their channels
+    if (allowlists.disgustchannels.includes(message.channel.id)) {
         if (![emojis.disgust].includes(message.content)) {
             return message.delete();
         }
-    } if (message.content.includes(emojis.disgust)) {
-        message.react("742092526097268797");
-    }
-
-    if (message.channel.id === "747663718959153906") {
+    } else if (allowlists.starechannels.includes(message.channel.id)) {
         if (![emojis.stare].includes(message.content)) {
             return message.delete();
         }
-    } if (message.content.includes(emojis.stare)) {
-        message.react("742093326823587840");
-    }
-
-    if (message.channel.id === "750558283315544155") {
+    } else if (allowlists.owiechannels.includes(message.channel.id)) {
         if (![emojis.owie].includes(message.content)) {
             return message.delete();
         }
-    } if (message.content.includes(emojis.owie)) {
-        message.react("748995687093370902")
-            .then(() => message.react("765005652803321856"));
+    }
+
+    // Check for NiraMojis everywhere
+    if (message.content.includes(emojis.disgust) || message.content.includes(emojis.stare) || message.content.includes(emojis.owie)) {
+        const find_emojis = [emojis.disgust, emojis.stare, emojis.owie];
+        let matched_emojis = matchEmojis(find_emojis, message.content)
+
+        matched_emojis.forEach(e => message.react(e));
     }
 
     // PatPat Role
