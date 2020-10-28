@@ -168,29 +168,33 @@ client.on("message", async message => {
     }
 
     // Check for NiraMojis
-    if (message.channel.id === "603246659295510557") {
+    if (allowlists.disgustchannels.includes(message.channel.id)) {
         if (![emojis.disgust].includes(message.content)) {
             return message.delete();
         }
     } else if (message.content.includes(emojis.disgust)) {
-        message.react("742092526097268797");
+        message.react(emojis.disgust);
     }
 
-    if (message.channel.id === "747663718959153906") {
+    if (allowlists.starechannels.includes(message.channel.id)) {
         if (![emojis.stare].includes(message.content)) {
             return message.delete();
         }
     } else if (message.content.includes(emojis.stare)) {
-        message.react("742093326823587840");
+        message.react(emojis.stare);
     }
 
-    if (message.channel.id === "750558283315544155") {
+    if (allowlists.owiechannels.includes(message.channel.id)) {
         if (![emojis.owie].includes(message.content)) {
             return message.delete();
         }
     } else if (message.content.includes(emojis.owie)) {
-        message.react("748995687093370902")
-            .then(() => message.react("765005652803321856"));
+        message.react(emojis.owie)
+            .then(() => message.react(emojis.cursed));
+    }
+
+    if (message.content.includes(emojis.disgust) || message.content.includes(emojis.stare) || message.content.includes(emojis.owie)) {
+        
     }
 
     // PatPat Role
