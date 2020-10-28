@@ -241,19 +241,24 @@ client.on("message", async message => {
     // Capture group 1 will have the emoji name in this case
     const emoji_regexp = /<a?:\w+:\d+>|(?<!\\):(\w+):/g;
     let resend_content = message.content;
+    let needs_resend = false;
     const matches = [...resend_content.matchAll(emoji_regexp)];
     matches.forEach(match => {
         if (match[1]) {
             // If capture group 1 caught something
             message.guild.emojis.cache.each(emoji => {
-                // If it's an animated emoji, we need to resend
-                if (emoji.name === match[1] && emoji.animated) {
-                    resend_content = resend_content.replace(`:${emoji.name}:`, `<a:${emoji.name}:${emoji.id}>`);
+                // We need to replace non-gif emoji as well for them to show up when we resend the message
+                if (emoji.name === match[1]) {
+                    // If it's an animated emoji, we need to resend
+                    // But don't make it false if it was already true
+                    needs_resend = emoji.animated || needs_resend;
+                    let type = emoji.animated ? "a" : "";
+                    resend_content = resend_content.replace(`:${emoji.name}:`, `<${type}:${emoji.name}:${emoji.id}>`);
                 }
             });
         }
     });
-    if (resend_content !== message.content && message.member) {
+    if (needs_resend && message.member) {
         // If there were any GIF emoji added to the message
         message.delete();
         const webhooks = await message.channel.fetchWebhooks();
