@@ -80,7 +80,7 @@ client.on("guildMemberAdd", member => {
 // Boost Message
 client.on("guildMemberUpdate", async (oldMember, newMember) => {
     const isContributor = "761383555372023860";
-    const inContributorGroup = r=>contributorRoles.includes(r.name); 
+    const inContributorGroup = r=>contributorRoles.includes(r.name);
     const channel = client.channels.cache.get("603246092402032673");
 
     if (oldMember.roles.cache.size !== newMember.roles.cache.size) {
@@ -137,7 +137,8 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
     }
 
     // PatPat Role
-    if (newMessage.member.roles.cache.get("765347466169024512")) {
+    // The member attribute is undefined on some messages so check if it's defined first
+    if (newMessage.member && newMessage.member.roles.cache.get("765347466169024512")) {
         if (newMessage.content.toLowerCase().includes("patpat", emojis.patpat)) {
             newMessage.react("761487227921367051");
         }
@@ -211,7 +212,8 @@ client.on("message", async message => {
     }
 
     // PatPat Role
-    if (message.member.roles.cache.get("765347466169024512")) {
+    // The member attribute is undefined on some messages so check if it's defined first
+    if (message.member && message.member.roles.cache.get("765347466169024512")) {
         if (message.content.toLowerCase().includes("patpat", emojis.patpat)) {
             message.react("761487227921367051");
         }
@@ -226,26 +228,43 @@ client.on("message", async message => {
     // Capture group 1 will have the emoji name in this case
     const emoji_regexp = /<a?:\w+:\d+>|(?<!\\):(\w+):/g;
     let resend_content = message.content;
-    let originalAuthor = ("<@!" + message.author.id + ">");
     const matches = [...resend_content.matchAll(emoji_regexp)];
-    // This variable will keep track of whether we need to resend with GIF emoji
-    let needs_resend = false;
     matches.forEach(match => {
         if (match[1]) {
             // If capture group 1 caught something
             message.guild.emojis.cache.each(emoji => {
                 // If it's an animated emoji, we need to resend
                 if (emoji.name === match[1] && emoji.animated) {
-                    // Don't make needs_resend false if it was already true
-                    needs_resend = true;
                     resend_content = resend_content.replace(`:${emoji.name}:`, `<a:${emoji.name}:${emoji.id}>`);
-                    message.delete();
                 }
             });
         }
     });
-    if (needs_resend) {
-        message.channel.send(resend_content).then(message.channel.send(`**Message requested by: **` + originalAuthor));
+    if (resend_content !== message.content && message.member) {
+        // If there were any GIF emoji added to the message
+        message.delete();
+        const webhooks = await message.channel.fetchWebhooks();
+        const webhook = webhooks.first();
+
+        if (webhook === undefined) {
+            // No webhook exists in this channel, so create one
+            channel.createWebhook("Nira-chan")
+                .then(webhook => {
+                    console.log(`Created webhook ${webhook}`);
+                    // Resend the message with the OP's avatar and display name
+                    webhook.send(resend_content, {
+                        username: message.member.displayName,
+                        avatarURL: message.author.displayAvatarURL(),
+                    });
+                })
+                .catch(console.error);
+        } else {
+            // Resend the message with the OP's avatar and display name
+            webhook.send(resend_content, {
+                username: message.member.displayName,
+                avatarURL: message.author.displayAvatarURL(),
+            });
+        }
     }
 
     // Akinator Easter Egg
