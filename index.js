@@ -9,9 +9,11 @@ rules.forEach((rule, i) => rule.re = new RegExp(`(\\s|^)${prefix}${i+1}(\\s|$)`)
 /*
 For creating/editing embeds:
 const botEmbeds = require("./Embeds/botEmbeds");
+const contestEmbeds = require("./Embeds/contestEmbeds");
 const roleslistEmbeds = require("./Embeds/roleslistEmbeds");
 
 const botCommands = require("./Commands/botCommands");
+const contestCommands = require("./Commands/contestCommands");
 const roleslistCommands = require("./Commands/roleslistCommands");
 const ruleCommands = require("./Commands/ruleCommands");
 */
@@ -56,6 +58,7 @@ client.once("ready", () => {
     /*
     For creating/editing embeds:
     botCommands(client, "742548177462231120");
+    contestCommands(client, "770795084002230292");
     roleslistCommands(client, "758494476174884905");
     ruleCommands(client, "603248229928140801");
     */
@@ -172,7 +175,7 @@ client.on("message", async message => {
         if (![emojis.disgust].includes(message.content)) {
             return message.delete();
         }
-    } else if (message.content.includes(emojis.disgust)) {
+    } if (message.content.includes(emojis.disgust)) {
         message.react("742092526097268797");
     }
 
@@ -180,7 +183,7 @@ client.on("message", async message => {
         if (![emojis.stare].includes(message.content)) {
             return message.delete();
         }
-    } else if (message.content.includes(emojis.stare)) {
+    } if (message.content.includes(emojis.stare)) {
         message.react("742093326823587840");
     }
 
@@ -188,7 +191,7 @@ client.on("message", async message => {
         if (![emojis.owie].includes(message.content)) {
             return message.delete();
         }
-    } else if (message.content.includes(emojis.owie)) {
+    } if (message.content.includes(emojis.owie)) {
         message.react("748995687093370902")
             .then(() => message.react("765005652803321856"));
     }
