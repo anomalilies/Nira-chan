@@ -67,6 +67,33 @@ function matchEmojis(find_emojis, message_content) {
     return matched_emojis;
 }
 
+// Replace a regular message with a message sent through a webhook with the OP's name and avatar
+async function replace_message_through_webhook(message, resend_content) {
+    message.delete();
+    const webhooks = await message.channel.fetchWebhooks();
+    const webhook = webhooks.first();
+
+    if (webhook === undefined) {
+        // No webhook exists in this channel, so create one
+        message.channel.createWebhook("Nira-chan")
+            .then(webhook => {
+                console.log(`Created webhook ${webhook}`);
+                // Resend the message with the OP's avatar and display name
+                webhook.send(resend_content, {
+                    username: message.member.displayName,
+                    avatarURL: message.author.displayAvatarURL(),
+                });
+            })
+            .catch(console.error);
+    } else {
+        // Resend the message with the OP's avatar and display name
+        webhook.send(resend_content, {
+            username: message.member.displayName,
+            avatarURL: message.author.displayAvatarURL(),
+        });
+    }
+}
+
 // Ready Event
 client.once("ready", () => {
     console.log(`${client.user.tag} activated!`);
@@ -260,29 +287,16 @@ client.on("message", async message => {
     });
     if (needs_resend && message.member) {
         // If there were any GIF emoji added to the message
-        message.delete();
-        const webhooks = await message.channel.fetchWebhooks();
-        const webhook = webhooks.first();
+        await replace_message_through_webhook(message, resend_content);
+    }
 
-        if (webhook === undefined) {
-            // No webhook exists in this channel, so create one
-            message.channel.createWebhook("Nira-chan")
-                .then(webhook => {
-                    console.log(`Created webhook ${webhook}`);
-                    // Resend the message with the OP's avatar and display name
-                    webhook.send(resend_content, {
-                        username: message.member.displayName,
-                        avatarURL: message.author.displayAvatarURL(),
-                    });
-                })
-                .catch(console.error);
-        } else {
-            // Resend the message with the OP's avatar and display name
-            webhook.send(resend_content, {
-                username: message.member.displayName,
-                avatarURL: message.author.displayAvatarURL(),
-            });
-        }
+    // GIF emoji of the form `-emojiname`
+    if (message.guild && message.content[0] === "-") {
+        message.guild.emojis.cache.each(async emoji => {
+            if (message.content === `-${emoji.name}` && emoji.animated) {
+                await replace_message_through_webhook(message, `<a:${emoji.name}:${emoji.id}>`);
+            }
+        });
     }
 
     // Akinator Easter Egg
