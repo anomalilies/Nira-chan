@@ -111,13 +111,27 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
     await userReactions(newMessage);
 
     // Check for NiraMojis
-    if (newMessage.content.includes(emojis.disgust)) {
+    if (newMessage.channel.id === "603246659295510557") {
+        if (![emojis.disgust].includes(newMessage.content)) {
+            return newMessage.delete();
+        }
+    } if (newMessage.content.includes(emojis.disgust)) {
         newMessage.react("742092526097268797");
     }
-    if (newMessage.content.includes(emojis.stare)) {
+
+    if (newMessage.channel.id === "747663718959153906") {
+        if (![emojis.stare].includes(newMessage.content)) {
+            return newMessage.delete();
+        }
+    } if (newMessage.content.includes(emojis.stare)) {
         newMessage.react("742093326823587840");
     }
-    if (newMessage.content.includes(emojis.owie)) {
+
+    if (newMessage.channel.id === "750558283315544155") {
+        if (![emojis.owie].includes(newMessage.content)) {
+            return newMessage.delete();
+        }
+    } if (newMessage.content.includes(emojis.owie)) {
         newMessage.react("748995687093370902")
             .then(() => newMessage.react("765005652803321856"));
     }
