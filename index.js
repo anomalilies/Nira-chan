@@ -248,7 +248,7 @@ client.on("message", async message => {
 
         if (webhook === undefined) {
             // No webhook exists in this channel, so create one
-            channel.createWebhook("Nira-chan")
+            message.channel.createWebhook("Nira-chan")
                 .then(webhook => {
                     console.log(`Created webhook ${webhook}`);
                     // Resend the message with the OP's avatar and display name
