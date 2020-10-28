@@ -9,9 +9,11 @@ rules.forEach((rule, i) => rule.re = new RegExp(`(\\s|^)${prefix}${i+1}(\\s|$)`)
 /*
 For creating/editing embeds:
 const botEmbeds = require("./Embeds/botEmbeds");
+const contestEmbeds = require("./Embeds/contestEmbeds");
 const roleslistEmbeds = require("./Embeds/roleslistEmbeds");
 
 const botCommands = require("./Commands/botCommands");
+const contestCommands = require("./Commands/contestCommands");
 const roleslistCommands = require("./Commands/roleslistCommands");
 const ruleCommands = require("./Commands/ruleCommands");
 */
@@ -56,6 +58,7 @@ client.once("ready", () => {
     /*
     For creating/editing embeds:
     botCommands(client, "742548177462231120");
+    contestCommands(client, "770795084002230292");
     roleslistCommands(client, "758494476174884905");
     ruleCommands(client, "603248229928140801");
     */
@@ -108,13 +111,27 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
     await userReactions(newMessage);
 
     // Check for NiraMojis
-    if (newMessage.content.includes(emojis.disgust)) {
+    if (newMessage.channel.id === "603246659295510557") {
+        if (![emojis.disgust].includes(newMessage.content)) {
+            return newMessage.delete();
+        }
+    } if (newMessage.content.includes(emojis.disgust)) {
         newMessage.react("742092526097268797");
     }
-    if (newMessage.content.includes(emojis.stare)) {
+
+    if (newMessage.channel.id === "747663718959153906") {
+        if (![emojis.stare].includes(newMessage.content)) {
+            return newMessage.delete();
+        }
+    } if (newMessage.content.includes(emojis.stare)) {
         newMessage.react("742093326823587840");
     }
-    if (newMessage.content.includes(emojis.owie)) {
+
+    if (newMessage.channel.id === "750558283315544155") {
+        if (![emojis.owie].includes(newMessage.content)) {
+            return newMessage.delete();
+        }
+    } if (newMessage.content.includes(emojis.owie)) {
         newMessage.react("748995687093370902")
             .then(() => newMessage.react("765005652803321856"));
     }
@@ -172,29 +189,25 @@ client.on("message", async message => {
         if (![emojis.disgust].includes(message.content)) {
             return message.delete();
         }
-    } else if (message.content.includes(emojis.disgust)) {
-        message.react(emojis.disgust);
+    } if (message.content.includes(emojis.disgust)) {
+        message.react("742092526097268797");
     }
 
     if (allowlists.starechannels.includes(message.channel.id)) {
         if (![emojis.stare].includes(message.content)) {
             return message.delete();
         }
-    } else if (message.content.includes(emojis.stare)) {
-        message.react(emojis.stare);
+    } if (message.content.includes(emojis.stare)) {
+        message.react("742093326823587840");
     }
 
     if (allowlists.owiechannels.includes(message.channel.id)) {
         if (![emojis.owie].includes(message.content)) {
             return message.delete();
         }
-    } else if (message.content.includes(emojis.owie)) {
-        message.react(emojis.owie)
-            .then(() => message.react(emojis.cursed));
-    }
-
-    if (message.content.includes(emojis.disgust) || message.content.includes(emojis.stare) || message.content.includes(emojis.owie)) {
-        
+    } if (message.content.includes(emojis.owie)) {
+        message.react("748995687093370902")
+            .then(() => message.react("765005652803321856"));
     }
 
     // PatPat Role

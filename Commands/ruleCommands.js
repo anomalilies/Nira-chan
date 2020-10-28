@@ -1,6 +1,6 @@
 /*
-module.exports = async (client, id2 = []) => {
-    const channel = await client.channels.fetch(id2)
+module.exports = async (client, id = []) => {
+    const channel = await client.channels.fetch(id)
   
     channel.messages.fetch().then((messages) => {
 
