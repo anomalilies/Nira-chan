@@ -50,10 +50,10 @@ function statusChange() {
     client.user.setActivity(data.statuses[Math.floor(Math.random() * data.statuses.length)], { type: "WATCHING" });
 }
 
-// Find sepcific emojis in a message
+// Find specific emojis in a message
 function matchEmojis(find_emojis, message_content) {
-    const emoji_regexp2 = /<a?:\w+:\d+>|(?<!\\):(\w+):/g;
-    const matches = [...message_content.matchAll(emoji_regexp2)];
+    const emoji_regexp = /<a?:\w+:\d+>/g;
+    const matches = [...message_content.matchAll(emoji_regexp)];
     let matched_emojis = [];
     matches.forEach(match => {
         if (find_emojis.includes(match[0])) {
