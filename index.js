@@ -218,10 +218,6 @@ client.on("message", async message => {
         return;
     }
 
-    if(message.content.length !== 3) {
-        message.channel.send("hello")
-    }
-
     // UWU-ify
     if (message.content.toLowerCase().startsWith(`${prefix}${commands.uwuify.name}`)) {
 
