@@ -290,7 +290,9 @@ client.on("message", async message => {
                     // But don't make it false if it was already true
                     needs_resend = emoji.animated || needs_resend;
                     let type = emoji.animated ? "a" : "";
-                    resend_content = resend_content.replace(`:${emoji.name}:`, `<${type}:${emoji.name}:${emoji.id}>`);
+                    // The regex is to make sure we don't replace what's already been replaced
+                    // This happens when the same gif emoji appears twice in the message
+                    resend_content = resend_content.replace(new RegExp(`(?<!<a):${emoji.name}:`), `<${type}:${emoji.name}:${emoji.id}>`);
                 }
             });
         }
