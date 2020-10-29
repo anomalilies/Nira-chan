@@ -219,20 +219,23 @@ client.on("message", async message => {
     }
 
     // UWU-ify
-    if (message.content.toLowerCase().startsWith(`${prefix}${commands.uwuify.name}`) || message.channel.id === "696143475954941962") {
+    if (message.content.toLowerCase().startsWith(`${prefix}${commands.uwuify.name}`) || message.guild.id === "706628883440468060") {
+        message.react("771179684851089458");
 
-        var args = message.content.slice(4).trim().split(/ +/g);
-        var command = args.shift();
-        var str = command + " " + args.join(" ");
+        if (message.guild.id === "603246092402032670") {
+            var args = message.content.slice(4).trim().split(/ +/g);
+            var command = args.shift();
+            var str = command + " " + args.join(" ");
 
-    if (message.channel.id === "696143475954941962" || message.guild.id === "603246092402032670") {
-            message.react("771179684851089458");
             uwuifying.custom(str, message, data, Discord);
         }
-    }
-
-    if (message.channel.id === "456367532434128897" && message.author.id === "238386015520292866") {
-        message.react("771179684851089458");
+        else if (message.channel.id === "696143475954941962") {
+            var str = message.content
+            uwuifying.custom(str, message, data, Discord);
+        }
+        else if (message.channel.id === "456367532434128897" && message.author.id === "228880116699103232") {
+            return;
+        }
     }
 
     // Check for NiraMojis in their channels
