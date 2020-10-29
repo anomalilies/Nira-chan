@@ -219,16 +219,20 @@ client.on("message", async message => {
     }
 
     // UWU-ify
-    if (message.content.toLowerCase().startsWith(`${prefix}${commands.uwuify.name}`) || message.guild.id === "696143475954941962") {
+    if (message.content.toLowerCase().startsWith(`${prefix}${commands.uwuify.name}`) || message.channel.id === "696143475954941962") {
 
         var args = message.content.slice(4).trim().split(/ +/g);
         var command = args.shift();
         var str = command + " " + args.join(" ");
 
-        if (message.channel.id === "696143475954941962" || message.guild.id === "603246092402032670") {
+    if (message.channel.id === "696143475954941962" || message.guild.id === "603246092402032670") {
             message.react("771179684851089458");
             uwuifying.custom(str, message, data, Discord);
         }
+    }
+
+    if (message.channel.id === "456367532434128897" && message.author.id === "238386015520292866") {
+        message.react("771179684851089458");
     }
 
     // Check for NiraMojis in their channels
