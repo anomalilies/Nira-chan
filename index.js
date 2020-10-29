@@ -219,9 +219,9 @@ client.on("message", async message => {
     }
 
     // UWU-ify
-    if (message.content.toLowerCase().startsWith(`${prefix}${commands.uwuify.name}`) || message.guild.id === "706628883440468060") {
+    if (message.content.toLowerCase().startsWith(`${prefix}${commands.uwuify.name}`) || message.guild.id === "441673705458761729") {
         message.react("771179684851089458");
-
+        
         if (message.guild.id === "603246092402032670") {
             var args = message.content.slice(4).trim().split(/ +/g);
             var command = args.shift();
@@ -234,7 +234,7 @@ client.on("message", async message => {
             uwuifying.custom(str, message, data, Discord);
         }
         else if (message.channel.id === "456367532434128897" && message.author.id === "228880116699103232") {
-            message.react("690349953985544193")
+            return;
         }
     }
 
