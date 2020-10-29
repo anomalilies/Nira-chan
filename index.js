@@ -230,8 +230,6 @@ client.on("message", async message => {
             uwuifying.custom(str, message, data, Discord);
         }
         else if (message.channel.id === "696143475954941962") {
-            message.react("771179684851089458");
-            
             var str = message.content
             uwuifying.custom(str, message, data, Discord);
         }
