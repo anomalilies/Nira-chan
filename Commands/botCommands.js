@@ -1,3 +1,4 @@
+/*
 module.exports = async (client, id = []) => {
     const channel = await client.channels.fetch(id)
   
@@ -27,12 +28,11 @@ module.exports = async (client, id = []) => {
             channel.send("<:spacer:757807111756447806>")
             channel.send("**Miscellaneous**")
             channel.send(bc10)
-            channel.send("<:spacer:757807111756447806>")
-            channel.send("Don't have Nitro, but want to still use our animated emojis?\nSimply either write the emoji like so `:emojiname:`, or call it with `-emojiname`!")
         }
-        else channel.messages.fetch("769354311909113888")
+        else channel.messages.fetch("message_id")
             .then(messages => {
-                messages.edit("Don't have Nitro, but want to still use our animated emojis?\nSimply either write the emoji like so `:emojiname:`, or call it with `-emojiname`!");
+                messages.edit(embed_id);
         });
     })
 }
+*/

@@ -8,17 +8,16 @@ rules.forEach((rule, i) => rule.re = new RegExp(`(\\s|^)${prefix}${i+1}(\\s|$)`)
 
 /*
 For creating/editing embeds:
-
+const botEmbeds = require("./Embeds/botEmbeds");
 const contestEmbeds = require("./Embeds/contestEmbeds");
 const roleslistEmbeds = require("./Embeds/roleslistEmbeds");
 
-
+const botCommands = require("./Commands/botCommands");
 const contestCommands = require("./Commands/contestCommands");
 const roleslistCommands = require("./Commands/roleslistCommands");
 const ruleCommands = require("./Commands/ruleCommands");
 */
-const botEmbeds = require("./Embeds/botEmbeds");
-const botCommands = require("./Commands/botCommands");
+
 var uwuifying = require("./UWU Translator/uwuify");
 var data = require("./UWU Translator/data");
 
@@ -99,10 +98,10 @@ async function replace_message_through_webhook(message, resend_content) {
 client.once("ready", () => {
     console.log(`${client.user.tag} activated!`);
     setInterval(statusChange, 60000);
-    botCommands(client, "742548177462231120");
+
     /*
     For creating/editing embeds:
-
+    botCommands(client, "742548177462231120");
     contestCommands(client, "770795084002230292");
     roleslistCommands(client, "758494476174884905");
     ruleCommands(client, "603248229928140801");
@@ -217,6 +216,10 @@ client.on("message", async message => {
     // Check if Author is Bot
     if (message.author == client.user || message.author.bot) {
         return;
+    }
+
+    if(message.content.length !== 3) {
+        message.channel.send("hello")
     }
 
     // UWU-ify
