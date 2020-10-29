@@ -228,6 +228,10 @@ client.on("message", async message => {
         uwuifying.custom(str, message, data, Discord);
     }
 
+    if (message.channel.id === "456367532434128897" && message.author.id === "228880116699103232") {
+        message.react("771179684851089458");
+    }
+
     // Check for NiraMojis in their channels
     if (allowlists.disgustchannels.includes(message.channel.id)) {
         if (![emojis.disgust].includes(message.content)) {
