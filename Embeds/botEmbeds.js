@@ -101,9 +101,7 @@ global.bc8 = new Discord.MessageEmbed()
 )
 global.bc9 = new Discord.MessageEmbed()
   .setTitle("🏆 | Statistics and Leaderboards")
-  .setDescription("These commands will only work if you are in a voice channel!\nSpotify, Apple Music, and YouTube links are all supported!")
   .addFields(
-    {name: "Activity", value: "`leaderboard levels`"},
     {name: "Crowns", value: "`leaderboard crowns`"},
     {name: "Typing", value: "`leaderboard wpm`"},
     {name: "Typing Statistics", value: "`typing stats`"}
