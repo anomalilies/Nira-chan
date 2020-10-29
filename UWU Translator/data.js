@@ -1,5 +1,5 @@
 const data = {
-    statuses: ["you in disgust", "(staring at) you", "you in pain (owie!)", "you -fishy", "you~wu~(♥ω♥*)!"],
+    statuses: ["you in disgust", "(staring at) you", "you in pain (owie!)", "you -fishy", "you~wu~(♥ω♥*)!", "you, forever & always."],
 
     // This software uses code from QuazzyWazzy/UwU-fy - See LICENSE!
     replacements: [
