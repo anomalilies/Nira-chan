@@ -1,4 +1,4 @@
-///*
+/*
 module.exports = async (client, id = []) => {
     const channel = await client.channels.fetch(id)
   
@@ -29,10 +29,10 @@ module.exports = async (client, id = []) => {
             channel.send("**Miscellaneous**")
             channel.send(bc10)
         }
-        else channel.messages.fetch("769354284600786955")
+        else channel.messages.fetch("message_id")
             .then(messages => {
-                messages.edit(bc9);
+                messages.edit(embed_id);
         });
     })
 }
-//*/
+*/
