@@ -219,17 +219,16 @@ client.on("message", async message => {
     }
 
     // UWU-ify
-    if (message.content.toLowerCase().startsWith(`${prefix}${commands.uwuify.name}`) || message.guild.id === "441673705458761729") {
-        
-        if (message.guild.id === "603246092402032670") {
-            var args = message.content.slice(4).trim().split(/ +/g);
-            var command = args.shift();
-            var str = command + " " + args.join(" ");
+    if (message.content.toLowerCase().startsWith(`${prefix}${commands.uwuify.name}`)) {
+        var args = message.content.slice(4).trim().split(/ +/g);
+        var command = args.shift();
+        var str = command + " " + args.join(" ");
 
-            message.react("771179684851089458");
-            uwuifying.custom(str, message, data, Discord);
-        }
-        else if (message.channel.id === "696143475954941962") {
+        message.react("771179684851089458");
+        uwuifying.custom(str, message, data, Discord);
+    }
+    else if (message.guild.id === "441673705458761729") {
+        if (message.channel.id === "696143475954941962") {
             var str = message.content
             uwuifying.custom(str, message, data, Discord);
         }
