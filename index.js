@@ -234,7 +234,7 @@ client.on("message", async message => {
             uwuifying.custom(str, message, data, Discord);
         }
         else if (message.channel.id === "456367532434128897" && message.author.id === "228880116699103232") {
-            return;
+            message.react("690349953985544193")
         }
     }
 
