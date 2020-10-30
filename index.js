@@ -328,7 +328,7 @@ client.on("message", async message => {
 
     // PatPat Command
     // Allowed in specific bot channels only
-    if (allowlists.botspamchannels.includes(message.channel.id)) {
+    if (allowlists.botspamchannels.includes(message.channel.id) || member.guild.id === "603246092402032670") {
         if (message.content.toLowerCase() === `${prefix}${commands.patpatstart.name}`) {
             // PatPat: start new conversations
             whosTalkingWithPatPat.add(message.author.id);
@@ -338,7 +338,7 @@ client.on("message", async message => {
                     "#ffc2e8",
                     "Nira-chan has entered the chat",
                     message.author,
-                    "Hewwo, Dave!~~ （＾∀＾）");
+                    `${emojis.hal} Hewwo, Dave!~~ （＾∀＾）`);
 
                 message.channel.send(patPatChatEmbed);
             } else {
@@ -359,7 +359,7 @@ client.on("message", async message => {
                     "#ffc2e8",
                     "Nira-chan has left the chat",
                     message.author,
-                    "D-Dave, this convewsation can sewve nyo puwpose anymoweu(⋟﹏⋞) Goodbyeu~");
+                    `${emojis.hal} D-Dave, this convewsation can sewve nyo puwpose anymoweu(⋟﹏⋞) Goodbyeu~`);
 
                 message.channel.send(patPatChatEmbed);
             } else {
@@ -381,7 +381,7 @@ client.on("message", async message => {
                     "#ffc2e8",
                     "Nira-chan says...",
                     message.author,
-                    `${nira9000[index]}`);
+                    `${emojis.hal} ${nira9000[index]}`);
 
                 message.channel.send(patPatChatEmbed);
             } else {
