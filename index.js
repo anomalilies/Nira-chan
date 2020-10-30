@@ -213,8 +213,8 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
 client.on("message", async message => {
     message_global = message;
 
-    // Check if Author is Bot
-    if (message.author == client.user || message.author.bot) {
+    // Check if author is bot (webhooks are fine though)
+    if (!message.webhookID && (message.author == client.user || message.author.bot)) {
         return;
     }
 
