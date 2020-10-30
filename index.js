@@ -68,7 +68,7 @@ function matchEmojis(find_emojis, message_content) {
 }
 
 // Replace a regular message with a message sent through a webhook with the OP's name and avatar
-async function replace_message_through_webhook(message, resend_content) {
+async function replaceMessageThroughWebhook(message, resend_content) {
     message.delete();
     const webhooks = await message.channel.fetchWebhooks();
     const webhook = webhooks.first();
@@ -213,8 +213,8 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
 client.on("message", async message => {
     message_global = message;
 
-    // Check if Author is Bot
-    if (message.author == client.user || message.author.bot) {
+    // Check if author is bot (webhooks are fine though)
+    if (!message.webhookID && (message.author == client.user || message.author.bot)) {
         return;
     }
 
@@ -276,36 +276,39 @@ client.on("message", async message => {
     // Check for non-nitro user using GIF emoji to resend it with the GIF emoji
     // Capture group 1 will have the emoji name in this case
     const emoji_regexp = /<a?:\w+:\d+>|(?<!\\):(\w+):/g;
-    let resend_content = message.content;
-    let needs_resend = false;
-    const matches = [...resend_content.matchAll(emoji_regexp)];
-    matches.forEach(match => {
-        if (match[1]) {
+    var needs_resend = false;
+
+    // Replaces emoji names with GIF emoji
+    function replaceEmoji(match, group1) {
+        // The string to replace the match with
+        let replaceString = match;
+        if (group1) {
             // If capture group 1 caught something
             message.guild.emojis.cache.each(emoji => {
                 // We need to replace non-gif emoji as well for them to show up when we resend the message
-                if (emoji.name === match[1]) {
-                    // If it's an animated emoji, we need to resend
-                    // But don't make it false if it was already true
+                if (emoji.name === group1) {
+                    // We only need to resend if we replace any animated emoji
+                    // But don't make the variable false if it's already true
                     needs_resend = emoji.animated || needs_resend;
                     let type = emoji.animated ? "a" : "";
-                    // The regex is to make sure we don't replace what's already been replaced
-                    // This happens when the same gif emoji appears twice in the message
-                    resend_content = resend_content.replace(new RegExp(`(?<!<a):${emoji.name}:`), `<${type}:${emoji.name}:${emoji.id}>`);
+                    replaceString = `<${type}:${emoji.name}:${emoji.id}>`;
                 }
             });
         }
-    });
+        return replaceString;
+    }
+
+    let resend_content = message.content.replace(emoji_regexp, replaceEmoji);
     if (needs_resend && message.member) {
         // If there were any GIF emoji added to the message
-        await replace_message_through_webhook(message, resend_content);
+        await replaceMessageThroughWebhook(message, resend_content);
     }
 
     // GIF emoji of the form `-emojiname`
     if (message.guild && message.content[0] === "-") {
         message.guild.emojis.cache.each(async emoji => {
             if (message.content === `-${emoji.name}` && emoji.animated) {
-                await replace_message_through_webhook(message, `<a:${emoji.name}:${emoji.id}>`);
+                await replaceMessageThroughWebhook(message, `<a:${emoji.name}:${emoji.id}>`);
             }
         });
     }
