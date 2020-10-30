@@ -331,7 +331,7 @@ client.on("message", async message => {
 
     // PatPat Command
     // Allowed in specific bot channels only
-    if (allowlists.botspamchannels.includes(message.channel.id) || member.guild.id === "603246092402032670") {
+    if (allowlists.botspamchannels.includes(message.channel.id) || !member.guild.id === "603246092402032670") {
         if (message.content.toLowerCase() === `${prefix}${commands.patpatstart.name}`) {
             // PatPat: start new conversations
             whosTalkingWithPatPat.add(message.author.id);
