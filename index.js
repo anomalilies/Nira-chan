@@ -15,7 +15,6 @@ const roleslistEmbeds = require("./Embeds/roleslistEmbeds");
 const botCommands = require("./Commands/botCommands");
 const contestCommands = require("./Commands/contestCommands");
 const roleslistCommands = require("./Commands/roleslistCommands");
-const ruleCommands = require("./Commands/ruleCommands");
 */
 
 var uwuifying = require("./UWU Translator/uwuify");
@@ -24,15 +23,15 @@ var data = require("./UWU Translator/data");
 var message_global;
 var whosTalkingWithPatPat = new Set();
 var channelTitles = [
-    "Byoushin wo Kamu", "Nouriueno Cracker", "Humanoid", "Mabushii DNA Dake", "Seigi", "Kettobashita Moufu",
-    "Konnakoto Soudou", "Haze Haseru Haterumade", "Dear Mr. 'F'", "Obenkyou Shitoiteyo", "MILABO", "Fastening", "Ham"
+    "Byoushin wo Kamu", "Nouriueno Cracker", "Humanoid", "Mabushii DNA Dake", "Seigi", "Kettobashita Moufu", "Konnakoto Soudou", 
+    "Haze Haseru Haterumade", "Dear Mr. 'F'", "Obenkyou Shitoiteyo", "MILABO", "Fastening", "Ham", "Kuraku Kuroku"
 ];
 var fishyCommands = [
     "fishy", "fishytimer", "fishystats", "leaderboardfishy", "fish", "fihy", "fisy", "foshy", "fisyh", "fsihy", "fin",
     "fintimer", "fisytimer", "foshytimer", "ft", "finstats", "fisystats", "foshystats", "fs", "leaderboardfishysize"
 ];
 var contributorRoles = [
-    "Contestants", "Journalists", "Hackers", "Stans", "Editors",
+    "Journalists", "Contestants", "Hackers", "Stans", "Editors",
     "Translators", "Meme Royalty", "Theorists", "Musicians", "Artists"
 ];
 

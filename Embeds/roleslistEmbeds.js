@@ -16,11 +16,13 @@ global.roles2 = new Discord.MessageEmbed()
   .setColor(240116)
   .addFields(
     {name: "Contest Winners", value: `An exclusive role solely for our <@&761383548476325888> from <#761326959154167838>.`},
-    {name: "Runner Ups", value: `Given to our <@&761383550741643284> from server contests held on <#761326959154167838>.`},
+    {name: "Runners-Up", value: `Given to our <@&761383550741643284> from server contests held on <#761326959154167838>.`},
+    {name: "Ghostbuster", value: `Awarded to <@155425784109072384>, after achieving the highest score in the server for the Halloween Google Doodle game.`},
     {name: "Summoner", value: `A role from a server inside-joke, dedicated to <@126355183608397825>'s extraordinary ability to summon others.`},
     {name: "Loremaster", value: `A role commemorating <@721736867107700758>'s insane dedication with researching ZUTOMAYO lore.`},
     {name: "Fisherban", value: `Another role created from an inside-joke, born from the rivalry seen in <#747201864889794721>.`},
     {name: "Pope", value: `<@737697842507939840>'s nickname... For some reason?`},
+    {name: "Welcoming Pupper", value: `From <@314358105205112834>'s loving welcomes he gives to all our new members!`}
 )
 global.roles3 = new Discord.MessageEmbed()
   .setTitle("Contributor Roles")
@@ -29,6 +31,7 @@ global.roles3 = new Discord.MessageEmbed()
   .addFields(
     {name: "Server Boosters", value: `For our lovely <@&744738039116464151>!`},
     {name: "Affiliates", value: `Our <@&744728162843492404> from r/ZUTOMAYO, and other Discord servers!`},
+    {name: "Regulars", value: `The <@&751209585464836137> role is given to our most active users on a weekly basis.`},
     {name: "Artists", value: `Given to our most creative and active <@&758774087161741363>!`},
     {name: "Musicians", value: `Given to our <@&758774148154523669> from <#603248158088101929>, with talents ranging from singing, to guitar!`},
     {name: "Theorists", value: `The <@&756314524285534259> role is awarded to users who have spent their free-time making theories based on ZUTOMAYO MVs!`},
@@ -37,6 +40,7 @@ global.roles3 = new Discord.MessageEmbed()
     {name: "Stans", value: `<@&742066260811972709> are members in charge of updating and providing <#742069780328087613>.`},
     {name: "Hackers", value: `Our <@&769728601036947467> provide invaluable help with developing and debugging <@740606402330099752>.`},
     {name: "Journalists", value: `<@&765670343934345277> help our staff provide up-to-date ZUTOMAYO news on <#603248261461180480>.`},
+    {name: "Contestants", value: `The <@&761383555372023860> role comes with all awarded roles and those who have entered contests, as to separate users on the member list.`},
     {name: "Contributors", value: `The <@&761383555372023860> role comes with all awarded roles and those who have entered contests, as to separate users on the member list.`}
 )
 global.roles4 = new Discord.MessageEmbed()
