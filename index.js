@@ -352,7 +352,7 @@ client.on("message", async message => {
 		const channels = message.guild.channels.cache;
 		const serverEmojis = message.guild.emojis.cache;
 
-        const embed = new Discord.MessageEmbed()
+        const serverInfo = new Discord.MessageEmbed()
             .setTitle(`About ${message.guild.name}`)
             .setThumbnail(message.guild.iconURL({ dynamic: true }))
             .setColor(15849719)
@@ -380,19 +380,19 @@ client.on("message", async message => {
             ], true)
             
             if (message.channel.id === "770795084002230292") {
-                embed.addField("History", [
+                serverInfo.addField("History", [
                     "**❯ Ex-Owner:** xscore#4740",
                     "**❯ Ex-Administrators:** Dreycan#1936",
                     "**❯ Ex-Moderators:** jiachun#0067, TheSuperCrisb#3502"
                 ])
-                message.channel.send(embed).then((msg) => {
+                message.channel.send(serverInfo).then((msg) => {
                     setInterval(function () {
-                        msg.edit(embed);
+                        msg.edit(serverInfo);
                     }, 60000)
                 })
             }
             else {
-                message.channel.send(embed)
+                message.channel.send(serverInfo)
             }
     };
 

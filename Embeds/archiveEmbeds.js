@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 global.archive = new Discord.MessageEmbed()
   .setTitle("Server Archive")
-  .setDescription("Our beloved <@770022309393334302> employees get exclusive access to the server's archive ~~which doesn't include much~~!")
+  .setDescription("Our beloved <@&770022309393334302> employees get exclusive access to the server's archive ~~which doesn't include much~~!")
   .setColor(15849719)
   .addFields(
     {name: "Server Content", value: "[Google Drive Folder](https://drive.google.com/drive/folders/16RLTkFCgZcVZPYwYDTdxDJxknQUC_Ll2?usp=sharing)"},
