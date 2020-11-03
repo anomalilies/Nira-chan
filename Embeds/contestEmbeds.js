@@ -22,7 +22,7 @@ global.contest3 = new Discord.MessageEmbed()
 )
 global.contest4 = new Discord.MessageEmbed()
   .addFields(
-    {name: "When is the Deadline?", value: "The deadline for *all* entries will be on **Friday 30th October, 00:00 GMT/UTC**.\n\nThe rest of the 30th, up until 23:00 on the 31st, will be dedicated to voting.\nWinners, along with information for the next contest, will be released on 1st November."},
+    {name: "When is the Deadline?", value: "The deadline for *all* entries will be on **Sunday 29th November, 00:00 GMT/UTC**.\n\nThe rest of the 29th, up until 00:00 on the 30th, will be dedicated to voting.\nWinners, along with information for the next contest, will be released on 1st November."},
     {name: "What Prizes Are There?", value: `We'll be stepping up the rewards for this month's contest, seeing how the *stonks* have risen!\nAll UniguriXP${emojis.uniguri} rewards will be handed out on results day, whilst you'll be able to show off your fancy new <@&770792091353743401> role as soon as you enter!`}
 )
 global.contest5 = new Discord.MessageEmbed()

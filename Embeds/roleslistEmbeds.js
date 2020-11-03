@@ -15,8 +15,8 @@ global.roles2 = new Discord.MessageEmbed()
   .setDescription("Exclusive roles dedicated to our most active contributors, or to the winners of our monthly server contests!")
   .setColor(240116)
   .addFields(
-    {name: "Contest Winners", value: `An exclusive role solely for our <@&761383548476325888> from <#761326959154167838>.`},
-    {name: "Runners-Up", value: `Given to our <@&761383550741643284> from server contests held on <#761326959154167838>.`},
+    {name: "Contest Winners", value: `An exclusive role solely for our <@&761383548476325888> from the <#761326959154167838> channel.`},
+    {name: "Runners-Up", value: `Given to our <@&761383550741643284> from server contests held on the <#761326959154167838> channel.`},
     {name: "Ghostbuster", value: `Awarded to <@155425784109072384>, after achieving the highest score in the server for the Halloween Google Doodle game.`},
     {name: "Summoner", value: `A role from a server inside-joke, dedicated to <@126355183608397825>'s extraordinary ability to summon others.`},
     {name: "Loremaster", value: `A role commemorating <@721736867107700758>'s insane dedication with researching ZUTOMAYO lore.`},
