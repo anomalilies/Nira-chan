@@ -79,7 +79,7 @@ async function replaceMessageThroughWebhook(message, resend_content) {
                 // Resend the message with the OP's avatar and display name
                 webhook.send(resend_content, {
                     username: message.member.displayName,
-                    avatarURL: message.author.displayAvatarURL({ dynamic: true }),
+                    avatarURL: message.author.displayAvatarURL({dynamic: true}),
                 });
             })
             .catch(console.error);
@@ -87,7 +87,7 @@ async function replaceMessageThroughWebhook(message, resend_content) {
         // Resend the message with the OP's avatar and display name
         webhook.send(resend_content, {
             username: message.member.displayName,
-            avatarURL: message.author.displayAvatarURL(),
+            avatarURL: message.author.displayAvatarURL({dynamic:true}),
         });
     }
 }

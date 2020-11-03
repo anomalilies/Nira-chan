@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const emojis = require("../config.json");
+const { emojis } = require("./config.json");
 
 global.contest1 = new Discord.MessageEmbed()
   .setTitle("ZUTOMAYO ZONE - Monthly Contest #2")
