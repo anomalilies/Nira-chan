@@ -5,7 +5,6 @@ module.exports = async (client, id = []) => {
         const niraMessages = messages.filter(msg => msg.author == client.user);
 
         if (niraMessages.size === 0) {
-            channel.send("<:spacer:757807111756447806>")
             channel.send(archive)
             channel.send("https://discord.gg/tBerq3wjtW")
             channel.send("<:spacer:757807111756447806>")

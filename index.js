@@ -379,7 +379,7 @@ client.on("message", async message => {
 				`**❯ Offline:** ${members.filter(member => member.presence.status === "offline").size}`,
             ], true)
             
-            if (message.channel.id === "770795084002230292") {
+            if (message.channel.id === "770726574865514517") {
                 serverInfo.addField("History", [
                     "**❯ Ex-Owner:** xscore#4740",
                     "**❯ Ex-Administrators:** Dreycan#1936",
