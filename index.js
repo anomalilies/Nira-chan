@@ -1,21 +1,22 @@
 require("dotenv").config();
 const cron = require("cron");
 const Discord = require("discord.js");
+const moment = require("moment");
 const client = new Discord.Client();
 const { prefix, commands, allowlists, emojis, patpatresponses, nira9000 } = require("./config.json");
 const rules = require("./Embeds/ruleEmbeds.json");
 rules.forEach((rule, i) => rule.re = new RegExp(`(\\s|^)${prefix}${i+1}(\\s|$)`));
 
-/*
-For creating/editing embeds:
+const archiveEmbeds = require("./Embeds/archiveEmbeds")
 const botEmbeds = require("./Embeds/botEmbeds");
 const contestEmbeds = require("./Embeds/contestEmbeds");
 const roleslistEmbeds = require("./Embeds/roleslistEmbeds");
 
+const archiveCommands = require("./Commands/archiveCommands")
 const botCommands = require("./Commands/botCommands");
 const contestCommands = require("./Commands/contestCommands");
 const roleslistCommands = require("./Commands/roleslistCommands");
-*/
+const ruleCommands = require("./Commands/ruleCommands");
 
 var uwuifying = require("./UWU Translator/uwuify");
 var data = require("./UWU Translator/data");
@@ -24,7 +25,7 @@ var message_global;
 var whosTalkingWithPatPat = new Set();
 var channelTitles = [
     "Byoushin wo Kamu", "Nouriueno Cracker", "Humanoid", "Mabushii DNA Dake", "Seigi", "Kettobashita Moufu", "Konnakoto Soudou", 
-    "Haze Haseru Haterumade", "Dear Mr. 'F'", "Obenkyou Shitoiteyo", "MILABO", "Fastening", "Ham", "Kuraku Kuroku"
+    "Haze Haseru Haterumade", "Dear Mr. 'F'", "Obenkyou Shitoiteyo", "MILABO", "Fastening", "Ham", "Darken"
 ];
 var fishyCommands = [
     "fishy", "fishytimer", "fishystats", "leaderboardfishy", "fish", "fihy", "fisy", "foshy", "fisyh", "fsihy", "fin",
@@ -62,7 +63,6 @@ function matchEmojis(find_emojis, message_content) {
             }
         }
     });
-
     return matched_emojis;
 }
 
@@ -80,7 +80,7 @@ async function replaceMessageThroughWebhook(message, resend_content) {
                 // Resend the message with the OP's avatar and display name
                 webhook.send(resend_content, {
                     username: message.member.displayName,
-                    avatarURL: message.author.displayAvatarURL(),
+                    avatarURL: message.author.displayAvatarURL({ dynamic: true }),
                 });
             })
             .catch(console.error);
@@ -94,20 +94,18 @@ async function replaceMessageThroughWebhook(message, resend_content) {
 }
 
 // Ready Event
-client.once("ready", () => {
+client.on("ready", () => {
     console.log(`${client.user.tag} activated!`);
     setInterval(statusChange, 60000);
 
-    /*
-    For creating/editing embeds:
+    archiveCommands(client, "770726574865514517");
     botCommands(client, "742548177462231120");
     contestCommands(client, "770795084002230292");
     roleslistCommands(client, "758494476174884905");
     ruleCommands(client, "603248229928140801");
-    */
 });
 
-// Monthly Server Themes
+// Monthly Server Topics
 const scheduledMessage = new cron.CronJob("0 0 1 * *", () => {
     const channel = client.channels.cache.find(channel => channel.id === "767550623767068742");
     const random = Math.floor(Math.random() * channelTitles.length);
@@ -119,6 +117,9 @@ scheduledMessage.start();
 client.on("guildMemberAdd", member => {
     if (member.guild.id === "603246092402032670") {
         member.guild.channels.cache.get("603246092402032673").send(emojis.wave);
+
+        var newbiesRole = member.guild.roles.cache.find(role => role.name === "Newbies");
+        member.roles.add(newbiesRole)
     }
 });
 
@@ -328,6 +329,73 @@ client.on("message", async message => {
         }
     }
 
+    // Server Info
+    const regions = {
+        brazil: "Brazil",
+        europe: "Europe",
+        hongkong: "Hong Kong",
+        india: "India",
+        japan: "Japan",
+        russia: "Russia",
+        singapore: "Singapore",
+        southafrica: "South Africa",
+        sydney: "Sydney",
+        "us-central": "US Central",
+        "us-east": "US East",
+        "us-west": "US West",
+        "us-south": "US South"
+    };
+
+    if (message.content.toLowerCase() === `${prefix}${commands.serverinfo.name}`) {
+		const roles = message.guild.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString());
+		const members = message.guild.members.cache;
+		const channels = message.guild.channels.cache;
+		const serverEmojis = message.guild.emojis.cache;
+
+        const embed = new Discord.MessageEmbed()
+            .setTitle(`About ${message.guild.name}`)
+            .setThumbnail(message.guild.iconURL({ dynamic: true }))
+            .setColor(15849719)
+			.addField("General", [
+                `**❯ Owner:** ${message.guild.owner.user.tag}`,
+				`**❯ Region:** ${regions[message.guild.region]}`,
+				`**❯ Boost Tier:** ${message.guild.premiumTier ? `Tier ${message.guild.premiumTier}` : "None"}`,
+				`**❯ Creation Date:** ${moment(message.guild.createdTimestamp).format("LT")}, ${moment(message.guild.createdTimestamp).format("LL")} (${moment(message.guild.createdTimestamp).fromNow()})`,
+				"\u200b"
+			])
+			.addField("Statistics", [
+				`**❯ Role Count:** ${roles.length}`,
+				`**❯ Emoji Count:** ${serverEmojis.size} (${serverEmojis.filter(emoji => emoji.animated).size} animated)`,
+				`**❯ Member Count:** ${message.guild.memberCount} (${members.filter(member => member.user.bot).size} bots)`,
+				`**❯ Text Channels:** ${channels.filter(channel => channel.type === "text").size}`,
+				`**❯ Voice Channels:** ${channels.filter(channel => channel.type === "voice").size}`,
+				`**❯ Boost Count:** ${message.guild.premiumSubscriptionCount || "0"}`,
+				"\u200b"
+			], true)
+			.addField("Presence", [
+				`**❯ Online:** ${members.filter(member => member.presence.status === "online").size}`,
+				`**❯ Idle:** ${members.filter(member => member.presence.status === "idle").size}`,
+				`**❯ Do Not Disturb:** ${members.filter(member => member.presence.status === "dnd").size}`,
+				`**❯ Offline:** ${members.filter(member => member.presence.status === "offline").size}`,
+            ], true)
+            
+            if (message.channel.id === "770795084002230292") {
+                embed.addField("History", [
+                    "**❯ Ex-Owner:** xscore#4740",
+                    "**❯ Ex-Administrators:** Dreycan#1936",
+                    "**❯ Ex-Moderators:** jiachun#0067, TheSuperCrisb#3502"
+                ])
+                message.channel.send(embed).then((msg) => {
+                    setInterval(function () {
+                        msg.edit(embed);
+                    }, 60000)
+                })
+            }
+            else {
+                message.channel.send(embed)
+            }
+    };
+
     // PatPat Command
     // Allowed in specific bot channels only
     if (allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== "603246092402032670") {
@@ -453,8 +521,8 @@ client.on("message", async message => {
     let isPrefix = message.content.toLowerCase();
     if (isPrefix.startsWith("<@!" + client.user.id + "> help")) {
         let helpEmbed = new Discord.MessageEmbed()
-            .setTitle(`Nira-chan's Commands`)
-            .setColor(16761576)
+            .setTitle("Nira-chan's Commands")
+            .setColor(15849719)
         for (const key in commands) {
             helpEmbed.addField(`${prefix}${commands[key].name}`, `${commands[key].description}`)
         }

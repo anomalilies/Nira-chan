@@ -1,22 +1,25 @@
-/*
-const emojis = require("./config.json");
 module.exports = async (client, id = []) => {
     const channel = await client.channels.fetch(id)
   
     channel.messages.fetch().then((messages) => {
+        const niraMessages = messages.filter(msg => msg.author == client.user);
 
-        if (messages.size === 0) {
+        if (niraMessages.size === 0) {
             channel.send("**Roles List**")
-            channel.send(roles1, `${emojis.spacer}`)
-            channel.send(roles2, `${emojis.spacer}`)
-            channel.send(roles3, `${emojis.spacer}`)
-            channel.send(roles4, `${emojis.spacer}`)
+            channel.send(roles1)
+            channel.send("<:spacer:757807111756447806>")
+            channel.send(roles2)
+            channel.send("<:spacer:757807111756447806>")
+            channel.send(roles3)
+            channel.send("<:spacer:757807111756447806>")
+            channel.send(roles4)
             channel.send("**Role Shop**")
         }
-        else channel.messages.fetch("message_id")
-        .then(messages => {
-            messages.edit(role_embed);
-        });
+        else {
+            niraMessages.array()[7].edit(roles1);
+            niraMessages.array()[5].edit(roles2);
+            niraMessages.array()[3].edit(roles3);
+            niraMessages.array()[1].edit(roles4);
+        }
     })
 }
-*/

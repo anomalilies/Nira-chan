@@ -17,6 +17,10 @@
             "name": "patpatbye",
             "description": "End conversation with PatPat's clone."
         },
+        "serverinfo": {
+            "name": "serverinfo",
+            "description": "Find more out about the server!"
+        },
         "stabstabstab": {
             "name": "stabstabstab",
             "description": "Do some fencing."

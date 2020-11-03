@@ -36,7 +36,7 @@ var uwuify = {
             description: str
         });
 
-        uwuembed.setColor(16761576);
+        uwuembed.setColor(15849719);
         uwuembed.setFooter("Requested by: " + message.author.username + " | Use -uwu to uwu-ify your messages!", message.author.displayAvatarURL({dynamic:true}));
         message.channel.send(uwuembed);
     }

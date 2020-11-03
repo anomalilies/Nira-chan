@@ -12,7 +12,8 @@
   "dependencies": {
     "cron": "^1.8.2",
     "discord.js": "^12.4.0",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "moment": "^2.29.1"
   },
   "engines": {
     "node": "12.19.0",
