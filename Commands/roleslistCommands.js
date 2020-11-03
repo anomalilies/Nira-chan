@@ -13,6 +13,7 @@ module.exports = async (client, id = []) => {
             channel.send(roles3)
             channel.send("<:spacer:757807111756447806>")
             channel.send(roles4)
+            channel.send("<:spacer:757807111756447806>")
             channel.send("**Role Shop**")
         }
         else {
