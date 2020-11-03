@@ -16,7 +16,6 @@ const archiveCommands = require("./Commands/archiveCommands")
 const botCommands = require("./Commands/botCommands");
 const contestCommands = require("./Commands/contestCommands");
 const roleslistCommands = require("./Commands/roleslistCommands");
-const ruleCommands = require("./Commands/ruleCommands");
 
 var uwuifying = require("./UWU Translator/uwuify");
 var data = require("./UWU Translator/data");
@@ -102,7 +101,6 @@ client.on("ready", () => {
     botCommands(client, "742548177462231120");
     contestCommands(client, "770795084002230292");
     roleslistCommands(client, "758494476174884905");
-    ruleCommands(client, "603248229928140801");
 });
 
 // Monthly Server Topics
