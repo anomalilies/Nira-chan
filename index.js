@@ -435,24 +435,6 @@ client.on("message", async message => {
         else message.delete();
     }
 
-    // Rule 0(w0)
-    if (message.content.toLowerCase().startsWith(`${prefix}0w0`)) {
-        const rule0w0 = new Discord.MessageEmbed()
-            .setTitle("(Swecrwet Rwulwe) 0w0. Bwe Kwind to Youwsewf")
-            .setDescription(
-                "We cawe fow ywou, so stwop byeatwing youwsewf up. (・`ω´・)\nNyot evewything is youw fauwt, so "
-                + "pwease keep twusting youwsewf, and ouw wespect and wuv fow you."
-            );
-        message.channel.send(rule0w0);
-    } else if (message.content === (`${prefix}0`)) {
-        const rule0 = new Discord.MessageEmbed()
-            .setTitle("(Secret Rule) 0. Be Kind to Yourself")
-            .setDescription(
-                "We care for you, so stop beating yourself up!\nNot everything is your fault, so please keep trusting"
-                + " yourself, and our respect and love for you.");
-        message.channel.send(rule0);
-    }
-
     // Server Rules
     if (message.member.roles.cache.get("742061218860236840")) {
         rules.filter(rule => rule.re.test(message.content))
