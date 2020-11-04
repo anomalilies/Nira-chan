@@ -436,7 +436,7 @@ client.on("message", async message => {
     }
 
     // Rule 0(w0)
-    if (message.content.toLowerCase().startsWith(`${prefix}0w0 `)) {
+    if (message.content.toLowerCase().startsWith(`${prefix}0w0`)) {
         const rule0w0 = new Discord.MessageEmbed()
             .setTitle("(Swecrwet Rwulwe) 0w0. Bwe Kwind to Youwsewf")
             .setDescription(
