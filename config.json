@@ -1,6 +1,6 @@
 {
     "prefix": "-",
-    "commands": {
+    "commandNames": {
         "dearmrf": {
             "name": "dearmrf",
             "description": "Write your own personal letter to Mr. F."
@@ -17,8 +17,8 @@
             "name": "patpatbye",
             "description": "End conversation with PatPat's clone."
         },
-        "serverinfo": {
-            "name": "serverinfo",
+        "about": {
+            "name": "about",
             "description": "Find more out about the server!"
         },
         "stabstabstab": {
