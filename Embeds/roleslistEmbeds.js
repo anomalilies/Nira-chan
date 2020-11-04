@@ -40,7 +40,7 @@ global.roles3 = new Discord.MessageEmbed()
     {name: "Stans", value: `<@&742066260811972709> are members in charge of updating and providing <#742069780328087613>.`},
     {name: "Hackers", value: `Our <@&769728601036947467> provide invaluable help with developing and debugging <@740606402330099752>.`},
     {name: "Journalists", value: `<@&765670343934345277> help our staff provide up-to-date ZUTOMAYO news on <#603248261461180480>.`},
-    {name: "Contestants", value: `The <@&761383555372023860> role comes with all awarded roles and those who have entered contests, as to separate users on the member list.`},
+    {name: "Contestants", value: `For all our <@&770792091353743401> from the <#761326959154167838> channel!`},
     {name: "Contributors", value: `The <@&761383555372023860> role comes with all awarded roles and those who have entered contests, as to separate users on the member list.`}
 )
 global.roles4 = new Discord.MessageEmbed()

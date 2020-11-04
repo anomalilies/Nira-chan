@@ -26,7 +26,7 @@ module.exports = async (client, id = []) => {
             channel.send("<:spacer:757807111756447806>")
             channel.send(bc9)
             channel.send("<:spacer:757807111756447806>")
-            channel.send("`Miscellaneous` **Prefixes**")
+            channel.send("`@` **Prefix**")
             channel.send(bc10)
         }
         else {
