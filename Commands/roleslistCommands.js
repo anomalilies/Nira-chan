@@ -17,10 +17,10 @@ module.exports = async (client, id = []) => {
             channel.send("**Role Shop**")
         }
         else {
-            niraMessages.array()[7].edit(roles1);
-            niraMessages.array()[5].edit(roles2);
-            niraMessages.array()[3].edit(roles3);
-            niraMessages.array()[1].edit(roles4);
+            niraMessages.array()[8].edit(roles1);
+            niraMessages.array()[6].edit(roles2);
+            niraMessages.array()[4].edit(roles3);
+            niraMessages.array()[2].edit(roles4);
         }
     })
 }
