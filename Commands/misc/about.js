@@ -3,7 +3,7 @@ const moment = require("moment");
 const { commandNames } = require("../../config.json");
 
 module.exports = {
-    commands: "about",
+    commands: ["about", "serverinfo"],
     callback: (message) => {
         const regions = {
             brazil: "Brazil",
