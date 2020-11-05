@@ -3,8 +3,7 @@ const cron = require("cron");
 const path = require("path");
 const fs = require("fs");
 
-const Discord = require("discord.js");
-const client = new Discord.Client();
+const Commando = require("discord.js-commando")
 const { prefix, commandNames, allowlists, emojis, patpatresponses, nira9000 } = require("./config.json");
 const rules = require("./Embeds/ruleEmbeds.json");
 rules.forEach((rule, i) => rule.re = new RegExp(`(\\s|^)${prefix}${i+1}(\\s|$)`));
@@ -20,6 +19,11 @@ const contestCommands = require("./move/contestCommands");
 const roleslistCommands = require("./move/roleslistCommands");
 
 var data = require("./UWU Translator/data");
+
+const client = new Commando.CommandoClient({
+    owner: "228880116699103232",
+    commandPrefix: prefix,
+})
 
 var message_global;
 var whosTalkingWithPatPat = new Set();
@@ -97,6 +101,15 @@ async function replaceMessageThroughWebhook(message, resend_content) {
 client.on("ready", () => {
     console.log(`${client.user.tag} activated!`);
     setInterval(statusChange, 60000);
+
+    client.registry
+    .registerGroups([
+        ["misc", "Miscellaneous Commands"],
+        ["moderation", "Moderation Commands"],
+        ["fun", "Fun Commands"]
+    ])
+    .registerDefaults()
+    .registerCommandsIn(path.join(__dirname, "cmds"))
 
     const baseFile = "command-base.js"
     const commandBase = require(`./Commands/${baseFile}`)

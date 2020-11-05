@@ -1,9 +1,19 @@
-const Discord = require("discord.js");
+const Commando = require("discord.js-commando");
+const { MessageEmbed } = require("discord.js");
 const moment = require("moment");
 
-module.exports = {
-    commands: ["about", "serverinfo"],
-    callback: (message) => {
+module.exports = class AboutCommand extends Commando.Command {
+    constructor(client) {
+        super(client, {
+            name: "about",
+            aliases: ["serverinfo"],
+            group: "misc",
+            memberName: "about",
+            description: "Find out about the server!",
+        })
+    }
+
+    async run(message) {
         const regions = {
             brazil: "Brazil",
             europe: "Europe",
@@ -24,7 +34,7 @@ module.exports = {
 		const channels = message.guild.channels.cache;
 		const serverEmojis = message.guild.emojis.cache;
 
-        const serverInfo = new Discord.MessageEmbed()
+        const serverInfo = new MessageEmbed()
             .setTitle(`About ${message.guild.name}`)
             .setThumbnail(message.guild.iconURL({ dynamic: true }))
             .setColor(15849719)
@@ -66,5 +76,5 @@ module.exports = {
             else {
                 message.channel.send(serverInfo)
             }
-        }
-};
+    }
+}
