@@ -97,5 +97,36 @@ module.exports = (client, commandOptions) => {
             }
         }
     })
+    client.on("messageUpdate", async (oldMessage, newMessage) => {
+        const { member, content, guild } = newMessage
 
+        for (const alias of commands) {
+            if (content.toLowerCase().startsWith(`${prefix}${alias.toLowerCase()}`)) {
+                for (const permission of permissions) {
+                    if (!member.hasPermission(permission)) {
+                        newMessage.reply(permissionError)
+                        return
+                    }
+                }
+                for (const requiredRole of requiredRoles) {
+                    const role = guild.roles.cache.find(role =>
+                        role.name === requiredRole)
+
+                        if (!role || !member.roles.cache.has(role.id)) {
+                            newMessage.reply(`You must have the "${requiredRole} to use this command.`)
+                            return
+                        }
+                }
+                const arguments = content.split(/[ ]+/)
+                arguments.shift()
+                if (arguments.length < minArgs || (
+                    maxArgs !== null && arguments.length > maxArgs
+                )) {
+                    newMessage.reply(`Incorrect syntax! Use ${prefix}${alias} ${expectedArgs}`)
+                    return
+                }
+                callback(newMessage, arguments, arguments.join(" "))
+            }
+        }
+    })
 }

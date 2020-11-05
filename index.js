@@ -19,7 +19,6 @@ const botCommands = require("./move/botCommands");
 const contestCommands = require("./move/contestCommands");
 const roleslistCommands = require("./move/roleslistCommands");
 
-var uwuifying = require("./UWU Translator/uwuify");
 var data = require("./UWU Translator/data");
 
 var message_global;
@@ -207,22 +206,6 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
     if (newMessage.mentions.users.has(client.user.id)) {
         newMessage.react("742394597174673458");
     }
-
-    // Akinator Easter Egg
-    // Allowed in specific bot channels only
-    if(allowlists.botspamchannels.includes(newMessage.channel.id)) {
-        if(newMessage.content.toLowerCase().startsWith("!akinator ")) {
-            const embed = new Discord.MessageEmbed()
-                .setAuthor(newMessage.author.tag, newMessage.author.displayAvatarURL({dynamic:true}))
-                .setDescription(
-                    `I'm ${Math.floor(Math.random() * (99-75+1)+75)}% sure your character is...\n\nACAne (Singer)`
-                )
-                .setThumbnail("https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/ACAne.png")
-                .setFooter("Is this correct? (yes/no)")
-                .setColor(240116);
-            newMessage.channel.send(embed);
-        }
-    }
 });
 
 // Check Messages
@@ -232,25 +215,6 @@ client.on("message", async message => {
     // Check if author is bot (webhooks are fine though)
     if (!message.webhookID && (message.author == client.user || message.author.bot)) {
         return;
-    }
-
-    // UWU-ify
-    if (message.content.toLowerCase().startsWith(`${prefix}${commandNames.uwuify.name} `)) {
-        var args = message.content.slice(4).trim().split(/ +/g);
-        var command = args.shift();
-        var str = command + " " + args.join(" ");
-
-        message.react("771179684851089458");
-        uwuifying.custom(str, message, data, Discord);
-    }
-    else if (message.guild.id === "441673705458761729") {
-        if (message.channel.id === "696143475954941962") {
-            var str = message.content
-            uwuifying.custom(str, message, data, Discord);
-        }
-        else if (message.channel.id === "456367532434128897" && message.author.id === "238386015520292866") {
-            message.react("771179684851089458");
-        }
     }
 
     // Check for NiraMojis in their channels
@@ -327,22 +291,6 @@ client.on("message", async message => {
                 await replaceMessageThroughWebhook(message, `<a:${emoji.name}:${emoji.id}>`);
             }
         });
-    }
-
-    // Akinator Easter Egg
-    // Allowed in specific bot channels only
-    if (allowlists.botspamchannels.includes(message.channel.id)) {
-        if(message.content.toLowerCase().startsWith("!akinator ")) {
-            const embed = new Discord.MessageEmbed()
-                .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
-                .setDescription(
-                    `I'm ${Math.floor(Math.random() * (99-75+1)+75)}% sure your character is...\n\nACAne (Singer)`
-                )
-                .setThumbnail("https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/ACAne.png")
-                .setFooter("Is this correct? (yes/no)")
-                .setColor(240116);
-            message.channel.send(embed);
-        }
     }
 
     // PatPat Command
@@ -446,25 +394,6 @@ client.on("message", async message => {
                     value: rule.moderation
                 }))
             .forEach(rule => message.channel.send(rule));
-    }
-
-    // Other Commands
-    let isPrefix = message.content.toLowerCase();
-    if (isPrefix.startsWith("<@!" + client.user.id + "> help ")) {
-        let helpEmbed = new Discord.MessageEmbed()
-            .setTitle("Nira-chan's Commands")
-            .setColor(15849719)
-        for (const key in commandNames) {
-            helpEmbed.addField(`${prefix}${commandNames[key].name}`, `${commandNames[key].description}`)
-        }
-        message.channel.send(helpEmbed);
-    } else if (message.content.toLowerCase() === `${prefix}${commandNames.despair.name}`) {
-        message.channel.send(`Aaaa, the tape is rewinding so fast! ${emojis.despair}`);
-    } else if (message.content.toLowerCase().startsWith(`${prefix}${commandNames.dearmrf.name} `)) {
-        message.channel.send(`Mr. F, I have no idea what **${message.author.username}** is saying, but something `
-            + `tells me you best pay really close attention! ${emojis.wince}`);
-    } else if (message.content.toLowerCase() === `${prefix}${commandNames.stabstabstab.name}`) {
-        message.channel.send(`pokepokepoke ${emojis.fencing}`);
     }
 });
 

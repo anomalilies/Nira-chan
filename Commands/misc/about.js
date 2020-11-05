@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const moment = require("moment");
-const { commandNames } = require("../../config.json");
 
 module.exports = {
     commands: ["about", "serverinfo"],

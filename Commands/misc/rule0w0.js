@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+
 module.exports = {
     commands: "0w0",
     callback: (message) => {
