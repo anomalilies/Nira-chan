@@ -18,6 +18,7 @@ const botCommands = require("./move/botCommands");
 const contestCommands = require("./move/contestCommands");
 const roleslistCommands = require("./move/roleslistCommands");
 
+var uwuifying = require("./UWU Translator/uwuify");
 var data = require("./UWU Translator/data");
 
 const client = new Commando.CommandoClient({
@@ -104,33 +105,16 @@ client.on("ready", () => {
 
     client.registry
     .registerGroups([
-        ["misc", "Miscellaneous Commands"],
-        ["moderation", "Moderation Commands"],
-        ["fun", "Fun Commands"]
+        ["fun", "Fun Commands"],
+        ["misc", "Miscellaneous Commands"]
     ])
     .registerDefaults()
-    .registerCommandsIn(path.join(__dirname, "cmds"))
+    .registerCommandsIn(path.join(__dirname, "Commands"))
 
-    const baseFile = "command-base.js"
-    const commandBase = require(`./Commands/${baseFile}`)
-    const readCommands = dir => {
-        const files = fs.readdirSync(path.join(__dirname, dir))
-        for (const file of files) {
-            const stat = fs.lstatSync(path.join(__dirname, dir, file))
-            if (stat.isDirectory()) {
-                readCommands(path.join(dir,file))
-            } else if (file !== baseFile) {
-                    const option = require(path.join(__dirname, dir, file))
-                    commandBase (client, option)
-                }
-            }
-        }
-    readCommands("Commands")
-
-    /*archiveCommands(client, "770726574865514517");
+    archiveCommands(client, "770726574865514517");
     botCommands(client, "742548177462231120");
     contestCommands(client, "770795084002230292");
-    roleslistCommands(client, "758494476174884905");*/
+    roleslistCommands(client, "758494476174884905");
 });
 
 // Monthly Server Topics
@@ -183,6 +167,17 @@ async function userReactions(message) {
 
 client.on("messageUpdate", async (oldMessage, newMessage) => {
     await userReactions(newMessage);
+
+    // UWU-ify
+    if (message.guild.id === "441673705458761729") {
+        if (message.channel.id === "696143475954941962") {
+            var str = message.content
+            uwuifying.custom(str, message, data, Commando);
+        }
+        else if (message.channel.id === "456367532434128897" && message.author.id === "238386015520292866") {
+            message.react("771179684851089458");
+        }
+    }
 
     // Check for NiraMojis in their channels
     if (allowlists.disgustchannels.includes(newMessage.channel.id)) {
