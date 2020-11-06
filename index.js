@@ -111,10 +111,10 @@ client.on("ready", () => {
     .registerDefaults()
     .registerCommandsIn(path.join(__dirname, "Commands"))
 
-    archiveCommands(client, "770726574865514517");
+    /*archiveCommands(client, "770726574865514517");
     botCommands(client, "742548177462231120");
     contestCommands(client, "770795084002230292");
-    roleslistCommands(client, "758494476174884905");
+    roleslistCommands(client, "758494476174884905");*/
 });
 
 // Monthly Server Topics
@@ -168,17 +168,6 @@ async function userReactions(message) {
 client.on("messageUpdate", async (oldMessage, newMessage) => {
     await userReactions(newMessage);
 
-    // UWU-ify
-    if (message.guild.id === "441673705458761729") {
-        if (message.channel.id === "696143475954941962") {
-            var str = message.content
-            uwuifying.custom(str, message, data, Commando);
-        }
-        else if (message.channel.id === "456367532434128897" && message.author.id === "238386015520292866") {
-            message.react("771179684851089458");
-        }
-    }
-
     // Check for NiraMojis in their channels
     if (allowlists.disgustchannels.includes(newMessage.channel.id)) {
         if (![emojis.disgust].includes(newMessage.content)) {
@@ -223,6 +212,17 @@ client.on("message", async message => {
     // Check if author is bot (webhooks are fine though)
     if (!message.webhookID && (message.author == client.user || message.author.bot)) {
         return;
+    }
+
+    // UWU-ify
+    if (message.guild.id === "441673705458761729") {
+        if (message.channel.id === "696143475954941962") {
+            var str = message.content
+            uwuifying.custom(str, message, data, Commando);
+        }
+        else if (message.channel.id === "456367532434128897" && message.author.id === "238386015520292866") {
+            message.react("771179684851089458");
+        }
     }
 
     // Check for NiraMojis in their channels
