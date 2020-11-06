@@ -21,9 +21,9 @@ const roleslistCommands = require("./Embeds/Roles/roleslistCommands");
 var uwuifying = require("./Commands/Fun/UWU Translator/uwuify");
 var data = require("./Commands/Fun/UWU Translator/data");
 
-const client = new Commando.CommandoClient({
-    owner: "228880116699103232",
+const client = new CommandoClient({
     commandPrefix: prefix,
+    owner: "228880116699103232",
     unknownCommandResponse: false,
 });
 
