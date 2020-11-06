@@ -24,6 +24,7 @@ var data = require("./Commands/Fun/UWU Translator/data");
 const client = new Commando.CommandoClient({
     owner: "228880116699103232",
     commandPrefix: prefix,
+    unknownCommandResponse: false
 })
 
 var message_global;
