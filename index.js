@@ -8,18 +8,18 @@ const { prefix, commandNames, allowlists, emojis, patpatresponses, nira9000 } = 
 const rules = require("./Embeds/ruleEmbeds.json");
 rules.forEach((rule, i) => rule.re = new RegExp(`(\\s|^)${prefix}${i+1}(\\s|$)`));
 
-const archiveEmbeds = require("./Embeds/archiveEmbeds")
-const botEmbeds = require("./Embeds/botEmbeds");
-const contestEmbeds = require("./Embeds/contestEmbeds");
-const roleslistEmbeds = require("./Embeds/roleslistEmbeds");
+const archiveEmbeds = require("./Embeds/Archive/archiveEmbeds")
+const botEmbeds = require("./Embeds/Bots/botEmbeds");
+const contestEmbeds = require("./Embeds/Contests/contestEmbeds");
+const roleslistEmbeds = require("./Embeds/Roles/roleslistEmbeds");
 
-const archiveCommands = require("./move/archiveCommands")
-const botCommands = require("./move/botCommands");
-const contestCommands = require("./move/contestCommands");
-const roleslistCommands = require("./move/roleslistCommands");
+const archiveCommands = require("./Embeds/Archive/archiveCommands")
+const botCommands = require("./Embeds/Bots/botCommands");
+const contestCommands = require("./Embeds/Contests/contestCommands");
+const roleslistCommands = require("./Embeds/Roles/roleslistCommands");
 
-var uwuifying = require("./UWU Translator/uwuify");
-var data = require("./UWU Translator/data");
+var uwuifying = require("./Commands/Fun/UWU Translator/uwuify");
+var data = require("./Commands/Fun/UWU Translator/data");
 
 const client = new Commando.CommandoClient({
     owner: "228880116699103232",

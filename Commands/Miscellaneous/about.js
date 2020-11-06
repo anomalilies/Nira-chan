@@ -60,6 +60,7 @@ module.exports = class AboutCommand extends Commando.Command {
 				`**❯ Do Not Disturb:** ${members.filter(member => member.presence.status === "dnd").size}`,
 				`**❯ Offline:** ${members.filter(member => member.presence.status === "offline").size}`,
             ], true)
+            .setTimestamp()
 
             if (message.channel.id === "770726574865514517") {
                 serverInfo.addField("History", [
@@ -67,6 +68,8 @@ module.exports = class AboutCommand extends Commando.Command {
                     "**❯ Ex-Administrators:** Dreycan#1936",
                     "**❯ Ex-Moderators:** jiachun#0067, TheSuperCrisb#3502"
                 ])
+                serverInfo.setFooter("Last updated")
+
                 message.channel.send(serverInfo).then((msg) => {
                     setInterval(function () {
                         msg.edit(serverInfo);

@@ -1,5 +1,6 @@
 const { Command } = require("discord.js-commando");
 const { emojis } = require("../../config.json");
+const { MessageEmbed } = require("discord.js");
 
 module.exports = class FencingCommand extends Command {
     constructor(client) {
