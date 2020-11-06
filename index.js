@@ -1,24 +1,30 @@
 require("dotenv").config();
 const cron = require("cron");
-const Discord = require("discord.js");
-const moment = require("moment");
-const client = new Discord.Client();
-const { prefix, commands, allowlists, emojis, patpatresponses, nira9000 } = require("./config.json");
+const path = require("path");
+const fs = require("fs");
+
+const Commando = require("discord.js-commando")
+const { prefix, commandNames, allowlists, emojis, patpatresponses, nira9000 } = require("./config.json");
 const rules = require("./Embeds/ruleEmbeds.json");
 rules.forEach((rule, i) => rule.re = new RegExp(`(\\s|^)${prefix}${i+1}(\\s|$)`));
 
-const archiveEmbeds = require("./Embeds/archiveEmbeds")
-const botEmbeds = require("./Embeds/botEmbeds");
-const contestEmbeds = require("./Embeds/contestEmbeds");
-const roleslistEmbeds = require("./Embeds/roleslistEmbeds");
+const archiveEmbeds = require("./Embeds/Archive/archiveEmbeds")
+const botEmbeds = require("./Embeds/Bots/botEmbeds");
+const contestEmbeds = require("./Embeds/Contests/contestEmbeds");
+const roleslistEmbeds = require("./Embeds/Roles/roleslistEmbeds");
 
-const archiveCommands = require("./Commands/archiveCommands")
-const botCommands = require("./Commands/botCommands");
-const contestCommands = require("./Commands/contestCommands");
-const roleslistCommands = require("./Commands/roleslistCommands");
+const archiveCommands = require("./Embeds/Archive/archiveCommands")
+const botCommands = require("./Embeds/Bots/botCommands");
+const contestCommands = require("./Embeds/Contests/contestCommands");
+const roleslistCommands = require("./Embeds/Roles/roleslistCommands");
 
-var uwuifying = require("./UWU Translator/uwuify");
-var data = require("./UWU Translator/data");
+var uwuifying = require("./Commands/Fun/UWU Translator/uwuify");
+var data = require("./Commands/Fun/UWU Translator/data");
+
+const client = new Commando.CommandoClient({
+    owner: "228880116699103232",
+    commandPrefix: prefix,
+})
 
 var message_global;
 var whosTalkingWithPatPat = new Set();
@@ -96,6 +102,14 @@ async function replaceMessageThroughWebhook(message, resend_content) {
 client.on("ready", () => {
     console.log(`${client.user.tag} activated!`);
     setInterval(statusChange, 60000);
+
+    client.registry
+    .registerGroups([
+        ["fun", "Fun Commands"],
+        ["misc", "Miscellaneous Commands"]
+    ])
+    .registerDefaults()
+    .registerCommandsIn(path.join(__dirname, "Commands"))
 
     archiveCommands(client, "770726574865514517");
     botCommands(client, "742548177462231120");
@@ -189,22 +203,6 @@ client.on("messageUpdate", async (oldMessage, newMessage) => {
     if (newMessage.mentions.users.has(client.user.id)) {
         newMessage.react("742394597174673458");
     }
-
-    // Akinator Easter Egg
-    // Allowed in specific bot channels only
-    if(allowlists.botspamchannels.includes(newMessage.channel.id)) {
-        if(newMessage.content.toLowerCase().startsWith("!akinator")) {
-            const embed = new Discord.MessageEmbed()
-                .setAuthor(newMessage.author.tag, newMessage.author.displayAvatarURL({dynamic:true}))
-                .setDescription(
-                    `I'm ${Math.floor(Math.random() * (99-75+1)+75)}% sure your character is...\n\nACAne (Singer)`
-                )
-                .setThumbnail("https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/ACAne.png")
-                .setFooter("Is this correct? (yes/no)")
-                .setColor(240116);
-            newMessage.channel.send(embed);
-        }
-    }
 });
 
 // Check Messages
@@ -217,18 +215,10 @@ client.on("message", async message => {
     }
 
     // UWU-ify
-    if (message.content.toLowerCase().startsWith(`${prefix}${commands.uwuify.name}`)) {
-        var args = message.content.slice(4).trim().split(/ +/g);
-        var command = args.shift();
-        var str = command + " " + args.join(" ");
-
-        message.react("771179684851089458");
-        uwuifying.custom(str, message, data, Discord);
-    }
-    else if (message.guild.id === "441673705458761729") {
+    if (message.guild.id === "441673705458761729") {
         if (message.channel.id === "696143475954941962") {
             var str = message.content
-            uwuifying.custom(str, message, data, Discord);
+            uwuifying.custom(str, message, data, Commando);
         }
         else if (message.channel.id === "456367532434128897" && message.author.id === "238386015520292866") {
             message.react("771179684851089458");
@@ -311,93 +301,10 @@ client.on("message", async message => {
         });
     }
 
-    // Akinator Easter Egg
-    // Allowed in specific bot channels only
-    if (allowlists.botspamchannels.includes(message.channel.id)) {
-        if(message.content.toLowerCase().startsWith("!akinator")) {
-            const embed = new Discord.MessageEmbed()
-                .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
-                .setDescription(
-                    `I'm ${Math.floor(Math.random() * (99-75+1)+75)}% sure your character is...\n\nACAne (Singer)`
-                )
-                .setThumbnail("https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/ACAne.png")
-                .setFooter("Is this correct? (yes/no)")
-                .setColor(240116);
-            message.channel.send(embed);
-        }
-    }
-
-    // Server Info
-    const regions = {
-        brazil: "Brazil",
-        europe: "Europe",
-        hongkong: "Hong Kong",
-        india: "India",
-        japan: "Japan",
-        russia: "Russia",
-        singapore: "Singapore",
-        southafrica: "South Africa",
-        sydney: "Sydney",
-        "us-central": "US Central",
-        "us-east": "US East",
-        "us-west": "US West",
-        "us-south": "US South"
-    };
-
-    if (message.content.toLowerCase() === `${prefix}${commands.serverinfo.name}`) {
-		const roles = message.guild.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString());
-		const members = message.guild.members.cache;
-		const channels = message.guild.channels.cache;
-		const serverEmojis = message.guild.emojis.cache;
-
-        const serverInfo = new Discord.MessageEmbed()
-            .setTitle(`About ${message.guild.name}`)
-            .setThumbnail(message.guild.iconURL({ dynamic: true }))
-            .setColor(15849719)
-			.addField("General", [
-                `**❯ Owner:** ${message.guild.owner.user.tag}`,
-				`**❯ Region:** ${regions[message.guild.region]}`,
-				`**❯ Boost Tier:** ${message.guild.premiumTier ? `Tier ${message.guild.premiumTier}` : "None"}`,
-				`**❯ Creation Date:** ${moment(message.guild.createdTimestamp).format("LT")}, ${moment(message.guild.createdTimestamp).format("LL")} (${moment(message.guild.createdTimestamp).fromNow()})`,
-				"\u200b"
-			])
-			.addField("Statistics", [
-				`**❯ Role Count:** ${roles.length}`,
-				`**❯ Emoji Count:** ${serverEmojis.size} (${serverEmojis.filter(emoji => emoji.animated).size} animated)`,
-				`**❯ Member Count:** ${message.guild.memberCount} (${members.filter(member => member.user.bot).size} bots)`,
-				`**❯ Text Channels:** ${channels.filter(channel => channel.type === "text").size}`,
-				`**❯ Voice Channels:** ${channels.filter(channel => channel.type === "voice").size}`,
-				`**❯ Boost Count:** ${message.guild.premiumSubscriptionCount || "0"}`,
-				"\u200b"
-			], true)
-			.addField("Presence", [
-				`**❯ Online:** ${members.filter(member => member.presence.status === "online").size}`,
-				`**❯ Idle:** ${members.filter(member => member.presence.status === "idle").size}`,
-				`**❯ Do Not Disturb:** ${members.filter(member => member.presence.status === "dnd").size}`,
-				`**❯ Offline:** ${members.filter(member => member.presence.status === "offline").size}`,
-            ], true)
-            
-            if (message.channel.id === "770726574865514517") {
-                serverInfo.addField("History", [
-                    "**❯ Ex-Owner:** xscore#4740",
-                    "**❯ Ex-Administrators:** Dreycan#1936",
-                    "**❯ Ex-Moderators:** jiachun#0067, TheSuperCrisb#3502"
-                ])
-                message.channel.send(serverInfo).then((msg) => {
-                    setInterval(function () {
-                        msg.edit(serverInfo);
-                    }, 60000)
-                })
-            }
-            else {
-                message.channel.send(serverInfo)
-            }
-    };
-
     // PatPat Command
     // Allowed in specific bot channels only
     if (allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== "603246092402032670") {
-        if (message.content.toLowerCase() === `${prefix}${commands.patpatstart.name}`) {
+        if (message.content.toLowerCase() === `${prefix}${commandNames.patpatstart.name}`) {
             // PatPat: start new conversations
             whosTalkingWithPatPat.add(message.author.id);
 
@@ -418,7 +325,7 @@ client.on("message", async message => {
 
                 message.channel.send(patPatChatEmbed);
             }
-        } else if (message.content.toLowerCase() === `${prefix}${commands.patpatstop.name}`) {
+        } else if (message.content.toLowerCase() === `${prefix}${commandNames.patpatstop.name}`) {
             // PatPat: end conversations
             whosTalkingWithPatPat.delete(message.author.id);
 
@@ -469,7 +376,7 @@ client.on("message", async message => {
     // Fishy Commands
     if (message.channel.id === "747201864889794721") {
         let starts_with_command = fishyCommands
-            .some(word => message.content.toLowerCase().startsWith(`${prefix}`+word));
+            .some(word => message.content.toLowerCase().startsWith(`${prefix}`+word+` `));
         if (message.mentions.members.first() || starts_with_command) {
             return;
         }
@@ -484,24 +391,6 @@ client.on("message", async message => {
         else message.delete();
     }
 
-    // Rule 0(w0)
-    if (message.content.toLowerCase().startsWith(`${prefix}0w0`)) {
-        const rule0w0 = new Discord.MessageEmbed()
-            .setTitle("(Swecrwet Rwulwe) 0w0. Bwe Kwind to Youwsewf")
-            .setDescription(
-                "We cawe fow ywou, so stwop byeatwing youwsewf up. (・`ω´・)\nNyot evewything is youw fauwt, so "
-                + "pwease keep twusting youwsewf, and ouw wespect and wuv fow you."
-            );
-        message.channel.send(rule0w0);
-    } else if (message.content === (`${prefix}0`)) {
-        const rule0 = new Discord.MessageEmbed()
-            .setTitle("(Secret Rule) 0. Be Kind to Yourself")
-            .setDescription(
-                "We care for you, so stop beating yourself up!\nNot everything is your fault, so please keep trusting"
-                + " yourself, and our respect and love for you.");
-        message.channel.send(rule0);
-    }
-
     // Server Rules
     if (message.member.roles.cache.get("742061218860236840")) {
         rules.filter(rule => rule.re.test(message.content))
@@ -513,25 +402,6 @@ client.on("message", async message => {
                     value: rule.moderation
                 }))
             .forEach(rule => message.channel.send(rule));
-    }
-
-    // Other Commands
-    let isPrefix = message.content.toLowerCase();
-    if (isPrefix.startsWith("<@!" + client.user.id + "> help")) {
-        let helpEmbed = new Discord.MessageEmbed()
-            .setTitle("Nira-chan's Commands")
-            .setColor(15849719)
-        for (const key in commands) {
-            helpEmbed.addField(`${prefix}${commands[key].name}`, `${commands[key].description}`)
-        }
-        message.channel.send(helpEmbed);
-    } else if (message.content.toLowerCase() === `${prefix}${commands.despair.name}`) {
-        message.channel.send(`Aaaa, the tape is rewinding so fast! ${emojis.despair}`);
-    } else if (message.content.toLowerCase().startsWith(`${prefix}${commands.dearmrf.name}`)) {
-        message.channel.send(`Mr. F, I have no idea what **${message.author.username}** is saying, but something `
-            + `tells me you best pay really close attention! ${emojis.wince}`);
-    } else if (message.content.toLowerCase() === `${prefix}${commands.stabstabstab.name}`) {
-        message.channel.send(`pokepokepoke ${emojis.fencing}`);
     }
 });
 

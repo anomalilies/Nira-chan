@@ -1,14 +1,6 @@
 {
     "prefix": "-",
-    "commands": {
-        "dearmrf": {
-            "name": "dearmrf",
-            "description": "Write your own personal letter to Mr. F."
-        },
-        "despair": {
-            "name": "despair",
-            "description": "Express Despair the Nira Way™️."
-        },
+    "commandNames": {
         "patpatstart": {
             "name": "patpathi",
             "description": "Start a conversation with one of PatPat's clones."
@@ -16,25 +8,14 @@
         "patpatstop": {
             "name": "patpatbye",
             "description": "End conversation with PatPat's clone."
-        },
-        "serverinfo": {
-            "name": "serverinfo",
-            "description": "Find more out about the server!"
-        },
-        "stabstabstab": {
-            "name": "stabstabstab",
-            "description": "Do some fencing."
-        },
-        "uwuify": {
-            "name": "uwu",
-            "description": "UWU-ify your messages!"
         }
     },
     "allowlists": {
         "botspamchannels": [
             "742550881911701615",
             "758523455850938408",
-            "770028576078430239"
+            "770028576078430239",
+            "765054650029309962"
         ],
         "disgustchannels": [
             "603246659295510557",
