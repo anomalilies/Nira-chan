@@ -4,6 +4,8 @@ const path = require("path");
 
 const Commando = require("discord.js-commando")
 const { prefix, commandNames, allowlists, emojis, patpatresponses, nira9000 } = require("./config.json");
+
+const { MessageEmbed } = require("discord.js");
 const rules = require("./Embeds/ruleEmbeds.json");
 rules.forEach((rule, i) => rule.re = new RegExp(`(\\s|^)${prefix}${i+1}(\\s|$)`));
 
@@ -43,7 +45,7 @@ var contributorRoles = [
 
 // Embeds
 function getSimpleEmbed(color, title, author, description) {
-    return new Discord.MessageEmbed()
+    return new MessageEmbed()
         .setColor(color)
         .setTitle(title)
         .setAuthor(author.username, author.avatarURL({ dynamic: true }))
@@ -134,6 +136,13 @@ scheduledMessage.start();
 client.on("guildMemberAdd", member => {
     if (member.guild.id === "603246092402032670") {
         member.guild.channels.cache.get("603246092402032673").send(emojis.wave);
+
+        var newbiesRole = member.guild.roles.cache.find(role => role.name === "Newbies");
+        member.roles.add(newbiesRole);
+
+        if (Date.now() === member.joinedAt < 604800000) {
+            member.roles.remove(newbiesRole);
+        }
     }
     if (member.guild.id === "706628883440468060") {
         var lurkersRole = member.guild.roles.cache.find(role => role.name === "Lurkers");
@@ -403,7 +412,7 @@ client.on("message", async message => {
     // Server Rules
     if (message.member.roles.cache.get("742061218860236840")) {
         rules.filter(rule => rule.re.test(message.content))
-            .map(rule => new Discord.MessageEmbed()
+            .map(rule => new MessageEmbed()
                 .setTitle(rule.title)
                 .setDescription(rule.description)
                 .addFields({
