@@ -21,11 +21,11 @@ const roleslistCommands = require("./Embeds/Roles/roleslistCommands");
 var uwuifying = require("./Commands/Fun/UWU Translator/uwuify");
 var data = require("./Commands/Fun/UWU Translator/data");
 
-const client = new CommandoClient({
-    commandPrefix: prefix,
+const client = new Commando.CommandoClient({
     owner: "228880116699103232",
-    unknownCommandResponse: false,
-});
+    commandPrefix: prefix,
+    unknownCommand: false
+})
 
 var message_global;
 var whosTalkingWithPatPat = new Set();
@@ -107,15 +107,20 @@ client.on("ready", () => {
     client.registry
     .registerGroups([
         ["fun", "Fun Commands"],
-        ["misc", "Miscellaneous Commands"]
+        ["misc", "Miscellaneous Commands"],
+        ["util", "Utility"],
+        ["commands", "Commands"]
     ])
-    .registerDefaults()
+    .registerDefaultTypes()
+    .registerDefaultCommands({
+        unknownCommand: false
+    })
     .registerCommandsIn(path.join(__dirname, "Commands"))
 
-    archiveCommands(client, "770726574865514517");
+    /*archiveCommands(client, "770726574865514517");
     botCommands(client, "742548177462231120");
     contestCommands(client, "770795084002230292");
-    roleslistCommands(client, "758494476174884905");
+    roleslistCommands(client, "758494476174884905");*/
 });
 
 // Monthly Server Topics
