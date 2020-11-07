@@ -382,7 +382,7 @@ client.on("message", async message => {
     // Fishy Commands
     if (message.channel.id === "747201864889794721") {
         let starts_with_command = fishyCommands
-            .some(word => message.content.toLowerCase().startsWith(`${prefix}`+word+` `));
+            .some(word => message.content.toLowerCase().startsWith(`${prefix}`+word));
 
         if (starts_with_command) {
             return;
