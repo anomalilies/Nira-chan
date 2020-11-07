@@ -1,7 +1,6 @@
 require("dotenv").config();
 const cron = require("cron");
 const path = require("path");
-const fs = require("fs");
 
 const Commando = require("discord.js-commando")
 const { prefix, commandNames, allowlists, emojis, patpatresponses, nira9000 } = require("./config.json");
@@ -117,10 +116,10 @@ client.on("ready", () => {
     })
     .registerCommandsIn(path.join(__dirname, "Commands"))
 
-    /*archiveCommands(client, "770726574865514517");
+    archiveCommands(client, "770726574865514517");
     botCommands(client, "742548177462231120");
     contestCommands(client, "770795084002230292");
-    roleslistCommands(client, "758494476174884905");*/
+    roleslistCommands(client, "758494476174884905");
 });
 
 // Monthly Server Topics
@@ -135,9 +134,12 @@ scheduledMessage.start();
 client.on("guildMemberAdd", member => {
     if (member.guild.id === "603246092402032670") {
         member.guild.channels.cache.get("603246092402032673").send(emojis.wave);
-
-        var newbiesRole = member.guild.roles.cache.find(role => role.name === "Newbies");
-        member.roles.add(newbiesRole)
+    }
+    if (member.guild.id === "706628883440468060") {
+        var lurkersRole = member.guild.roles.cache.find(role => role.name === "Lurkers");
+        if (Date.now() === member.joinedAt > 604800000) {
+            member.roles.add(lurkersRole);
+        }
     }
 });
 
