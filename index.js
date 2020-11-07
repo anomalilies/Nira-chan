@@ -117,10 +117,10 @@ client.on("ready", () => {
     })
     .registerCommandsIn(path.join(__dirname, "Commands"))
 
-    archiveCommands(client, "770726574865514517");
+    /*archiveCommands(client, "770726574865514517");
     botCommands(client, "742548177462231120");
     contestCommands(client, "770795084002230292");
-    roleslistCommands(client, "758494476174884905");
+    roleslistCommands(client, "758494476174884905");*/
 });
 
 // Monthly Server Topics
@@ -383,10 +383,11 @@ client.on("message", async message => {
     if (message.channel.id === "747201864889794721") {
         let starts_with_command = fishyCommands
             .some(word => message.content.toLowerCase().startsWith(`${prefix}`+word+` `));
-        if (!starts_with_command || !message.mentions.members.first()) {
-            message.delete();
+
+        if (starts_with_command) {
+            return;
         }
-        else return;
+        else message.delete();
     }
 
     // !work
