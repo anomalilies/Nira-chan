@@ -11,6 +11,9 @@ const client = new Commando.CommandoClient({
     unknownCommand: false
 });
 
+client.on("error", (e) => console.error(e));
+client.on("warn", (e) => console.warn(e));
+
 // Events and Commands
 fs.readdir("./Events/", (err, files) => {
     if (err) return console.error(err);
