@@ -72,7 +72,7 @@ module.exports = async (client, message) => {
     // UWU-ify
     if (message.guild.id === "441673705458761729") {
         if (message.channel.id === "696143475954941962") {
-            var str = message.content
+            var str = message.content;
             uwuifying.custom(str, message, data, Commando);
         }
         else if (message.channel.id === "456367532434128897" && message.author.id === "238386015520292866") {
@@ -98,7 +98,7 @@ module.exports = async (client, message) => {
     // Check for NiraMojis everywhere
     if (message.content.includes(emojis.disgust) || message.content.includes(emojis.stare) || message.content.includes(emojis.owie)) {
         const find_emojis = [emojis.disgust, emojis.stare, emojis.owie];
-        let matched_emojis = matchEmojis(find_emojis, message.content)
+        let matched_emojis = matchEmojis(find_emojis, message.content);
 
         matched_emojis.forEach(e => message.react(e));
     }

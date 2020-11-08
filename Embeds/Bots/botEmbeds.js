@@ -12,7 +12,7 @@ global.bc1 = new Discord.MessageEmbed()
     {name: "Collect Your Income", value: "`collect-income`"},
     {name: "Work to Get Money", value: "`work`"},
     {name: "Commit a Crime to Get Money", value: "`crime`"}
-)
+);
 global.bc2 = new Discord.MessageEmbed()
   .setTitle("🎲 | Fun and Games")
   .addFields(
@@ -21,7 +21,7 @@ global.bc2 = new Discord.MessageEmbed()
     {name: "Get a Random Cat Picture", value: "`cat`"},
     {name: "Get a Random Dad Joke", value: "`dad-joke`"},
     {name: "Play a Game of Akinator", value: "`akinator`"}
-)
+);
 global.bc3 = new Discord.MessageEmbed()
   .setTitle("🎰 | Gambling")
   .addFields(
@@ -29,7 +29,7 @@ global.bc3 = new Discord.MessageEmbed()
     {name: "Roulette", value: "Start a game of roulette, or place your bet in an existing game.\n`roulette <bet> <space>` `roulette-info`\nExample: `!roulette 100 odd` `!roulette 100 3rd` `!roulette 100 13-24` `!roulette 16`"},
     {name: "Russian Roulette", value: "Play a game of Russian Roulette.\n`russian-roulette <bet>` | Example: `!russian-roulette 100`"},
     {name: "Slot Machine", value: "Bet on the slot machine; If you get three in a row on the middle row, you win!\n`slot-machine <bet>` | Example: `!slot-machine 100`"}
-)
+);
 global.bc4 = new Discord.MessageEmbed()
   .setTitle("🔨 | Tools and Utilities")
   .addFields(
@@ -40,7 +40,7 @@ global.bc4 = new Discord.MessageEmbed()
     {name: "Schedule a Reminder", value: "`remindme`\nExample: `-remindme in 2 hours to fishy` `-remindme on 2020/12/31 00:00:00 to think of a resolution`"},
     {name: "Translator", value: "`translate`\nExample: `-translate en/ja hedgehog` `-translate ja/en 針鼠`"},
     {name: "Define Something", value: "`define`\nExample: `-define hedgehog`"}
-)
+);
 global.bc5 = new Discord.MessageEmbed()
   .setTitle("🎉 | Fun and Games")
   .addFields(
@@ -53,7 +53,7 @@ global.bc5 = new Discord.MessageEmbed()
     {name: "Roll a Die", value: "`roll`\nSpecify nothing for 6 sides, specify a number for max sides, or use RPG syntax."},
     {name: "Would You Rather...?", value: "`wouldyourather/wyr`\nGet presented with two options."},
     {name: "Ask the 8-Ball", value: "`8ball`\nExample: `-8ball Will I get to see ZUTOMAYO live?`"}
-)
+);
 global.bc6 = new Discord.MessageEmbed()
   .addFields(
     {name: "Ask WolframAlpha", value: "`wolfram`\nExample: `-wolfram Tell me a joke`"},
@@ -68,7 +68,7 @@ global.bc6 = new Discord.MessageEmbed()
     {name: "Write to Mr. F", value: "`dearmrf`\nExample: `-dearmrf ...or wild boar thigh that is salted as a lump, or a product thereof.`"},
     {name: "Talk to PatPat", value: "Start a conversation: `patpathi`\nEnd a conversation: `patpatbye`"},
     {name: "Talk to Nira-chan", value: "Go fencing: `stabstabstab`\nExpress your despair: `despair`"}
-)
+);
 global.bc7 = new Discord.MessageEmbed()
   .setTitle("🎧 | Last.fm")
   .setDescription("Connect your [Last.fm](https://www.last.fm/) account to track and compare your listening history!")
@@ -83,7 +83,7 @@ global.bc7 = new Discord.MessageEmbed()
     {name: "List Your Artist Crowns", value: "`crowns`\nThe top listener of a particular artist will gain a crown!"},
     {name: "See What the Server is Currently Playing", value: "`fm servernp`"},
     {name: "Unlink your Last.fm Account", value: "`fm unset`"}
-)
+);
 global.bc8 = new Discord.MessageEmbed()
   .setTitle("🎵 | Music")
   .setDescription("These commands will only work if you are in a voice channel!\nSpotify, Apple Music, and YouTube links are all supported!")
@@ -98,14 +98,15 @@ global.bc8 = new Discord.MessageEmbed()
     {name: "Play an Attached File", value: "`playfile/pf`"},
     {name: "Add Bot to the VC", value: "`join/j`"},
     {name: "Use the Soundboard", value: "Available sounds can be found using: `soundboard`\nTo play a sound, use `sb [name]`\nExample: `-sb bruh`"}
-)
+);
 global.bc9 = new Discord.MessageEmbed()
   .setTitle("🏆 | Statistics and Leaderboards")
   .addFields(
     {name: "Crowns", value: "`leaderboard crowns`"},
     {name: "Typing", value: "`leaderboard wpm`"},
     {name: "Typing Statistics", value: "`typing stats`"}
-)
+);
 global.bc10 = new Discord.MessageEmbed()
   .setTitle("Celebrate Your Birthday With the Server!")
-  .setDescription("Our <@656621136808902656> allows us to celebrate our user's birthdays!\nIf you'd like to set up your birthday with the bot, you can do so using the following command in <#742550881911701615>: `bday setup`")
+  .setDescription("Our <@656621136808902656> allows us to celebrate our user's birthdays!\nIf you'd like to set up your birthday with the bot, you can do so using the following command in <#742550881911701615>: `bday setup`"
+);

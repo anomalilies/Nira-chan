@@ -10,7 +10,7 @@ module.exports = class AddCommand extends Commando.Command {
             group: "fun",
             memberName: "akinator",
             description: "Akinator... But with ACAね for once!",
-        })
+        });
     }
 
     async run(message) {
@@ -26,4 +26,4 @@ module.exports = class AddCommand extends Commando.Command {
             message.channel.send(embed);
             }
     }
-}
+};

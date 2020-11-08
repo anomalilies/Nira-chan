@@ -17,7 +17,7 @@ module.exports = class WriteCommand extends Commando.Command {
                     type: 'string',
                 },
             ]
-        })
+        });
     }
 
     async run(message, { text }) {
@@ -33,4 +33,4 @@ module.exports = class WriteCommand extends Commando.Command {
             message.channel.send(embed);
             }
     }
-}
+};

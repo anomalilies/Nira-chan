@@ -22,4 +22,4 @@ module.exports = async (client, oldMember, newMember) => {
             newMember.roles.remove(isContributor);
         }
     }
-}
+};

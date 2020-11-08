@@ -9,7 +9,7 @@ module.exports = class DespairCommand extends Commando.Command {
             group: "misc",
             memberName: "despair",
             description: "Express Despair the Nira Way™️.",
-        })
+        });
     }
 
     async run(message) {
@@ -21,4 +21,4 @@ module.exports = class DespairCommand extends Commando.Command {
             message.channel.send(embed);
             }
     }
-}
+};

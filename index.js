@@ -9,7 +9,7 @@ const client = new Commando.CommandoClient({
     owner: "228880116699103232",
     commandPrefix: prefix,
     unknownCommand: false
-})
+});
 
 // Events and Commands
 fs.readdir("./Events/", (err, files) => {

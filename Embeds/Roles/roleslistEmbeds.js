@@ -9,7 +9,7 @@ global.roles1 = new Discord.MessageEmbed()
     {name: "Moderators", value: `As you could imagine, our <@&742061218860236840> are in charge of server moderation.`},
     {name: "Emoji Curators", value: `<@&756292255282757734> help provide implementation of emoji suggestions from <#603248273100242964>.`},
     {name: "Bots", value: `<@&742082022729580715> are pretty much what you'd imagine them to be.`}
-)
+);
 global.roles2 = new Discord.MessageEmbed()
   .setTitle("Awarded Roles")
   .setDescription("Exclusive roles dedicated to our most active contributors, or to the winners of our monthly server contests!")
@@ -23,7 +23,7 @@ global.roles2 = new Discord.MessageEmbed()
     {name: "Fisherban", value: `Another role created from an inside-joke, born from the rivalry seen in <#747201864889794721>.`},
     {name: "Pope", value: `<@737697842507939840>'s nickname... For some reason?`},
     {name: "Welcoming Pupper", value: `From <@314358105205112834>'s loving welcomes he gives to all our new members!`}
-)
+);
 global.roles3 = new Discord.MessageEmbed()
   .setTitle("Contributor Roles")
   .setDescription("Given to those who have contributed their time to the server!")
@@ -42,7 +42,7 @@ global.roles3 = new Discord.MessageEmbed()
     {name: "Journalists", value: `<@&765670343934345277> help our staff provide up-to-date ZUTOMAYO news on <#603248261461180480>.`},
     {name: "Contestants", value: `For all our <@&770792091353743401> from the <#761326959154167838> channel!`},
     {name: "Contributors", value: `The <@&761383555372023860> role comes with all awarded roles and those who have entered contests, as to separate users on the member list.`}
-)
+);
 global.roles4 = new Discord.MessageEmbed()
   .setTitle("Limited Edition Roles")
   .setDescription("From exclusive role shop listings, or given out from past server events/inside-jokes!")
@@ -51,4 +51,4 @@ global.roles4 = new Discord.MessageEmbed()
     {name: "Paint Drinkers", value: `Still don't know how this meme started...`},
     {name: "Bri'ish", value: `For all our British members, born from yet another server inside-joke, and available from <#603248229928140801> if you react with 🇬🇧 when prompted.`},
     {name: "Queen", value: `<@228880116699103232>'s nickname.!`}
-)
+);

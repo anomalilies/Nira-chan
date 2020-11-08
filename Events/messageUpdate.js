@@ -47,7 +47,7 @@ module.exports = async (client, oldMessage, newMessage) => {
     // Check for NiraMojis everywhere
     if (newMessage.content.includes(emojis.disgust) || newMessage.content.includes(emojis.stare) || newMessage.content.includes(emojis.owie)) {
         const find_emojis = [emojis.disgust, emojis.stare, emojis.owie];
-        let matched_emojis = matchEmojis(find_emojis, newMessage.content)
+        let matched_emojis = matchEmojis(find_emojis, newMessage.content);
 
         matched_emojis.forEach(e => newMessage.react(e));
     }

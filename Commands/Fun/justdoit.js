@@ -1,5 +1,4 @@
 const Commando = require("discord.js-commando");
-const { allowlists } = require("../../config.json");
 const { MessageEmbed } = require("discord.js");
 
 module.exports = class DoItCommand extends Commando.Command {
@@ -10,7 +9,7 @@ module.exports = class DoItCommand extends Commando.Command {
             group: "fun",
             memberName: "justdoit",
             description: "DO IT! JUST DO IT!",
-        })
+        });
     }
 
     async run(message) {
@@ -22,4 +21,4 @@ module.exports = class DoItCommand extends Commando.Command {
             .setColor(240116);
         message.channel.send(embed);
     }
-}
+};

@@ -10,7 +10,7 @@ module.exports = class AboutCommand extends Commando.Command {
             group: "misc",
             memberName: "about",
             description: "Find out about the server!",
-        })
+        });
     }
 
     async run(message) {
@@ -28,7 +28,7 @@ module.exports = class AboutCommand extends Commando.Command {
             "us-east": "US East",
             "us-west": "US West",
             "us-south": "US South"
-        }
+        };
 		const roles = message.guild.roles.cache.sort((a, b) => b.position - a.position).map(role => role.toString());
 		const members = message.guild.members.cache;
 		const channels = message.guild.channels.cache;
@@ -60,24 +60,24 @@ module.exports = class AboutCommand extends Commando.Command {
 				`**❯ Do Not Disturb:** ${members.filter(member => member.presence.status === "dnd").size}`,
 				`**❯ Offline:** ${members.filter(member => member.presence.status === "offline").size}`,
             ], true)
-            .setTimestamp()
+            .setTimestamp();
 
             if (message.channel.id === "770726574865514517") {
                 serverInfo.addField("History", [
                     "**❯ Ex-Owner:** xscore#4740",
                     "**❯ Ex-Administrators:** Dreycan#1936",
                     "**❯ Ex-Moderators:** jiachun#0067, TheSuperCrisb#3502"
-                ])
-                serverInfo.setFooter("Last updated")
+                ]);
+                serverInfo.setFooter("Last updated");
 
                 message.channel.send(serverInfo).then((msg) => {
                     setInterval(function () {
                         msg.edit(serverInfo);
-                    }, 60000)
-                })
+                    }, 60000);
+                });
             }
             else {
-                message.channel.send(serverInfo)
+                message.channel.send(serverInfo);
             }
     }
-}
+};

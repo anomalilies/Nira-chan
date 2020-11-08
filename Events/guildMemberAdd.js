@@ -17,4 +17,4 @@ module.exports = (client, member) => {
             member.roles.add(lurkersRole);
         }
     }
-}
+};

@@ -17,7 +17,7 @@ module.exports = class UWUCommand extends Commando.Command {
                     type: "string"
                 }
             ]
-        })
+        });
     }
 
     async run(message, { text }) {
@@ -26,4 +26,4 @@ module.exports = class UWUCommand extends Commando.Command {
             uwuifying.custom(text, message, data, Commando);
         }
     }
-}
+};

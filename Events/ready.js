@@ -1,12 +1,12 @@
 const path = require("path");
 var data = require("../Commands/Fun/UWU Translator/data");
 
-const archiveEmbeds = require("../Embeds/Archive/archiveEmbeds")
+const archiveEmbeds = require("../Embeds/Archive/archiveEmbeds");
 const botEmbeds = require("../Embeds/Bots/botEmbeds");
 const contestEmbeds = require("../Embeds/Contests/contestEmbeds");
 const roleslistEmbeds = require("../Embeds/Roles/roleslistEmbeds");
 
-const archiveCommands = require("../Embeds/Archive/archiveCommands")
+const archiveCommands = require("../Embeds/Archive/archiveCommands");
 const botCommands = require("../Embeds/Bots/botCommands");
 const contestCommands = require("../Embeds/Contests/contestCommands");
 const roleslistCommands = require("../Embeds/Roles/roleslistCommands");
@@ -29,10 +29,10 @@ module.exports = (client) => {
     .registerDefaultCommands({
         unknownCommand: false
     })
-    .registerCommandsIn(path.join(__dirname, "../Commands"))
+    .registerCommandsIn(path.join(__dirname, "../Commands"));
 
     archiveCommands(client, "770726574865514517");
     botCommands(client, "742548177462231120");
     contestCommands(client, "770795084002230292");
     roleslistCommands(client, "758494476174884905");
-}
+};

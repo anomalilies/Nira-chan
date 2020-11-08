@@ -42,6 +42,6 @@ var uwuify = {
         uwuembed.setFooter("Requested by: " + message.author.username + " | Use -uwu to uwu-ify your messages!", message.author.displayAvatarURL({dynamic:true}));
         message.channel.send(uwuembed);
     }
-}
+};
 
 module.exports = uwuify;
