@@ -241,10 +241,10 @@ module.exports = async (client, message) => {
 
     // !work
     if (message.channel.id === "770109833713418271") {
-        if (message.content.toLowerCase() === ("!work")) {
-            return;
+        if (message.content.toLowerCase() !== ("!work")) {
+            message.delete();
         }
-        else message.delete();
+        else return
     }
 
     // Server Rules
