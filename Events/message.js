@@ -5,8 +5,8 @@ const { MessageEmbed } = require("discord.js");
 const rules = require("../Embeds/ruleEmbeds.json");
 rules.forEach((rule, i) => rule.re = new RegExp(`(\\s|^)${prefix}${i+1}(\\s|$)`));
 
-var uwuifying = require("../Fun/UWU Translator/uwuify");
-var data = require("../Fun/UWU Translator/data");
+var uwuifying = require("../Commands/Fun/UWU Translator/uwuify");
+var data = require("../Commands/Fun/UWU Translator/data");
 
 var whosTalkingWithPatPat = new Set();
 var fishyCommands = [
