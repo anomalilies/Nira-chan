@@ -21,7 +21,7 @@ module.exports = class UWUCommand extends Commando.Command {
     }
 
     async run(message, { text }) {
-        if (allowlists.botspamchannels.includes(message.channel.id)) {
+        if (allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== "603246092402032670") {
             message.react("771179684851089458");
             uwuifying.custom(text, message, data, Commando);
         }
