@@ -69,7 +69,10 @@ function matchEmojis(find_emojis, message_content) {
 module.exports = async (client, message) => {
     // Check if author is bot (webhooks are fine though)
     if (!message.webhookID && (message.author == client.user || message.author.bot)) {
-        return;
+        if (message.author.id == "500385855072894982" && message.content.startsWith(":no_entry_sign:")) {
+            message.delete();
+        }
+        else return;
     }
 
     // UWU-ify

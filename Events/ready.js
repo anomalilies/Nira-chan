@@ -31,8 +31,8 @@ module.exports = (client) => {
     })
     .registerCommandsIn(path.join(__dirname, "../Commands"));
 
-    archiveCommands(client, "770726574865514517");
+    /*archiveCommands(client, "770726574865514517");
     botCommands(client, "742548177462231120");
     contestCommands(client, "770795084002230292");
-    roleslistCommands(client, "758494476174884905");
+    roleslistCommands(client, "758494476174884905");*/
 };
