@@ -11,7 +11,7 @@ const botCommands = require("../Embeds/Bots/botCommands");
 const contestCommands = require("../Embeds/Contests/contestCommands");
 const roleslistCommands = require("../Embeds/Roles/roleslistCommands");
 
-module.exports = async (client, member) => {
+module.exports = async (client) => {
     console.log(`${client.user.tag} activated!`);
     function statusChange() {
         client.user.setActivity(data.statuses[Math.floor(Math.random() * data.statuses.length)], { type: "WATCHING" });
@@ -31,33 +31,33 @@ module.exports = async (client, member) => {
     })
     .registerCommandsIn(path.join(__dirname, "../Commands"));
 
-    function checkNewbies() {
-        if (member.guild.id === "706628883440468060") {
-            var newbiesRole = member.guild.roles.cache.find(role => role.name === "Newbies");
-    
-            if (newbiesRole) {
-                if (Date.now() == member.joinedAt < 30000) {
-                    member.roles.remove(newbiesRole);
-                    console.log ("role removed")
-                }
-            else return;
-            }
-        }
-    };
     function checkLurkers() {
-        if (member.guild.id === "706628883440468060") {
-            var lurkersRole = member.guild.roles.cache.find(role => role.name === "Lurkers");
+        const list = client.guilds.cache.get("757726578309595238");
+        var lurkersRole = member.guild.roles.cache.find(role => role.name === "Lurkers");
     
-            if (lurkersRole) {
-                if (Date.now() === member.joinedAt > 604800000) {
+        list.members.cache.each(member => {
+            if (!member.roles.cache.get(lurkersRole.id)) {
+                if (Date.now() - member.joinedTimestamp > 604800000) {
                     member.roles.add(lurkersRole);
                 }
                 else return;
             }
-        }
-    };
+        });
+    }
+    
+    function checkNewbies() {
+        const guild = client.guilds.cache.get("603246092402032670");
+        var newbiesRole = guild.roles.cache.find(role => role.name === "Newbies");
+
+        newbiesRole.members.forEach(member => {
+            if (Date.now() - member.joinedTimestamp > 604800000) {
+                member.roles.remove(newbiesRole);
+            }
+        });
+    }
+
     setInterval(checkLurkers, 3600000);
-    setInterval(checkNewbies, 30000);
+    setInterval(checkNewbies, 3600000);
 
     /*archiveCommands(client, "770726574865514517");
     botCommands(client, "742548177462231120");
