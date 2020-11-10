@@ -6,15 +6,5 @@ module.exports = (client, member) => {
 
         var newbiesRole = member.guild.roles.cache.find(role => role.name === "Newbies");
         member.roles.add(newbiesRole);
-
-        if (Date.now() === member.joinedAt < 604800000) {
-            member.roles.remove(newbiesRole);
-        }
-    }
-    if (member.guild.id === "706628883440468060") {
-        var lurkersRole = member.guild.roles.cache.find(role => role.name === "Lurkers");
-        if (Date.now() === member.joinedAt > 604800000) {
-            member.roles.add(lurkersRole);
-        }
     }
 };

@@ -11,7 +11,7 @@ const botCommands = require("../Embeds/Bots/botCommands");
 const contestCommands = require("../Embeds/Contests/contestCommands");
 const roleslistCommands = require("../Embeds/Roles/roleslistCommands");
 
-module.exports = (client) => {
+module.exports = async (client) => {
     console.log(`${client.user.tag} activated!`);
     function statusChange() {
         client.user.setActivity(data.statuses[Math.floor(Math.random() * data.statuses.length)], { type: "WATCHING" });
@@ -30,6 +30,34 @@ module.exports = (client) => {
         unknownCommand: false
     })
     .registerCommandsIn(path.join(__dirname, "../Commands"));
+
+    function checkLurkers() {
+        const list = client.guilds.cache.get("757726578309595238");
+        var lurkersRole = member.guild.roles.cache.find(role => role.name === "Lurkers");
+    
+        list.members.cache.each(member => {
+            if (!member.roles.cache.get(lurkersRole.id)) {
+                if (Date.now() - member.joinedTimestamp > 604800000) {
+                    member.roles.add(lurkersRole);
+                }
+                else return;
+            }
+        });
+    }
+    
+    function checkNewbies() {
+        const guild = client.guilds.cache.get("603246092402032670");
+        var newbiesRole = guild.roles.cache.find(role => role.name === "Newbies");
+
+        newbiesRole.members.forEach(member => {
+            if (Date.now() - member.joinedTimestamp > 604800000) {
+                member.roles.remove(newbiesRole);
+            }
+        });
+    }
+
+    setInterval(checkLurkers, 3600000);
+    setInterval(checkNewbies, 3600000);
 
     /*archiveCommands(client, "770726574865514517");
     botCommands(client, "742548177462231120");
