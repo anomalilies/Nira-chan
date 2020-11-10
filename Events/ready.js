@@ -10,6 +10,7 @@ const archiveCommands = require("../Embeds/Archive/archiveCommands");
 const botCommands = require("../Embeds/Bots/botCommands");
 const contestCommands = require("../Embeds/Contests/contestCommands");
 const roleslistCommands = require("../Embeds/Roles/roleslistCommands");
+const message = require("./message");
 
 module.exports = async (client) => {
     console.log(`${client.user.tag} activated!`);
@@ -44,7 +45,6 @@ module.exports = async (client) => {
             }
         });
     }
-    
     function checkNewbies() {
         const guild = client.guilds.cache.get("603246092402032670");
         var newbiesRole = guild.roles.cache.find(role => role.name === "Newbies");
@@ -55,11 +55,10 @@ module.exports = async (client) => {
             }
         });
     }
-
     setInterval(checkLurkers, 3600000);
     setInterval(checkNewbies, 3600000);
 
-    /*archiveCommands(client, "770726574865514517");
+    archiveCommands(client, "770726574865514517");/*
     botCommands(client, "742548177462231120");
     contestCommands(client, "770795084002230292");
     roleslistCommands(client, "758494476174884905");*/

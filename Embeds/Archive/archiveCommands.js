@@ -1,4 +1,4 @@
-module.exports = async (client, id = []) => {
+module.exports = async (client, id, serverInfo = []) => {
     const channel = await client.channels.fetch(id);
   
     channel.messages.fetch().then((messages) => {
@@ -10,9 +10,16 @@ module.exports = async (client, id = []) => {
             channel.send("<:spacer:757807111756447806>");
             channel.send(lore);
             channel.send("<:spacer:757807111756447806>");
+            channel.send(serverInfo)
         }
         else {
-            niraMessages.array()[4].edit(archive);
+            niraMessages.array()[0].edit(archive);
+            setInterval(function () {
+                niraMessages.array()[5].edit(serverInfo);
+            }, 5000)
+            console.log("test")
         }
     });
 };
+
+//i need to import the command for serverinfo not to return blank?
