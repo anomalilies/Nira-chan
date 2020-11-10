@@ -1,5 +1,6 @@
 const path = require("path");
 var data = require("../Commands/Fun/UWU Translator/data");
+var aboutEmbed = require("../Commands/Miscellaneous/Functions/aboutEmbed");
 
 const archiveEmbeds = require("../Embeds/Archive/archiveEmbeds");
 const botEmbeds = require("../Embeds/Bots/botEmbeds");
@@ -57,6 +58,16 @@ module.exports = async (client) => {
     }
     setInterval(checkLurkers, 3600000);
     setInterval(checkNewbies, 3600000);
+
+    const channel = client.channels.cache.get("770726574865514517");
+    channel.messages.fetch().then((messages) => {
+        const niraMessages = messages.filter(msg => msg.author == client.user);
+        if (niraMessages.size === 5) {
+            setInterval(function () {
+                niraMessages.array()[0].edit(aboutEmbed);
+                }, 5000)
+        }
+    });
 
     archiveCommands(client, "770726574865514517");/*
     botCommands(client, "742548177462231120");

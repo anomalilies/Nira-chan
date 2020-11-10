@@ -1,4 +1,6 @@
-module.exports = async (client, id, serverInfo = []) => {
+var aboutEmbed = require("../../Commands/Miscellaneous/Functions/aboutEmbed");
+
+module.exports = async (client, id, message = []) => {
     const channel = await client.channels.fetch(id);
   
     channel.messages.fetch().then((messages) => {
@@ -10,16 +12,10 @@ module.exports = async (client, id, serverInfo = []) => {
             channel.send("<:spacer:757807111756447806>");
             channel.send(lore);
             channel.send("<:spacer:757807111756447806>");
-            channel.send(serverInfo)
         }
         else {
-            niraMessages.array()[0].edit(archive);
-            setInterval(function () {
-                niraMessages.array()[5].edit(serverInfo);
-            }, 5000)
-            console.log("test")
+            niraMessages.array()[5].edit(archive);
+            niraMessages.array()[0].edit(aboutEmbed);
         }
     });
 };
-
-//i need to import the command for serverinfo not to return blank?
