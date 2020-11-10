@@ -1,6 +1,6 @@
 const path = require("path");
 var data = require("../Commands/Fun/UWU Translator/data");
-var aboutEmbed = require("../Commands/Miscellaneous/Functions/aboutEmbed");
+const aboutEmbed = require("../Commands/Miscellaneous/aboutEmbed");
 
 const archiveEmbeds = require("../Embeds/Archive/archiveEmbeds");
 const botEmbeds = require("../Embeds/Bots/botEmbeds");
@@ -11,9 +11,9 @@ const archiveCommands = require("../Embeds/Archive/archiveCommands");
 const botCommands = require("../Embeds/Bots/botCommands");
 const contestCommands = require("../Embeds/Contests/contestCommands");
 const roleslistCommands = require("../Embeds/Roles/roleslistCommands");
-const message = require("./message");
+const { send } = require("process");
 
-module.exports = async (client) => {
+module.exports = async (client, message) => {
     console.log(`${client.user.tag} activated!`);
     function statusChange() {
         client.user.setActivity(data.statuses[Math.floor(Math.random() * data.statuses.length)], { type: "WATCHING" });
@@ -60,13 +60,13 @@ module.exports = async (client) => {
     setInterval(checkNewbies, 3600000);
 
     const channel = client.channels.cache.get("770726574865514517");
-    channel.messages.fetch().then((messages) => {
-        const niraMessages = messages.filter(msg => msg.author == client.user);
-        if (niraMessages.size === 5) {
-            setInterval(function () {
-                niraMessages.array()[0].edit(aboutEmbed);
-                }, 5000)
-        }
+
+    channel.messages.fetch({around: "775817590210691143", limit: 1})
+    .then(msg => {
+        const fetchedMsg = msg.first();
+        setInterval(function () {
+            fetchedMsg.edit(aboutEmbed);
+        }, 5000)
     });
 
     archiveCommands(client, "770726574865514517");/*

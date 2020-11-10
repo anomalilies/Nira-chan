@@ -1,5 +1,5 @@
 const Commando = require("discord.js-commando");
-var aboutEmbed = require("./Functions/aboutEmbed");
+const aboutEmbed = require("./aboutEmbed");
 
 module.exports = class AboutCommand extends Commando.Command {
     constructor(client) {
@@ -13,6 +13,6 @@ module.exports = class AboutCommand extends Commando.Command {
     }
 
     async run(message) {
-        aboutEmbed.custom(message);
+        message.channel.send(aboutEmbed);
     }
 };
