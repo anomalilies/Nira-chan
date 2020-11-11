@@ -1,3 +1,5 @@
+var aboutEmbed = require("../../Commands/Miscellaneous/about");
+
 module.exports = async (client, id = []) => {
     const channel = await client.channels.fetch(id);
   
@@ -10,9 +12,10 @@ module.exports = async (client, id = []) => {
             channel.send("<:spacer:757807111756447806>");
             channel.send(lore);
             channel.send("<:spacer:757807111756447806>");
+            channel.send("<:spacer:757807111756447806>");
         }
         else {
-            niraMessages.array()[4].edit(archive);
+            niraMessages.array()[5].edit(archive);
         }
     });
 };
