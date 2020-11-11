@@ -1,11 +1,11 @@
 const Commando = require("discord.js-commando");
-const aboutEmbed = require("../../Embeds/aboutEmbed");
+const serverInfoEmbed = require("../../Embeds/serverInfoEmbed");
 
 module.exports = class AboutCommand extends Commando.Command {
     constructor(client) {
         super(client, {
-            name: "about",
-            aliases: ["serverinfo"],
+            name: "serverinfo",
+            aliases: ["about"],
             group: "misc",
             memberName: "about",
             description: "Find out about the server!",
@@ -13,6 +13,6 @@ module.exports = class AboutCommand extends Commando.Command {
     }
 
     async run(message) {
-        message.channel.send(aboutEmbed(message.guild));
+        message.channel.send(serverInfoEmbed(message.guild));
     }
 };

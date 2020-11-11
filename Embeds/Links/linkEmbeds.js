@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 global.links1 = new Discord.MessageEmbed()
   .setTitle("Lives and Performances")
-  .setDescription("If you missed a live show, here's your chance to catch-up!")
+  .setDescription("If you missed a live show, here's your chance to catch-up!\n\nPlease be aware that the majority of ZUTOMAYO's lives use strobe effects and other intense, flashing lights.\nIf you have photosensitive epilepsy, or any other conditions that cause sensitivity to light, please take caution before viewing!")
   .setColor(15849719)
   .setAuthor("All content courtesy of our wonderful Stans!\nPlease keep links solely to the server to recognise their efforts.", "https://i.imgur.com/yySSsCK.png")
   .addFields(

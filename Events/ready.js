@@ -1,6 +1,6 @@
 const path = require("path");
 var data = require("../Commands/Fun/UWU Translator/data");
-const aboutEmbed = require("../Embeds/aboutEmbed");
+const serverInfoEmbed = require("../Embeds/serverInfoEmbed");
 
 const archiveEmbeds = require("../Embeds/Archive/archiveEmbeds");
 const botEmbeds = require("../Embeds/Bots/botEmbeds");
@@ -65,7 +65,7 @@ module.exports = async (client) => {
     .then(msg => {
         const fetchedMsg = msg.first();
         setInterval(function () {
-            fetchedMsg.edit(aboutEmbed(fetchedMsg.guild));
+            fetchedMsg.edit(serverInfoEmbed(fetchedMsg.guild));
         }, 60000)
     });
 

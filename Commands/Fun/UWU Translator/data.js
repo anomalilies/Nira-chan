@@ -1,5 +1,5 @@
 const data = {
-    statuses: ["you in disgust", "(staring at) you", "you in pain (owie!)", "you -fishy", "you~wu~(♥ω♥*)!", "you, forever & always."],
+    statuses: ["you in disgust.", "(staring at) you.", "you in pain— owie!", "you -fishy!", "you~wu~(♥ω♥*)!", "you, forever & always."],
 
     // This software uses code from QuazzyWazzy/UwU-fy - See LICENSE!
     replacements: [
@@ -15,7 +15,7 @@ const data = {
         ],
         [
             ["unhappy", "depressed", "depressing", "depression", "miserable", "heartbroken", "broken-hearted"],
-            ["╥﹏╥", "༼☯﹏☯༽", "(╥_╥)", "(⋟﹏⋞)", "༼ ༎ຶ ෴ ༎ຶ༽", "（>﹏<）", "（；＿；）"]
+            ["╥﹏╥", "(╥_╥)", "(⋟﹏⋞)", "༼ ༎ຶ ෴ ༎ຶ༽", "（>﹏<）", "（；＿；）"]
         ],
         [
             ["angery", "mad", "annoyed", "annoying", "hate", "rage", "quit", "ragequit", "fuck", "fucks", "fucked", "shit", "shitty", "shits", "bullshit", "motherfucker", "triggered"],
