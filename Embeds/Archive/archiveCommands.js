@@ -24,7 +24,7 @@ module.exports = async (client, id = []) => {
             channel.send(cd5);
             channel.send("<:spacer:757807111756447806>");
         }
-        else {
+        /*else {
             niraMessages.array()[16].edit(about1);
             niraMessages.array()[14].edit(about2);
             niraMessages.array()[12].edit(about3);
@@ -33,6 +33,6 @@ module.exports = async (client, id = []) => {
             niraMessages.array()[5].edit(cd3);
             niraMessages.array()[3].edit(cd4);
             niraMessages.array()[1].edit(cd5);
-        }
+        }*/
     });
 };
