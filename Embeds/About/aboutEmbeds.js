@@ -27,11 +27,11 @@ global.about3 = new Discord.MessageEmbed()
   .setColor(15849719)
   .addFields(
     {name: "Streaming Platforms", value: "• [Spotify](https://open.spotify.com/artist/38WbKH6oKAZskBhqDFA8Uj)\n• [Apple Music](https://music.apple.com/jp/artist/%E3%81%9A%E3%81%A3%E3%81%A8%E7%9C%9F%E5%A4%9C%E4%B8%AD%E3%81%A7%E3%81%84%E3%81%84%E3%81%AE%E3%81%AB/1428083875)\n• [YouTube Music](https://music.youtube.com/channel/UCrpcd5WtOrdCsx5cufc4JRQ)\n• [Google Play](https://play.google.com/store/music/artist/Zutomayo?id=A5linp6b6pqj2lnz5756n2oa354)\n• [Deezer](https://www.deezer.com/en/artist/52778562/)\n• [Amazon Music](https://music.amazon.com/artists/B07JHTFJSC/zutomayo)"},
-    {name: "Merchandise", value: "The official [ZUTOMAYO Store](https://store.zutomayo.com/) is currently only available for Japanese residents to purchase from.\nWe recommend either using a proxy service, or other international merchants such as [CDJapan](https://www.cdjapan.co.jp/person/700818465) and [Amazon.jp](https://www.amazon.co.jp/s?k=%E3%81%9A%E3%81%A3%E3%81%A8%E7%9C%9F%E5%A4%9C%E4%B8%AD%E3%81%A7%E3%81%84%E3%81%84%E3%81%AE%E3%81%AB%E3%80%82), to buy official goods.\nA tutorial on how to use ZenMarket can be found **[here](https://docs.google.com/document/d/13SLLBzU8yGhS3PJ_rjBHq2IBxLMtBssDq9L7ApOLf5Y/edit?usp=sharing)**."}
+    {name: "Merchandise", value: "The official [ZUTOMAYO Store](https://store.zutomayo.com/) is currently only available for Japanese residents to purchase from.\nWe recommend either using a proxy service, or other international merchants such as [CDJapan](https://www.cdjapan.co.jp/person/700818465) and [Amazon.jp](https://www.amazon.co.jp/s?k=%E3%81%9A%E3%81%A3%E3%81%A8%E7%9C%9F%E5%A4%9C%E4%B8%AD%E3%81%A7%E3%81%84%E3%81%84%E3%81%AE%E3%81%AB%E3%80%82), to buy official goods.\nA tutorial on how to use ZenMarket can be found **__[here](https://docs.google.com/document/d/13SLLBzU8yGhS3PJ_rjBHq2IBxLMtBssDq9L7ApOLf5Y/edit?usp=sharing)__**."}
 );
 global.cd1 = new Discord.MessageEmbed()
   .setTitle("正しい偽りからの起床")
-  .setThumbnail("https://public.muragon.com/g5lmv6h9/mivgknbe.jpg")
+  .setThumbnail("https://i.imgur.com/gxKYhtJ.jpg")
   .setDescription("Tadashii Itsuwari Kara no Kishō")
   .setColor(15849719)
   .addFields(
@@ -43,7 +43,7 @@ global.cd1 = new Discord.MessageEmbed()
 );
 global.cd2 = new Discord.MessageEmbed()
   .setTitle("今は今で誓いは笑みで")
-  .setThumbnail("https://images-na.ssl-images-amazon.com/images/I/91uzTUV%2Bb4L._AC_SL1500_.jpg")
+  .setThumbnail("https://i.imgur.com/mYtIyrZ.jpg")
   .setDescription("Imawa Imade Chikaiwa Emide")
   .setColor(15849719)
   .addFields(
@@ -55,7 +55,7 @@ global.cd2 = new Discord.MessageEmbed()
 );
 global.cd3 = new Discord.MessageEmbed()
   .setTitle("潜潜話")
-  .setThumbnail("https://www.zutomayo.com/img/disco/5f0305ec907bf.jpg")
+  .setThumbnail("https://i.imgur.com/k8Imhrc.jpg")
   .setDescription("Hisohiso Banashi")
   .setColor(15849719)
   .addFields(
@@ -67,7 +67,7 @@ global.cd3 = new Discord.MessageEmbed()
 );
 global.cd4 = new Discord.MessageEmbed()
   .setTitle("朗らかな皮膚とて不服")
-  .setThumbnail("https://public.muragon.com/g5lmv6h9/0xywvyrr.jpg")
+  .setThumbnail("https://i.imgur.com/4ebpynM.jpg")
   .setDescription("Hogarakana Hifutote Fufuku")
   .setColor(15849719)
   .addFields(
@@ -79,13 +79,13 @@ global.cd4 = new Discord.MessageEmbed()
 );
 global.cd5 = new Discord.MessageEmbed()
   .setTitle("ぐされ")
-  .setThumbnail("https://pbs.twimg.com/media/EmHzoGSVkAI4el9.jpg")
+  .setThumbnail("https://i.imgur.com/LIxwE6H.jpg")
   .setDescription("Gusare")
   .setColor(15849719)
   .addFields(
     {name: "Release Date", value: "February 10, 2020", inline: true},
     {name: "Oricon Weekly Albums Chart", value: "Position: N/A", inline: true},
     {name: "Billboard Japan Hot 100", value: "Position: N/A", inline: true},
-    {name: "Track List", value: "13 songs; Titles to be confirmed.\nWill include *Kuraku Kuroku (暗く黒く)* and the OP for *The Promised Neverland* live-action film."},
-    {name: "CD Exclusive Tracks", value: "Instrumental editions of all songs, plus 10 8-bit remixes of older songs (2 per each regular CD, target-stores only)."}
+    {name: "Track List", value: "13 songs; Titles to be confirmed.\nWill include *Kuraku Kuroku* (暗く黒く) and the OP for *The Promised Neverland* live-action film."},
+    {name: "CD Exclusive Tracks - Disc 2", value: "Instrumental editions of all songs, plus 10 8-bit remixes of older songs (2 per each regular CD, target-stores only)."}
 );

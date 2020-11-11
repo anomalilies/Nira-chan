@@ -253,6 +253,14 @@ module.exports = async (client, message) => {
         else message.delete();
     }
 
+    // 2-Word Story Channel
+    if (message.channel.id === "776229267998375946") {
+        const args = message.content.trim().split(/ +/g);
+        if (args[2]) {
+            message.delete();
+        }
+    }
+
     // Server Rules
     if (message.member && message.member.roles.cache.get("742061218860236840")) {
         rules.filter(rule => rule.re.test(message.content))
