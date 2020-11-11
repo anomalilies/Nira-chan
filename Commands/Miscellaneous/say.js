@@ -9,7 +9,7 @@ module.exports = class SayCommand extends Commando.Command {
             description: "Say something!",
             args: [
                 {
-                    key: "title",
+                    key: "text",
                     prompt: "What would you like Nira to say?",
                     type: "string"
                 }
@@ -19,5 +19,6 @@ module.exports = class SayCommand extends Commando.Command {
     }
 
     run(message, { text }) {
+        message.delete();
         message.channel.send(text);
 }}
