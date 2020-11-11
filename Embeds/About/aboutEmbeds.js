@@ -79,13 +79,13 @@ global.cd4 = new Discord.MessageEmbed()
 );
 global.cd5 = new Discord.MessageEmbed()
   .setTitle("ぐされ")
-  .setThumbnail("https://www.billboard-japan.com/common/sys/img/news/00000093/93982/image.jpg")
+  .setThumbnail("https://pbs.twimg.com/media/EmHzoGSVkAI4el9.jpg")
   .setDescription("Gusare")
   .setColor(15849719)
   .addFields(
     {name: "Release Date", value: "February 10, 2020", inline: true},
     {name: "Oricon Weekly Albums Chart", value: "Position: N/A", inline: true},
     {name: "Billboard Japan Hot 100", value: "Position: N/A", inline: true},
-    {name: "Track List", value: "13 songs; Titles to be confirmed.\nWill include *Kuraku Kuroku* and the OP for *The Promised Neverland* live-action film."},
+    {name: "Track List", value: "13 songs; Titles to be confirmed.\nWill include *Kuraku Kuroku (暗く黒く)* and the OP for *The Promised Neverland* live-action film."},
     {name: "CD Exclusive Tracks", value: "Instrumental editions of all songs, plus 10 8-bit remixes of older songs (2 per each regular CD, target-stores only)."}
 );
