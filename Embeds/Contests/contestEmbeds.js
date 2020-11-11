@@ -3,7 +3,7 @@ const { emojis } = require("../../config.json");
 
 global.contest1 = new Discord.MessageEmbed()
   .setTitle("ZUTOMAYO ZONE - Monthly Contest #2")
-  .setDescription("Seeing as our last contest went so well, we're back for another!\nWith the holiday season ~~and another lockdown, here in the U.K.~~ impending on us, this month's art contest will focus on creating a festive server banner.\nAnd, for those not interested in entering art contests, from December, we'll be extending the basis of possible entries soon!")
+  .setDescription("Seeing as our last contest went so well, we're back for another!\nWith the holiday season ~~and another lockdown, here in the U.K.,~~ impending on us, this month's art contest will focus on creating a festive server banner.\nAnd, for those not interested in entering art contests, from December, we'll be extending the basis of possible entries soon!")
   .addFields(
     {name: "What Does This Entail?", value: "Everyone celebrates the holidays differently, or even not at all.\nWith this contest, we'd love to see your entries either focusing on typical holiday activities, or those unique to your culture!\nHowever, as always, you'll need to remember to reference ZUTOMAYO and/or the server in your entries!"}
 );
