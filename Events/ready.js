@@ -59,8 +59,19 @@ module.exports = async (client) => {
     setInterval(checkLurkers, 3600000);
     setInterval(checkNewbies, 3600000);
 
-    /*archiveCommands(client, "770726574865514517");
+    archiveCommands(client, "770726574865514517");
+    const channel = client.channels.cache.get("770726574865514517");
+
+    channel.messages.fetch({around: "775873931461787668", limit: 1})
+    .then(msg => {
+        const fetchedMsg = msg.first();
+        setInterval(function () {
+            fetchedMsg.edit(aboutEmbed(fetchedMsg.guild));
+        }, 60000)
+    });
+
+    archiveCommands(client, "770726574865514517");
     botCommands(client, "742548177462231120");
     contestCommands(client, "770795084002230292");
-    roleslistCommands(client, "758494476174884905");*/
+    roleslistCommands(client, "758494476174884905");
 };
