@@ -16,6 +16,7 @@ module.exports = async (client, id = []) => {
         }
         else {
             niraMessages.array()[5].edit(archive);
+            niraMessages.array()[2].edit(lore);
         }
     });
 };
