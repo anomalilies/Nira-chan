@@ -5,13 +5,14 @@ const aboutEmbed = require("../Embeds/aboutEmbed");
 const archiveEmbeds = require("../Embeds/Archive/archiveEmbeds");
 const botEmbeds = require("../Embeds/Bots/botEmbeds");
 const contestEmbeds = require("../Embeds/Contests/contestEmbeds");
+const linkEmbeds = require ("../Embeds/Links/linkEmbeds");
 const roleslistEmbeds = require("../Embeds/Roles/roleslistEmbeds");
 
 const archiveCommands = require("../Embeds/Archive/archiveCommands");
 const botCommands = require("../Embeds/Bots/botCommands");
 const contestCommands = require("../Embeds/Contests/contestCommands");
+const linkCommands = require ("../Embeds/Links/linkCommands");
 const roleslistCommands = require("../Embeds/Roles/roleslistCommands");
-const { send } = require("process");
 
 module.exports = async (client) => {
     console.log(`${client.user.tag} activated!`);
@@ -71,5 +72,6 @@ module.exports = async (client) => {
     archiveCommands(client, "770726574865514517");
     botCommands(client, "742548177462231120");
     contestCommands(client, "770795084002230292");
+    linkCommands(client, "742069780328087613");
     roleslistCommands(client, "758494476174884905");
 };
