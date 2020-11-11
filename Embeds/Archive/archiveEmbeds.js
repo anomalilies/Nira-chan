@@ -10,7 +10,7 @@ global.archive = new Discord.MessageEmbed()
     {name: "J-Music Archive", value: "In affiliation with J-Music Archive, we host a few extra goodies on their server! Be sure to check it out!"}
 );
 global.lore = new Discord.MessageEmbed()
-  .setDescription("Apart from being used as an archive, this channel's primary purpose is to host 'server lore' conversations/nFor more information, check out <@81286698306117632>'s collection of server lore and historic tales!")
+  .setDescription("Apart from being used as an archive, this channel's primary purpose is to host 'server lore' conversations.\nFor more information, check out <@81286698306117632>'s collection of server lore and historic tales!")
   .setColor(15849719)
   .addFields(
     {name: "Server Lore", value: "[Google Docs Link](https://docs.google.com/document/d/1F5kUSwy7uMkdnKjuacZvJR1XeksLSsU8GweLcxynrCY/edit?usp=sharing)"}

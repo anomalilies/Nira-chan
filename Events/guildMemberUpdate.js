@@ -6,16 +6,22 @@ var contributorRoles = [
 ];
 
 module.exports = async (client, oldMember, newMember) => {
+    const channel = client.channels.cache.get("603246092402032673");
+    const isRegular = "751209585464836137";
     const isContributor = "761383555372023860";
     const inContributorGroup = r=>contributorRoles.includes(r.name);
-    const channel = client.channels.cache.get("603246092402032673");
 
     if (oldMember.roles.cache.size !== newMember.roles.cache.size) {
+        // Server Boost Message
         if (!oldMember.roles.cache.has("744738039116464151") && newMember.roles.cache.has("744738039116464151")) {
             channel.send(emojis.yay);
         }
+        // Lock Regulars for Non-Newbies
+        if (oldMember.roles.cache.has("774482130737561600") && newMember.roles.cache.has(isRegular)) {
+            newMember.roles.remove(isRegular);
+        }
         // Contributors Role
-        else if (!oldMember.roles.cache.has(isContributor) && newMember.roles.cache.some(inContributorGroup)) {
+        if (!oldMember.roles.cache.has(isContributor) && newMember.roles.cache.some(inContributorGroup)) {
             newMember.roles.add(isContributor);
         }
         else if (oldMember.roles.cache.has(isContributor) && !newMember.roles.cache.some(inContributorGroup)) {

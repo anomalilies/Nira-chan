@@ -13,7 +13,7 @@ const contestCommands = require("../Embeds/Contests/contestCommands");
 const roleslistCommands = require("../Embeds/Roles/roleslistCommands");
 const { send } = require("process");
 
-module.exports = async (client, message) => {
+module.exports = async (client) => {
     console.log(`${client.user.tag} activated!`);
     function statusChange() {
         client.user.setActivity(data.statuses[Math.floor(Math.random() * data.statuses.length)], { type: "WATCHING" });
