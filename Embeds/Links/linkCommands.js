@@ -16,23 +16,17 @@ module.exports = async (client, id = []) => {
             channel.messages.fetch({around: "776144364438028288", limit: 1})
             .then(msg => {
                 const links1Msg = msg.first();
-                setInterval(function () {
-                    links1Msg.edit(links1);
-                })
+                links1Msg.edit(links1);
             });
             channel.messages.fetch({around: "776144365738524673", limit: 1})
             .then(msg => {
                 const links2Msg = msg.first();
-                setInterval(function () {
-                    links2Msg.edit(links2);
-                })
+                links2Msg.edit(links2);
             });
             channel.messages.fetch({around: "776144366665728041", limit: 1})
             .then(msg => {
                 const links3Msg = msg.first();
-                setInterval(function () {
-                    links3Msg.edit(links3);
-                })
+                links3Msg.edit(links3);
             });
         }
     });
