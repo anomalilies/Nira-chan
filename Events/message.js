@@ -256,7 +256,7 @@ module.exports = async (client, message) => {
     // 2-Word Story Channel
     if (message.channel.id === "776229267998375946") {
         const args = message.content.trim().split(/ +/g);
-        if (args[2]) {
+        if (args[2] && !args[1]) {
             message.delete();
         }
     }
