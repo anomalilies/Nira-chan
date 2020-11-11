@@ -2,12 +2,14 @@ const path = require("path");
 var data = require("../Commands/Fun/UWU Translator/data");
 const serverInfoEmbed = require("../Embeds/serverInfoEmbed");
 
+const aboutEmbeds = require("../Embeds/About/aboutEmbeds");
 const archiveEmbeds = require("../Embeds/Archive/archiveEmbeds");
 const botEmbeds = require("../Embeds/Bots/botEmbeds");
 const contestEmbeds = require("../Embeds/Contests/contestEmbeds");
 const linkEmbeds = require ("../Embeds/Links/linkEmbeds");
 const roleslistEmbeds = require("../Embeds/Roles/roleslistEmbeds");
 
+const aboutCommands = require("../Embeds/About/aboutCommands");
 const archiveCommands = require("../Embeds/Archive/archiveCommands");
 const botCommands = require("../Embeds/Bots/botCommands");
 const contestCommands = require("../Embeds/Contests/contestCommands");
@@ -69,6 +71,7 @@ module.exports = async (client) => {
         }, 60000)
     });
 
+    aboutCommands(client, "760625396487684126");
     archiveCommands(client, "770726574865514517");
     botCommands(client, "742548177462231120");
     contestCommands(client, "770795084002230292");
