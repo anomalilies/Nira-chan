@@ -6,7 +6,7 @@ global.links1 = new Discord.MessageEmbed()
   .setColor(15849719)
   .setAuthor("All content courtesy of our wonderful Stans!\nPlease keep links solely to the server to recognise their efforts.", "https://i.imgur.com/yySSsCK.png")
   .addFields(
-    {name: "JAPAN ONLINE FESTIVAL 2020", value: "**[Download Link](https://mega.nz/file/WyAgiBZB#YYzZJcW28dW7QutFYsb4JjViCq_OUldN9-hD2XctQZc)**"},
+    {name: "JAPAN ONLINE FESTIVAL 2020", value: "**[Download Link](https://mega.nz/file/WyAgiBZB#YYzZJcW28dW7QutFYsb4JjViCq_OUldN9-hD2XctQZc)**\nAudio-only: [MP3](https://drive.google.com/drive/folders/1IibXSwEOAnxVDOm_oRfEcWd08YejLgL0)"},
     {name: "Online Live NIWA TO NIRA", value: "**[Download Link](https://mega.nz/file/abQnHQpZ#JB1sN4qVS9MCHCGUw0Mz0mzJdEbOopu3N8h41bC5RSk)** ([Mirror](https://drive.google.com/file/d/1yDwELl6mAggdViqajabl1QOO6NMspHYl/view?usp=sharing))\nAudio-only: [MP3](https://drive.google.com/drive/folders/1Qs9uNdTLwi7rrMey9y4OFSoN6m-sgaSm?usp=sharing)"},
     {name: "Midnight Forever Live from YouTube Space Tokyo", value: "**[YouTube Link](https://youtu.be/PwVFxexqenE)** ([Mirror 1](https://mega.nz/file/LeBGwABR#ev4H4Ha9pKXaytiCg7fXH_30rzoeN6147ys22h7P90s) | [Mirror 2](https://drive.google.com/file/d/1-cv5b44qK_vWnPo-tgAYybuB_6CjuNpb/view?usp=sharing))\nAudio-only: [MP3](https://drive.google.com/drive/folders/1Z0FW3ygYTzIortW18LhHkqZfQ67DmJnD?usp=sharing)"},
     {name: "Bathroom Twin Piano Live", value: "**[Download Link](https://mega.nz/file/fGw1ATgY#s0CporJqz0MHK7QAH1NhS1pQAjk72R-WXqqFMiSd_rk)** ([Mirror](https://drive.google.com/file/d/1UHbhdbDBPe2IDLW7utznj1PegJoEiHDg/view?usp=sharing))\nAudio-only: [MP3](https://drive.google.com/drive/folders/1uHT69XHUNTSCLCk4qb8x7rTYDks8NCld?usp=sharing)"},
