@@ -1,5 +1,6 @@
 const path = require("path");
 var data = require("../Commands/Fun/UWU Translator/data");
+const aboutEmbed = require("../Embeds/aboutEmbed");
 
 const archiveEmbeds = require("../Embeds/Archive/archiveEmbeds");
 const botEmbeds = require("../Embeds/Bots/botEmbeds");
@@ -10,8 +11,9 @@ const archiveCommands = require("../Embeds/Archive/archiveCommands");
 const botCommands = require("../Embeds/Bots/botCommands");
 const contestCommands = require("../Embeds/Contests/contestCommands");
 const roleslistCommands = require("../Embeds/Roles/roleslistCommands");
+const { send } = require("process");
 
-module.exports = async (client) => {
+module.exports = async (client, message) => {
     console.log(`${client.user.tag} activated!`);
     function statusChange() {
         client.user.setActivity(data.statuses[Math.floor(Math.random() * data.statuses.length)], { type: "WATCHING" });
@@ -37,14 +39,13 @@ module.exports = async (client) => {
     
         list.members.cache.each(member => {
             if (!member.roles.cache.get(lurkersRole.id)) {
-                if (Date.now() - member.joinedTimestamp > 604800000) {
+                if (Date.now() - member.joinedTimestamp > 86400000) {
                     member.roles.add(lurkersRole);
                 }
                 else return;
             }
         });
     }
-    
     function checkNewbies() {
         const guild = client.guilds.cache.get("603246092402032670");
         var newbiesRole = guild.roles.cache.find(role => role.name === "Newbies");
@@ -55,13 +56,10 @@ module.exports = async (client) => {
             }
         });
     }
-
     setInterval(checkLurkers, 3600000);
     setInterval(checkNewbies, 3600000);
 
-    archiveCommands(client, "770726574865514517");
     const channel = client.channels.cache.get("770726574865514517");
-
     channel.messages.fetch({around: "775873931461787668", limit: 1})
     .then(msg => {
         const fetchedMsg = msg.first();

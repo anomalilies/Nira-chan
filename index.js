@@ -8,7 +8,7 @@ const { prefix } = require("./config.json");
 const client = new Commando.CommandoClient({
     owner: "228880116699103232",
     commandPrefix: prefix,
-    unknownCommand: false
+    unknownCommand: false,
 });
 
 // Events and Commands
