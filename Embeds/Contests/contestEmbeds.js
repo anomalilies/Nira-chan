@@ -9,7 +9,7 @@ global.contest1 = new Discord.MessageEmbed()
 );
 global.contest2 = new Discord.MessageEmbed()
   .addFields(
-    {name: "How Do I Take Part?", value: "<#770795084002230292> been especially created to host server competitions!\nAfter you have verified that you have read the contest's rules below, you'll be able to submit your entries, ask any questions you may have, and ask for constructive criticism.\n\nWe understand that not everybody here is an artist, but you don't have to be; Whether you're a beginner to drawing, or an expert scholar in colour theory, we'd love to see what you come up with!\nThose who'd prefer to contribute from the side-lines will also be able to cast their votes as to which pieces are their favourites on the server's <#758462946627158046>."}
+    {name: "How Do I Take Part?", value: "<#761326959154167838> been especially created to host server competitions!\nAfter you have verified that you have read the contest's rules below, you'll be able to submit your entries, ask any questions you may have, and ask for constructive criticism.\n\nWe understand that not everybody here is an artist, but you don't have to be; Whether you're a beginner to drawing, or an expert scholar in colour theory, we'd love to see what you come up with!\nThose who'd prefer to contribute from the side-lines will also be able to cast their votes as to which pieces are their favourites on the server's <#758462946627158046>."}
 );
 global.contest3 = new Discord.MessageEmbed()
   .setTitle("Rules and Regulations")
