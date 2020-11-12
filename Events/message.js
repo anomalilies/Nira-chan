@@ -267,11 +267,12 @@ module.exports = async (client, message) => {
     if (message.channel.id === "776311768640389150") {
         let pinned = await countingChannel.messages.fetchPinned().catch(() => ({ size: 0 }));
         const num = parseInt(message.content);
-        
+
         if (pinned.size == 50) {
             await pinned.last().unpin();
         }
         else if (num % 1000 == 0) {
+            message.react("764025729696268319");
             message.pin();
         }
     }
