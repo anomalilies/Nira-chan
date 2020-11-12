@@ -78,7 +78,16 @@ module.exports = async (client) => {
         const fetchedMsg = msg.first();
         fetchedMsg.edit(rule1);
     });
-
+    rulesChannel.messages.fetch({around: "768553523205373952", limit: 1})
+    .then(msg => {
+        const fetchedMsg = msg.first();
+        fetchedMsg.edit(rule4);
+    });
+    rulesChannel.messages.fetch({around: "768553549717700669", limit: 1})
+    .then(msg => {
+        const fetchedMsg = msg.first();
+        fetchedMsg.edit(rule9);
+    });
 
     aboutCommands(client, "760625396487684126");
     archiveCommands(client, "770726574865514517");
