@@ -26,5 +26,6 @@ global.links3 = new Discord.MessageEmbed()
   .setColor(15849719)
   .addFields(
     {name: "Official Instrumentals", value: "**[Download Link](https://piapro.jp/zutomayo)**"},
+    {name: "ACAね's Song Covers", value: "**[Download Link](https://drive.google.com/drive/folders/1k6SJ4cH4CGEbbIIA-jIw2t47ebUi-dwl?usp=sharing)**"},
     {name: "ZUTOMAYO Complete Playlist", value: "**[Spotify Link](https://open.spotify.com/playlist/6J3HlwKB5Iq6APJAWfa3zq?si=3Ku9puyNSdOAvkMtOu4pqw)**"}
 );
