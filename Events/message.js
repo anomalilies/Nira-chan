@@ -261,6 +261,21 @@ module.exports = async (client, message) => {
         };
     }
 
+    // Pin Multiples of 1000
+    const countingChannel = await client.channels.fetch("776311768640389150");
+
+    if (message.channel.id === "776311768640389150") {
+        let pinned = await countingChannel.messages.fetchPinned().catch(() => ({ size: 0 }));
+        const num = parseInt(message.content);
+        
+        if (pinned.size == 50) {
+            await pinned.last().unpin();
+        }
+        else if (num % 1000 == 0) {
+            message.pin();
+        }
+    }
+
     // Server Rules
     if (message.member && message.member.roles.cache.get("742061218860236840")) {
         rules.filter(rule => rule.re.test(message.content))
