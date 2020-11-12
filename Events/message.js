@@ -259,15 +259,15 @@ module.exports = async (client, message) => {
         const channel = client.channels.cache.get("776229267998375946");
 
         channel.messages.fetch({ limit: 2 }).then(messages => {
-            let fetchedMsg = messages[1];
-            let newMsg = messages[0];
+            const fetchedMsg = messages[1];
+            const message = messages[0];
 
-            if (newMsg.author === fetchedMsg.author) {
-                newMsg.delete()
+            if (message.author === fetchedMsg.author) {
+                message.delete()
             }
             else {
                 if (!args[1] || args[2]) {
-                newMsg.delete();
+                message.delete();
             }}
         })
     }
