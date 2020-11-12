@@ -70,6 +70,6 @@ module.exports = async (client, oldMessage, newMessage) => {
         const args = newMessage.content.trim().split(/ +/g);
         if (!args[1] || args[2]) {
             newMessage.delete();
-        };
+        }
     }
 };

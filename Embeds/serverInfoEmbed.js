@@ -53,4 +53,4 @@ module.exports = guild => {
         .setTimestamp();
 
     return serverInfo;
-}
+};

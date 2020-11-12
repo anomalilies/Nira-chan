@@ -14,4 +14,4 @@ global.lore = new Discord.MessageEmbed()
   .setColor(15849719)
   .addFields(
     {name: "Server Lore", value: "[Google Docs Link](https://docs.google.com/document/d/1F5kUSwy7uMkdnKjuacZvJR1XeksLSsU8GweLcxynrCY/edit?usp=sharing)"}
-  )
+);

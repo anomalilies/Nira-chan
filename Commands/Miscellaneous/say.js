@@ -21,4 +21,5 @@ module.exports = class SayCommand extends Commando.Command {
     run(message, { text }) {
         message.delete();
         message.channel.send(text);
-}}
+    }
+};

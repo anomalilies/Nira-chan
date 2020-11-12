@@ -51,4 +51,5 @@ module.exports = class LinkCommand extends Commando.Command {
             message.channel.send(faqEmbed)
             .then (message.channel.send(emojis.spacer));
         }
-}}
+    }
+};

@@ -68,7 +68,7 @@ module.exports = async (client) => {
         const fetchedMsg = msg.first();
         setInterval(function () {
             fetchedMsg.edit(serverInfoEmbed(fetchedMsg.guild));
-        }, 300000)
+        }, 300000);
     });
 
     aboutCommands(client, "760625396487684126");
@@ -77,4 +77,4 @@ module.exports = async (client) => {
     contestCommands(client, "770795084002230292");
     linkCommands(client, "742069780328087613");
     roleslistCommands(client, "758494476174884905");
-}
+};

@@ -263,7 +263,7 @@ module.exports = async (client, message) => {
         const args = message.content.trim().split(/ +/g);
         if (!args[1] || args[2]) {
             message.delete();
-        };
+        }
     }
 
     // Pin Multiples of 1000

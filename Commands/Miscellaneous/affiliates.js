@@ -42,4 +42,5 @@ module.exports = class AffiliatesCommand extends Commando.Command {
         channel.send(embed)
         .then (channel.send(link))
         .then (channel.send(emojis.spacer));
-}}
+    }
+};
