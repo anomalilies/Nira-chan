@@ -256,20 +256,9 @@ module.exports = async (client, message) => {
     // 2-Word Story Channel
     if (message.channel.id === "776229267998375946") {
         const args = message.content.trim().split(/ +/g);
-        const channel = client.channels.cache.get("776229267998375946");
-
-        channel.messages.fetch({ limit: 2 }).then(messages => {
-            const fetchedMsg = messages[1];
-            const message = messages[0];
-
-            if (message.author === fetchedMsg.author) {
-                message.delete()
-            }
-            else {
-                if (!args[1] || args[2]) {
-                message.delete();
-            }}
-        })
+        if (!args[1] || args[2]) {
+            message.delete();
+        };
     }
 
     // Server Rules
