@@ -63,7 +63,7 @@ module.exports = async (client) => {
     setInterval(checkNewbies, 3600000);
 
     const channel = client.channels.cache.get("770726574865514517");
-    channel.messages.fetch({around: "775873931461787668", limit: 1})
+    channel.messages.fetch({around: "776320801729019934", limit: 1})
     .then(msg => {
         const fetchedMsg = msg.first();
         setInterval(function () {
