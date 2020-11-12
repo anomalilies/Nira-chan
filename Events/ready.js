@@ -71,28 +71,10 @@ module.exports = async (client) => {
         }, 300000)
     });
 
-
-    const rulesChannel = client.channels.cache.get("603248229928140801");
-    rulesChannel.messages.fetch({around: "768553497946750996", limit: 1})
-    .then(msg => {
-        const fetchedMsg = msg.first();
-        fetchedMsg.edit(rule1);
-    });
-    rulesChannel.messages.fetch({around: "768553523205373952", limit: 1})
-    .then(msg => {
-        const fetchedMsg = msg.first();
-        fetchedMsg.edit(rule4);
-    });
-    rulesChannel.messages.fetch({around: "768553549717700669", limit: 1})
-    .then(msg => {
-        const fetchedMsg = msg.first();
-        fetchedMsg.edit(rule9);
-    });
-
     aboutCommands(client, "760625396487684126");
     archiveCommands(client, "770726574865514517");
     botCommands(client, "742548177462231120");
     contestCommands(client, "770795084002230292");
     linkCommands(client, "742069780328087613");
     roleslistCommands(client, "758494476174884905");
-};
+}

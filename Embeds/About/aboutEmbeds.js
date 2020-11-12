@@ -89,22 +89,3 @@ global.cd5 = new Discord.MessageEmbed()
     {name: "Track List", value: "13 songs; Titles to be confirmed.\nWill include *Kuraku Kuroku* (暗く黒く) and the OP for *The Promised Neverland* live-action film."},
     {name: "CD Exclusive Tracks - Disc 2", value: "Instrumental editions of all songs, plus 10 8-bit remixes of older songs (2 per each regular CD, target-stores only)."}
 );
-
-global.rule1 = new Discord.MessageEmbed()
-  .setTitle("1. General Kindness and Decency")
-  .setDescription("Condescending talk towards others, tasteless humour, outright insults, and harassment are not to be tolerated.\nPlease be respectful of everyone, regardless of their identity, and if things get heated, do not feel afraid to ping our <@&742061218860236840>.\n\nYou can also report members with the following command, for our staff to later review if they are inactive:\n`-report @user [reason]`")
-  .addFields(
-    {name: "Moderation", value: "1. After the first breach of this rule, the user will be reminded of our policy.\n2. If the user's behaviour continues, they will be warned.\n3. After 5 violations,  the user will be temporarily muted.\n4. If behaviour continues, the user will be kicked from the server.\n5. If the user joins again and continues to be rude, they will be permanently banned."}
-);
-global.rule4 = new Discord.MessageEmbed()
-  .setTitle("4. Stay Out of Sensitive Discussion and Politics")
-  .setDescription("We aim to dedicate this server to casual discussion about ZUTOMAYO, not bitter arguments about your political beliefs or the posting of sensitive content.\n\nAll serious discussions should take place in their dedicated channel over at <#753249149415325826>, which is able to be accessed from <#758494476174884905>.\nHowever, please note that our members are not your personal therapists. We will always ask that you seek __professional help__ when mentioning major/criminal/urgent issues, with all posts that address these topics to be deleted immediately.\n\nFor content that is potentially triggering (which ideally shouldn't become a topic in the first place), please use spoilers ||like so||.\nSpoilers can be used by surrounding the offending text with `||`, in the same manner one would make text bold or italicised.")
-  .addFields(
-    {name: "Moderation", value: "1. After the first breach of this rule, the user will be reminded of our policy.\n2. If the user's behaviour continues, they will be warned.\n3. After 5 violations,  the user will be temporarily muted.\n4. If behaviour continues, the user will be kicked from the server.\n5. If the user joins again and continues to be rude, they will be permanently banned."}
-);
-global.rule9 = new Discord.MessageEmbed()
-  .setTitle("9. Refrain from Backseat Moderation")
-  .setDescription("Please do not undermine the server's staff, nor 'backseat' moderate; Reminding someone of the rules is very different to telling someone what they can and cannot do!\nOur <@&742061218860236840> are capable in handling conflict, so always feel free to ping them when necessary, instead of giving out your own advice!")
-  .addFields(
-    {name: "Moderation", value: "1. The user will be warned if necessary, and reminded of our policy."}
-);

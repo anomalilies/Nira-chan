@@ -69,6 +69,11 @@ function matchEmojis(find_emojis, message_content) {
 module.exports = async (client, message) => {
     // Check if author is bot (webhooks are fine though)
     if (!message.webhookID && (message.author == client.user || message.author.bot)) {
+        for (let embed of message.embeds) {
+            if (embed.title === "`-wolfram <query>`" && message.channel.id === "758523806507204608") {
+                message.delete();
+            }
+        }
         if (message.author.id == "500385855072894982" && message.content.startsWith(":no_entry_sign:")) {
             message.delete();
         }
