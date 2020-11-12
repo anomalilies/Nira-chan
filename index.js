@@ -9,6 +9,7 @@ const client = new Commando.CommandoClient({
     owner: "228880116699103232",
     commandPrefix: prefix,
     unknownCommand: false,
+    help: false
 });
 
 // Events and Commands
