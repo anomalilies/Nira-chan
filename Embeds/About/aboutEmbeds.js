@@ -94,7 +94,7 @@ global.rule6 = new Discord.MessageEmbed()
   .setTitle("6. Keep the Group’s Identity a Secret")
   .setDescription("Images can easily be found of the group's identities, particularly that of ACAね.\nHowever, since ZUTOMAYO have always been secretive by nature, we plan on upholding this standard due to the publicity of our server, and any information regarding the group's identity will be deleted *without warning*.")
   .addFields(
-    {name: "Moderation", value: "1. The content will be deleted immediately, and the user will be reminded of alternative options to post similar content.\n2. If the user's behaviour continues, they will be temporarily muted."}
+    {name: "Moderation", value: "1. The content will be deleted immediately.\n2. If the user's behaviour continues, they face the risk of being muted, kicked, or banned, depending on each individual circumstance."}
 );
 global.rule7 = new Discord.MessageEmbed()
   .setTitle("7. Support ZUTOMAYO Wherever Possible")
