@@ -21,7 +21,7 @@ global.contest3 = new Discord.MessageEmbed()
     {name: "Tracing", value: "It's fine to use a reference, but please don't directly trace your work!"},
     {name: "Art Theft", value: "Any submissions found to be stolen will result in immediate disqualification."},
     {name: "Restrictions", value: "We'd prefer original entries made solely for this contest, but there is no restriction on art previously created/entered into other competitions."},
-    {name: "Permissions", value: "By submitting an entry, you give the server permission to use your art as the server's banner.\nCredit will be given to you using your Discord username in the <#603248229928140801> channel."}
+    {name: "Permissions", value: "By submitting an entry, you give the server permission to use your art as the server's banner.\nCredit will be given to you using your Discord username on the server's sidebar."}
 );
 global.contest4 = new Discord.MessageEmbed()
   .setColor(15849719)
