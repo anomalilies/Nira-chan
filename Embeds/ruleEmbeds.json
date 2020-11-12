@@ -1,7 +1,7 @@
 [
     {
         "title": "1. General Kindness and Decency",
-        "description": "Condescending talk towards others, tasteless humour, outright insults, and harassment are not to be tolerated.\nPlease be respectful of everyone, regardless of their identity, and if things get heated, do not feel afraid to ping the moderation team.\n\nYou can also report members with the following command, for our mods to later review if they are inactive:\n`-report @user [reason]`",
+        "description": "Condescending talk towards others, tasteless humour, outright insults, and harassment are not to be tolerated.\nPlease be respectful of everyone, regardless of their identity, and if things get heated, do not feel afraid to ping our <@&742061218860236840>.\n\nYou can also report members with the following command, for our Mods to later review if they are inactive:\n`-report @user [reason]`",
         "moderation": "1. After the first breach of this rule, the user will be reminded of our policy.\n2. If the user's behaviour continues, they will be warned.\n3. After 5 violations,  the user will be temporarily muted.\n4. If behaviour continues, the user will be kicked from the server.\n5. If the user joins again and continues to be rude, they will be permanently banned."
     },
     {

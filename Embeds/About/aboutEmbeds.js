@@ -90,15 +90,9 @@ global.cd5 = new Discord.MessageEmbed()
     {name: "CD Exclusive Tracks - Disc 2", value: "Instrumental editions of all songs, plus 10 8-bit remixes of older songs (2 per each regular CD, target-stores only)."}
 );
 
-global.rule6 = new Discord.MessageEmbed()
-  .setTitle("6. Keep the Group’s Identity a Secret")
-  .setDescription("Images can easily be found of the group's identities, particularly that of ACAね.\nHowever, since ZUTOMAYO have always been secretive by nature, we plan on upholding this standard due to the publicity of our server, and any information regarding the group's identity will be deleted *without warning*.")
+global.rule1 = new Discord.MessageEmbed()
+  .setTitle("1. General Kindness and Decency")
+  .setDescription("Condescending talk towards others, tasteless humour, outright insults, and harassment are not to be tolerated.\nPlease be respectful of everyone, regardless of their identity, and if things get heated, do not feel afraid to ping our <@&742061218860236840>.\n\nYou can also report members with the following command, for our Mods to later review if they are inactive:\n`-report @user [reason]`")
   .addFields(
-    {name: "Moderation", value: "1. The content will be deleted immediately.\n2. If the user's behaviour continues, they face the risk of being muted, kicked, or banned, depending on each individual circumstance."}
-);
-global.rule7 = new Discord.MessageEmbed()
-  .setTitle("7. Support ZUTOMAYO Wherever Possible")
-  .setDescription("As a server, we strive on being able to provide exclusive content that is hard-to-find outside of Japan for international fans wherever possible.\nTherefore, we will always share links and information on how you can support the band, whether financially or otherwise, so please check them out on <#603248261461180480> when they become available!\nHowever, illegal piracy of copyrighted goods, particularly those of that are easily accessible (including, but not limited to, CD rips), will **not** be tolerated.\nWe will also not support illegal distribution of copied merch; For more information on how to buy official goods, please see <#760625396487684126>.\n\nPlease be aware that links our members generously provide will be monitored to uphold these standards, and **can therefore be removed at any time**.")
-  .addFields(
-    {name: "Moderation", value: "1. The offending content will be deleted immediately, and the user will be warned.\n2. If the user's behaviour continues, they will be temporarily muted.\n3. If the rule is violated again, the user will be kicked.\n4. If the user joins and continues to post content that breaks the rules, they will be permanently banned."}
+    {name: "Moderation", value: "1. After the first breach of this rule, the user will be reminded of our policy.\n2. If the user's behaviour continues, they will be warned.\n3. After 5 violations,  the user will be temporarily muted.\n4. If behaviour continues, the user will be kicked from the server.\n5. If the user joins again and continues to be rude, they will be permanently banned."}
 );
