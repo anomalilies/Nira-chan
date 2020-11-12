@@ -260,12 +260,14 @@ module.exports = async (client, message) => {
 
         channel.messages.fetch({ limit: 2 }).then(messages => {
             let fetchedMsg = messages[1];
-            if (message.author === fetchedMsg.author) {
-                message.delete()
+            let newMsg = messages[0];
+
+            if (newMsg.author === fetchedMsg.author) {
+                newMsg.delete()
             }
             else {
                 if (!args[1] || args[2]) {
-                message.delete();
+                newMsg.delete();
             }}
         })
     }
