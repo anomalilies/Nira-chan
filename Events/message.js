@@ -263,8 +263,8 @@ module.exports = async (client, message) => {
             if (message.author === fetchedMsg.author) {
                 message.delete()
             }
-            else if (message.author !== bot) {
-                if (!args[1] || args[2]) {
+            else if (!args[1] || args[2]) {
+                if (message.author !== bot) {
                     message.delete();
                 }
             }
