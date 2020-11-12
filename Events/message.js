@@ -259,13 +259,13 @@ module.exports = async (client, message) => {
 
         channel.fetchMessages({ limit: 1 }).then(messages => {
             let fetchedMsg = messages.first();
-            if (message.author !== fetchedMsg.author) {
+            if (message.author === fetchedMsg.author) {
+                message.delete()
+            }
+            else if (message.author !== bot) {
                 if (!args[1] || args[2]) {
                     message.delete();
                 }
-            }
-            else {
-                message.delete();
             }
         })
     }
