@@ -258,7 +258,7 @@ module.exports = async (client, message) => {
         const args = message.content.trim().split(/ +/g);
         const channel = client.channels.cache.get("776229267998375946");
 
-        channel.fetchMessages({ limit: 1 }).then(messages => {
+        channel.messages.fetch({ limit: 1 }).then(messages => {
             let fetchedMsg = messages.first();
             if (message.author === fetchedMsg.author) {
                 message.delete()
