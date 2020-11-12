@@ -2,9 +2,10 @@ const Discord = require("discord.js");
 
 global.links1 = new Discord.MessageEmbed()
   .setTitle("Lives and Performances")
-  .setDescription("If you missed a live show, here's your chance to catch-up!\n\nPlease be aware that the majority of ZUTOMAYO's lives use strobe effects and other intense, flashing lights.\nIf you have photosensitive epilepsy, or any other conditions that cause sensitivity to light, please take caution before viewing!")
+  .setDescription("If you missed a live show, here's your chance to catch-up!")
   .setColor(15849719)
   .setAuthor("All content courtesy of our wonderful Stans!\nPlease keep links solely to the server to recognise their efforts.", "https://i.imgur.com/yySSsCK.png")
+  .setFooter("Please be aware that the majority of ZUTOMAYO's lives use strobe effects and other intense, flashing lights.\nIf you have photosensitive epilepsy, or any other conditions that cause sensitivity to light, please take caution before viewing!")
   .addFields(
     {name: "JAPAN ONLINE FESTIVAL 2020", value: "**[Download Link](https://mega.nz/file/WyAgiBZB#YYzZJcW28dW7QutFYsb4JjViCq_OUldN9-hD2XctQZc)**\nAudio-only: [MP3](https://drive.google.com/drive/folders/1IibXSwEOAnxVDOm_oRfEcWd08YejLgL0)"},
     {name: "Online Live NIWA TO NIRA", value: "**[Download Link](https://mega.nz/file/abQnHQpZ#JB1sN4qVS9MCHCGUw0Mz0mzJdEbOopu3N8h41bC5RSk)** ([Mirror](https://drive.google.com/file/d/1yDwELl6mAggdViqajabl1QOO6NMspHYl/view?usp=sharing))\nAudio-only: [MP3](https://drive.google.com/drive/folders/1Qs9uNdTLwi7rrMey9y4OFSoN6m-sgaSm?usp=sharing)"},
