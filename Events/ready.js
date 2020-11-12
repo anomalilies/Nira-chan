@@ -68,7 +68,7 @@ module.exports = async (client) => {
         const fetchedMsg = msg.first();
         setInterval(function () {
             fetchedMsg.edit(serverInfoEmbed(fetchedMsg.guild));
-        }, 5000)
+        }, 300000)
     });
 
     aboutCommands(client, "760625396487684126");
