@@ -264,9 +264,7 @@ module.exports = async (client, message) => {
                 message.delete()
             }
             else if (!args[1] || args[2]) {
-                if (message.author !== bot) {
-                    message.delete();
-                }
+                message.delete();
             }
         })
     }
