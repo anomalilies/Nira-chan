@@ -76,16 +76,12 @@ module.exports = async (client) => {
     rulesChannel.messages.fetch({around: "768553524945616926", limit: 1})
     .then(msg => {
         const fetchedMsg = msg.first();
-        setInterval(function () {
-            fetchedMsg.edit(rule6);
-        }, 300000)
+        fetchedMsg.edit(rule6);
     });
     rulesChannel.messages.fetch({around: "768553525700460595", limit: 1})
     .then(msg => {
         const fetchedMsg = msg.first();
-        setInterval(function () {
-            fetchedMsg.edit(rule7);
-        }, 300000)
+        fetchedMsg.edit(rule7);
     });
 
 
