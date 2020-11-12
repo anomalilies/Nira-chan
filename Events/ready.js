@@ -62,8 +62,8 @@ module.exports = async (client) => {
     setInterval(checkLurkers, 3600000);
     setInterval(checkNewbies, 3600000);
 
-    const channel = client.channels.cache.get("770726574865514517");
-    channel.messages.fetch({around: "775873931461787668", limit: 1})
+    const channel = client.channels.cache.get("758541031498317835");
+    channel.messages.fetch({around: "758541031498317835", limit: 1})
     .then(msg => {
         const fetchedMsg = msg.first();
         setInterval(function () {
