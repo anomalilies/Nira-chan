@@ -256,6 +256,7 @@ module.exports = async (client, message) => {
     // 2-Word Story Channel
     if (message.channel.id === "776229267998375946") {
         const args = message.content.trim().split(/ +/g);
+        const channel = client.channels.cache.get("776229267998375946");
 
         channel.fetchMessages({ limit: 1 }).then(messages => {
             let fetchedMsg = messages.first();
