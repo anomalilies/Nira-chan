@@ -283,9 +283,10 @@ module.exports = async (client, message) => {
     }
 
     // Server Rules
-    if (message.member && message.member.roles.cache.get("742061218860236840")) {
-        rules.filter(rule => rule.re.test(message.content))
-            .map(rule => new MessageEmbed()
+    if (message.guild.id === "603246092402032670") {
+        if (message.member && message.member.roles.cache.get("742061218860236840")) {
+            rules.filter(rule => rule.re.test(message.content))
+                .map(rule => new MessageEmbed()
                 .setTitle(rule.title)
                 .setDescription(rule.description)
                 .addFields({
@@ -293,5 +294,6 @@ module.exports = async (client, message) => {
                     value: rule.moderation
                 }))
             .forEach(rule => message.channel.send(rule));
+        }
     }
 };

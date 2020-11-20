@@ -27,7 +27,6 @@ var channelTitles = [
     "Byoushin wo Kamu", "Nouriueno Cracker", "Humanoid", "Mabushii DNA Dake", "Seigi", "Kettobashita Moufu", "Konnakoto Soudou", 
     "Haze Haseru Haterumade", "Dear Mr. 'F'", "Obenkyou Shitoiteyo", "MILABO", "Fastening", "Ham", "Darken"
 ];
-
 const scheduledMessage = new cron.CronJob("0 0 1 * *", () => {
     const channel = client.channels.cache.find(channel => channel.id === "767550623767068742");
     const random = Math.floor(Math.random() * channelTitles.length);
