@@ -68,7 +68,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
             .setTimestamp();
 
             if(starboard) {
-                starboard.send(embed);
+                starboard.send("<@&772657659635171348>", embed);
             }
         }
     }
