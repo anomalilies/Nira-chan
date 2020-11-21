@@ -73,6 +73,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
         }
     }
     if(reaction.emoji.name === "⭐") {
+        if (starboard) return;
         if(reaction.message.partial) {
             await reaction.fetch();
             await reaction.message.fetch();
