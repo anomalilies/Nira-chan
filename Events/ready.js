@@ -38,7 +38,7 @@ module.exports = async (client) => {
 
     function checkLurkers() {
         const list = client.guilds.cache.get("757726578309595238");
-        var lurkersRole = member.guild.roles.cache.find(role => role.name === "Lurkers");
+        var lurkersRole = list.roles.cache.find(role => role.name === "Lurkers");
     
         list.members.cache.each(member => {
             if (!member.roles.cache.get(lurkersRole.id)) {
