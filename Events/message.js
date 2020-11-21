@@ -267,7 +267,7 @@ module.exports = async (client, message) => {
     }
 
     // Pin Multiples of 1000
-    const countingChannel = await client.channels.fetch("776311768640389150");
+    const countingChannel = client.channels.cache.get("758541031498317835");
 
     if (message.channel.id === "776311768640389150") {
         let pinned = await countingChannel.messages.fetchPinned().catch(() => ({ size: 0 }));
