@@ -10,8 +10,8 @@ var data = require("../Commands/Fun/UWU Translator/data");
 
 var whosTalkingWithPatPat = new Set();
 var fishyCommands = [
-    "fishy", "fishytimer", "fishystats", "leaderboardfishy", "fish", "fihy", "fisy", "foshy", "fisyh", "fsihy", "fin",
-    "fintimer", "fisytimer", "foshytimer", "ft", "finstats", "fisystats", "foshystats", "fs", "leaderboardfishysize"
+    "fishy", "fishytimer", "fishystats", "leaderboard fishy", "fish", "fihy", "fisy", "foshy", "fisyh", "fsihy", "fin",
+    "fintimer", "fisytimer", "foshytimer", "ft", "finstats", "fisystats", "foshystats", "fs", "leaderboard fishysize"
 ];
 
 // Embeds
@@ -248,7 +248,7 @@ module.exports = async (client, message) => {
     if (message.channel.id === "456367532434128897" && message.author.id === "238386015520292866") {
         message.react("771179684851089458");
 
-        if (starts_with_command) {
+        if (message.content.toLowerCase().startsWith(">"+word)) {
             return;
         }
         else {
