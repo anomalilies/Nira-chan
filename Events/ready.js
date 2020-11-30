@@ -1,80 +1,307 @@
-const path = require("path");
+const Commando = require("discord.js-commando");
+const { prefix, commandNames, allowlists, emojis, patpatresponses, nira9000 } = require("../config.json");
+
+const { MessageEmbed } = require("discord.js");
+const rules = require("../Embeds/ruleEmbeds.json");
+rules.forEach((rule, i) => rule.re = new RegExp(`(\\s|^)${prefix}${i+1}(\\s|$)`));
+
+var uwuifying = require("../Commands/Fun/UWU Translator/uwuify");
 var data = require("../Commands/Fun/UWU Translator/data");
-const serverInfoEmbed = require("../Embeds/serverInfoEmbed");
 
-const aboutEmbeds = require("../Embeds/About/aboutEmbeds");
-const archiveEmbeds = require("../Embeds/Archive/archiveEmbeds");
-const botEmbeds = require("../Embeds/Bots/botEmbeds");
-const contestEmbeds = require("../Embeds/Contests/contestEmbeds");
-const linkEmbeds = require ("../Embeds/Links/linkEmbeds");
-const roleslistEmbeds = require("../Embeds/Roles/roleslistEmbeds");
+var whosTalkingWithPatPat = new Set();
+var fishyCommands = [
+    "fishy", "fishytimer", "fishystats", "leaderboardfishy", "fish", "fihy", "fisy", "foshy", "fisyh", "fsihy", "fin",
+    "fintimer", "fisytimer", "foshytimer", "ft", "finstats", "fisystats", "foshystats", "fs", "leaderboardfishysize"
+];
 
-const aboutCommands = require("../Embeds/About/aboutCommands");
-const archiveCommands = require("../Embeds/Archive/archiveCommands");
-const botCommands = require("../Embeds/Bots/botCommands");
-const contestCommands = require("../Embeds/Contests/contestCommands");
-const linkCommands = require ("../Embeds/Links/linkCommands");
-const roleslistCommands = require("../Embeds/Roles/roleslistCommands");
+// Embeds
+function getSimpleEmbed(color, title, author, description) {
+    return new MessageEmbed()
+        .setColor(color)
+        .setTitle(title)
+        .setAuthor(author.username, author.avatarURL({ dynamic: true }))
+        .setDescription(description);
+}
 
-module.exports = async (client) => {
-    console.log(`${client.user.tag} activated!`);
-    function statusChange() {
-        client.user.setActivity(data.statuses[Math.floor(Math.random() * data.statuses.length)], { type: "WATCHING" });
-    }
-    setInterval(statusChange, 60000);
+// Replace a regular message with a message sent through a webhook with the OP's name and avatar
+async function replaceMessageThroughWebhook(message, resend_content) {
+    message.delete();
+    const webhooks = await message.channel.fetchWebhooks();
+    const webhook = webhooks.first();
 
-    client.registry
-    .registerGroups([
-        ["fun", "Fun Commands"],
-        ["misc", "Miscellaneous Commands"],
-        ["util", "Utility"],
-        ["commands", "Commands"]
-    ])
-    .registerDefaultTypes()
-    .registerDefaultCommands({
-        unknownCommand: false
-    })
-    .registerCommandsIn(path.join(__dirname, "../Commands"));
-
-    function checkLurkers() {
-        const list = client.guilds.cache.get("757726578309595238");
-        var lurkersRole = list.roles.cache.find(role => role.name === "Lurkers");
-    
-        list.members.cache.each(member => {
-            if (!member.roles.cache.get(lurkersRole.id)) {
-                if (Date.now() - member.joinedTimestamp > 86400000) {
-                    member.roles.add(lurkersRole);
-                }
-                else return;
-            }
+    if (webhook === undefined) {
+        // No webhook exists in this channel, so create one
+        message.channel.createWebhook("Nira-chan")
+            .then(webhook => {
+                console.log(`Created webhook ${webhook}`);
+                // Resend the message with the OP's avatar and display name
+                webhook.send(resend_content, {
+                    username: message.member.displayName,
+                    avatarURL: message.author.displayAvatarURL(),
+                });
+            })
+            .catch(console.error);
+    } else {
+        // Resend the message with the OP's avatar and display name
+        webhook.send(resend_content, {
+            username: message.member.displayName,
+            avatarURL: message.author.displayAvatarURL(),
         });
     }
-    function checkNewbies() {
-        const guild = client.guilds.cache.get("603246092402032670");
-        var newbiesRole = guild.roles.cache.find(role => role.name === "Newbies");
+}
 
-        newbiesRole.members.forEach(member => {
-            if (Date.now() - member.joinedTimestamp > 604800000) {
-                member.roles.remove(newbiesRole);
+// Find specific emojis in a message
+function matchEmojis(find_emojis, message_content) {
+    const emoji_regexp = /<a?:\w+:\d+>/g;
+    const matches = [...message_content.matchAll(emoji_regexp)];
+    let matched_emojis = [];
+    matches.forEach(match => {
+        if (find_emojis.includes(match[0])) {
+            matched_emojis.push(match[0]);
+            if (match[0] === emojis.owie) {
+                matched_emojis.push(emojis.cursed);
             }
-        });
-    }
-    setInterval(checkLurkers, 3600000);
-    setInterval(checkNewbies, 3600000);
-
-    const channel = client.channels.cache.get("770726574865514517");
-    channel.messages.fetch({around: "776320801729019934", limit: 1})
-    .then(msg => {
-        const fetchedMsg = msg.first();
-        setInterval(function () {
-            fetchedMsg.edit(serverInfoEmbed(fetchedMsg.guild));
-        }, 300000);
+        }
     });
+    return matched_emojis;
+}
 
-    aboutCommands(client, "760625396487684126");
-    archiveCommands(client, "770726574865514517");
-    botCommands(client, "742548177462231120");
-    contestCommands(client, "770795084002230292");
-    linkCommands(client, "742069780328087613");
-    roleslistCommands(client, "758494476174884905");
+module.exports = async (client, message) => {
+    // Check if author is bot (webhooks are fine though)
+    if (!message.webhookID && (message.author == client.user || message.author.bot)) {
+        for (let embed of message.embeds) {
+            if (embed.title === "`-wolfram <query>`" && message.channel.id === "758523806507204608") {
+                message.delete();
+            }
+        }
+        if (message.author.id == "500385855072894982" && message.content.startsWith(":no_entry_sign:")) {
+            message.delete();
+        }
+        else return;
+    }
+
+    // UWU-ify
+    if (message.guild.id === "441673705458761729") {
+        if (message.channel.id === "696143475954941962") {
+            var str = message.content;
+            uwuifying.custom(str, message, data, Commando);
+        }
+    }
+
+    // Check for NiraMojis in their channels
+    if (allowlists.disgustchannels.includes(message.channel.id)) {
+        if (![emojis.disgust].includes(message.content)) {
+            return message.delete();
+        }
+    } else if (allowlists.starechannels.includes(message.channel.id)) {
+        if (![emojis.stare].includes(message.content)) {
+            return message.delete();
+        }
+    } else if (allowlists.owiechannels.includes(message.channel.id)) {
+        if (![emojis.owie].includes(message.content)) {
+            return message.delete();
+        }
+    }
+
+    // Check for NiraMojis everywhere
+    if (message.content.includes(emojis.disgust) || message.content.includes(emojis.stare) || message.content.includes(emojis.owie)) {
+        const find_emojis = [emojis.disgust, emojis.stare, emojis.owie];
+        let matched_emojis = matchEmojis(find_emojis, message.content);
+
+        matched_emojis.forEach(e => message.react(e));
+    }
+
+    // PatPat Role
+    // The member attribute is undefined on some messages so check if it's defined first
+    if (message.member && message.member.roles.cache.get("765347466169024512")) {
+        if (message.content.toLowerCase().includes("patpat", emojis.patpat)) {
+            message.react("761487227921367051");
+        }
+    }
+
+    // Nira Wave
+    if (message.mentions.users.has(client.user.id)) {
+        message.react("742394597174673458");
+    }
+
+    // Check for non-nitro user using GIF emoji to resend it with the GIF emoji
+    // Capture group 1 will have the emoji name in this case
+    const emoji_regexp = /<a?:\w+:\d+>|(?<!\\):(\w+):/g;
+    var needs_resend = false;
+
+    // Replaces emoji names with GIF emoji
+    function replaceEmoji(match, group1) {
+        // The string to replace the match with
+        let replaceString = match;
+        if (group1) {
+            // If capture group 1 caught something
+            message.guild.emojis.cache.each(emoji => {
+                // We need to replace non-gif emoji as well for them to show up when we resend the message
+                if (emoji.name === group1) {
+                    // We only need to resend if we replace any animated emoji
+                    // But don't make the variable false if it's already true
+                    needs_resend = emoji.animated || needs_resend;
+                    let type = emoji.animated ? "a" : "";
+                    replaceString = `<${type}:${emoji.name}:${emoji.id}>`;
+                }
+            });
+        }
+        return replaceString;
+    }
+
+    let resend_content = message.content.replace(emoji_regexp, replaceEmoji);
+    if (needs_resend && message.member) {
+        // If there were any GIF emoji added to the message
+        await replaceMessageThroughWebhook(message, resend_content);
+    }
+
+    // GIF emoji of the form `-emojiname`
+    if (message.guild && message.content[0] === "-") {
+        message.guild.emojis.cache.each(async emoji => {
+            if (message.content === `-${emoji.name}` && emoji.animated) {
+                await replaceMessageThroughWebhook(message, `<a:${emoji.name}:${emoji.id}>`);
+            }
+        });
+    }
+
+    // PatPat Command
+    // Allowed in specific bot channels only
+    if (allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== "603246092402032670") {
+        if (message.content.toLowerCase() === `${prefix}${commandNames.patpatstart.name}`) {
+            // PatPat: start new conversations
+            whosTalkingWithPatPat.add(message.author.id);
+
+            if (message.author.id == "759338005633826817") {
+                const patPatChatEmbed = getSimpleEmbed(
+                    "#ffc2e8",
+                    "Nira-chan has entered the chat",
+                    message.author,
+                    `${emojis.hal} Hewwo, Dave!~~ （＾∀＾）`);
+
+                message.channel.send(patPatChatEmbed);
+            } else {
+                const patPatChatEmbed = getSimpleEmbed(
+                    "#99ff00",
+                    "PatPat has entered the chat",
+                    message.author,
+                    `Salutations, gamer! ${emojis.patpat}`);
+
+                message.channel.send(patPatChatEmbed);
+            }
+        } else if (message.content.toLowerCase() === `${prefix}${commandNames.patpatstop.name}`) {
+            // PatPat: end conversations
+            whosTalkingWithPatPat.delete(message.author.id);
+
+            if (message.author.id == "759338005633826817") {
+                const patPatChatEmbed = getSimpleEmbed(
+                    "#ffc2e8",
+                    "Nira-chan has left the chat",
+                    message.author,
+                    `${emojis.hal} D-Dave, this convewsation can sewve nyo puwpose anymoweu(⋟﹏⋞) Goodbyeu~`);
+
+                message.channel.send(patPatChatEmbed);
+            } else {
+                const patPatChatEmbed = getSimpleEmbed(
+                    "#ff9900",
+                    "PatPat has left the chat",
+                    message.author,
+                    `Gud niet yeahyeah— ${emojis.patpat}`);
+
+                message.channel.send(patPatChatEmbed);
+            }
+        }
+        else if (whosTalkingWithPatPat.has(message.author.id)) {
+            // PatPat: ongoing conversations
+            if (message.author.id == "759338005633826817") {
+                const index = Math.floor(Math.random() * nira9000.length);
+
+                const patPatChatEmbed = getSimpleEmbed(
+                    "#ffc2e8",
+                    "Nira-chan says...",
+                    message.author,
+                    `${emojis.hal} ${nira9000[index]}`);
+
+                message.channel.send(patPatChatEmbed);
+            } else {
+                const index = Math.floor(Math.random() * patpatresponses.length);
+
+                const patPatChatEmbed = getSimpleEmbed(
+                    "#0099ff",
+                    "PatPat says...",
+                    message.author,
+                    `${patpatresponses[index]}`);
+
+                message.channel.send(patPatChatEmbed);
+            }
+        }
+    }
+
+    // Fishy Commands
+    let starts_with_command = fishyCommands
+        .some(word => message.content.toLowerCase().startsWith(`${prefix}`+word));
+    if (message.channel.id === "747201864889794721") {
+        if (starts_with_command) {
+            return;
+        }
+        else message.delete();
+    }
+    if (message.channel.id === "456367532434128897" && message.author.id === "238386015520292866") {
+        message.react("771179684851089458");
+
+        if (starts_with_command) {
+            return;
+        }
+        else {
+            var str = message.content;
+            uwuifying.custom(str, message, data, Commando);
+            message.delete();
+        }
+    }
+
+    // !work
+    if (message.channel.id === "770109833713418271") {
+        if (message.content.toLowerCase() === ("!work")) {
+            return;
+        }
+        else message.delete();
+    }
+
+    // 2-Word Story Channel
+    if (message.channel.id === "776229267998375946") {
+        const args = message.content.trim().split(/ +/g);
+        if (!args[1] || args[2]) {
+            message.delete();
+        }
+    }
+
+    // Pin Multiples of 1000
+    const countingChannel = client.channels.cache.get("758541031498317835");
+
+    if (message.channel.id === "776311768640389150") {
+        let pinned = await countingChannel.messages.fetchPinned().catch(() => ({ size: 0 }));
+        const num = parseInt(message.content);
+
+        if (pinned.size == 50) {
+            await pinned.last().unpin();
+        }
+        else if (num % 1000 == 0) {
+            message.react("764025729696268319");
+            message.pin();
+        }
+    }
+
+    // Server Rules
+    if (message.guild.id === "603246092402032670") {
+        if (message.member && message.member.roles.cache.get("742061218860236840")) {
+            rules.filter(rule => rule.re.test(message.content))
+                .map(rule => new MessageEmbed()
+                .setTitle(rule.title)
+                .setDescription(rule.description)
+                .addFields({
+                    name: "Moderation",
+                    value: rule.moderation
+                }))
+            .forEach(rule => message.channel.send(rule));
+        }
+    }
 };
