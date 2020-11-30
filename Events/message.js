@@ -246,12 +246,10 @@ module.exports = async (client, message) => {
         else message.delete();
     }
     if (message.channel.id === "456367532434128897" && message.author.id === "238386015520292866") {
-        message.react("771179684851089458");
-
         let starts_with_command = fishyCommands
         .some(word => message.content.toLowerCase().startsWith(">"+word));
         if (starts_with_command) {
-            return;
+            message.react("771179684851089458");
         }
         else {
             message.delete();
