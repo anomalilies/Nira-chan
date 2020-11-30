@@ -86,9 +86,6 @@ module.exports = async (client, message) => {
             var str = message.content;
             uwuifying.custom(str, message, data, Commando);
         }
-        else if (message.channel.id === "456367532434128897" && message.author.id === "238386015520292866") {
-            message.react("771179684851089458");
-        }
     }
 
     // Check for NiraMojis in their channels
@@ -240,14 +237,25 @@ module.exports = async (client, message) => {
     }
 
     // Fishy Commands
+    let starts_with_command = fishyCommands
+        .some(word => message.content.toLowerCase().startsWith(`${prefix}`+word));
     if (message.channel.id === "747201864889794721") {
-        let starts_with_command = fishyCommands
-            .some(word => message.content.toLowerCase().startsWith(`${prefix}`+word));
-
         if (starts_with_command) {
             return;
         }
         else message.delete();
+    }
+    if (message.channel.id === "456367532434128897" && message.author.id === "238386015520292866") {
+        message.react("771179684851089458");
+
+        if (starts_with_command) {
+            return;
+        }
+        else {
+            var str = message.content;
+            uwuifying.custom(str, message, data, Commando);
+            message.delete();
+        }
     }
 
     // !work
