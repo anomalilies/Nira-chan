@@ -1,90 +1,80 @@
-require("dotenv").config();
-const cron = require("cron");
-const fs = require("fs");
-const Commando = require("discord.js-commando");
-const { prefix, allowlists } = require("./config.json");
-const { MessageEmbed } = require("discord.js");
+const path = require("path");
+var data = require("../Commands/Fun/UWU Translator/data");
+const serverInfoEmbed = require("../Embeds/serverInfoEmbed");
 
-// Commando
-const client = new Commando.CommandoClient({
-    owner: "228880116699103232",
-    commandPrefix: prefix,
-    unknownCommand: false,
-    help: false
-});
+const aboutEmbeds = require("../Embeds/About/aboutEmbeds");
+const archiveEmbeds = require("../Embeds/Archive/archiveEmbeds");
+const botEmbeds = require("../Embeds/Bots/botEmbeds");
+const contestEmbeds = require("../Embeds/Contests/contestEmbeds");
+const linkEmbeds = require ("../Embeds/Links/linkEmbeds");
+const roleslistEmbeds = require("../Embeds/Roles/roleslistEmbeds");
 
-// Events and Commands
-fs.readdir("./Events/", (err, files) => {
-    if (err) return console.error(err);
-    files.forEach(file => {
-      const event = require(`./Events/${file}`);
-      let eventName = file.split(".")[0];
-      client.on(eventName, event.bind(null, client));
-    });
-});
+const aboutCommands = require("../Embeds/About/aboutCommands");
+const archiveCommands = require("../Embeds/Archive/archiveCommands");
+const botCommands = require("../Embeds/Bots/botCommands");
+const contestCommands = require("../Embeds/Contests/contestCommands");
+const linkCommands = require ("../Embeds/Links/linkCommands");
+const roleslistCommands = require("../Embeds/Roles/roleslistCommands");
 
-// Monthly Server Topics
-var channelTitles = [
-    "Byoushin wo Kamu", "Nouriueno Cracker", "Humanoid", "Mabushii DNA Dake", "Seigi", "Kettobashita Moufu", "Konnakoto Soudou", 
-    "Haze Haseru Haterumade", "Dear Mr. 'F'", "Obenkyou Shitoiteyo", "MILABO", "Fastening", "Ham", "Darken"
-];
+module.exports = async (client) => {
+    console.log(`${client.user.tag} activated!`);
+    function statusChange() {
+        client.user.setActivity(data.statuses[Math.floor(Math.random() * data.statuses.length)], { type: "WATCHING" });
+    }
+    setInterval(statusChange, 60000);
 
-const scheduledMessage = new cron.CronJob("0 0 1 * *", () => {
-    const channel = client.channels.cache.find(channel => channel.id === "767550623767068742");
-    const random = Math.floor(Math.random() * channelTitles.length);
-    channel.setName(channelTitles[random]);
-}, null, true, "Etc/UTC");
-scheduledMessage.start();
+    client.registry
+    .registerGroups([
+        ["fun", "Fun Commands"],
+        ["misc", "Miscellaneous Commands"],
+        ["util", "Utility"],
+        ["commands", "Commands"]
+    ])
+    .registerDefaultTypes()
+    .registerDefaultCommands({
+        unknownCommand: false
+    })
+    .registerCommandsIn(path.join(__dirname, "../Commands"));
 
-
-// Starboard
-var contributorRoles = [
-    "Journalists", "Contestants", "Hackers", "Stans", "Editors",
-    "Translators", "Meme Royalty", "Theorists", "Musicians", "Artists"
-];
-const inContributorGroup = r=>contributorRoles.includes(r.name);
-
-client.on("messageReactionAdd", async (reaction, user) => {
-    const starboard = client.channels.cache.find(channel => channel.id === "778734720879951922");
-    const message = reaction.message;
-    if (message.reactions.cache.get("⭐")) {
-        message.reactions.cache.get("⭐").fetch().then(async starReaction => {
-            if (starReaction.count >= 5) {
-                const handleStarboard = async () => {
-                    const image = message.attachments.size > 0 ? message.attachments.array()[0].url : "";
-
-                    const msgs = await starboard.messages.fetch({ limit: 100 });
-                    const existingMsg = msgs.find(msg =>
-                        msg.embeds.length === 1 ?
-                            (msg.embeds[0].footer.text.startsWith(reaction.message.id)) : false);
-
-                    if (!existingMsg && message.member.roles.cache.some(inContributorGroup) &&
-                        allowlists.contributionchannels.includes(message.channel.id)) {
-                        const embed = new MessageEmbed()
-                            .setColor(15844367)
-                            .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-                            .setDescription(`${message.content}\n\n[context](${message.url})`)
-                            .setImage(image)
-                            .setFooter(reaction.message.id)
-                            .setTimestamp();
-
-                        if (starboard) {
-                            starboard.send(embed);
-                        }
-                    }
+    function checkLurkers() {
+        const list = client.guilds.cache.get("757726578309595238");
+        var lurkersRole = list.roles.cache.find(role => role.name === "Lurkers");
+    
+        list.members.cache.each(member => {
+            if (!member.roles.cache.get(lurkersRole.id)) {
+                if (Date.now() - member.joinedTimestamp > 86400000) {
+                    member.roles.add(lurkersRole);
                 }
-
-                if(reaction.message.partial) {
-                    await reaction.fetch();
-                    await reaction.message.fetch();
-                    await handleStarboard();
-                }
-                else {
-                    await handleStarboard();
-                }
+                else return;
             }
         });
     }
-});
+    function checkNewbies() {
+        const guild = client.guilds.cache.get("603246092402032670");
+        var newbiesRole = guild.roles.cache.find(role => role.name === "Newbies");
 
-client.login(process.env.CLIENT_TOKEN);
+        newbiesRole.members.forEach(member => {
+            if (Date.now() - member.joinedTimestamp > 604800000) {
+                member.roles.remove(newbiesRole);
+            }
+        });
+    }
+    setInterval(checkLurkers, 3600000);
+    setInterval(checkNewbies, 3600000);
+
+    const channel = client.channels.cache.get("770726574865514517");
+    channel.messages.fetch({around: "776320801729019934", limit: 1})
+    .then(msg => {
+        const fetchedMsg = msg.first();
+        setInterval(function () {
+            fetchedMsg.edit(serverInfoEmbed(fetchedMsg.guild));
+        }, 300000);
+    });
+
+    aboutCommands(client, "760625396487684126");
+    archiveCommands(client, "770726574865514517");
+    botCommands(client, "742548177462231120");
+    contestCommands(client, "770795084002230292");
+    linkCommands(client, "742069780328087613");
+    roleslistCommands(client, "758494476174884905");
+};
