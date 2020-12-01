@@ -54,7 +54,7 @@ module.exports = async (client) => {
         var newbiesRole = guild.roles.cache.find(role => role.name === "Newbies");
 
         newbiesRole.members.forEach(member => {
-            if (Date.now() - member.joinedTimestamp > 604800000) {
+            if (Date.now() - member.joinedTimestamp > 259200000) {
                 member.roles.remove(newbiesRole);
             }
         });
@@ -62,7 +62,7 @@ module.exports = async (client) => {
     setInterval(checkLurkers, 3600000);
     setInterval(checkNewbies, 3600000);
 
-    /*const channel = client.channels.cache.get("770726574865514517");
+    const channel = client.channels.cache.get("770726574865514517");
     channel.messages.fetch({around: "776320801729019934", limit: 1})
     .then(msg => {
         const fetchedMsg = msg.first();
@@ -76,5 +76,5 @@ module.exports = async (client) => {
     botCommands(client, "742548177462231120");
     contestCommands(client, "770795084002230292");
     linkCommands(client, "742069780328087613");
-    roleslistCommands(client, "758494476174884905");*/
+    roleslistCommands(client, "758494476174884905");
 };
