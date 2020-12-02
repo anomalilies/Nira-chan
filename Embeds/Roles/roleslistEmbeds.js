@@ -6,7 +6,7 @@ global.roles1 = new Discord.MessageEmbed()
   .setColor(240116)
   .addFields(
     {name: "Admins", value: `<@&603441627729625139> are charge of the server and its general upkeep.`},
-    {name: "(Former) King", value: `Dedicated to the server's creator, our <@&778719212993773608> <@208960237988741123>!`}
+    {name: "(Former) King", value: `Dedicated to the server's creator, our <@&778719212993773608> <@208960237988741123>!`},
     {name: "Moderators", value: `As you could imagine, our <@&742061218860236840> are in charge of server moderation.`},
     {name: "Emoji Curators", value: `<@&756292255282757734> help provide implementation of emoji suggestions from <#603248273100242964>.`},
     {name: "Other Staff", value: `<@&778719739291631636> are miscellaneous staff members that help out with small server-related tasks!`},
