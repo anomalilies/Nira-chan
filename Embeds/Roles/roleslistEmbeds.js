@@ -41,7 +41,7 @@ global.roles3 = new Discord.MessageEmbed()
     {name: "Journalists", value: `<@&765670343934345277> help our staff provide up-to-date ZUTOMAYO news on <#603248261461180480>.`},
     {name: "Contestants", value: `For all our <@&770792091353743401> from the <#761326959154167838> channel!`},
     {name: "Contributors", value: `The <@&761383555372023860> role comes with all awarded roles and those who have entered contests, as to separate users on the member list.`},
-    {name: "Affiliates", value: `Our <@&744728162843492404> from r/ZUTOMAYO, and other Discord servers!`}
+    {name: "Affiliates", value: `Our <@&744728162843492404> from [r/ZUTOMAYO](https://www.reddit.com/r/ZUTOMAYO/), and other Discord servers!`}
 );
 global.roles4 = new Discord.MessageEmbed()
   .setTitle("Exclusive Roles")
