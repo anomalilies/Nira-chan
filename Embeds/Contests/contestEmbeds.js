@@ -3,7 +3,7 @@ const { emojis } = require("../../config.json");
 
 global.contest1 = new Discord.MessageEmbed()
   .setTitle("ZUTOMAYO ZONE - Monthly Contest #2")
-  .setDescription("Seeing as our last contest went so well, we're back for another!\nWith the holiday season ~~and another lockdown, here in the U.K.,~~ impending on us, this month's art contest will focus on creating a festive server banner.\nAnd, for those not interested in entering art contests, from December, we'll be extending the basis of possible entries soon!")
+  .setDescription("Seeing as our last contest went so well, we're back for another!\nWith the holiday season ~~and another lockdown, here in the U.K.,~~ impending on us, this month's art contest will focus on creating a festive server banner.\nAnd, for those not interested in entering art contests, from mid-December, we'll be extending the basis of possible entries soon!")
   .setColor(15849719)
   .addFields(
     {name: "What Does This Entail?", value: "Everyone celebrates the holidays differently, or even not at all.\nWith this contest, we'd love to see your entries either focusing on typical holiday activities, or those unique to your culture!\nHowever, as always, you'll need to remember to reference ZUTOMAYO and/or the server in your entries!"}
@@ -26,13 +26,13 @@ global.contest3 = new Discord.MessageEmbed()
 global.contest4 = new Discord.MessageEmbed()
   .setColor(15849719)
   .addFields(
-    {name: "When is the Deadline?", value: "The deadline for *all* entries will be on **Monday 7th November, 00:00 GMT/UTC**.\n\nThe rest of the 7th, up until 00:00 on the 8th, will be dedicated to voting.\nWinners, along with information for the next contest, will be released on 8th December."},
+    {name: "When is the Deadline?", value: "The deadline for *all* entries will be on **Monday 7th December, 00:00 GMT/UTC**.\n\nThe rest of the 7th, up until 00:00 on the 8th, will be dedicated to voting.\nWinners, along with information for the next contest, will be released on 8th December."},
     {name: "What Prizes Are There?", value: `We'll be stepping up the rewards for this month's contest, seeing how the *stonks* have risen!\nAll UniguriXP${emojis.uniguri} rewards will be handed out on results day, whilst you'll be able to show off your fancy new <@&770792091353743401> role as soon as you enter!`}
 );
 global.contest5 = new Discord.MessageEmbed()
   .setColor(15849719)
   .addFields(
-    {name: "1st Place", value: `• Your art as the server's header for November!\n• 1,000,000 UniguriXP${emojis.uniguri}.\n• A shiny new <@&761383548476325888> role.\n• The <@&758774087161741363> role, if you haven't already been awarded it.`},
+    {name: "1st Place", value: `• Your art as the server's header for December!\n• 1,000,000 UniguriXP${emojis.uniguri}.\n• A shiny new <@&761383548476325888> role.\n• The <@&758774087161741363> role, if you haven't already been awarded it.`},
     {name: "2nd Place", value: `• 750,000 UniguriXP${emojis.uniguri}.\n• The shiny <@&761383550741643284> role.\n• The <@&758774087161741363> role, if you haven't already been awarded it.`},
     {name: "3rd Place", value: `• 250,000 UniguriXP${emojis.uniguri}.\n• The shiny <@&761383550741643284> role.\n• The <@&758774087161741363> role, if you haven't already been awarded it.`},
     {name: "Participation Awards", value: `• 50,000 UniguriXP${emojis.uniguri}.\n• The <@&770792091353743401> role!`}
