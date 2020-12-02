@@ -45,7 +45,7 @@ global.roles3 = new Discord.MessageEmbed()
 );
 global.roles4 = new Discord.MessageEmbed()
   .setTitle("Exclusive Roles")
-  .setDescription("From limited edition <#758494476174884905> listings, or given out from past server events/inside-jokes!")
+  .setDescription("From limited-edition <#758494476174884905> listings, or given out from inside jokes!")
   .setColor(240116)
   .addFields(
     {name: "h̷͂̒ē̶̓ ̶͂͝w̴̍̆h̶͛̉o̵͒̍ ̵̑̄s̸̛͝h̵̑̃a̵͂͆l̶̘̋l̶̋̕ ̷̌̍n̶̽͠ŏ̴̚ť̵̍ ̸͋̊b̵̔̅é̷̩ ̵̒͂n̸̈́͠ȃ̴̈́ṁ̴̺e̴̿͝d̷͛͐", value: `We don't know why we gave this to <@208960237988741123>, either.`},
