@@ -25,28 +25,31 @@ function getSimpleEmbed(color, title, author, description) {
 
 // Replace a regular message with a message sent through a webhook with the OP's name and avatar
 async function replaceMessageThroughWebhook(message, resend_content) {
-    message.delete();
-    const webhooks = await message.channel.fetchWebhooks();
-    const webhook = webhooks.first();
+    if (message.channel.id !== "758541031498317835") {
+        message.delete();
+        const webhooks = await message.channel.fetchWebhooks();
+        const webhook = webhooks.first();
 
-    if (webhook === undefined) {
-        // No webhook exists in this channel, so create one
-        message.channel.createWebhook("Nira-chan")
-            .then(webhook => {
-                console.log(`Created webhook ${webhook}`);
-                // Resend the message with the OP's avatar and display name
-                webhook.send(resend_content, {
-                    username: message.member.displayName,
-                    avatarURL: message.author.displayAvatarURL(),
-                });
+        if (webhook === undefined) {
+            // No webhook exists in this channel, so create one
+            message.channel.createWebhook("Nira-chan")
+                .then(webhook => {
+                    console.log(`Created webhook ${webhook}`);
+                    // Resend the message with the OP's avatar and display name
+                    webhook.send(resend_content, {
+                        username: message.member.displayName,
+                        avatarURL: message.author.displayAvatarURL(),
+                    }
+                );
             })
             .catch(console.error);
-    } else {
-        // Resend the message with the OP's avatar and display name
-        webhook.send(resend_content, {
-            username: message.member.displayName,
-            avatarURL: message.author.displayAvatarURL(),
-        });
+        } else {
+            // Resend the message with the OP's avatar and display name
+            webhook.send(resend_content, {
+                username: message.member.displayName,
+                avatarURL: message.author.displayAvatarURL(),
+            });
+        }
     }
 }
 
@@ -274,13 +277,23 @@ module.exports = async (client, message) => {
         }
     }
 
-    // Pin Multiples of 1000
+    // Counting
     const countingChannel = client.channels.cache.get("758541031498317835");
 
-    if (message.channel.id === "776311768640389150") {
+    if (message.channel.id === "758541031498317835") {
         let pinned = await countingChannel.messages.fetchPinned().catch(() => ({ size: 0 }));
         const num = parseInt(message.content);
 
+        countingChannel.messages.fetch({ limit: 2 }).then(messages => {
+            let lastMessage = parseInt(messages.array()[1]);
+            
+            console.log(lastMessage)
+            if (num-1 != lastMessage || message.author.bot || message.system || message.webhook) {
+                message.delete();
+            }
+        })
+        .catch(console.error);
+        
         if (pinned.size == 50) {
             await pinned.last().unpin();
         }
