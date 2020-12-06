@@ -279,28 +279,32 @@ module.exports = async (client, message) => {
 
     // Counting
     const countingChannel = client.channels.cache.get("758541031498317835");
+    const integer_regexp = new RegExp(`^[0-9]+$`);
 
     if (message.channel.id === "758541031498317835") {
         let pinned = await countingChannel.messages.fetchPinned().catch(() => ({ size: 0 }));
-        const num = parseInt(message.content);
+        const num = parseInt(message.content.match(integer_regexp));
+        console.log("num:", num)
 
-        countingChannel.messages.fetch({ limit: 2 }).then(messages => {
+        countingChannel.messages.fetch({ limit: 2 }).then(async messages => {
             let lastMessage = parseInt(messages.array()[1]);
             
             console.log(lastMessage)
-            if (num-1 != lastMessage || message.author.bot || message.system || message.webhook) {
+            if (message.system) {
                 message.delete();
             }
+            if (num-1 != lastMessage || message.author.bot || message.webhook) {
+                message.delete();
+            }
+            if (pinned.size == 50) {
+                await pinned.last().unpin();
+            }
+            else if (num-1 !== lastMessage && num % 1000 == 0) {
+                message.react("764025729696268319");
+                message.pin();
+            }
         })
-        .catch(console.error);
-        
-        if (pinned.size == 50) {
-            await pinned.last().unpin();
-        }
-        else if (num % 1000 == 0) {
-            message.react("764025729696268319");
-            message.pin();
-        }
+        .catch();
     }
 
     // Server Rules

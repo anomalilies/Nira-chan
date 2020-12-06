@@ -65,6 +65,11 @@ module.exports = async (client, oldMessage, newMessage) => {
         newMessage.react("742394597174673458");
     }
 
+    // Counting
+    if (newMessage.channel.id === "758541031498317835") {
+        newMessage.delete();
+    }
+
     // 2-Word Story Channel
     if (newMessage.channel.id === "776229267998375946") {
         const args = newMessage.content.trim().split(/ +/g);
