@@ -284,16 +284,13 @@ module.exports = async (client, message) => {
     if (message.channel.id === "758541031498317835") {
         let pinned = await countingChannel.messages.fetchPinned().catch(() => ({ size: 0 }));
         const num = parseInt(message.content.match(integer_regexp));
-        console.log("num:", num)
 
         countingChannel.messages.fetch({ limit: 2 }).then(async messages => {
             let lastMessage = parseInt(messages.array()[1]);
-            
-            console.log(lastMessage)
-            if (message.system) {
+            if (message.system || message.author.bot || message.webhook || message.author == client.user) {
                 message.delete();
             }
-            if (num-1 != lastMessage || message.author.bot || message.webhook) {
+            if (num-1 != lastMessage) {
                 message.delete();
             }
             if (pinned.size == 50) {
