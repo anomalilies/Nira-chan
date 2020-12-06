@@ -290,7 +290,7 @@ module.exports = async (client, message) => {
             if (message.system || message.author.bot || message.webhook || message.author == client.user) {
                 message.delete();
             }
-            if (num-1 != lastMessage) {
+            if (num-1 != lastMessage || message.mentions.members.first()) {
                 message.delete();
             }
             if (pinned.size == 50) {
@@ -303,6 +303,8 @@ module.exports = async (client, message) => {
         })
         .catch();
     }
+
+    message.mentions.users.has(client.user.id)
 
     // Server Rules
     if (message.guild.id === "603246092402032670") {
