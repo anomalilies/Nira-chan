@@ -287,10 +287,10 @@ module.exports = async (client, message) => {
 
         countingChannel.messages.fetch({ limit: 2 }).then(async messages => {
             let lastMessage = parseInt(messages.array()[1]);
-            if (message.system || message.author.bot || message.webhook) {
+            if (message.system) {
                 message.delete();
             }
-            if (num-1 != lastMessage) {
+            if (num-1 != lastMessage || message.author.bot || message.webhook) {
                 message.delete();
             }
             if (pinned.size == 50) {
