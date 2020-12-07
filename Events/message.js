@@ -281,20 +281,19 @@ module.exports = async (client, message) => {
     const integer_regexp = new RegExp(`^[1-9]\d+$`);
     // Some preliminary checks to see if the message should be deleted
     if (message.channel.id === "758541031498317835") {
-        if (message.system || message.author.bot || !/^[1-9]\d+$/.test(message.content)) {
+        if (message.system || message.author.bot || message.attachments.array().length || !/^[1-9]\d+$/.test(message.content)) {
             message.delete();
         } else {
             let pinned = await message.channel.messages.fetchPinned().catch(() => ({ size: 0 }));
             const num = parseInt(message.content);
             countingChannel.messages.fetch({ limit: 2 }).then(async messages => {
                 let lastMessage = parseInt(messages.array()[1]);
-                if (num - 1 != lastMessage) {
-                    message.delete();
-                }
                 if (pinned.size == 50) {
                     await pinned.last().unpin();
                 }
-                if (lastMessage && num % 1000 === 0) {
+                if (num - 1 != lastMessage) {
+                    message.delete();
+                } else if (num % 1000 === 0) {
                     message.react("764025729696268319");
                     message.pin();
                 }
