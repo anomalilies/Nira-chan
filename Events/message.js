@@ -279,7 +279,7 @@ module.exports = async (client, message) => {
 
     // Counting
     const countingChannel = client.channels.cache.get("758541031498317835");
-    const integer_regexp = new RegExp(`^[0-9]+$`);
+    const integer_regexp = new RegExp(`[1-9][0-9]*`);
 
     if (message.channel.id === "758541031498317835") {
         let pinned = await countingChannel.messages.fetchPinned().catch(() => ({ size: 0 }));
