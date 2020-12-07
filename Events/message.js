@@ -284,18 +284,21 @@ module.exports = async (client, message) => {
         if (message.system || message.author.bot || message.attachments.array().length || !/^[1-9]\d+$/.test(message.content)) {
             message.delete();
         } else {
+            // Discord only allows a maximum of 50 pins, so delete the oldest one if we've reached the limit
             let pinned = await message.channel.messages.fetchPinned().catch(() => ({ size: 0 }));
+            if (pinned.size == 50) {
+                await pinned.last().unpin();
+            }
             const num = parseInt(message.content);
             countingChannel.messages.fetch({ limit: 2 }).then(async messages => {
                 let lastMessage = parseInt(messages.array()[1]);
-                if (pinned.size == 50) {
-                    await pinned.last().unpin();
-                }
-                if (num - 1 != lastMessage) {
-                    message.delete();
+                if (num - 1 !== lastMessage) {
+                    // It's the wrong number; delete the message
+                    messages.array()[0].delete();
                 } else if (num % 1000 === 0) {
-                    message.react("764025729696268319");
-                    message.pin();
+                    // It's a multiple of 1000; pin it
+                    messages.array()[0].react("764025729696268319");
+                    messages.array()[0].pin();
                 }
             }).catch();
         }
