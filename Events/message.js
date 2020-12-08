@@ -80,7 +80,6 @@ module.exports = async (client, message) => {
 
                 if (prevMsg) {
                     let num = parseInt(prevMsg) + 1;
-                    console.log(num)
                     if (message.content !== `${num}`) { // Invalid count
                         message.delete();
                     } else if (num % 1000 === 0) {      // Multiple of 1000
