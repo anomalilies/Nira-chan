@@ -59,22 +59,25 @@ module.exports = async (client) => {
             }
         });
     }
-    setInterval(checkLurkers, 3600000);
-    setInterval(checkNewbies, 3600000);
 
-    const channel = client.channels.cache.get("770726574865514517");
-    channel.messages.fetch({around: "776320801729019934", limit: 1})
-    .then(msg => {
-        const fetchedMsg = msg.first();
-        setInterval(function () {
-            fetchedMsg.edit(serverInfoEmbed(fetchedMsg.guild));
-        }, 300000);
-    });
+    if (client.user.id === "740606402330099752") {
+        setInterval(checkLurkers, 3600000);
+        setInterval(checkNewbies, 3600000);
 
-    aboutCommands(client, "760625396487684126");
-    archiveCommands(client, "770726574865514517");
-    botCommands(client, "742548177462231120");
-    contestCommands(client, "770795084002230292");
-    linkCommands(client, "742069780328087613");
-    roleslistCommands(client, "758494476174884905");
+        const channel = client.channels.cache.get("770726574865514517");
+        channel.messages.fetch({around: "776320801729019934", limit: 1})
+            .then(msg => {
+                const fetchedMsg = msg.first();
+                setInterval(function () {
+                fetchedMsg.edit(serverInfoEmbed(fetchedMsg.guild));
+            }, 300000);
+        });
+
+        aboutCommands(client, "760625396487684126");
+        archiveCommands(client, "770726574865514517");
+        botCommands(client, "742548177462231120");
+        contestCommands(client, "770795084002230292");
+        linkCommands(client, "742069780328087613");
+        roleslistCommands(client, "758494476174884905");
+    }
 };

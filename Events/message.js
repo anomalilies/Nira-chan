@@ -278,33 +278,30 @@ module.exports = async (client, message) => {
     }
 
     // Counting
-    const integer_regexp = new RegExp(`^[1-9]\d+$`);
-    // Some preliminary checks to see if the message should be deleted
+    const countingChannel = client.channels.cache.get("758541031498317835");
     if (message.channel.id === "758541031498317835") {
-        if (message.system || message.author.bot || message.attachments.array().length || !/^[1-9]\d+$/.test(message.content)) {
+        if (message.system || message.author.bot || message.attachments.array().length || !/^[1-9]\d*$/.test(message.content)) {
             message.delete();
         } else {
-            // Discord only allows a maximum of 50 pins, so delete the oldest one if we've reached the limit
-            let pinned = await message.channel.messages.fetchPinned().catch(() => ({ size: 0 }));
-            if (pinned.size == 50) {
-                await pinned.last().unpin();
-            }
-            const num = parseInt(message.content);
             countingChannel.messages.fetch({ limit: 2 }).then(async messages => {
-                let lastMessage = parseInt(messages.array()[1]);
-                if (num - 1 !== lastMessage) {
-                    // It's the wrong number; delete the message
-                    messages.array()[0].delete();
-                } else if (num % 1000 === 0) {
-                    // It's a multiple of 1000; pin it
-                    messages.array()[0].react("764025729696268319");
-                    messages.array()[0].pin();
+                let prevMsg = parseInt(messages.array()[1]);
+
+                if (prevMsg) {
+                    let num = parseInt(prevMsg) + 1;
+                    if (message.content !== `${num}`) { // Invalid count
+                        message.delete();
+                    } else if (num % 1000 === 0) {      // Multiple of 1000
+                        message.react("764025729696268319");
+                        let pinned = await message.channel.messages.fetchPinned();
+                        if (pinned.size === 50) {
+                            await pinned.last().unpin();
+                        }
+                        message.pin();
+                    }
                 }
             }).catch();
         }
     }
-
-    message.mentions.users.has(client.user.id)
 
     // Server Rules
     if (message.guild.id === "603246092402032670") {
