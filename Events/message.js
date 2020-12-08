@@ -70,8 +70,32 @@ function matchEmojis(find_emojis, message_content) {
 }
 
 module.exports = async (client, message) => {
-    // Check if author is bot (webhooks are fine though)
-    if (!message.webhookID && (message.author == client.user || message.author.bot)) {
+    // Counting and Bot Check
+    if (message.channel.id === "758541031498317835") {
+        if (message.system || message.author.bot || message.attachments.array().length) {
+            message.delete();
+        } else {
+            message.channel.messages.fetch({ limit: 2 }).then(async messages => {
+                let prevMsg = parseInt(messages.array()[1]);
+
+                if (prevMsg) {
+                    let num = parseInt(prevMsg) + 1;
+                    console.log(num)
+                    if (message.content !== `${num}`) { // Invalid count
+                        message.delete();
+                    } else if (num % 1000 === 0) {      // Multiple of 1000
+                        message.react("764025729696268319");
+                        let pinned = await message.channel.messages.fetchPinned();
+                        if (pinned.size === 50) {
+                            await pinned.last().unpin();
+                        }
+                        message.pin();
+                    }
+                }
+            }).catch();
+        }
+    }
+    else if (!message.webhookID && (message.author == client.user || message.author.bot)) {
         for (let embed of message.embeds) {
             if (embed.title === "`-wolfram <query>`" && message.channel.id === "758523806507204608") {
                 message.delete();
@@ -274,31 +298,6 @@ module.exports = async (client, message) => {
         const args = message.content.trim().split(/ +/g);
         if (!args[1] || args[2]) {
             message.delete();
-        }
-    }
-
-    // Counting
-    if (message.channel.id === "758541031498317835") {
-        if (message.system || message.author.bot || message.attachments.array().length) {
-            message.delete();
-        } else {
-            message.channel.messages.fetch({ limit: 2 }).then(async messages => {
-                let prevMsg = parseInt(messages.array()[1]);
-
-                if (prevMsg) {
-                    let num = parseInt(prevMsg) + 1;
-                    if (message.content !== `${num}`) { // Invalid count
-                        message.delete();
-                    } else if (num % 1000 === 0) {      // Multiple of 1000
-                        message.react("764025729696268319");
-                        let pinned = await message.channel.messages.fetchPinned();
-                        if (pinned.size === 50) {
-                            await pinned.last().unpin();
-                        }
-                        message.pin();
-                    }
-                }
-            }).catch();
         }
     }
 
