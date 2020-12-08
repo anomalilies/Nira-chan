@@ -278,12 +278,11 @@ module.exports = async (client, message) => {
     }
 
     // Counting
-    const countingChannel = client.channels.cache.get("758541031498317835");
     if (message.channel.id === "758541031498317835") {
-        if (message.system || message.author.bot || message.attachments.array().length || !/^[1-9]\d*$/.test(message.content)) {
+        if (message.system || message.author.bot || message.attachments.array().length) {
             message.delete();
         } else {
-            countingChannel.messages.fetch({ limit: 2 }).then(async messages => {
+            message.channel.messages.fetch({ limit: 2 }).then(async messages => {
                 let prevMsg = parseInt(messages.array()[1]);
 
                 if (prevMsg) {
