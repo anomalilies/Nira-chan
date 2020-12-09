@@ -48,8 +48,8 @@ module.exports = class LinkCommand extends Commando.Command {
                     const botMessages = messages.filter(msg => msg.author.id === "740606402330099752");
                     const authorMessages = messages.filter(msg => msg.author.id);
 
-                    botMessages.array()[0-2].delete();
-                    authorMessages.array()[0-2].delete();
+                    botMessages.array()[0,1,2].delete();
+                    authorMessages.array()[0,1,2].delete();
                 })}, 5000);
             })
         }
