@@ -23,7 +23,7 @@ module.exports = class UWUCommand extends Commando.Command {
         uwuifying.custom(text, message, data, Commando).then(message => {
             setTimeout(function() {
                 message.delete();
-            }, 5000)
+            }, 5000);
         })
     }
 };

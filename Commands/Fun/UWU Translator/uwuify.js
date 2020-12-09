@@ -36,6 +36,7 @@ var uwuify = {
                     webhook.send(text, {
                         username: message.member.displayName,
                         avatarURL: message.author.displayAvatarURL(),
+                        files: message.attachments.array()
                     }
                 );
             })
