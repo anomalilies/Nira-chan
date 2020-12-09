@@ -1,5 +1,4 @@
 const Commando = require("discord.js-commando");
-const { allowlists } = require("../../config.json");
 var uwuifying = require("./UWU Translator/uwuify");
 var data = require("./UWU Translator/data");
 
@@ -21,9 +20,10 @@ module.exports = class UWUCommand extends Commando.Command {
     }
 
     async run(message, { text }) {
-        if (allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== "603246092402032670") {
-            message.react("771179684851089458");
-            uwuifying.custom(text, message, data, Commando);
-        }
+        uwuifying.custom(text, message, data, Commando).then(message => {
+            setTimeout(function() {
+                message.delete();
+            }, 5000)
+        })
     }
 };

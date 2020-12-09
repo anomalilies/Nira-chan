@@ -2,12 +2,6 @@ const data = {
     statuses: ["you in disgust.", "(staring at) you.", "you in pain— owie!", "you -fishy!", "you~wu~(♥ω♥*)!", "you, forever & always."],
 
     // This software uses code from QuazzyWazzy/UwU-fy - See LICENSE!
-    replacements: [
-        [
-            ["god"], "gawd"
-        ]
-    ],
-
     emotions: [
         [
             ["exciting", "excited", "wonderful", "nice", "joyful", "gleeful", "glee", "blessed", "delighted", "smiling"],

@@ -34,7 +34,6 @@ async function replaceMessageThroughWebhook(message, resend_content) {
             // No webhook exists in this channel, so create one
             message.channel.createWebhook("Nira-chan")
                 .then(webhook => {
-                    console.log(`Created webhook ${webhook}`);
                     // Resend the message with the OP's avatar and display name
                     webhook.send(resend_content, {
                         username: message.member.displayName,
@@ -72,7 +71,7 @@ function matchEmojis(find_emojis, message_content) {
 module.exports = async (client, message) => {
     // Counting and Bot Check
     if (message.channel.id === "758541031498317835") {
-        if (message.system || message.author.bot || message.attachments.array().length) {
+        if (message.system || message.webhookID || message.author.bot || message.attachments.array().length) {
             message.delete();
         } else {
             message.channel.messages.fetch({ limit: 2 }).then(async messages => {
@@ -94,7 +93,7 @@ module.exports = async (client, message) => {
             }).catch();
         }
     }
-    else if (!message.webhookID && (message.author == client.user || message.author.bot)) {
+    else if (message.webhookID || message.author == client.user || message.author.bot) {
         for (let embed of message.embeds) {
             if (embed.title === "`-wolfram <query>`" && message.channel.id === "758523806507204608") {
                 message.delete();
@@ -106,12 +105,15 @@ module.exports = async (client, message) => {
         else return;
     }
 
-    // UWU-ify
-    if (message.guild.id === "441673705458761729") {
-        if (message.channel.id === "696143475954941962") {
+    // UWU-ify Channel
+    if (message.channel.id === "785977489142448178") {
             var str = message.content;
-            uwuifying.custom(str, message, data, Commando);
-        }
+            uwuifying.custom(str, message, data, Commando).then(message => {
+                setTimeout(function() {
+                    message.delete();
+                }, 5000);
+            }
+        )
     }
 
     // Check for NiraMojis in their channels
@@ -264,23 +266,26 @@ module.exports = async (client, message) => {
 
     // Fishy Commands
     if (message.channel.id === "747201864889794721") {
-        let starts_with_command = fishyCommands
-        .some(word => message.content.toLowerCase().startsWith(`${prefix}`+word));
+        let starts_with_command = fishyCommands.some(word => message.content.toLowerCase().startsWith(`${prefix}`+word));
+
         if (starts_with_command) {
             return;
         }
         else message.delete();
     }
     if (message.channel.id === "456367532434128897" && message.author.id === "238386015520292866") {
-        let starts_with_command = fishyCommands
-        .some(word => message.content.toLowerCase().startsWith(">"+word));
+        let starts_with_command = fishyCommands.some(word => message.content.toLowerCase().startsWith(">"+word));
+
         if (starts_with_command) {
             message.react("771179684851089458");
         }
-        else {
-            message.delete();
+        else if (!message.content.startsWith(`${prefix}uwu`) && !message.mentions.users.has(client.user.id)) {
             var str = message.content;
-            uwuifying.custom(str, message, data, Commando);
+            uwuifying.custom(str, message, data, Commando).then(message => {
+                setTimeout(function() {
+                    message.delete();
+                }, 5000);
+            })
         }
     }
 

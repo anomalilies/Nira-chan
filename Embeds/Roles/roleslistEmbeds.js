@@ -50,7 +50,7 @@ global.roles4 = new Discord.MessageEmbed()
   .addFields(
     {name: "h̷͂̒ē̶̓ ̶͂͝w̴̍̆h̶͛̉o̵͒̍ ̵̑̄s̸̛͝h̵̑̃a̵͂͆l̶̘̋l̶̋̕ ̷̌̍n̶̽͠ŏ̴̚ť̵̍ ̸͋̊b̵̔̅é̷̩ ̵̒͂n̸̈́͠ȃ̴̈́ṁ̴̺e̴̿͝d̷͛͐", value: `We don't know why we gave this to <@208960237988741123>, either.`},
     {name: "Queen", value: `<@228880116699103232>'s nickname!`},
-    {name: "Pope", value: `<@737697842507939840>'s nickname... For some reason?`},
+    {name: "God", value: `<@737697842507939840>'s nickname... For some reason?`},
     {name: "ἰχθύς", value: `Dedicated to <@205837815630659593>!`},
     {name: "Fisherban", value: `A role created from an inside-joke, born from the rivalry seen in <#747201864889794721>.`},
     {name: "Paint Drinkers", value: `Still don't know how this meme started...`},

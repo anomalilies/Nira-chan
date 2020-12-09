@@ -29,13 +29,19 @@ var channelTitles = [
     "Haze Haseru Haterumade", "Dear Mr. 'F'", "Obenkyou Shitoiteyo", "MILABO", "Fastening", "Ham", "Darken", "Hunch Grey"
 ];
 
-const scheduledMessage = new cron.CronJob("0 0 1 * *", () => {
+const channelChange = new cron.CronJob("0 0 1 * *", () => {
     const channel = client.channels.cache.find(channel => channel.id === "767550623767068742");
     const random = Math.floor(Math.random() * channelTitles.length);
     channel.setName(channelTitles[random]);
 }, null, true, "Etc/UTC");
-scheduledMessage.start();
+channelChange.start();
 
+// S
+const scheduledMessage = new cron.CronJob("0 0 * * *", () => {
+    const channel = client.channels.cache.find(channel => channel.id === "528641575752957983");
+    channel.send("s")
+}, null, true, "Europe/London");
+scheduledMessage.start();
 
 // Starboard
 var contributorRoles = [
