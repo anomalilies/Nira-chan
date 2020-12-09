@@ -26,7 +26,7 @@ module.exports = class LinkCommand extends Commando.Command {
         });
     }
 
-    async run(client, message, { title, description }) {
+    async run(message, { title, description }) {
         if (message.channel.id === "745410767574007811") {
             const embed = new MessageEmbed()
             .setTitle(title)
@@ -45,7 +45,7 @@ module.exports = class LinkCommand extends Commando.Command {
             .then(() => {
                 setTimeout(function() {
                     message.channel.messages.fetch({limit: 5}).then(messages => {
-                    const botMessages = messages.filter(msg => msg.author == client.user);
+                    const botMessages = messages.filter(msg => msg.author.id === "740606402330099752");
                     const authorMessages = messages.filter(msg => msg.author.id);
 
                     botMessages.array()[0-2].delete();
