@@ -53,7 +53,7 @@ const inContributorGroup = r=>contributorRoles.includes(r.name);
 client.on("messageReactionAdd", async (reaction, user) => {
     const starboard = client.channels.cache.find(channel => channel.id === "778734720879951922");
     const message = reaction.message;
-    if (message.reactions.cache.get("⭐")) {
+    if (message.reactions.cache.get("⭐") && allowlists.contributionchannels.includes(message.channel.id)) {
         message.reactions.cache.get("⭐").fetch().then(async starReaction => {
             if (starReaction.count >= 5) {
                 const handleStarboard = async () => {
@@ -64,8 +64,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
                         msg.embeds.length === 1 ?
                             (msg.embeds[0].footer.text.startsWith(reaction.message.id)) : false);
 
-                    if (!existingMsg && message.member.roles.cache.some(inContributorGroup) &&
-                        allowlists.contributionchannels.includes(message.channel.id)) {
+                    if (!existingMsg && message.member.roles.cache.some(inContributorGroup)) {
                         const embed = new MessageEmbed()
                             .setColor(15844367)
                             .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))

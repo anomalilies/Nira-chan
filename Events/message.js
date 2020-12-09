@@ -111,7 +111,7 @@ module.exports = async (client, message) => {
             uwuifying.custom(str, message, data, Commando).then(() => {
                 setTimeout(function() {
                     message.delete();
-                }, 5000);
+                }, 4000);
             })
     }
 
