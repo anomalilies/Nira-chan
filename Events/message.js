@@ -108,7 +108,6 @@ module.exports = async (client, message) => {
     // UWU-ify Channel
     if (message.channel.id === "696143475954941962") {
             var str = message.content;
-            var str = message.content;
             uwuifying.custom(str, message, data, Commando);
             message.delete();
     }
