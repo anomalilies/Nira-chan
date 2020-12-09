@@ -13,7 +13,7 @@ global.about1 = new Discord.MessageEmbed()
 global.about2 = new Discord.MessageEmbed()
   .setTitle("Origins")
   .setAuthor("Source: Wikipedia", "https://i.imgur.com/u8AnEzu.jpg", "https://en.wikipedia.org/wiki/Zutomayo")
-  .setThumbnail("https://i.imgur.com/MphIkv3.gif")
+  .setThumbnail("https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/Space-ACAne.gif")
   .setDescription("On June 4th, 2018, ZUTOMAYO debuted via. YouTube with their first song, [秒針を噛む](https://youtu.be/GJI4Gv7NbmE) (Byoushin wo Kamu).")
   .setColor(15849719)
   .addFields(
@@ -22,7 +22,7 @@ global.about2 = new Discord.MessageEmbed()
 );
 global.about3 = new Discord.MessageEmbed()
   .setTitle("Links")
-  .setThumbnail("https://i.imgur.com/zfyIJFi.gif")
+  .setThumbnail("https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/Uniguri.gif")
   .setDescription("**[YouTube](https://www.youtube.com/c/ZUTOMAYO/)** | [(Staff)](https://twitter.com/zutomayo_staff) [Twitter](https://twitter.com/zutomayo) | [Instagram](https://www.instagram.com/zutomayo/) | [Official Website](https://www.zutomayo.com/)")
   .setColor(15849719)
   .addFields(
@@ -31,7 +31,7 @@ global.about3 = new Discord.MessageEmbed()
 );
 global.cd1 = new Discord.MessageEmbed()
   .setTitle("正しい偽りからの起床")
-  .setThumbnail("https://i.imgur.com/gxKYhtJ.jpg")
+  .setThumbnail("https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/1.jpg")
   .setDescription("Tadashii Itsuwari Kara no Kishō")
   .setColor(15849719)
   .addFields(
@@ -43,7 +43,7 @@ global.cd1 = new Discord.MessageEmbed()
 );
 global.cd2 = new Discord.MessageEmbed()
   .setTitle("今は今で誓いは笑みで")
-  .setThumbnail("https://i.imgur.com/mYtIyrZ.jpg")
+  .setThumbnail("https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/2.jpg")
   .setDescription("Imawa Imade Chikaiwa Emide")
   .setColor(15849719)
   .addFields(
@@ -55,7 +55,7 @@ global.cd2 = new Discord.MessageEmbed()
 );
 global.cd3 = new Discord.MessageEmbed()
   .setTitle("潜潜話")
-  .setThumbnail("https://i.imgur.com/k8Imhrc.jpg")
+  .setThumbnail("https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/3.jpg")
   .setDescription("Hisohiso Banashi")
   .setColor(15849719)
   .addFields(
@@ -67,7 +67,7 @@ global.cd3 = new Discord.MessageEmbed()
 );
 global.cd4 = new Discord.MessageEmbed()
   .setTitle("朗らかな皮膚とて不服")
-  .setThumbnail("https://i.imgur.com/4ebpynM.jpg")
+  .setThumbnail("https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/4.jpg")
   .setDescription("Hogarakana Hifutote Fufuku")
   .setColor(15849719)
   .addFields(
@@ -79,13 +79,13 @@ global.cd4 = new Discord.MessageEmbed()
 );
 global.cd5 = new Discord.MessageEmbed()
   .setTitle("ぐされ")
-  .setThumbnail("https://i.imgur.com/LIxwE6H.jpg")
+  .setThumbnail("https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/5.jpg")
   .setDescription("Gusare")
   .setColor(15849719)
   .addFields(
     {name: "Release Date", value: "February 10, 2020", inline: true},
     {name: "Oricon Weekly Albums Chart", value: "Position: N/A", inline: true},
     {name: "Billboard Japan Hot 100", value: "Position: N/A", inline: true},
-    {name: "Track List", value: "13 songs; Titles to be confirmed.\nWill include *Kuraku Kuroku* (暗く黒く) and the OP for *The Promised Neverland* live-action film."},
+    {name: "Track List", value: "13 songs; Titles to be confirmed.\nWill include Darken (暗く黒く), Hunch Grey (勘ぐれい), and Tadashiku Narenai (正しくなれない)!"},
     {name: "CD Exclusive Tracks - Disc 2", value: "Instrumental editions of all songs, plus 10 8-bit remixes of older songs (2 per each regular CD, target-stores only)."}
-);
+)

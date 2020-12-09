@@ -41,8 +41,19 @@ module.exports = class LinkCommand extends Commando.Command {
             .setTitle(`Sucessfully created embed!`)
             .setDescription(`Your embed can be found on ${channel}!`)
             .setColor(15849719);
-            message.channel.send(replyEmbed);
+            message.channel.send(replyEmbed)
+            .then(() => {
+                setTimeout(function() {
+                    message.channel.messages.fetch({limit: 5}).then(messages => {
+                    const botMessages = messages.filter(msg => msg.author == client.user);
+                    const authorMessages = messages.filter(msg => msg.author.id);
+
+                    botMessages.array()[0-2].delete();
+                    authorMessages.array()[0-2].delete();
+                })}, 5000);
+            })
         }
+
         else if (message.channel.id === "760621183564513312") {
             const faqEmbed = new MessageEmbed()
             .setTitle(title)

@@ -106,10 +106,13 @@ module.exports = async (client, message) => {
     }
 
     // UWU-ify Channel
-    if (message.channel.id === "696143475954941962") {
+    if (message.channel.id === "696143475954941962" || message.channel.id === "786321508527243324") {
             var str = message.content;
-            uwuifying.custom(str, message, data, Commando);
-            message.delete();
+            uwuifying.custom(str, message, data, Commando).then(() => {
+                setTimeout(function() {
+                    message.delete();
+                }, 5000);
+            })
     }
 
     // Check for NiraMojis in their channels
