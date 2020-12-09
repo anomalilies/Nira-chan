@@ -20,10 +20,10 @@ module.exports = class UWUCommand extends Commando.Command {
     }
 
     async run(message, { text }) {
-        uwuifying.custom(text, message, data, Commando).then(msg => {
+        uwuifying.custom(text, message, data, Commando)/*.then(message => {
             setTimeout(function() {
-                msg.delete();
+                message.delete();
             }, 5000);
-        })
+        })*/
     }
 };
