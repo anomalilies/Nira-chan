@@ -106,7 +106,7 @@ module.exports = async (client, message) => {
     }
 
     // UWU-ify Channel
-    if (message.channel.id === "785977489142448178") {
+    if (message.channel.id === "696143475954941962") {
             var str = message.content;
             uwuifying.custom(str, message, data, Commando).then(message => {
                 setTimeout(function() {
