@@ -108,12 +108,9 @@ module.exports = async (client, message) => {
     // UWU-ify Channel
     if (message.channel.id === "696143475954941962") {
             var str = message.content;
-            uwuifying.custom(str, message, data, Commando).then(message => {
-                setTimeout(function() {
-                    message.delete();
-                }, 5000);
-            }
-        )
+            var str = message.content;
+            uwuifying.custom(str, message, data, Commando);
+            message.delete();
     }
 
     // Check for NiraMojis in their channels
@@ -281,11 +278,8 @@ module.exports = async (client, message) => {
         }
         else if (!message.content.startsWith(`${prefix}uwu`) && !message.mentions.users.has(client.user.id)) {
             var str = message.content;
-            uwuifying.custom(str, message, data, Commando).then(message => {
-                setTimeout(function() {
-                    message.delete();
-                }, 5000);
-            })
+            uwuifying.custom(str, message, data, Commando);
+            message.delete();
         }
     }
 
