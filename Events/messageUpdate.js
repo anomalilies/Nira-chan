@@ -17,6 +17,10 @@ function matchEmojis(find_emojis, message_content) {
 }
 
 module.exports = async (client, oldMessage, newMessage) => {
+    // Ignore event if content has not changed
+    if (newMessage.content === oldMessage.content) {
+        return;
+    }
 
     // Check Edited Messages
     async function userReactions(newMessage) {
