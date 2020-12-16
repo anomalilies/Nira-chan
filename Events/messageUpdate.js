@@ -81,4 +81,13 @@ module.exports = async (client, oldMessage, newMessage) => {
             newMessage.delete();
         }
     }
+
+    // no u
+    const noUResponses = [
+        "no u", "yesn't men't", "nay thee", "[Rn] 5f¹⁴7s² × [Rn] 5f³6d¹7s²"
+    ]
+    if (newMessage.content === "no u" && (Math.random() < 0.5 || newMessage.author.id === "314358105205112834")) {
+        const response = noUResponses[Math.floor(Math.random() * noUResponses.length)];
+        newMessage.channel.send(response);
+    }
 };

@@ -14,11 +14,13 @@ module.exports = class FencingCommand extends Command {
     }
 
     run(message) {
-        const stabstabstab = new MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
-        .setColor(15849719)
-        .setDescription(
-            `pokepokepoke ${emojis.fencing}`);
-        message.channel.send(stabstabstab);
+        if (message.guild.id === "603246092402032670") {
+            const stabstabstab = new MessageEmbed()
+            .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
+            .setColor(15849719)
+            .setDescription(
+                `pokepokepoke ${emojis.fencing}`);
+            message.channel.send(stabstabstab);
+        }
     }
 };
