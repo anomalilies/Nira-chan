@@ -83,7 +83,7 @@ global.cd5 = new Discord.MessageEmbed()
   .setDescription("Gusare")
   .setColor(15849719)
   .addFields(
-    {name: "Release Date", value: "February 10, 2020", inline: true},
+    {name: "Release Date", value: "February 10, 2021", inline: true},
     {name: "Oricon Weekly Albums Chart", value: "Position: N/A", inline: true},
     {name: "Billboard Japan Hot 100", value: "Position: N/A", inline: true},
     {name: "Track List", value: "13 songs; Titles to be confirmed.\nWill include Darken (暗く黒く), Hunch Grey (勘ぐれい), and Tadashiku Narenai (正しくなれない)!"},

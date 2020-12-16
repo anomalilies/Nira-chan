@@ -301,6 +301,11 @@ module.exports = async (client, message) => {
         }
     }
 
+    // no u
+    if (message.content.toLowerCase() === "no u") {
+        message.channel.send("no u")
+    }
+
     // Server Rules
     if (message.guild.id === "603246092402032670") {
         if (message.member && message.member.roles.cache.get("742061218860236840")) {
