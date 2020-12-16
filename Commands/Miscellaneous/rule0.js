@@ -12,11 +12,13 @@ module.exports = class Rule0Command extends Command {
     }
 
     run(message) {
-        const rule0 = new MessageEmbed()
-        .setTitle("(Secret Rule) 0. Be Kind to Yourself")
-        .setDescription(
-            "We care for you, so stop beating yourself up!\nNot everything is your fault, so please keep trusting"
-            + " yourself, and our respect and love for you.");
-        message.channel.send(rule0);
+        if (message.guild.id === "603246092402032670") {
+            const rule0 = new MessageEmbed()
+            .setTitle("(Secret Rule) 0. Be Kind to Yourself")
+            .setDescription(
+                "We care for you, so stop beating yourself up!\nNot everything is your fault, so please keep trusting"
+                + " yourself, and our respect and love for you.");
+            message.channel.send(rule0);
+        }
     }
 };

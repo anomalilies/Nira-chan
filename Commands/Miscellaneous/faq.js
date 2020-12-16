@@ -27,14 +27,16 @@ module.exports = class FAQCommand extends Commando.Command {
     }
 
     async run(message, { title, description }) {
-        const embed = new MessageEmbed()
-        .setTitle(title)
-        .setDescription(description)
-        .setColor(15849719);
+        if (message.guild.id === "603246092402032670") {
+            const embed = new MessageEmbed()
+            .setTitle(title)
+            .setDescription(description)
+            .setColor(15849719);
 
-        const { guild } = message;
-        const channel = guild.channels.cache.get(FAQChannel);
-        channel.send(embed)
-        .then (channel.send(emojis.spacer));
+            const { guild } = message;
+            const channel = guild.channels.cache.get(FAQChannel);
+            channel.send(embed)
+            .then (channel.send(emojis.spacer));
+        }
     }
 };
