@@ -309,7 +309,7 @@ module.exports = async (client, message) => {
         "∩O ∪", "∩∅ ∪", "`01101110 01101111 00100000 01110101`", "`-. --- / ..-`",
         "`110 111 32 117`", "`&#110;&#111;&#32;&#117;`", "ⁿᵒ ᵘ"
     ]
-    let isNoU = fishyCommands.some(word => message.content.toLowerCase().startsWith(`${prefix}`+word));
+    let isNoU = noUResponses.some(word => message.content.toLowerCase() === word);
     if (isNoU && (Math.random() < 1/3 || message.author.id === "314358105205112834")) {
         const response = noUResponses[Math.floor(Math.random() * noUResponses.length)];
         message.channel.send(response);
