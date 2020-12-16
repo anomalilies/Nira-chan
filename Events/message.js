@@ -92,6 +92,7 @@ module.exports = async (client, message) => {
                 }
             }).catch();
         }
+        return;
     }
     else if (message.webhookID || message.author == client.user || message.author.bot) {
         for (let embed of message.embeds) {
@@ -302,8 +303,12 @@ module.exports = async (client, message) => {
     }
 
     // no u
-    if (message.content.toLowerCase() === "no u") {
-        message.channel.send("no u")
+    const noUResponses = [
+        "no u", "yesn't men't", "nay thee", "[Rn] 5f¹⁴7s² × [Rn] 5f³6d¹7s²"
+    ]
+    if (message.content === "no u" && (Math.random() < 0.5 || message.author.id === "314358105205112834")) {
+        const response = response[Math.floor(Math.random() * noUResponses.length)];
+        message.channel.send(response)
     }
 
     // Server Rules

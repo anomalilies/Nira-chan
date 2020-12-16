@@ -5,8 +5,8 @@ var uwuify = {
 
         for (var loop = 0; loop < datavar[1].length; loop++) {
             for (var j = 0; j < datavar[1][loop][0].length; j++) {
-                while (text.includes(datavar[1][loop][0][j]) && text.match(/(?!a?:\w+:\d+>*?)(\w+)(?![^<]*>)/g)) {
-                    text = text.replace(datavar[1][loop][0][j], datavar[1][loop][1][Math.floor(Math.random() * datavar[1][loop][1].length)]);
+                while (text.includes(datavar[1][loop][0][j])) {
+                    text = text.replace(/(?!a?:\w+:\d+>*?)(\w+)(?![^<]*>)/g, (datavar[1][loop][0][j], datavar[1][loop][1][Math.floor(Math.random() * datavar[1][loop][1].length)]));
                 }
             }
         }
