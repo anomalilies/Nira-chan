@@ -303,14 +303,14 @@ module.exports = async (client, message) => {
     }
 
     // no u
-    const noUResponses = [
+    var noUResponses = [
         "no u", "yesn't men't", "nay thee", "[Rn] 5f¹⁴7s² × [Rn] 5f³6d¹7s²", "n-nyo u~wu",
         "Nobelium Uranium", "non tu", "no tu", "102 + 92", "`6e 6f 20 75`", "🇳 🇴  🇺", "ノユ",
         "∩O ∪", "∩∅ ∪", "`01101110 01101111 00100000 01110101`", "`-. --- / ..-`",
         "`110 111 32 117`", "`&#110;&#111;&#32;&#117;`", "ⁿᵒ ᵘ"
     ]
-    if (message.content === noUResponses.some(word => message.content.toLowerCase() === (word))
-    && (Math.random() < 1/3 || message.author.id === "314358105205112834")) {
+    let isNoU = fishyCommands.some(word => message.content.toLowerCase().startsWith(`${prefix}`+word));
+    if (isNoU && (Math.random() < 1/3 || message.author.id === "314358105205112834")) {
         const response = noUResponses[Math.floor(Math.random() * noUResponses.length)];
         message.channel.send(response);
     }
