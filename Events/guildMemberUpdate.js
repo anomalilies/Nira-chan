@@ -36,7 +36,7 @@ module.exports = async (client, oldMember, newMember) => {
         }
         // Mute
         if (newMember.roles.cache.has(isMute)) {
-            newMember.roles.remove(isIVIP);
+            newMember.roles.remove(isVIP);
         }
         else if (oldMember.roles.cache.has(isMute) && newMember.roles.cache.has(isVIP)) {
             newMember.roles.remove(isMute);
