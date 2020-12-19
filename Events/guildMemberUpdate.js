@@ -9,6 +9,7 @@ module.exports = async (client, oldMember, newMember) => {
     const channel = client.channels.cache.get("603246092402032673");
     const isRegular = "751209585464836137";
     const isIVIP = "776872223427788821";
+    const isVIP = "742822553218711562";
     const isMute = "745439119479406693";
     const isContributor = "761383555372023860";
     const inContributorGroup = r=>contributorRoles.includes(r.name);
@@ -34,7 +35,7 @@ module.exports = async (client, oldMember, newMember) => {
             newMember.roles.remove(isContributor);
         }
         // Mute
-        if (oldMember.roles.cache.has(isVIP) && newMember.roles.cache.has(isMute)) {
+        if (newMember.roles.cache.has(isMute)) {
             newMember.roles.remove(isIVIP);
         }
         else if (oldMember.roles.cache.has(isMute) && newMember.roles.cache.has(isVIP)) {
