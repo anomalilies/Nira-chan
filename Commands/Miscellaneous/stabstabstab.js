@@ -9,7 +9,7 @@ module.exports = class FencingCommand extends Commando.Command {
             aliases: ["stab", "fence", "fencing"],
             group: "misc",
             memberName: "stabstabstab",
-            description: "Go fencing!",
+            description: "Go fencing.",
         });    
     }
 

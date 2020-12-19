@@ -1,5 +1,4 @@
 const path = require("path");
-var data = require("../Commands/Fun/UWU Translator/data");
 const serverInfoEmbed = require("../Embeds/serverInfoEmbed");
 
 const aboutEmbeds = require("../Embeds/About/aboutEmbeds");
@@ -16,17 +15,19 @@ const contestCommands = require("../Embeds/Contests/contestCommands");
 const linkCommands = require ("../Embeds/Links/linkCommands");
 const roleslistCommands = require("../Embeds/Roles/roleslistCommands");
 
+var statuses = ["you in disgust.", "(staring at) you.", "you in pain— owie!", "over the fishy league!", "you~wu~(♥ω♥*)!", "you, forever & always."]
+
 module.exports = async (client) => {
     console.log(`${client.user.tag} activated!`);
     function statusChange() {
-        client.user.setActivity(data.statuses[Math.floor(Math.random() * data.statuses.length)], { type: "WATCHING" });
+        client.user.setActivity(statuses[Math.floor(Math.random() * statuses.length)], { type: "WATCHING" });
     }
     setInterval(statusChange, 60000);
 
     client.registry
     .registerGroups([
-        ["fun", "Fun Commands"],
-        ["misc", "Miscellaneous Commands"],
+        ["fun", "Fun"],
+        ["misc", "Miscellaneous"],
         ["util", "Utility"],
         ["commands", "Commands"]
     ])

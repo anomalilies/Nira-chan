@@ -8,7 +8,7 @@ module.exports = class AboutCommand extends Commando.Command {
             aliases: ["about"],
             group: "misc",
             memberName: "about",
-            description: "Find out about the server!",
+            description: "Find out about the server you're in.",
         });
     }
 
