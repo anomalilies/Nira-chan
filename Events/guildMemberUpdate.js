@@ -9,8 +9,10 @@ module.exports = async (client, oldMember, newMember) => {
     const channel = client.channels.cache.get("603246092402032673");
     const isRegular = "751209585464836137";
     const isIntVIP = "776872223427788821";
+
     const isVIP = "742822553218711562";
     const isMute = "745439119479406693";
+
     const isContributor = "761383555372023860";
     const inContributorGroup = r=>contributorRoles.includes(r.name);
 
@@ -36,13 +38,16 @@ module.exports = async (client, oldMember, newMember) => {
         }
         // Mute Role
         if (oldMember.roles.cache.has(isVIP) && newMember.roles.cache.has(isMute)) {
-            newMember.roles.remove(isVIP);
+            newMember.roles.remove(isVIP); // If muted, remove V.I.P.
         }
         if (oldMember.roles.cache.has(isMute) && newMember.roles.cache.has(isVIP)) {
-            newMember.roles.remove(isVIP); // This will be made redundant if/when the pronoun rolepicker is moved to Nira.
+            newMember.roles.remove(isVIP); // If muted user tries to get V.I.P. via pronouns, remove (this is a secondary check, in case YAGPDB goes down).
+        }
+        if (oldMember.roles.cache.has(isMute) && newMember.roles.cache.has(isIntVIP)) {
+            newMember.roles.remove(isIntVIP); // If muted user tries to get International V.I.P., remove.
         }
         else if (oldMember.roles.cache.has(isMute) && !newMember.roles.cache.has(isMute)) {
-            newMember.roles.add(isVIP);
+            newMember.roles.add(isVIP); // If unmuted, add V.I.P.
         }
     }
 };
