@@ -14,7 +14,7 @@ module.exports = class FishPunCommand extends Commando.Command {
     }
 
     async run(message) {
-        if (allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== "603246092402032670" || message.channel.type === "dm") {
+        if (message.channel.type === "dm" || allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== "603246092402032670") {
             const index = Math.floor(Math.random() * fishpuns.length);
             const embed = new MessageEmbed()
                 .setTitle("Mr. Fish says...")
