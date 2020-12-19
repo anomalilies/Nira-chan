@@ -26,7 +26,7 @@ fs.readdir("./Events/", (err, files) => {
 // Monthly Server Topics
 var channelTitles = [
     "Byoushin wo Kamu", "Nouriueno Cracker", "Humanoid", "Mabushii DNA Dake", "Seigi", "Kettobashita Moufu", "Konnakoto Soudou", 
-    "Haze Haseru Haterumade", "Dear Mr. 'F'", "Obenkyou Shitoiteyo", "MILABO", "Fastening", "Ham", "Darken", "Hunch Grey"
+    "Haze Haseru Haterumade", "Dear Mr. 'F'", "Obenkyou Shitoiteyo", "MILABO", "Fastening", "Ham", "Darken", "Hunch Grey", "Can't Be Right"
 ];
 
 const channelChange = new cron.CronJob("0 0 1 * *", () => {
@@ -36,7 +36,7 @@ const channelChange = new cron.CronJob("0 0 1 * *", () => {
 }, null, true, "Etc/UTC");
 channelChange.start();
 
-// S
+// s
 const scheduledMessage = new cron.CronJob("0 0 * * *", () => {
     const channel = client.channels.cache.find(channel => channel.id === "528641575752957983");
     channel.send("s")

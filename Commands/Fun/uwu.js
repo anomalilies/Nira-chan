@@ -21,9 +21,11 @@ module.exports = class UWUCommand extends Commando.Command {
 
     async run(message, { text }) {
         uwuifying.custom(text, message, data, Commando).then(() => {
-            setTimeout(function() {
-                message.delete();
-            }, 4000);
+            if (message.channel.type !== "dm") {
+                    setTimeout(function() {
+                    message.delete();
+                }, 4000);
+            }
         })
     }
 };

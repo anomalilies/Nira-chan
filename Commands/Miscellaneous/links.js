@@ -7,7 +7,6 @@ module.exports = class LinkCommand extends Commando.Command {
     constructor(client) {
         super(client, {
             name: "link",
-            aliases: ["embed"],
             group: "misc",
             memberName: "link",
             description: "Embed a link.",
@@ -27,28 +26,30 @@ module.exports = class LinkCommand extends Commando.Command {
     }
 
     async run(message, { title, description }) {
-        if (message.channel.id === "745410767574007811") {
+        if (message.channel.type === "dm") {
+            message.channel.send("You can't use this command here, silly!");
+        }
+        else if (message.channel.id === "745410767574007811") {
             const embed = new MessageEmbed()
-            .setTitle(title)
-            .setDescription(description)
-            .setColor(15849719);
-
+                .setTitle(title)
+                .setDescription(description)
+                .setColor(15849719);
+    
             const { guild } = message;
             const channel = guild.channels.cache.get(linksChannel);
             channel.send(embed);
-        
+            
             const replyEmbed = new MessageEmbed()
-            .setTitle(`Sucessfully created embed!`)
-            .setDescription(`Your embed can be found on ${channel}!`)
-            .setColor(15849719);
+                .setTitle(`Sucessfully created embed!`)
+                .setDescription(`Your embed can be found on ${channel}!`)
+                .setColor(15849719);
             message.channel.send(replyEmbed);
         }
-
         else if (message.channel.id === "760621183564513312") {
             const faqEmbed = new MessageEmbed()
-            .setTitle(title)
-            .setDescription(description)
-            .setColor(15849719);
+                .setTitle(title)
+                .setDescription(description)
+                .setColor(15849719);
             message.channel.send(faqEmbed)
             .then (message.channel.send(emojis.spacer));
         }

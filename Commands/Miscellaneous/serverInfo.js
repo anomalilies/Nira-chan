@@ -13,6 +13,10 @@ module.exports = class AboutCommand extends Commando.Command {
     }
 
     async run(message) {
-        message.channel.send(serverInfoEmbed(message.guild));
+        if (message.channel.type !== "dm") {
+            message.channel.send(serverInfoEmbed(message.guild));
+        } else {
+            message.channel.send("You can't use this command here, silly!");
+        }
     }
 };

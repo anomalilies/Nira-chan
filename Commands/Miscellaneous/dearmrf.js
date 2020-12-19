@@ -21,11 +21,13 @@ module.exports = class WriteCommand extends Commando.Command {
     }
 
     async run(message, { text }) {
-        if (allowlists.botspamchannels.includes(message.channel.id)) {
+        if (allowlists.botspamchannels.includes(message.channel.id) || message.channel.type === "dm") {
             const embed = new MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
-                .setDescription(text)
                 .addFields({
+                    name: "Dear Mr. F:", value: text
+                },
+                {
                     name: "Your Response:", value: `Mr. F, I have no idea what **${message.author}** is saying, but something `
                     + `tells me you best pay really close attention! ${emojis.wince}`
                 })

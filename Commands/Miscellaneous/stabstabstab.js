@@ -1,8 +1,8 @@
-const { Command } = require("discord.js-commando");
-const { emojis } = require("../../config.json");
+const Commando = require("discord.js-commando");
+const { allowlists, emojis } = require("../../config.json");
 const { MessageEmbed } = require("discord.js");
 
-module.exports = class FencingCommand extends Command {
+module.exports = class FencingCommand extends Commando.Command {
     constructor(client) {
         super(client, {
             name: "stabstabstab",
@@ -14,7 +14,7 @@ module.exports = class FencingCommand extends Command {
     }
 
     run(message) {
-        if (message.guild.id === "603246092402032670") {
+        if (allowlists.botspamchannels.includes(message.channel.id) || message.channel.type === "dm") {
             const stabstabstab = new MessageEmbed()
             .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
             .setColor(15849719)

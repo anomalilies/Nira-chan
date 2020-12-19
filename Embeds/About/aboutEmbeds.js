@@ -86,6 +86,6 @@ global.cd5 = new Discord.MessageEmbed()
     {name: "Release Date", value: "February 10, 2021", inline: true},
     {name: "Oricon Weekly Albums Chart", value: "Position: N/A", inline: true},
     {name: "Billboard Japan Hot 100", value: "Position: N/A", inline: true},
-    {name: "Track List", value: "13 songs; Titles to be confirmed.\nWill include Darken (暗く黒く), Hunch Grey (勘ぐれい), and Tadashiku Narenai (正しくなれない)!"},
+    {name: "Track List", value: "13 songs; Titles to be confirmed.\nWill include Darken (暗く黒く), Hunch Grey (勘ぐれい), and Can't Be Right (正しくなれない)!"},
     {name: "CD Exclusive Tracks - Disc 2", value: "Instrumental editions of all songs, plus 10 8-bit remixes of older songs (2 per each regular CD, target-stores only)."}
 )

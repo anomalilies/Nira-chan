@@ -4,6 +4,7 @@ module.exports = class SayCommand extends Commando.Command {
     constructor(client) {
         super(client, {
             name: "say",
+            aliases: ["echo"],
             group: "misc",
             memberName: "say",
             description: "Say something!",
@@ -19,7 +20,9 @@ module.exports = class SayCommand extends Commando.Command {
     }
 
     run(message, { text }) {
-        message.delete();
         message.channel.send(text);
+        if (message.channel.type !== "dm") {
+            message.delete();
+        }
     }
 };

@@ -1,7 +1,7 @@
-const { Command } = require("discord.js-commando");
+const Commando = require("discord.js-commando");
 const { MessageEmbed } = require("discord.js");
 
-module.exports = class Rule0Command extends Command {
+module.exports = class Rule0Command extends Commando.Command {
     constructor(client) {
         super(client, {
             name: "0",
@@ -12,7 +12,10 @@ module.exports = class Rule0Command extends Command {
     }
 
     run(message) {
-        if (message.guild.id === "603246092402032670") {
+        if (message.channel.type === "dm") {
+            message.channel.send("You can't use this command here, silly!");
+        }
+        else if (message.guild.id === "603246092402032670") {
             const rule0 = new MessageEmbed()
             .setTitle("(Secret Rule) 0. Be Kind to Yourself")
             .setDescription(

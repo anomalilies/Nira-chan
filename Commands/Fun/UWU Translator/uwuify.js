@@ -1,3 +1,5 @@
+const { MessageEmbed } = require("discord.js");
+
 var uwuify = {
     custom: async function(text, message, data) {
         var datavar = Object.values(data);
@@ -25,14 +27,22 @@ var uwuify = {
         if (text[text.length - 1].match(/[a-z]/i))
             text = text + "\~\~";
 
-        const webhooks = await message.channel.fetchWebhooks();
-        const webhook = webhooks.first();
+        if (message.channel.type === "dm") {
+            let embed = new MessageEmbed()
+                .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
+                .setDescription(text)
+                .setColor(15849719);
+            message.channel.send(embed);
+        }
+        else if (message.channel.type !== "dm") {
+            const webhooks = await message.channel.fetchWebhooks();
+            const webhook = webhooks.first();
 
-        if (webhook === undefined) {
-            // No webhook exists in this channel, so create one
-            message.channel.createWebhook("Nira-chan")
+            if (webhook === undefined) {
+                // No webhook exists in this channel, so create one
+                message.channel.createWebhook("Nira-chan")
                 .then(webhook => {
-                    // Resend the message with the OP's avatar and display name
+                // Resend the message with the OP's avatar and display name
                     webhook.send(text, {
                         username: message.member.displayName,
                         avatarURL: message.author.displayAvatarURL(),
@@ -40,7 +50,7 @@ var uwuify = {
                     }
                 );
             })
-            .catch(console.error);
+        .catch(console.error);
         } else {
             // Resend the message with the OP's avatar and display name
             webhook.send(text, {
@@ -48,7 +58,7 @@ var uwuify = {
                 avatarURL: message.author.displayAvatarURL(),
                 files: message.attachments.array()
             });
-        }
+        }}
     }
 };
 

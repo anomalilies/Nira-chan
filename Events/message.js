@@ -194,7 +194,7 @@ module.exports = async (client, message) => {
 
     // PatPat Command
     // Allowed in specific bot channels only
-    if (allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== "603246092402032670") {
+    if (message.channel.type !== "dm" && (allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== "603246092402032670")) {
         if (message.content.toLowerCase() === `${prefix}${commandNames.patpatstart.name}`) {
             // PatPat: start new conversations
             whosTalkingWithPatPat.add(message.author.id);
@@ -316,7 +316,7 @@ module.exports = async (client, message) => {
     }
 
     // Server Rules
-    if (message.guild.id === "603246092402032670") {
+    if (message.channel.type !== "dm" && message.guild.id === "603246092402032670") {
         if (message.member && message.member.roles.cache.get("742061218860236840")) {
             rules.filter(rule => rule.re.test(message.content))
                 .map(rule => new MessageEmbed()

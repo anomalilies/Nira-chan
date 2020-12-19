@@ -32,7 +32,10 @@ module.exports = class AffiliatesCommand extends Commando.Command {
     }
 
     async run(message, { title, description, link }) {
-        if (message.guild.id === "603246092402032670") {
+        if (message.channel.type === "dm") {
+            message.channel.send("You can't use this command here, silly!");
+        }
+        else if (message.guild.id === "603246092402032670") {
             const embed = new MessageEmbed()
             .setTitle(title)
             .setDescription(description)
@@ -41,8 +44,8 @@ module.exports = class AffiliatesCommand extends Commando.Command {
             const { guild } = message;
             const channel = guild.channels.cache.get(affiliatesChannel);
             channel.send(embed)
-            .then (channel.send(link))
-            .then (channel.send(emojis.spacer));
+            .then(channel.send(link))
+            .then(channel.send(emojis.spacer));
         }
     }
 };

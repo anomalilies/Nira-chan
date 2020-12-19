@@ -14,7 +14,7 @@ module.exports = class AddCommand extends Commando.Command {
     }
 
     async run(message) {
-        if (allowlists.botspamchannels.includes(message.channel.id)) {
+        if (allowlists.botspamchannels.includes(message.channel.id) || message.channel.type === "dm") {
             const embed = new MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
                 .setDescription(
