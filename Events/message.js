@@ -276,7 +276,7 @@ module.exports = async (client, message) => {
     if (message.channel.id === "456367532434128897" && message.author.id === "238386015520292866") {
         let starts_with_command = fishyCommands.some(word => message.content.toLowerCase().startsWith(">"+word));
 
-        if (starts_with_command) {
+        if (starts_with_command || message.content.startsWith(`${prefix}`)) {
             message.react("771179684851089458");
         }
         else if (!message.content.startsWith(`${prefix}uwu`) && !message.mentions.users.has(client.user.id)) {

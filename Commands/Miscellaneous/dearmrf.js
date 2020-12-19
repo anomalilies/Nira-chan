@@ -33,6 +33,6 @@ module.exports = class WriteCommand extends Commando.Command {
                 })
                 .setColor(15849719);
             message.channel.send(embed);
-            }
+        }
     }
 };

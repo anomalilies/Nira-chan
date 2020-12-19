@@ -14,12 +14,14 @@ module.exports = class FishPunCommand extends Commando.Command {
     }
 
     async run(message) {
-        const index = Math.floor(Math.random() * fishpuns.length);
-        const embed = new MessageEmbed()
-            .setTitle("Mr Fish says...")
-            .setThumbnail("https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/Fishy.jpg")
-            .setDescription(`${fishpuns[index]}`)
-            .setColor(15849719);
-        message.channel.send(embed);
+        if (allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== "603246092402032670" || message.channel.type === "dm") {
+            const index = Math.floor(Math.random() * fishpuns.length);
+            const embed = new MessageEmbed()
+                .setTitle("Mr. Fish says...")
+                .setThumbnail("https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/Fishy.jpg")
+                .setDescription(`${fishpuns[index]}`)
+                .setColor(15849719);
+            message.channel.send(embed);
+        }
     }
 };
