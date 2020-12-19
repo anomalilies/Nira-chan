@@ -11,7 +11,8 @@ var data = require("../Commands/Fun/UWU Translator/data");
 var whosTalkingWithPatPat = new Set();
 var fishyCommands = [
     "fishy", "fishytimer", "fishystats", "leaderboard fishy", "fish", "fihy", "fisy", "foshy", "fisyh", "fsihy", "fin",
-    "fintimer", "fisytimer", "foshytimer", "ft", "finstats", "fisystats", "foshystats", "fs", "leaderboard fishysize"
+    "fintimer", "fisytimer", "foshytimer", "ft", "finstats", "fisystats", "foshystats", "fs", "leaderboard fishysize",
+    "fishypun", "fishjoke", "fishyjoke", "squidpun", "squiddypun", "squidjoke", "squiddyjoke"
 ];
 
 // Embeds
