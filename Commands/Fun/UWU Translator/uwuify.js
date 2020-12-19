@@ -1,14 +1,15 @@
 const { MessageEmbed } = require("discord.js");
+var data = require("./data");
 
 var uwuify = {
-    custom: async function(text, message, data) {
-        var datavar = Object.values(data);
+    custom: async function(text, message) {
+        var replacements = data['emotions'];
         if (text.slice(-1) == " ") text = text.subtexting(0, text.length - 1);
 
-        for (var loop = 0; loop < datavar[1].length; loop++) {
-            for (var j = 0; j < datavar[1][loop][0].length; j++) {
-                while (text.includes(datavar[1][loop][0][j])) {
-                    text = text.replace(datavar[1][loop][0][j], datavar[1][loop][1][Math.floor(Math.random() * datavar[1][loop][1].length)]);
+        for (var loop = 0; loop < replacements.length; loop++) {
+            for (var j = 0; j < replacements[loop][0].length; j++) {
+                while (text.includes(replacements[loop][0][j])) {
+                    text = text.replace(replacements[loop][0][j], replacements[loop][1][Math.floor(Math.random() * replacements[loop][1].length)]);
                 }
             }
         }
@@ -33,8 +34,7 @@ var uwuify = {
                 .setDescription(text)
                 .setColor(15849719);
             message.channel.send(embed);
-        }
-        else if (message.channel.type !== "dm") {
+        } else {
             const webhooks = await message.channel.fetchWebhooks();
             const webhook = webhooks.first();
 
@@ -42,23 +42,23 @@ var uwuify = {
                 // No webhook exists in this channel, so create one
                 message.channel.createWebhook("Nira-chan")
                 .then(webhook => {
-                // Resend the message with the OP's avatar and display name
+                    // Resend the message with the OP's avatar and display name
                     webhook.send(text, {
                         username: message.member.displayName,
                         avatarURL: message.author.displayAvatarURL(),
                         files: message.attachments.array()
-                    }
-                );
-            })
-        .catch(console.error);
-        } else {
-            // Resend the message with the OP's avatar and display name
-            webhook.send(text, {
-                username: message.member.displayName,
-                avatarURL: message.author.displayAvatarURL(),
-                files: message.attachments.array()
-            });
-        }}
+                    });
+                })
+                .catch(console.error);
+            } else {
+                // Resend the message with the OP's avatar and display name
+                webhook.send(text, {
+                    username: message.member.displayName,
+                    avatarURL: message.author.displayAvatarURL(),
+                    files: message.attachments.array()
+                });
+            }
+        }
     }
 };
 

@@ -1,4 +1,3 @@
-const Commando = require("discord.js-commando");
 const { prefix, commandNames, allowlists, emojis, patpatresponses, nira9000 } = require("../config.json");
 
 const { MessageEmbed } = require("discord.js");
@@ -6,7 +5,6 @@ const rules = require("../Embeds/ruleEmbeds.json");
 rules.forEach((rule, i) => rule.re = new RegExp(`(\\s|^)${prefix}${i+1}(\\s|$)`));
 
 var uwuifying = require("../Commands/Fun/UWU Translator/uwuify");
-var data = require("../Commands/Fun/UWU Translator/data");
 
 var whosTalkingWithPatPat = new Set();
 var fishyCommands = [
@@ -110,7 +108,7 @@ module.exports = async (client, message) => {
     // UWU-ify Channel
     if (message.channel.id === "696143475954941962" || message.channel.id === "786321508527243324") {
             var str = message.content;
-            uwuifying.custom(str, message, data, Commando).then(() => {
+            uwuifying.custom(str, message).then(() => {
                 setTimeout(function() {
                     message.delete();
                 }, 4000);
@@ -282,7 +280,7 @@ module.exports = async (client, message) => {
         }
         else if (!message.content.startsWith(`${prefix}uwu`) && !message.mentions.users.has(client.user.id)) {
             var str = message.content;
-            uwuifying.custom(str, message, data, Commando);
+            uwuifying.custom(str, message);
             message.delete();
         }
     }

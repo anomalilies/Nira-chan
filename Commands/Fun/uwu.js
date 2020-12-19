@@ -1,6 +1,5 @@
 const Commando = require("discord.js-commando");
 var uwuifying = require("./UWU Translator/uwuify");
-var data = require("./UWU Translator/data");
 
 module.exports = class UWUCommand extends Commando.Command {
     constructor(client) {
@@ -20,7 +19,7 @@ module.exports = class UWUCommand extends Commando.Command {
     }
 
     async run(message, { text }) {
-        uwuifying.custom(text, message, data, Commando).then(() => {
+        uwuifying.custom(text, message).then(() => {
             if (message.channel.type !== "dm") {
                     setTimeout(function() {
                     message.delete();
