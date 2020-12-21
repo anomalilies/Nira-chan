@@ -15,7 +15,7 @@ const contestCommands = require("../Embeds/Contests/contestCommands");
 const linkCommands = require ("../Embeds/Links/linkCommands");
 const roleslistCommands = require("../Embeds/Roles/roleslistCommands");
 
-var statuses = ["you in disgust.", "(staring at) you.", "you in pain— owie!", "over the fishy league!", "you~wu~(♥ω♥*)!", "you, forever & always."]
+var statuses = ["you in disgust.", "(staring at) you.", "you in pain— owie!", "over the fishy league!", "you~wu~(♥ω♥*)!", "you, forever & always.", ";´༎ຶਊ ༎ຶ`;"]
 
 module.exports = async (client) => {
     console.log(`${client.user.tag} activated!`);

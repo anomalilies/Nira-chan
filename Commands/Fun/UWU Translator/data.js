@@ -3,7 +3,7 @@ const data = {
     emotions: [
         [
             ["exciting", "excited", "wonderful", "nice", "joyful", "gleeful", "glee", "blessed", "delighted", "smiling"],
-            ["＾ω＾", "（＾∀＾）", "≧ω≦", "(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧", "	(≧◡≦)"]
+            ["＾ω＾", "（＾∀＾）", "≧ω≦", "(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧", "(≧◡≦)"]
         ],
         [
             ["unhappy", "depressed", "depressing", "depression", "miserable", "heartbroken", "broken-hearted"],
@@ -14,7 +14,7 @@ const data = {
             ["ಠ_ಠ", "⋋_⋌", "ಠ▃ಠ", "(╬ಠ益ಠ)", "(¬_¬)", "（＞μ＜＃）", "凸ಠ益ಠ)凸", "(ノಠ益ಠ)ノ彡┻━┻"]
         ],
         [
-            ["ez", "easy"],
+            ["ez", "easy", "gg"],
             ["(⌐■_■)", "(ﾒ▼_▼)"]
         ],
         [
