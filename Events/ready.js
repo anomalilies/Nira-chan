@@ -50,20 +50,9 @@ module.exports = async (client) => {
             }
         });
     }
-    function checkNewbies() {
-        const guild = client.guilds.cache.get("603246092402032670");
-        var newbiesRole = guild.roles.cache.find(role => role.name === "Newbies");
-
-        newbiesRole.members.forEach(member => {
-            if (Date.now() - member.joinedTimestamp > 259200000) {
-                member.roles.remove(newbiesRole);
-            }
-        });
-    }
 
     if (client.user.id === "740606402330099752") {
         setInterval(checkLurkers, 3600000);
-        setInterval(checkNewbies, 3600000);
 
         const channel = client.channels.cache.get("770726574865514517");
         channel.messages.fetch({around: "776320801729019934", limit: 1})

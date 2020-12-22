@@ -13,7 +13,5 @@ module.exports = (client, member) => {
                 channel.send(embed);
             }
         });
-        var newbiesRole = member.guild.roles.cache.find(role => role.name === "Newbies");
-        member.roles.add(newbiesRole);
     }
 };
