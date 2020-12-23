@@ -116,10 +116,7 @@ module.exports = async (client, message) => {
                 message.delete();
             }
         }
-        if (message.author.id == "500385855072894982" && message.content.startsWith(":no_entry_sign:")) {
-            message.delete();
-        }
-        else return;
+        return;
     }
 
     // UWU-ify Channel
