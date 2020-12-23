@@ -181,14 +181,12 @@ module.exports = async (client, message) => {
             // If capture group 1 caught something
             message.guild.emojis.cache.each(emoji => {
                 // We need to replace non-gif emoji as well for them to show up when we resend the message
-                if (emoji.name === group1 && !message.content.includes("@here") && !message.content.includes("@everyone")) {
+                if (emoji.name === group1) {
                     // We only need to resend if we replace any animated emoji
                     // But don't make the variable false if it's already true
                     needs_resend = emoji.animated || needs_resend;
                     let type = emoji.animated ? "a" : "";
                     replaceString = `<${type}:${emoji.name}:${emoji.id}>`;
-                } else {
-                    message.channel.send("I can't ping everyone! <:nirangy:777736569746227211>")
                 }
             });
         }
