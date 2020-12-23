@@ -14,6 +14,7 @@ module.exports = async (client, id = []) => {
         }
         else {
             niraMessages.array()[4].edit(welcome1);
+            niraMessages.array()[4].react("756679974953549914");
             niraMessages.array()[2].edit(welcome2);
         }
     });
