@@ -36,18 +36,5 @@ module.exports = async (client, oldMember, newMember) => {
         else if (oldMember.roles.cache.has(isContributor) && !newMember.roles.cache.some(inContributorGroup)) {
             newMember.roles.remove(isContributor);
         }
-        /*// Mute Role
-        if (oldMember.roles.cache.has(isVIP) && newMember.roles.cache.has(isMute)) {
-            newMember.roles.remove(isVIP); // If muted, remove V.I.P.
-        }
-        if (oldMember.roles.cache.has(isMute) && newMember.roles.cache.has(isVIP)) {
-            newMember.roles.remove(isVIP); // If muted user tries to get V.I.P. via pronouns, remove (this is a secondary check, in case YAGPDB goes down).
-        }
-        if (oldMember.roles.cache.has(isMute) && newMember.roles.cache.has(isIntVIP)) {
-            newMember.roles.remove(isIntVIP); // If muted user tries to get International V.I.P., remove.
-        }
-        else if (oldMember.roles.cache.has(isMute) && !newMember.roles.cache.has(isMute)) {
-            newMember.roles.add(isVIP); // If unmuted, add V.I.P.
-        }*/
     }
 };

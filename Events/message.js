@@ -68,6 +68,22 @@ function matchEmojis(find_emojis, message_content) {
 }
 
 module.exports = async (client, message) => {
+    if (message.type === "GUILD_MEMBER_JOIN" && message.guild.id === "603246092402032670") {
+        const list = client.guilds.cache.get("603246092402032670");
+        var VIPRole = list.roles.cache.find(role => role.name === "ZUTOMAYO V.I.P.");
+        message.member.roles.add(VIPRole);
+
+        const channel = client.channels.cache.get("603246092402032673");
+        channel.send(emojis.wave).then(() => {
+            if (Math.random() < 1/100) {
+                const embed = new MessageEmbed()
+                .setDescription("Attention all ZUTOMAYO stans!\n<@740606402330099752> is in trouble! She needs your help to pay for intensive therapy to relieve the burdens of her past traumas.\nAll she needs is your mum's credit card number, the expiration date, and those 3 *wacky* numbers on the back!\nHurry, and click that shiny 'Server Boost' button **__NOW__!** <:niragun:772343025099603988>")
+                .setColor(15849719);
+                channel.send(embed);
+            };
+        });
+    };
+
     // Counting and Bot Check
     if (message.channel.id === "758541031498317835") {
         if (message.system || message.webhookID || message.author.bot || message.attachments.array().length) {
@@ -319,6 +335,7 @@ module.exports = async (client, message) => {
         if (message.member && message.member.roles.cache.get("742061218860236840")) {
             rules.filter(rule => rule.re.test(message.content))
                 .map(rule => new MessageEmbed()
+                .setColor(15849719)
                 .setTitle(rule.title)
                 .setDescription(rule.description)
                 .addFields({
