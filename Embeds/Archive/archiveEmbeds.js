@@ -15,6 +15,6 @@ global.nitro = new Discord.MessageEmbed()
   .setDescription("Are you a Nitro user, looking for more ZUTOMAYO emojis?\nCheck out our affiliates!")
   .setColor(15849719)
   .addFields(
-    {name: "Server of Grey", value: "Owned by <@394724520872771585> | [Invite](https://discord.gg/p9Vg6xtdk6)"},
+    {name: "Server of Grey", value: "[Invite](https://discord.gg/p9Vg6xtdk6) | Owned by <@394724520872771585>"},
     {name: "Lily's Test Server", value: "[Invite](https://discord.gg/n7YcF3EDAk)"}
 );
