@@ -15,7 +15,7 @@ const botCommands = require("../Embeds/Bots/botCommands");
 const contestCommands = require("../Embeds/Contests/contestCommands");
 const linkCommands = require ("../Embeds/Links/linkCommands");
 const roleslistCommands = require("../Embeds/Roles/roleslistCommands");
-const roleslistCommands = require("../Embeds/Welcome/welcomeCommands");
+const welcomeCommands = require("../Embeds/Welcome/welcomeCommands");
 
 
 var statuses = ["you in disgust.", "(staring at) you.", "you in pain— owie!", "over the fishy league!", "you~wu~(♥ω♥*)!", "you, forever & always.", ";´༎ຶਊ ༎ຶ`;"]
