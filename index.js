@@ -66,7 +66,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
 
                     if (!existingMsg && message.member.roles.cache.some(inContributorGroup)) {
                         const embed = new MessageEmbed()
-                            .setColor(15844367)
+                            .setColor(16755763)
                             .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
                             .setDescription(`${message.content}\n\n[context](${message.url})`)
                             .setImage(image)

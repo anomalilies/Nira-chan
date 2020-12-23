@@ -50,13 +50,15 @@ var uwuify = {
                     });
                 })
                 .catch(console.error);
-            } else {
+            } else if (!message.content.includes("@here") && !message.content.includes("@everyone")) {
                 // Resend the message with the OP's avatar and display name
                 webhook.send(text, {
                     username: message.member.displayName,
                     avatarURL: message.author.displayAvatarURL(),
                     files: message.attachments.array()
                 });
+            } else {
+                message.channel.send("I can't ping everyone! <:nirangy:777736569746227211>");
             }
         }
     }
