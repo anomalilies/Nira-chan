@@ -40,7 +40,7 @@ module.exports = class InviteCommand extends Commando.Command {
                     `Would you like to **invite <@`+msg.author.id+`> to a server** (<:nirahello:${nirahello}>),\nor **share `+msg.guild.name+`'s invite link** (<:niracute:${niracute}>)?`
                 );
                 msg.edit(newEmbed)
-                .then(msg.react(`<:nirahello:${nirahello}>`).then(msg.react(`<:niracute:${niracute}>`)));
+                .then(msg.react(`${nirahello}`).then(msg.react(`${niracute}`)));
 
                 const filter = (reaction, user) => [`${nirahello}`, `${niracute}`].includes(reaction.emoji.id) && user.id === message.author.id;
                 const reactions = msg.awaitReactions(filter, {
