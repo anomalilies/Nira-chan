@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 global.welcome1 = new Discord.MessageEmbed()
   .setTitle("Welcome to ZUTOMAYO ZONE!")
-  .setDescription("All our staff (and bots) can be categorised with their purple role colours!")
+  .setDescription("Thanks so much for joining us; It's an absolute pleasure to have you here!\nWe're a pretty laidback server as a whole, however to combat spam, we require you to have read the rules before chatting with us.\nPlease follow Discord's built-in tutorial on how to do so!")
   .setColor(15849719)
   .addFields(
     {name: "Moderation of Rules", value: "**Please also note that Admins have the final say when it comes to the enforcement of *all* rules, particularly if multiple have been broken.**\nWe will always talk our actions through where possible, but if this isn’t an option, we have __every right__ to choose how a problematic member is handled.\nThank you for your understanding!\n\n**Can't see the rules?** Please react below with `[coming soon]` to gain access to <#791126859320000522>, where you'll be able to check over our moderation policies."}
