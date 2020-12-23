@@ -11,9 +11,10 @@ global.archive = new Discord.MessageEmbed()
     {name: "J-Music Archive", value: "In affiliation with J-Music Archive, we host a few extra goodies on their server! Be sure to check it out!"}
 );
 global.nitro = new Discord.MessageEmbed()
+  .setTitle("Emojis")
   .setDescription("Are you a Nitro user, looking for more ZUTOMAYO emojis?\nCheck out our affiliates!")
   .setColor(15849719)
   .addFields(
-    {name: "Server of Grey", value: "[Server of Grey](https://discord.gg/p9Vg6xtdk6)"},
-    {name: "Lily's Test Server", value: "[Server of Grey](https://discord.gg/n7YcF3EDAk)"}
+    {name: "Server of Grey", value: "[Invite](https://discord.gg/p9Vg6xtdk6)"},
+    {name: "Lily's Test Server", value: "[Invite](https://discord.gg/n7YcF3EDAk)"}
 );
