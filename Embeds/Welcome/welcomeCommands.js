@@ -16,5 +16,39 @@ module.exports = async (client, id = []) => {
             niraMessages.array()[4].edit(welcome1);
             niraMessages.array()[2].edit(welcome2);
         }
+        niraMessages.array()[4].react("756679974953549914");
+
+        client.on("messageReactionAdd", async (reaction, user) => {
+            if (reaction.message.partial) {
+                await reaction.message.fetch();
+            }
+            if (reaction.partial) {
+                await reaction.fetch();
+            }
+            if (user.bot && !reaction.message.guild) {
+                return;
+            }
+            if (reaction.message.id === niraMessages.array()[4].id) {
+                if (reaction.emoji.id === "756679974953549914") {
+                    await reaction.message.guild.members.cache.get(user.id).roles.add("791126700972441600")
+                }
+            }
+        })
+        client.on("messageReactionRemove", async (reaction, user) => {
+            if (reaction.message.partial) {
+                await reaction.message.fetch();
+            }
+            if (reaction.partial) {
+                await reaction.fetch();
+            }
+            if (user.bot && !reaction.message.guild) {
+                return;
+            }
+            if (reaction.message.id === niraMessages.array()[4].id) {
+                if (reaction.emoji.id === "756679974953549914") {
+                    await reaction.message.guild.members.cache.get(user.id).roles.remove("791126700972441600")
+                }
+            }
+        })
     });
 };
