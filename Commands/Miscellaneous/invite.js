@@ -1,5 +1,6 @@
 const Commando = require("discord.js-commando");
 const { MessageEmbed } = require("discord.js");
+const { homeguild } = require("../../config.json");
 
 // Embeds
 function getSimpleEmbed(title, description) {
@@ -34,7 +35,7 @@ module.exports = class InviteCommand extends Commando.Command {
                 "Click __**[here](https://discord.com/api/oauth2/authorize?client_id=740606402330099752&permissions=805661760&scope=bot)**__ to invite <@"+msg.author.id+">!"
             );
 
-            if (msg.channel.type !== "dm" && msg.guild.id === "603246092402032670") {
+            if (msg.channel.type !== "dm" && msg.guild.id === homeguild) {
                 const newEmbed = getSimpleEmbed (
                     "Invitation",
                     `Would you like to **invite <@`+msg.author.id+`> to a server** (<:nirahello:${nirahello}>),\nor **share `+msg.guild.name+`'s invite link** (<:niracute:${niracute}>)?`

@@ -1,6 +1,6 @@
 const Commando = require("discord.js-commando");
 const { MessageEmbed } = require("discord.js");
-const { emojis } = require("../../config.json");
+const { homeguild, emojis } = require("../../config.json");
 const FAQChannel = "760621183564513312";
 
 module.exports = class FAQCommand extends Commando.Command {
@@ -30,7 +30,7 @@ module.exports = class FAQCommand extends Commando.Command {
         if (message.channel.type === "dm") {
             message.channel.send("You can't use this command here, silly!");
         }
-        else if (message.guild.id === "603246092402032670") {
+        else if (message.guild.id === homeguild) {
             const embed = new MessageEmbed()
             .setTitle(title)
             .setDescription(description)

@@ -1,5 +1,6 @@
 const Commando = require("discord.js-commando");
 const { MessageEmbed } = require("discord.js");
+const { homeguild } = require("../../config.json");
 
 module.exports = class Rule0Command extends Commando.Command {
     constructor(client) {
@@ -15,7 +16,7 @@ module.exports = class Rule0Command extends Commando.Command {
         if (message.channel.type === "dm") {
             message.channel.send("You can't use this command here, silly!");
         }
-        else if (message.guild.id === "603246092402032670") {
+        else if (message.guild.id === homeguild) {
             const rule0 = new MessageEmbed()
             .setTitle("(Secret Rule) 0. Be Kind to Yourself")
             .setDescription(

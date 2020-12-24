@@ -10,6 +10,7 @@
             "description": "End conversation with PatPat's clone."
         }
     },
+    "homeguild": "603246092402032670",
     "allowlists": {
         "botspamchannels": [
             "742550881911701615",
