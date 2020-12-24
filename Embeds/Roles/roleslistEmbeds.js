@@ -52,6 +52,7 @@ global.roles4 = new Discord.MessageEmbed()
     {name: "Queen", value: `<@228880116699103232>'s nickname!`},
     {name: "God", value: `<@737697842507939840>'s nickname... For some reason?`},
     {name: "ἰχθύς", value: `Dedicated to <@205837815630659593>!`},
+    {name: "Shamy Curator", value: `Given to <@737697842507939840> as appreciation for her amazing Shamy-mojis!`},
     {name: "Fisherban", value: `A role created from an inside-joke, born from the rivalry seen in <#747201864889794721>.`},
     {name: "Paint Drinkers", value: `Still don't know how this meme started...`},
     {name: "Bri'ish", value: `For all our British members, born from yet another server inside-joke, and available from <#603248229928140801> if you react with 🇬🇧 when prompted.`}
