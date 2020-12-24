@@ -33,31 +33,22 @@ var uwuify = {
                 .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
                 .setDescription(text)
                 .setColor(15849719);
-            message.channel.send(embed);
+            await message.channel.send(embed);
         } else {
             const webhooks = await message.channel.fetchWebhooks();
-            const webhook = webhooks.first();
+            var webhook = webhooks.first();
 
-            if (webhook === undefined) {
+            if (!webhook) {
                 // No webhook exists in this channel, so create one
-                message.channel.createWebhook("Nira-chan")
-                .then(webhook => {
-                    // Resend the message with the OP's avatar and display name
-                    webhook.send(text, {
-                        username: message.member.displayName,
-                        avatarURL: message.author.displayAvatarURL(),
-                        files: message.attachments.array()
-                    });
-                })
-                .catch(console.error);
-            } else {
-                // Resend the message with the OP's avatar and display name
-                webhook.send(text, {
-                    username: message.member.displayName,
-                    avatarURL: message.author.displayAvatarURL(),
-                    files: message.attachments.array()
-                });
+                webhook = await message.channel.createWebhook("Nira-chan");
             }
+
+            // Resend the message with the OP's avatar and display name
+            await webhook.send(text, {
+                username: message.member.displayName,
+                avatarURL: message.author.displayAvatarURL(),
+                files: message.attachments.array()
+            });
         }
     }
 };
