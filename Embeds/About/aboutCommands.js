@@ -7,22 +7,22 @@ module.exports = async (client, id = []) => {
         if (niraMessages.size === 0) {
             channel.send("**About**");
             channel.send(about1);
-            channel.send("<:spacer:757807111756447806>");
+            channel.send(emojis.spacer);
             channel.send(about2);
-            channel.send("<:spacer:757807111756447806>");
+            channel.send(emojis.spacer);
             channel.send(about3);
-            channel.send("<:spacer:757807111756447806>");
+            channel.send(emojis.spacer);
             channel.send("**Discography**");
             channel.send(cd1);
-            channel.send("<:spacer:757807111756447806>");
+            channel.send(emojis.spacer);
             channel.send(cd2);
-            channel.send("<:spacer:757807111756447806>");
+            channel.send(emojis.spacer);
             channel.send(cd3);
-            channel.send("<:spacer:757807111756447806>");
+            channel.send(emojis.spacer);
             channel.send(cd4);
-            channel.send("<:spacer:757807111756447806>");
+            channel.send(emojis.spacer);
             channel.send(cd5);
-            channel.send("<:spacer:757807111756447806>");
+            channel.send(emojis.spacer);
         }
         else {
             niraMessages.array()[16].edit(about1);

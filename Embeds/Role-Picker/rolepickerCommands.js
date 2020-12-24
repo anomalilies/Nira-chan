@@ -1,3 +1,5 @@
+const { emojis } = require("../../config.json");
+
 module.exports = async (client, id = []) => {
     const channel = await client.channels.fetch(id);
   
@@ -6,11 +8,11 @@ module.exports = async (client, id = []) => {
 
         if (niraMessages.size === 0) {
             channel.send(pronouns);
-            channel.send("<:spacer:757807111756447806>");
+            channel.send(emojis.spacer);
             channel.send(miscellaneous);
-            channel.send("<:spacer:757807111756447806>");
+            channel.send(emojis.spacer);
             channel.send(dividers);
-            channel.send("<:spacer:757807111756447806>");
+            channel.send(emojis.spacer);
             channel.send(colours);
         }
     });
