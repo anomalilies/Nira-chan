@@ -5,6 +5,6 @@ module.exports = (client, member) => {
         channel.send("**" + member.user.username + `** joined! <:nirahello:777736555829002281>`);
     }
     client.on("guildMemberRemove", member => {
-        channel.send(`**` + member.user.username + `**, left... <:nirawail:777736598854696980>`);
+        channel.send(`**` + member.user.username + `** left... <:nirawail:777736598854696980>`);
     })
 };
