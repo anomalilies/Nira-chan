@@ -1,6 +1,7 @@
 const Commando = require("discord.js-commando");
-const { fishpuns, allowlists } = require("../../config.json");
+const { allowlists } = require("../../config.json");
 const { MessageEmbed } = require("discord.js");
+const fishpuns = require("../../Data/fishpuns.json");
 
 module.exports = class FishPunCommand extends Commando.Command {
     constructor(client) {

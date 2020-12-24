@@ -1,4 +1,6 @@
-const { prefix, commandNames, allowlists, emojis, patpatresponses, nira9000 } = require("../config.json");
+const { prefix, commandNames, allowlists, emojis } = require("../config.json");
+const nira9000 = require("../Data/nira9000.json");
+const patpatresponses = require("../Data/patpatresponses.json");
 
 const { MessageEmbed } = require("discord.js");
 const rules = require("../Embeds/ruleEmbeds.json");
