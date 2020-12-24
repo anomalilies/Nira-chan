@@ -6,6 +6,7 @@ const archiveEmbeds = require("../Embeds/Archive/archiveEmbeds");
 const botEmbeds = require("../Embeds/Bots/botEmbeds");
 const contestEmbeds = require("../Embeds/Contests/contestEmbeds");
 const linkEmbeds = require ("../Embeds/Links/linkEmbeds");
+const rolepickerEmbeds = require("../Embeds/Role-Picker/rolepickerEmbeds");
 const roleslistEmbeds = require("../Embeds/Roles/roleslistEmbeds");
 const welcomeEmbeds = require("../Embeds/Welcome/welcomeEmbeds");
 
@@ -14,6 +15,7 @@ const archiveCommands = require("../Embeds/Archive/archiveCommands");
 const botCommands = require("../Embeds/Bots/botCommands");
 const contestCommands = require("../Embeds/Contests/contestCommands");
 const linkCommands = require ("../Embeds/Links/linkCommands");
+const rolepickerCommands = require ("../Embeds/Role-Picker/rolepickerCommands");
 const roleslistCommands = require("../Embeds/Roles/roleslistCommands");
 const welcomeCommands = require("../Embeds/Welcome/welcomeCommands");
 
@@ -71,6 +73,7 @@ module.exports = async (client) => {
         botCommands(client, "742548177462231120");
         contestCommands(client, "770795084002230292");
         linkCommands(client, "742069780328087613");
+        rolepickerCommands(client, "781296501351383050");
         roleslistCommands(client, "758494476174884905");
         welcomeCommands(client, "603248229928140801");
     }
