@@ -23,7 +23,7 @@ global.dividers = new Discord.MessageEmbed()
 );
 global.colours = new Discord.MessageEmbed()
   .setTitle("Colours")
-  .setDescription("Want to change your role colour? You've come to the right place!\nWith the <@781295857706336296> role, you'll be able to change your roles infinite times.\n\nThe highest role in the list below will become the colour for your username:\n• If you'd like to add a role you don't already have, react with the corresponding emoji once.\n• If you'd like to remove a pre-existing role you already have, react with the corresponding emoji twice.\n• If you'd like to remove a given role, remove your reaction by reacting with the corresponding emoji again.")
+  .setDescription("Want to change your role colour? You've come to the right place!\nWith the <@&781295857706336296> role, you'll be able to change your roles infinite times.\n\nThe highest role in the list below will become the colour for your username:\n• If you'd like to add a role you don't already have, react with the corresponding emoji once.\n• If you'd like to remove a pre-existing role you already have, react with the corresponding emoji twice.\n• If you'd like to remove a given role, remove your reaction by reacting with the corresponding emoji again.")
   .setColor(15849719)
   .addFields (
     {name: "Key", value: "<:red:781294389241970688> : `Glass to Red Raisin`\n<:orange:781295090617811004> : `Salmon-yoi Yoi Ondo`\n<:yellow:781295102046765066> : `Saturn Saffron`\n<:green:783501246954340382> : `Seigi Sage`\n<:blue:781295124280901643> : `Marine Blue Garden`\n<:pink:781295137635958804> : `Kirby Gang`"}
