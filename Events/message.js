@@ -1,4 +1,4 @@
-const { prefix, commandNames, allowlists, emojis } = require("../config.json");
+const { prefix, commandNames, homeguild, allowlists, emojis } = require("../config.json");
 const nira9000 = require("../Data/nira9000.json");
 const patpatresponses = require("../Data/patpatresponses.json");
 
@@ -71,7 +71,7 @@ function matchEmojis(find_emojis, message_content) {
 
 module.exports = async (client, message) => {
     // Welcome Message and Role
-    if (message.type === "GUILD_MEMBER_JOIN" && message.guild.id === "603246092402032670") {
+    if (message.type === "GUILD_MEMBER_JOIN" && message.guild.id === homeguild) {
         const list = client.guilds.cache.get("603246092402032670");
         var VIPRole = list.roles.cache.find(role => role.name === "ZUTOMAYO V.I.P.");
         message.member.roles.add(VIPRole);
@@ -205,7 +205,7 @@ module.exports = async (client, message) => {
 
     // PatPat Command
     // Allowed in specific bot channels only
-    if (message.channel.type !== "dm" && (allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== "603246092402032670")) {
+    if (message.channel.type !== "dm" && (allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== homeguild)) {
         if (message.content.toLowerCase() === `${prefix}${commandNames.patpatstart.name}`) {
             // PatPat: start new conversations
             whosTalkingWithPatPat.add(message.author.id);
@@ -327,7 +327,7 @@ module.exports = async (client, message) => {
     }
 
     // Server Rules
-    if (message.channel.type !== "dm" && message.guild.id === "603246092402032670") {
+    if (message.channel.type !== "dm" && message.guild.id === homeguild) {
         if (message.member && message.member.roles.cache.get("742061218860236840")) {
             rules.filter(rule => rule.re.test(message.content))
                 .map(rule => new MessageEmbed()
