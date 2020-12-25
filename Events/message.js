@@ -1,4 +1,4 @@
-const { prefix, commandNames, homeguild, allowlists, emojis } = require("../config.json");
+const { prefix, commandNames, homeguild, allowlists, members, members, emojis } = require("../config.json");
 const nira9000 = require("../Data/nira9000.json");
 const patpatresponses = require("../Data/patpatresponses.json");
 
@@ -210,7 +210,7 @@ module.exports = async (client, message) => {
             // PatPat: start new conversations
             whosTalkingWithPatPat.add(message.author.id);
 
-            if (message.author.id == "759338005633826817") {
+            if (members.friendsofnira9000.includes(message.author.id)) {
                 const patPatChatEmbed = getSimpleEmbed(
                     "#ffc2e8",
                     "Nira-chan has entered the chat",
@@ -231,7 +231,7 @@ module.exports = async (client, message) => {
             // PatPat: end conversations
             whosTalkingWithPatPat.delete(message.author.id);
 
-            if (message.author.id == "759338005633826817") {
+            if (members.friendsofnira9000.includes(message.author.id)) {
                 const patPatChatEmbed = getSimpleEmbed(
                     "#ffc2e8",
                     "Nira-chan has left the chat",
@@ -321,7 +321,7 @@ module.exports = async (client, message) => {
         "`110 111 32 117`", "`&#110;&#111;&#32;&#117;`", "ⁿᵒ ᵘ"
     ]
     let isNoU = noUResponses.some(word => message.content.toLowerCase() === word.toLowerCase());
-    if (isNoU && (Math.random() < 1/3 || message.author.id === "314358105205112834")) {
+    if (isNoU && (Math.random() < 1/3 || members.noutimesinfinity.includes(message.author.id))) {
         const response = noUResponses[Math.floor(Math.random() * noUResponses.length)];
         message.channel.send(response);
     }

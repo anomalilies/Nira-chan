@@ -7,7 +7,7 @@ const { MessageEmbed } = require("discord.js");
 
 // Commando
 const client = new Commando.CommandoClient({
-    owner: "228880116699103232",
+    owner: guild.owner.user.id,
     commandPrefix: prefix,
     unknownCommand: false,
     disableMentions: "everyone"
