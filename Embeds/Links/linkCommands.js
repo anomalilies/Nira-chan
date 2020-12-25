@@ -1,3 +1,5 @@
+const { emojis } = require("../../config.json");
+
 module.exports = async (client, id = []) => {
     const channel = await client.channels.fetch(id);
   
@@ -8,7 +10,7 @@ module.exports = async (client, id = []) => {
             channel.send(links1);
             channel.send(links2);
             channel.send(links3);
-            channel.send("<:spacer:757807111756447806>");
+            channel.send(emojis.spacer);
             channel.send("**Miscellaneous**");
         }
         else {
