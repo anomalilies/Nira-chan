@@ -1,4 +1,4 @@
-const { prefix, commandNames, homeguild, allowlists, members, members, emojis } = require("../config.json");
+const { prefix, commandNames, homeguild, allowlists, members, emojis } = require("../config.json");
 const nira9000 = require("../Data/nira9000.json");
 const patpatresponses = require("../Data/patpatresponses.json");
 

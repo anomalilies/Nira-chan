@@ -2,12 +2,12 @@ require("dotenv").config();
 const cron = require("cron");
 const fs = require("fs");
 const Commando = require("discord.js-commando");
-const { prefix, allowlists } = require("./config.json");
+const { prefix, allowlists, members } = require("./config.json");
 const { MessageEmbed } = require("discord.js");
 
 // Commando
 const client = new Commando.CommandoClient({
-    owner: guild.owner.user.id,
+    owner: members.currentowner,
     commandPrefix: prefix,
     unknownCommand: false,
     disableMentions: "everyone"
