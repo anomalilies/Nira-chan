@@ -57,7 +57,7 @@ module.exports = async (client) => {
         });
     }
 
-    if (client.user.id === members.botself) {
+    if (client.user.id === members.nirachanactual) {
         setInterval(checkLurkers, 3600000);
 
         const channel = client.channels.cache.get("770726574865514517");
