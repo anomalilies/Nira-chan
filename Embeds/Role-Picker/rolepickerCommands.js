@@ -38,16 +38,27 @@ module.exports = async (client, id = []) => {
                 }
             }
 
-            /*client.on("messageReactionAdd", (reaction, user, client) => {
-                if (user.bot) return;
-                if (user.roles.cache.get("790791220179632128")) {
-                }
-            })
-
-            client.on("messageReactionRemove", (reaction, user) => {
-                if (user.bot) return;
-
-            })*/
+            // Pronouns
+            const pronounMessage = embedMessages.array()[3]
+            const pronounReactionCollector = pronounMessage.createReactionCollector((reaction, user) => {
+                return reactions.pronounsReact.includes(reaction.emoji.id)
+            });
+            pronounReactionCollector.on("collect", async (reaction, user) => {
+                const reactionIndex = reactions.pronounsReact.findIndex(
+                    reactionIdentifier => reactionIdentifier === reaction.emoji.id);
+                    
+                    if (reactionIndex === -1) {
+                        return;
+                    } else {
+                        if (user.bot) {
+                            return;
+                        } else {
+                            const potentialRoleID = roles.pronounsID[reactionIndex];
+                            const member = reaction.message.guild.members.cache.get(user.id);
+                            member.roles.add(potentialRoleID);
+                        }
+                    }
+            });
         }
     })
 };
