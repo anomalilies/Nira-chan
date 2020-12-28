@@ -185,7 +185,6 @@ module.exports = async (client, message) => {
                 }
             });
         }
-        else {console.log("working!")}
         return replaceString;
     }
 
