@@ -4,9 +4,16 @@ module.exports = async (client, id = []) => {
     const channel = await client.channels.fetch(id);
   
     channel.messages.fetch().then((messages) => {
-        const niraMessages = messages.filter(msg => msg.author == client.user);
+        const niraMessages = messages.filter(msg => msg.author == client.user)
 
-        const RAINBOW_PASS_ROLE = "792946935849811968";
+        const dividerPerms = {
+            aesthetic: ["Glass to Red Raisin", "Salmon-yoi Yoi Ondo", "Saturn Saffron", "Seigi Sage", "Marine Blue Garden", "Kirby Gang", "Electric Fan Carp", "ずっと真夜漁期中でいいのに。"],
+            awarded: ["ἰχθύς", "God", "Runners-Up", "Welcoming Pupper", "Ghostbuster", "Summoner", "Contest Winners", "Loremaster", "Fisherban", "Shamy Curator"],
+            miscellaneous: ["Patpat", "Server Boosters", "Uniguri Corp.", "Paint Drinkers", "Regulars"],
+            contributor: ["Contributors"],
+            zone: ["ZUTOMAYO V.I.P."],
+            channel: ["Rainbow Pass", "Fishy League Pass", "Serious Discussion Pass", "Stickler for Rules"]
+        }
 
         const data = {
             colours: {
@@ -19,7 +26,7 @@ module.exports = async (client, id = []) => {
                     "781295124280901643": "760695751499579504",
                     "781295137635958804": "752308894474174515"
                 },
-                hasPermission: (user, role) => user.roles.cache.has(RAINBOW_PASS_ROLE)
+                hasPermission: (user, role) => user.roles.cache.find(r => r.name === dividerPerms.channel[0])
             }, dividers: {
                 roles: {
                     "764025729696268319": "770127096194269225",
@@ -29,7 +36,8 @@ module.exports = async (client, id = []) => {
                     "764026501066129408": "781322220382453780",
                     "777269746722668565": "781322360967266344",
                 },
-                hasPermission: (user, role) => true
+                hasPermission: (user, role) => {
+                }
             }, misc: {
                 roles: {
                     "742096993731477505": "772657659635171348",
@@ -74,10 +82,14 @@ module.exports = async (client, id = []) => {
                     let role = picker.roles[reaction.emoji.id];
                     let member = reaction.message.guild.members.cache.get(user.id);
             
-                    if (!user.bot && picker.hasPermission(member, role)) {
-                        added ? member.roles.add(role) : member.roles.remove(role);
+                    if (!user.bot) {
+                        if (picker.hasPermission(member, role)) {
+                            added ? member.roles.add(role) : member.roles.remove(role);
+                        } else {
+                            reaction.users.remove(user);
+                        }
                     }
-                }
+                };
             
                 collector.on('collect', (reaction, user) => handleReaction(reaction, user, true));
                 collector.on('remove', (reaction, user) => handleReaction(reaction, user, false));
