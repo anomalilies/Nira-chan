@@ -114,7 +114,7 @@ module.exports = async (client, message) => {
     }
     else if (message.webhookID || message.author == client.user || message.author.bot) {
         for (let embed of message.embeds) {
-            if (embed.title === "`-wolfram <query>`" && message.channel.id === "758523806507204608") {
+            if (embed.title === "-wolfram <query>" && message.channel.id === "758523806507204608") {
                 message.delete();
             }
         }
@@ -172,7 +172,7 @@ module.exports = async (client, message) => {
     function replaceEmoji(match, group1) {
         // The string to replace the match with
         let replaceString = match;
-        if (group1 && message.channel.type !== "dm") {
+        if (group1 && message.channel.type !== "dm" && !message.content.includes("<@&790791220179632128>" && "<@&772657659635171348>")) {
             // If capture group 1 caught something
             message.guild.emojis.cache.each(emoji => {
                 // We need to replace non-gif emoji as well for them to show up when we resend the message
@@ -185,6 +185,7 @@ module.exports = async (client, message) => {
                 }
             });
         }
+        else {console.log("working!")}
         return replaceString;
     }
 
@@ -195,9 +196,9 @@ module.exports = async (client, message) => {
     }
 
     // GIF emoji of the form `-emojiname`
-    if (message.guild && message.content[0] === "-") {
+    if (message.guild && message.content[0] === prefix) {
         message.guild.emojis.cache.each(async emoji => {
-            if (message.content === `-${emoji.name}` && emoji.animated) {
+            if (message.content === `${prefix}${emoji.name}` && emoji.animated) {
                 await replaceMessageThroughWebhook(message, `<a:${emoji.name}:${emoji.id}>`);
             }
         });
