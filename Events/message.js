@@ -172,7 +172,7 @@ module.exports = async (client, message) => {
     function replaceEmoji(match, group1) {
         // The string to replace the match with
         let replaceString = match;
-        if (group1 && message.channel.type !== "dm" && !message.content.includes("<@&790791220179632128>") && !message.content.includes("<@&772657659635171348>")) {
+        if (group1 && message.channel.type !== "dm") {
             // If capture group 1 caught something
             message.guild.emojis.cache.each(emoji => {
                 // We need to replace non-gif emoji as well for them to show up when we resend the message
