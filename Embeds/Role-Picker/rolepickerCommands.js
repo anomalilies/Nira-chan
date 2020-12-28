@@ -6,6 +6,8 @@ module.exports = async (client, id = []) => {
     channel.messages.fetch().then((messages) => {
         const niraMessages = messages.filter(msg => msg.author == client.user);
 
+        const RAINBOW_PASS_ROLE = "792946935849811968";
+
         const data = {
             colours: {
                 roles: {
@@ -17,7 +19,7 @@ module.exports = async (client, id = []) => {
                     "781295124280901643": "760695751499579504",
                     "781295137635958804": "752308894474174515"
                 },
-                hasPermission: (user, role) => true
+                hasPermission: (user, role) => user.roles.cache.has(RAINBOW_PASS_ROLE)
             }, dividers: {
                 roles: {
                     "764025729696268319": "770127096194269225",
