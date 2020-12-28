@@ -45,9 +45,6 @@ module.exports = async (client, id = []) => {
                 hasPermission: (user, role) => true
             }
         }
-        const map = new Map();
-        map.set(data)
-        console.log(map)
 
         if (niraMessages.size === 0) {
             channel.send(pronouns)
@@ -60,33 +57,28 @@ module.exports = async (client, id = []) => {
         }
         else {
             const embedMessages = niraMessages.filter(msg => !msg.content.startsWith(emojis.spacer));
-            let arr = Object.values(reactions);
-            var x;
-            for (var [key] of Object.entries(arr)) {
-                for (x of arr[key]) {
-                    embedMessages.array()[key].react(x)
-                }
-            }
 
-            const pronounMessage = embedMessages.array()[3]
-            const pronounReactionCollector = pronounMessage.createReactionCollector((reaction, user) => {
-                return reactions.pronounsReact.includes(reaction.emoji.id)
-            });
-            pronounReactionCollector.on("collect", async (reaction, user) => {
-                const reactionIndex = reactions.pronounsReact.findIndex(
-                    reactionIdentifier => reactionIdentifier === reaction.emoji.id);
-                    
-                    if (reactionIndex === -1) {
-                        return;
-                    } else {
-                        if (user.bot) {
-                            return;
-                        } else {
-                            const potentialRoleID = roles.pronounsID[reactionIndex];
-                            const member = reaction.message.guild.members.cache.get(user.id);
-                            member.roles.add(potentialRoleID);
-                        }
+            Object.values(data).forEach((picker, i) => {
+                let message = embedMessages.array()[i];
+                for(var reaction in picker.roles) {
+                        message.react(reaction);
+                }
+
+                let collector = message.createReactionCollector(
+                    reaction => picker.roles[reaction.emoji.id], { dispose: true }
+                );
+            
+                function handleReaction(reaction, user, added) {
+                    let role = picker.roles[reaction.emoji.id];
+                    let member = reaction.message.guild.members.cache.get(user.id);
+            
+                    if (!user.bot && picker.hasPermission(member, role)) {
+                        added ? member.roles.add(role) : member.roles.remove(role);
                     }
+                }
+            
+                collector.on('collect', (reaction, user) => handleReaction(reaction, user, true));
+                collector.on('remove', (reaction, user) => handleReaction(reaction, user, false));
             });
         }
     })
