@@ -1,6 +1,6 @@
 const Commando = require("discord.js-commando");
 const { MessageEmbed } = require("discord.js");
-const { homeguild, members } = require("../../config.json");
+const { homeguild } = require("../../config.json");
 
 // Embeds
 function getSimpleEmbed(title, description) {
@@ -13,6 +13,8 @@ function getSimpleEmbed(title, description) {
 const nirahello = "777736555829002281";
 const niracute = "788632707789225985";
 
+var inviteClient = {};
+
 module.exports = class InviteCommand extends Commando.Command {
     constructor(client) {
         super(client, {
@@ -21,24 +23,26 @@ module.exports = class InviteCommand extends Commando.Command {
             memberName: "invite",
             description: "Get an invite for the server/bot!"
         });
+
+        inviteClient = client;
     }
 
     async run(message) {
         const embed = getSimpleEmbed (
-            "Loading...",
-            "<a:loading:791389606616236052>"
+            "Bot Invitation",
+            `Click __**[here](https://discord.com/api/oauth2/authorize?client_id=${inviteClient.user.id}&permissions=805661760&scope=bot)**__ to invite <@${inviteClient.user.id}>!`
         );
 
         message.channel.send(embed).then(async msg => {
             const botInvite = getSimpleEmbed (
                 "Bot Invitation",
-                `Click __**[here](https://discord.com/api/oauth2/authorize?client_id=${members.botself}&permissions=805661760&scope=bot)**__ to invite <@${msg.author.id}>!`
+                `Click __**[here](https://discord.com/api/oauth2/authorize?client_id=${inviteClient.user.id}&permissions=805661760&scope=bot)**__ to invite <@${inviteClient.user.id}>!`
             );
 
             if (msg.channel.type !== "dm" && msg.guild.id === homeguild) {
                 const newEmbed = getSimpleEmbed (
                     "Invitation",
-                    `Would you like to **invite <@${msg.author.id}> to a server** (<:nirahello:${nirahello}>),\nor **share ${msg.guild.name}'s invite link** (<:niracute:${niracute}>)?`
+                    `Would you like to **invite <@${inviteClient.user.id}> to a server** (<:nirahello:${nirahello}>),\nor **share ${msg.guild.name}'s invite link** (<:niracute:${niracute}>)?`
                 );
                 msg.edit(newEmbed)
                 .then(msg.react(`${nirahello}`).then(msg.react(`${niracute}`)));
