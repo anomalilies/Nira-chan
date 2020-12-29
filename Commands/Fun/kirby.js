@@ -7,7 +7,7 @@ module.exports = class KirbyCommand extends Commando.Command {
     constructor(client) {
         super(client, {
             name: "kirby",
-            aliases: ["kirb", "copyability"],
+            aliases: ["copyability"],
             group: "fun",
             memberName: "kirby",
             description: "What ability would Kirby get if he inhaled you?",
