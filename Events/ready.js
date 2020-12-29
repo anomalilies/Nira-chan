@@ -55,7 +55,7 @@ module.exports = async (client) => {
             }
         });
     }
-    rolepickerCommands(client, "792125490143821832");
+    rolepickerCommands(client, "781296501351383050");
 
     if (client.user.id === "740606402330099752") {
         setInterval(checkLurkers, 3600000);
@@ -75,6 +75,7 @@ module.exports = async (client) => {
         contestCommands(client, "770795084002230292");
         linkCommands(client, "742069780328087613");
         roleslistCommands(client, "758494476174884905");
+
         welcomeCommands(client, "603248229928140801");
     }
 };

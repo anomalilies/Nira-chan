@@ -37,6 +37,25 @@ module.exports = async (client, id = []) => {
                     "777269746722668565": "781322360967266344",
                 },
                 hasPermission: (user, role) => {
+                    // TEMPORARY - LILY DON'T EVEN THINK ABOUT MOVING ON TIL THIS IS PROPERLY FINISHED
+                    if (role === "770127096194269225" && user.roles.cache.find(r => dividerPerms.aesthetic.includes(r.name))) {
+                        return true;
+                    }
+                    if (role === "770119715808477244" && user.roles.cache.find(r => dividerPerms.awarded.includes(r.name))) {
+                        return true;
+                    }
+                    if (role === "770310986275618827" && user.roles.cache.find(r => dividerPerms.miscellaneous.includes(r.name))) {
+                        return true;
+                    }
+                    if (role === "770310988938346526" && user.roles.cache.find(r => dividerPerms.contributor.includes(r.name))) {
+                        return true;
+                    }
+                    if (role === "781322220382453780" && user.roles.cache.find(r => dividerPerms.zone.includes(r.name))) {
+                        return true;
+                    }
+                    if (role === "781322360967266344" && user.roles.cache.find(r => dividerPerms.channel.includes(r.name))) {
+                        return true;
+                    }
                 }
             }, misc: {
                 roles: {
