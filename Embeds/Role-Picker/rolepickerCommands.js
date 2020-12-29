@@ -10,7 +10,7 @@ module.exports = async (client, id = []) => {
             aesthetic: ["Glass to Red Raisin", "Salmon-yoi Yoi Ondo", "Saturn Saffron", "Seigi Sage", "Marine Blue Garden", "Kirby Gang", "Electric Fan Carp", "ずっと真夜漁期中でいいのに。"],
             awarded: ["ἰχθύς", "God", "Runners-Up", "Welcoming Pupper", "Ghostbuster", "Summoner", "Contest Winners", "Loremaster", "Fisherban", "Shamy Curator"],
             miscellaneous: ["Patpat", "Server Boosters", "Uniguri Corp.", "Paint Drinkers", "Regulars"],
-            contributor: ["Contributors"],
+            contributor: ["Contributors", "Affiliates"],
             zone: ["ZUTOMAYO V.I.P."],
             channel: ["Rainbow Pass", "Fishy League Pass", "Serious Discussion Pass", "Stickler for Rules"]
         }
