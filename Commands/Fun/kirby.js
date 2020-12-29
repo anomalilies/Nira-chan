@@ -19,7 +19,7 @@ module.exports = class KirbyCommand extends Commando.Command {
             const index = Math.floor(Math.random() * abilities.length);
             const embed = new MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
-                .setDescription(`<:kirbsucc:757289104789471322>Kirby inhaled ${message.author.username} and got the ${abilities[index]} ability!`)
+                .setDescription(`<:kirbsucc:757289104789471322> Kirby inhaled ${message.author.username} and got the ${abilities[index]} ability!`)
                 .setColor(15849719);
             message.channel.send(embed);
         }
