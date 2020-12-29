@@ -10,7 +10,7 @@ const client = new Commando.CommandoClient({
     owner: members.currentowner,
     commandPrefix: prefix,
     unknownCommand: false,
-    disableMentions: "everyone"
+    disableMentions: "all"
 });
 
 // Events and Commands

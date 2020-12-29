@@ -56,6 +56,7 @@ module.exports = async (client) => {
             }
         });
     }
+    rolepickerCommands(client, "781296501351383050");
 
     if (client.user.id === members.nirachanactual) {
         setInterval(checkLurkers, 3600000);
@@ -74,8 +75,8 @@ module.exports = async (client) => {
         botCommands(client, "742548177462231120");
         contestCommands(client, "770795084002230292");
         linkCommands(client, "742069780328087613");
-        rolepickerCommands(client, "781296501351383050");
         roleslistCommands(client, "758494476174884905");
+
         welcomeCommands(client, "603248229928140801");
     }
 };

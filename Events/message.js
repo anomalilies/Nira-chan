@@ -114,7 +114,7 @@ module.exports = async (client, message) => {
     }
     else if (message.webhookID || message.author == client.user || message.author.bot) {
         for (let embed of message.embeds) {
-            if (embed.title === "`-wolfram <query>`" && message.channel.id === "758523806507204608") {
+            if (embed.title === "-wolfram <query>" && message.channel.id === "758523806507204608") {
                 message.delete();
             }
         }
@@ -195,9 +195,9 @@ module.exports = async (client, message) => {
     }
 
     // GIF emoji of the form `-emojiname`
-    if (message.guild && message.content[0] === "-") {
+    if (message.guild && message.content[0] === prefix) {
         message.guild.emojis.cache.each(async emoji => {
-            if (message.content === `-${emoji.name}` && emoji.animated) {
+            if (message.content === `${prefix}${emoji.name}` && emoji.animated) {
                 await replaceMessageThroughWebhook(message, `<a:${emoji.name}:${emoji.id}>`);
             }
         });
