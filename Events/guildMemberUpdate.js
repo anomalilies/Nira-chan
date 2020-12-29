@@ -10,9 +10,6 @@ module.exports = async (client, oldMember, newMember) => {
     const isRegular = "751209585464836137";
     const isIntVIP = "776872223427788821";
 
-    const isVIP = "742822553218711562";
-    const isMute = "745439119479406693";
-
     const isContributor = "761383555372023860";
     const inContributorGroup = r=>contributorRoles.includes(r.name);
 
