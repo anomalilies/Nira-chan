@@ -31,7 +31,7 @@ async function replaceMessageThroughWebhook(message, resend_content) {
         const webhooks = await message.channel.fetchWebhooks();
         const webhook = webhooks.first();
 
-        if (webhook === undefined) {
+        if (webhook === undefined && !message.content.includes(blacklist)) {
             // No webhook exists in this channel, so create one
             message.channel.createWebhook("Nira-chan")
                 .then(webhook => {
@@ -72,9 +72,11 @@ function matchEmojis(find_emojis, message_content) {
 module.exports = async (client, message) => {
     // Welcome Message and Role
     if (message.type === "GUILD_MEMBER_JOIN" && message.guild.id === homeguild) {
-        const list = client.guilds.cache.get("603246092402032670");
+        const list = client.guilds.cache.get(homeguild);
         var VIPRole = list.roles.cache.find(role => role.name === "ZUTOMAYO V.I.P.");
-        message.member.roles.add(VIPRole);
+        if (!message.author.bot) {
+            message.member.roles.add(VIPRole);
+        }
 
         const channel = client.channels.cache.get("603246092402032673");
         channel.send(emojis.wave).then(() => {
@@ -114,7 +116,7 @@ module.exports = async (client, message) => {
     }
     else if (message.webhookID || message.author == client.user || message.author.bot) {
         for (let embed of message.embeds) {
-            if (embed.title === (`${prefix}wolfram <query>`) && message.channel.id === ("758523806507204608" || "762068348870852709")) {
+            if (embed.title === (`-wolfram <query>`) && (message.channel.id === "758523806507204608" || message.channel.id === "762068348870852709")) {
                 message.delete();
             }
         }
@@ -172,6 +174,7 @@ module.exports = async (client, message) => {
     function replaceEmoji(match, group1) {
         // The string to replace the match with
         let replaceString = match;
+
         if (group1 && message.channel.type !== "dm") {
             // If capture group 1 caught something
             message.guild.emojis.cache.each(emoji => {

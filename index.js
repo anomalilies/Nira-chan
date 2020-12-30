@@ -10,8 +10,9 @@ const client = new Commando.CommandoClient({
     owner: "228880116699103232",
     commandPrefix: prefix,
     unknownCommand: false,
-    disableMentions: "all"
+    disableEveryone: true
 });
+
 
 // Events and Commands
 fs.readdir("./Events/", (err, files) => {
@@ -26,7 +27,7 @@ fs.readdir("./Events/", (err, files) => {
 // Monthly Server Topics
 var channelTitles = [
     "Byoushin wo Kamu", "Nouriueno Cracker", "Humanoid", "Mabushii DNA Dake", "Seigi", "Kettobashita Moufu", "Konnakoto Soudou", 
-    "Haze Haseru Haterumade", "Dear Mr. 'F'", "Obenkyou Shitoiteyo", "MILABO", "Fastening", "Ham", "Darken", "Hunch Grey", "Can't Be Right"
+    "Haze Haseru Haterumade", "Dear Mr. 'F'", "Study Me", "MILABO", "Fastening", "Ham", "Darken", "Hunch Grey", "Can't Be Right"
 ];
 
 const channelChange = new cron.CronJob("0 0 1 * *", () => {
