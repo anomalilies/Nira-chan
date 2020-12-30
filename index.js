@@ -39,7 +39,7 @@ channelChange.start();
 // s
 const scheduledMessage = new cron.CronJob("0 0 * * *", () => {
     const channel = client.channels.cache.find(channel => channel.id === "528641575752957983");
-    channel.send("s")
+    channel.send("s");
 }, null, true, "Europe/London");
 scheduledMessage.start();
 
@@ -77,7 +77,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
                             starboard.send(embed);
                         }
                     }
-                }
+                };
 
                 if(reaction.message.partial) {
                     await reaction.fetch();

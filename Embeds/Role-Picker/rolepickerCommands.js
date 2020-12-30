@@ -4,7 +4,7 @@ module.exports = async (client, id = []) => {
     const channel = await client.channels.fetch(id);
   
     channel.messages.fetch().then((messages) => {
-        const niraMessages = messages.filter(msg => msg.author == client.user)
+        const niraMessages = messages.filter(msg => msg.author == client.user);
 
         const data = {
             colours: {
@@ -49,10 +49,10 @@ module.exports = async (client, id = []) => {
                 },
                 hasPermission: (user, role) => true
             }
-        }
+        };
 
         if (niraMessages.size === 0) {
-            channel.send(pronouns)
+            channel.send(pronouns);
             channel.send(emojis.spacer);
             channel.send(miscellaneous);
             channel.send(emojis.spacer);
@@ -84,11 +84,11 @@ module.exports = async (client, id = []) => {
                             reaction.users.remove(user);
                         }
                     }
-                };
+                }
             
                 collector.on("collect", (reaction, user) => handleReaction(reaction, user, true));
                 collector.on("remove", (reaction, user) => handleReaction(reaction, user, false));
             });
         }
-    })
+    });
 };

@@ -88,7 +88,7 @@ module.exports = async (client, oldMessage, newMessage) => {
         "Nobelium Uranium", "non tu", "no vos", "102 + 92", "`6e 6f 20 75`", "🇳 🇴  🇺", "ノユ",
         "∩O ∪", "∩∅ ∪", "`01101110 01101111 00100000 01110101`", "`-. --- / ..-`",
         "`110 111 32 117`", "`&#110;&#111;&#32;&#117;`", "ⁿᵒ ᵘ"
-    ]
+    ];
     let isNoU = noUResponses.some(word => newMessage.content.toLowerCase() === word.toLowerCase());
     if (isNoU && (Math.random() < 1/3 || newMessage.author.id === "314358105205112834")) {
         const response = noUResponses[Math.floor(Math.random() * noUResponses.length)];

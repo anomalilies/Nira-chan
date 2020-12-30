@@ -31,7 +31,7 @@ module.exports = class AddCommand extends Commando.Command {
                 message.channel.send(embed);
             }
             else {
-                message.channel.send("I respect your admiration, truly, however your message is too long!")
+                message.channel.send("I respect your admiration, truly, however your message is too long!");
             }
         }
     }
