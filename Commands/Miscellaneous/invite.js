@@ -25,8 +25,8 @@ module.exports = class InviteCommand extends Commando.Command {
 
     async run(message) {
         const embed = getSimpleEmbed (
-            "Bot Invitation",
-            `Click __**[here](https://discord.com/api/oauth2/authorize?client_id=${this.client.user.id}&permissions=805661760&scope=bot)**__ to invite <@${this.client.user.id}>!`
+            "Loading...",
+            "<a:loading:791389606616236052>"
         );
 
         message.channel.send(embed).then(async msg => {
