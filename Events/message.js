@@ -114,7 +114,7 @@ module.exports = async (client, message) => {
     }
     else if (message.webhookID || message.author == client.user || message.author.bot) {
         for (let embed of message.embeds) {
-            if (embed.title === "-wolfram <query>" && message.channel.id === "758523806507204608") {
+            if (embed.title === (`${prefix}wolfram <query>`) && message.channel.id === ("758523806507204608" || "762068348870852709")) {
                 message.delete();
             }
         }
