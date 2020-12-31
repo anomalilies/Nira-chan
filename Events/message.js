@@ -1,4 +1,4 @@
-const { prefix, commandNames, homeguild, allowlists, emojis } = require("../config.json");
+const { prefix, commandNames, homeguild, allowlists, members, emojis } = require("../config.json");
 const nira9000 = require("../Data/nira9000.json");
 const patpatresponses = require("../Data/patpatresponses.json");
 
@@ -82,7 +82,7 @@ module.exports = async (client, message) => {
         channel.send(emojis.wave).then(() => {
             if (Math.random() < 1/100) {
                 const embed = new MessageEmbed()
-                .setDescription("Attention all ZUTOMAYO stans!\n<@740606402330099752> is in trouble! She needs your help to pay for intensive therapy to relieve the burdens of her past traumas.\nAll she needs is your mum's credit card number, the expiration date, and those 3 *wacky* numbers on the back!\nHurry, and click that shiny `Server Boost` button **__NOW__!** <:niragun:772343025099603988>")
+                .setDescription(`Attention all ZUTOMAYO stans!\n<@${client.user.id}> is in trouble! She needs your help to pay for intensive therapy to relieve the burdens of her past traumas.\nAll she needs is your mum's credit card number, the expiration date, and those 3 *wacky* numbers on the back!\nHurry, and click that shiny 'Server Boost' button **__NOW__!** <:niragun:772343025099603988>`)
                 .setColor(15849719);
                 channel.send(embed);
             }
@@ -213,7 +213,7 @@ module.exports = async (client, message) => {
             // PatPat: start new conversations
             whosTalkingWithPatPat.add(message.author.id);
 
-            if (message.author.id == "759338005633826817") {
+            if (members.friendsofnira9000.includes(message.author.id)) {
                 const patPatChatEmbed = getSimpleEmbed(
                     "#ffc2e8",
                     "Nira-chan has entered the chat",
@@ -234,7 +234,7 @@ module.exports = async (client, message) => {
             // PatPat: end conversations
             whosTalkingWithPatPat.delete(message.author.id);
 
-            if (message.author.id == "759338005633826817") {
+            if (members.friendsofnira9000.includes(message.author.id)) {
                 const patPatChatEmbed = getSimpleEmbed(
                     "#ffc2e8",
                     "Nira-chan has left the chat",
@@ -324,7 +324,7 @@ module.exports = async (client, message) => {
         "`110 111 32 117`", "`&#110;&#111;&#32;&#117;`", "ⁿᵒ ᵘ"
     ]
     let isNoU = noUResponses.some(word => message.content.toLowerCase() === word.toLowerCase());
-    if (isNoU && (Math.random() < 1/3 || message.author.id === "314358105205112834")) {
+    if (isNoU && (Math.random() < 1/3 || members.noutimesinfinity.includes(message.author.id))) {
         const response = noUResponses[Math.floor(Math.random() * noUResponses.length)];
         message.channel.send(response);
     }

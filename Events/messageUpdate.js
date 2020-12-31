@@ -1,4 +1,4 @@
-const { allowlists, emojis } = require("../config.json");
+const { allowlists, members, emojis } = require("../config.json");
 
 // Find specific emojis in a message
 function matchEmojis(find_emojis, message_content) {
@@ -90,7 +90,7 @@ module.exports = async (client, oldMessage, newMessage) => {
         "`110 111 32 117`", "`&#110;&#111;&#32;&#117;`", "ⁿᵒ ᵘ"
     ];
     let isNoU = noUResponses.some(word => newMessage.content.toLowerCase() === word.toLowerCase());
-    if (isNoU && (Math.random() < 1/3 || newMessage.author.id === "314358105205112834")) {
+    if (isNoU && (Math.random() < 1/3 || members.noutimesinfinity.includes(newMessage.author.id))) {
         const response = noUResponses[Math.floor(Math.random() * noUResponses.length)];
         newMessage.channel.send(response);
     }

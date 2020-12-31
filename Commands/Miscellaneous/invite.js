@@ -32,13 +32,13 @@ module.exports = class InviteCommand extends Commando.Command {
         message.channel.send(embed).then(async msg => {
             const botInvite = getSimpleEmbed (
                 "Bot Invitation",
-                "Click __**[here](https://discord.com/api/oauth2/authorize?client_id=740606402330099752&permissions=805661760&scope=bot)**__ to invite <@"+msg.author.id+">!"
+                `Click __**[here](https://discord.com/api/oauth2/authorize?client_id=${this.client.user.id}&permissions=805661760&scope=bot)**__ to invite <@${this.client.user.id}>!`
             );
 
             if (msg.channel.type !== "dm" && msg.guild.id === homeguild) {
                 const newEmbed = getSimpleEmbed (
                     "Invitation",
-                    `Would you like to **invite <@`+msg.author.id+`> to a server** (<:nirahello:${nirahello}>),\nor **share `+msg.guild.name+`'s invite link** (<:niracute:${niracute}>)?`
+                    `Would you like to **invite <@${this.client.user.id}> to a server** (<:nirahello:${nirahello}>),\nor **share ${msg.guild.name}'s invite link** (<:niracute:${niracute}>)?`
                 );
                 msg.edit(newEmbed)
                 .then(msg.react(`${nirahello}`).then(msg.react(`${niracute}`)));
