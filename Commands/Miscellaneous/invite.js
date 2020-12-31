@@ -55,7 +55,7 @@ module.exports = class InviteCommand extends Commando.Command {
                         msg.channel.send("https://discord.gg/htSDkHH")
                         .then(msg.reactions.removeAll());
                     }
-			    })
+			    });
             }
             else {
                 setTimeout(() => {
@@ -63,5 +63,5 @@ module.exports = class InviteCommand extends Commando.Command {
                 }, 1000);
             }
         }
-    )}
-};
+    );
+}};

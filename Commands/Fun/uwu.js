@@ -23,6 +23,6 @@ module.exports = class UWUCommand extends Commando.Command {
             if (message.channel.type !== "dm") {
                 message.delete();
             }
-        })
+        });
     }
 };

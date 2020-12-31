@@ -4,16 +4,7 @@ module.exports = async (client, id = []) => {
     const channel = await client.channels.fetch(id);
   
     channel.messages.fetch().then((messages) => {
-        const niraMessages = messages.filter(msg => msg.author == client.user)
-
-        const dividerPerms = {
-            aesthetic: ["Glass to Red Raisin", "Salmon-yoi Yoi Ondo", "Saturn Saffron", "Seigi Sage", "Marine Blue Garden", "Kirby Gang", "Electric Fan Carp", "ずっと真夜漁期中でいいのに。"],
-            awarded: ["ἰχθύς", "God", "Runners-Up", "Welcoming Pupper", "Ghostbuster", "Summoner", "Contest Winners", "Loremaster", "Fisherban", "Shamy Curator"],
-            miscellaneous: ["Patpat", "Server Boosters", "Uniguri Corp.", "Paint Drinkers", "Regulars"],
-            contributor: ["Contributors", "Affiliates"],
-            zone: ["ZUTOMAYO V.I.P."],
-            channel: ["Rainbow Pass", "Fishy League Pass", "Serious Discussion Pass", "Stickler for Rules"]
-        }
+        const niraMessages = messages.filter(msg => msg.author == client.user);
 
         const data = {
             colours: {
@@ -26,7 +17,7 @@ module.exports = async (client, id = []) => {
                     "781295124280901643": "760695751499579504",
                     "781295137635958804": "752308894474174515"
                 },
-                hasPermission: (user, role) => user.roles.cache.find(r => r.name === dividerPerms.channel[0])
+                hasPermission: (user, role) => user.roles.cache.find(r => r.name === "Rainbow Pass")
             }, dividers: {
                 roles: {
                     "764025729696268319": "770127096194269225",
@@ -36,27 +27,12 @@ module.exports = async (client, id = []) => {
                     "764026501066129408": "781322220382453780",
                     "777269746722668565": "781322360967266344",
                 },
-                hasPermission: (user, role) => {
-                    // TEMPORARY - LILY DON'T EVEN THINK ABOUT MOVING ON TIL THIS IS PROPERLY FINISHED
-                    if (role === "770127096194269225" && user.roles.cache.find(r => dividerPerms.aesthetic.includes(r.name))) {
-                        return true;
-                    }
-                    if (role === "770119715808477244" && user.roles.cache.find(r => dividerPerms.awarded.includes(r.name))) {
-                        return true;
-                    }
-                    if (role === "770310986275618827" && user.roles.cache.find(r => dividerPerms.miscellaneous.includes(r.name))) {
-                        return true;
-                    }
-                    if (role === "770310988938346526" && user.roles.cache.find(r => dividerPerms.contributor.includes(r.name))) {
-                        return true;
-                    }
-                    if (role === "781322220382453780" && user.roles.cache.find(r => dividerPerms.zone.includes(r.name))) {
-                        return true;
-                    }
-                    if (role === "781322360967266344" && user.roles.cache.find(r => dividerPerms.channel.includes(r.name))) {
-                        return true;
-                    }
-                }
+                hasPermission: (user, role) => user.guild.roles.cache
+                .sorted((a, b) => a.comparePositionTo(b)).keyArray().some(function(guildRole) {
+                    if (Object.values(data.dividers.roles).includes(guildRole))
+                        this.roleMatch = guildRole == role;
+                    return this.roleMatch && user.roles.cache.has(guildRole);
+                }, { roleMatch: false })
             }, misc: {
                 roles: {
                     "742096993731477505": "772657659635171348",
@@ -73,10 +49,10 @@ module.exports = async (client, id = []) => {
                 },
                 hasPermission: (user, role) => true
             }
-        }
+        };
 
         if (niraMessages.size === 0) {
-            channel.send(pronouns)
+            channel.send(pronouns);
             channel.send(emojis.spacer);
             channel.send(miscellaneous);
             channel.send(emojis.spacer);
@@ -108,11 +84,11 @@ module.exports = async (client, id = []) => {
                             reaction.users.remove(user);
                         }
                     }
-                };
+                }
             
-                collector.on('collect', (reaction, user) => handleReaction(reaction, user, true));
-                collector.on('remove', (reaction, user) => handleReaction(reaction, user, false));
+                collector.on("collect", (reaction, user) => handleReaction(reaction, user, true));
+                collector.on("remove", (reaction, user) => handleReaction(reaction, user, false));
             });
         }
-    })
+    });
 };

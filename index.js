@@ -10,8 +10,9 @@ const client = new Commando.CommandoClient({
     owner: members.currentowner,
     commandPrefix: prefix,
     unknownCommand: false,
-    disableMentions: "all"
+    disableEveryone: true
 });
+
 
 // Events and Commands
 fs.readdir("./Events/", (err, files) => {
@@ -26,7 +27,7 @@ fs.readdir("./Events/", (err, files) => {
 // Monthly Server Topics
 var channelTitles = [
     "Byoushin wo Kamu", "Nouriueno Cracker", "Humanoid", "Mabushii DNA Dake", "Seigi", "Kettobashita Moufu", "Konnakoto Soudou", 
-    "Haze Haseru Haterumade", "Dear Mr. 'F'", "Obenkyou Shitoiteyo", "MILABO", "Fastening", "Ham", "Darken", "Hunch Grey", "Can't Be Right"
+    "Haze Haseru Haterumade", "Dear Mr. 'F'", "Study Me", "MILABO", "Fastening", "Ham", "Darken", "Hunch Grey", "Can't Be Right"
 ];
 
 const channelChange = new cron.CronJob("0 0 1 * *", () => {
@@ -39,7 +40,7 @@ channelChange.start();
 // s
 const scheduledMessage = new cron.CronJob("0 0 * * *", () => {
     const channel = client.channels.cache.find(channel => channel.id === "528641575752957983");
-    channel.send("s")
+    channel.send("s");
 }, null, true, "Europe/London");
 scheduledMessage.start();
 
@@ -77,7 +78,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
                             starboard.send(embed);
                         }
                     }
-                }
+                };
 
                 if(reaction.message.partial) {
                     await reaction.fetch();

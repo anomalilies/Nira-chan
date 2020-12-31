@@ -21,7 +21,7 @@ const roleslistCommands = require("../Embeds/Roles/roleslistCommands");
 const welcomeCommands = require("../Embeds/Welcome/welcomeCommands");
 
 
-var statuses = ["you in disgust.", "(staring at) you.", "you in pain— owie!", "over the fishy league!", "you~wu~(♥ω♥*)!", "you, forever & always.", ";´༎ຶਊ ༎ຶ`;"]
+var statuses = ["you in disgust.", "(staring at) you.", "you in pain— owie!", "over the fishy league!", "you~wu~(♥ω♥*)!", "you, forever & always.", ";´༎ຶਊ ༎ຶ`;"];
 
 module.exports = async (client) => {
     console.log(`${client.user.tag} activated!`);
@@ -56,7 +56,6 @@ module.exports = async (client) => {
             }
         });
     }
-    rolepickerCommands(client, "781296501351383050");
 
     if (client.user.id === members.nirachanactual) {
         setInterval(checkLurkers, 3600000);
@@ -76,7 +75,7 @@ module.exports = async (client) => {
         contestCommands(client, "770795084002230292");
         linkCommands(client, "742069780328087613");
         roleslistCommands(client, "758494476174884905");
-
+        rolepickerCommands(client, "781296501351383050");
         welcomeCommands(client, "603248229928140801");
     }
 };
