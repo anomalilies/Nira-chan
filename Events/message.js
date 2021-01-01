@@ -31,7 +31,7 @@ async function replaceMessageThroughWebhook(message, resend_content) {
         const webhooks = await message.channel.fetchWebhooks();
         const webhook = webhooks.first();
 
-        if (webhook === undefined && !message.content.includes(blacklist)) {
+        if (webhook === undefined) {
             // No webhook exists in this channel, so create one
             message.channel.createWebhook("Nira-chan")
                 .then(webhook => {
