@@ -1,5 +1,7 @@
+require("dotenv").config();
 const Commando = require("discord.js-commando");
-const { homeguild, allowlists } = require("../../config.json");
+const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
+const { homeguild, allowlists } = require(`../../${configFileName}`);
 const { MessageEmbed } = require("discord.js");
 const abilities = require("../../Data/copyabilities.json");
 

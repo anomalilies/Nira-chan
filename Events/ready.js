@@ -1,5 +1,7 @@
+require("dotenv").config();
 const path = require("path");
-const { members } = require("../config.json");
+const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
+const { themechannels, members } = require(`../${configFileName}`);
 const serverInfoEmbed = require("../Embeds/serverInfoEmbed");
 
 const aboutEmbeds = require("../Embeds/About/aboutEmbeds");
@@ -60,6 +62,7 @@ module.exports = async (client) => {
     if (client.user.id === members.nirachanactual) {
         setInterval(checkLurkers, 3600000);
 
+        // TODO: Identify channels
         const channel = client.channels.cache.get("770726574865514517");
         channel.messages.fetch({around: "776320801729019934", limit: 1})
             .then(msg => {
@@ -69,13 +72,13 @@ module.exports = async (client) => {
             }, 300000);
         });
 
-        aboutCommands(client, "760625396487684126");
-        archiveCommands(client, "770726574865514517");
-        botCommands(client, "742548177462231120");
-        contestCommands(client, "770795084002230292");
-        linkCommands(client, "742069780328087613");
-        roleslistCommands(client, "758494476174884905");
-        rolepickerCommands(client, "781296501351383050");
-        welcomeCommands(client, "603248229928140801");
+        aboutCommands(client, themechannels.about);
+        archiveCommands(client, themechannels.archive);
+        botCommands(client, themechannels.botcommands);
+        contestCommands(client, themechannels.contest);
+        linkCommands(client, themechannels.links);
+        roleslistCommands(client, themechannels.roleslist);
+        rolepickerCommands(client, themechannels.rolepicker);
+        welcomeCommands(client, themechannels.welcome);
     }
 };

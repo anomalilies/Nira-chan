@@ -1,4 +1,6 @@
-const { emojis } = require("../../config.json");
+require("dotenv").config();
+const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
+const { emojis } = require(`../../${configFileName}`);
 
 module.exports = async (client, id = []) => {
     const channel = await client.channels.fetch(id);

@@ -1,4 +1,6 @@
-const { emojis } = require("../config.json");
+require("dotenv").config();
+const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
+const { emojis } = require(`../${configFileName}`);
 
 var contributorRoles = [
     "Journalists", "Contestants", "Hackers", "Stans", "Editors",
