@@ -72,20 +72,22 @@ function matchEmojis(find_emojis, message_content) {
 module.exports = async (client, message) => {
     // Welcome Message and Role
     if (message.type === "GUILD_MEMBER_JOIN" && message.guild.id === homeguild) {
-        const list = client.guilds.cache.get("603246092402032670");
+        const list = client.guilds.cache.get(homeguild);
         var VIPRole = list.roles.cache.find(role => role.name === "ZUTOMAYO V.I.P.");
-        message.member.roles.add(VIPRole);
+        if (!message.author.bot) {
+            message.member.roles.add(VIPRole);
+        }
 
         const channel = client.channels.cache.get("603246092402032673");
         channel.send(emojis.wave).then(() => {
             if (Math.random() < 1/100) {
                 const embed = new MessageEmbed()
-                .setDescription(`Attention all ZUTOMAYO stans!\n<@${members.botself}> is in trouble! She needs your help to pay for intensive therapy to relieve the burdens of her past traumas.\nAll she needs is your mum's credit card number, the expiration date, and those 3 *wacky* numbers on the back!\nHurry, and click that shiny 'Server Boost' button **__NOW__!** <:niragun:772343025099603988>`)
+                .setDescription(`Attention all ZUTOMAYO stans!\n<@${client.user.id}> is in trouble! She needs your help to pay for intensive therapy to relieve the burdens of her past traumas.\nAll she needs is your mum's credit card number, the expiration date, and those 3 *wacky* numbers on the back!\nHurry, and click that shiny 'Server Boost' button **__NOW__!** <:niragun:772343025099603988>`)
                 .setColor(15849719);
                 channel.send(embed);
-            };
+            }
         });
-    };
+    }
 
     // Counting and Bot Check
     if (message.channel.id === "758541031498317835") {
@@ -114,7 +116,7 @@ module.exports = async (client, message) => {
     }
     else if (message.webhookID || message.author == client.user || message.author.bot) {
         for (let embed of message.embeds) {
-            if (embed.title === "`-wolfram <query>`" && message.channel.id === "758523806507204608") {
+            if (embed.title === (`-wolfram <query>`) && (message.channel.id === "758523806507204608" || message.channel.id === "762068348870852709")) {
                 message.delete();
             }
         }
@@ -172,6 +174,7 @@ module.exports = async (client, message) => {
     function replaceEmoji(match, group1) {
         // The string to replace the match with
         let replaceString = match;
+
         if (group1 && message.channel.type !== "dm") {
             // If capture group 1 caught something
             message.guild.emojis.cache.each(emoji => {
@@ -195,9 +198,9 @@ module.exports = async (client, message) => {
     }
 
     // GIF emoji of the form `-emojiname`
-    if (message.guild && message.content[0] === "-") {
+    if (message.guild && message.content[0] === prefix) {
         message.guild.emojis.cache.each(async emoji => {
-            if (message.content === `-${emoji.name}` && emoji.animated) {
+            if (message.content === `${prefix}${emoji.name}` && emoji.animated) {
                 await replaceMessageThroughWebhook(message, `<a:${emoji.name}:${emoji.id}>`);
             }
         });
