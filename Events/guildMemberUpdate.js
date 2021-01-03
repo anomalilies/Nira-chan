@@ -1,4 +1,3 @@
-require("dotenv").config();
 const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
 const { emojis } = require(`../${configFileName}`);
 

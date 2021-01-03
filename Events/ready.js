@@ -1,4 +1,3 @@
-require("dotenv").config();
 const path = require("path");
 const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
 const { themechannels, members } = require(`../${configFileName}`);
