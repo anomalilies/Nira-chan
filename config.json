@@ -11,6 +11,24 @@
         }
     },
     "homeguild": "603246092402032670",
+    "cronschedules": {
+        "servertopic": "0 0 1 * *",
+        "countdown": "0 0 * * *"
+    },
+    "themechannels": {
+        "servertopic": "767550623767068742",
+        "countdown": "528641575752957983",
+        "halloffame": "778734720879951922",
+        "starboard": "752363402608902215",
+        "about": "760625396487684126",
+        "archive": "770726574865514517",
+        "botcommands": "742548177462231120",
+        "contest": "770795084002230292",
+        "links": "742069780328087613",
+        "roleslist": "758494476174884905",
+        "rolepicker": "781296501351383050",
+        "welcome": "603248229928140801"
+    },
     "allowlists": {
         "botspamchannels": [
             "742550881911701615",

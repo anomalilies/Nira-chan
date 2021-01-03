@@ -1,4 +1,6 @@
-const { allowlists, members, emojis } = require("../config.json");
+require("dotenv").config();
+const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
+const { allowlists, members, emojis } = require(`../${configFileName}`);
 
 // Find specific emojis in a message
 function matchEmojis(find_emojis, message_content) {

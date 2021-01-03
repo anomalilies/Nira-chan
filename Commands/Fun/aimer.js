@@ -1,5 +1,7 @@
+require("dotenv").config();
 const Commando = require("discord.js-commando");
-const { allowlists, homeguild } = require("../../config.json");
+const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
+const { allowlists, homeguild } = require(`../../${configFileName}`);
 const { MessageEmbed } = require("discord.js");
 
 module.exports = class AddCommand extends Commando.Command {

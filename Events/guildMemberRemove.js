@@ -1,4 +1,6 @@
-const { homeguild } = require("../config.json");
+require("dotenv").config();
+const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
+const { homeguild } = require(`../${configFileName}`);
 
 module.exports = (client, member) => {
     const channel = client.channels.cache.get("742513756059467917");

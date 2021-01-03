@@ -1,5 +1,7 @@
+require("dotenv").config();
 const Discord = require("discord.js");
-const { emojis } = require("../../config.json");
+const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
+const { emojis } = require(`../../${configFileName}`);
 
 global.contest1 = new Discord.MessageEmbed()
   .setTitle("ZUTOMAYO ZONE - Monthly Contest #2")
