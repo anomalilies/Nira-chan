@@ -1,6 +1,6 @@
 const Commando = require("discord.js-commando");
 const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
-const { homeguild, allowlists } = require(`../../${configFileName}`);
+const { homeguild, allowlists, zoneRoles } = require(`../../${configFileName}`);
 const { MessageEmbed } = require("discord.js");
 const abilities = require("../../Data/copyabilities.json");
 
@@ -16,7 +16,7 @@ module.exports = class KirbyCommand extends Commando.Command {
     }
 
     async run(message) {
-        if (message.channel.type === "dm" || allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== homeguild || message.member.roles.cache.get("752308894474174515")) {
+        if (allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== homeguild || message.member.roles.cache.get(zoneRoles.botPass)) {
             var abilityGroup = [];
             var weights = [];
 

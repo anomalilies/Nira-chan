@@ -83,6 +83,19 @@ module.exports = async (client, oldMessage, newMessage) => {
         }
     }
 
+    // Death of Nira
+    const testingNira = "764990952510717973";
+    const niraDead = "756582453824454727";
+    if (newMessage.mentions.users.has(testingNira)) {
+        newMessage.awaitReactions((reaction, user) => user.id === testingNira && reaction.id === niraDead,
+            { max: 1, time: 3500 }).then(collected => {
+                if (collected.first() !== niraDead) {
+                    newMessage.react(niraDead)
+                }
+            }
+        )
+    }
+
     // no u
     var noUResponses = [
         "no u", "yesn't men't", "nay thee", "[Rn] 5f¹⁴7s² × [Rn] 5f³6d¹7s²", "n-nyo u~wu",

@@ -1,5 +1,5 @@
 const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
-const { prefix, commandNames, homeguild, allowlists, members, emojis } = require(`../${configFileName}`);
+const { prefix, commandNames, homeguild, allowlists, members, emojis, zoneRoles } = require(`../${configFileName}`);
 const nira9000 = require("../Data/nira9000.json");
 const patpatresponses = require("../Data/patpatresponses.json");
 
@@ -209,7 +209,7 @@ module.exports = async (client, message) => {
 
     // PatPat Command
     // Allowed in specific bot channels only
-    if (message.channel.type !== "dm" && (allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== homeguild)) {
+    if (message.channel.type !== "dm" && (allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== homeguild || message.member.roles.cache.get(zoneRoles.botPass))) {
         if (message.content.toLowerCase() === `${prefix}${commandNames.patpatstart.name}`) {
             // PatPat: start new conversations
             whosTalkingWithPatPat.add(message.author.id);
@@ -328,6 +328,19 @@ module.exports = async (client, message) => {
     if (isNoU && (Math.random() < 1/3 || members.noutimesinfinity.includes(message.author.id))) {
         const response = noUResponses[Math.floor(Math.random() * noUResponses.length)];
         message.channel.send(response);
+    }
+
+    // Death of Nira
+    const testingNira = "764990952510717973";
+    const niraDead = "756582453824454727";
+    if (message.mentions.users.has(testingNira)) {
+        message.awaitReactions((reaction, user) => user.id === testingNira && reaction.id === niraDead,
+            { max: 1, time: 3500 }).then(collected => {
+                if (collected.first() !== niraDead) {
+                    message.react(niraDead)
+                }
+            }
+        )
     }
 
     // Server Rules

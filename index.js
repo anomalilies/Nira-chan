@@ -5,7 +5,6 @@ const Commando = require("discord.js-commando");
 const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
 const { prefix, cronschedules, themechannels, allowlists, members } = require(`./${configFileName}`);
 const { MessageEmbed } = require("discord.js");
-const { start } = require("repl");
 
 // Commando
 const client = new Commando.CommandoClient({

@@ -18,6 +18,10 @@ module.exports = async (client, oldMember, newMember) => {
         // Server Boost Message
         if (!oldMember.roles.cache.has("744738039116464151") && newMember.roles.cache.has("744738039116464151")) {
             channel.send(emojis.yay);
+            newMember.roles.add("796211149397819442");
+            newMember.roles.add("781295857706336296");
+            newMember.roles.add("770022309393334302");
+            newMember.roles.add("765347466169024512");
         }
         // Lock Regulars for Non-Newbies
         if (oldMember.roles.cache.has("774482130737561600") && newMember.roles.cache.has(isRegular)) {

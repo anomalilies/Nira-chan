@@ -1,6 +1,6 @@
 const Commando = require("discord.js-commando");
 const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
-const { allowlists, homeguild } = require(`../../${configFileName}`);
+const { allowlists, homeguild, zoneRoles } = require(`../../${configFileName}`);
 const { MessageEmbed } = require("discord.js");
 
 module.exports = class AddCommand extends Commando.Command {
@@ -21,7 +21,7 @@ module.exports = class AddCommand extends Commando.Command {
     }
 
     async run(message, {name}) {
-        if (message.channel.type === "dm" || allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== homeguild) {
+        if (allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== homeguild || message.member.roles.cache.get(zoneRoles.botPass)) {
             if (name.length <= 40) {
                 const embed = new MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))

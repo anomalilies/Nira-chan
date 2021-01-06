@@ -1,6 +1,6 @@
 const Commando = require("discord.js-commando");
 const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
-const { allowlists } = require(`../../${configFileName}`);
+const { allowlists, zoneRoles } = require(`../../${configFileName}`);
 const { MessageEmbed } = require("discord.js");
 
 module.exports = class AddCommand extends Commando.Command {
@@ -15,7 +15,7 @@ module.exports = class AddCommand extends Commando.Command {
     }
 
     async run(message) {
-        if (allowlists.botspamchannels.includes(message.channel.id) || message.channel.type === "dm") {
+        if (allowlists.botspamchannels.includes(message.channel.id) || message.channel.type === "dm" || message.member.roles.cache.get(zoneRoles.botPass)) {
             const embed = new MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
                 .setDescription(
@@ -25,6 +25,6 @@ module.exports = class AddCommand extends Commando.Command {
                 .setFooter("Is this correct? (yes/no)")
                 .setColor(240116);
             message.channel.send(embed);
-            }
+        }
     }
 };

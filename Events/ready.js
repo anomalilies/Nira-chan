@@ -21,7 +21,6 @@ const rolepickerCommands = require ("../Embeds/Role-Picker/rolepickerCommands");
 const roleslistCommands = require("../Embeds/Roles/roleslistCommands");
 const welcomeCommands = require("../Embeds/Welcome/welcomeCommands");
 
-
 var statuses = ["you in disgust.", "(staring at) you.", "you in pain— owie!", "over the fishy league!", "you~wu~(♥ω♥*)!", "you, forever & always.", ";´༎ຶਊ ༎ຶ`;"];
 
 module.exports = async (client) => {

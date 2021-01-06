@@ -17,7 +17,7 @@ module.exports = class Rule0w0Command extends Commando.Command {
         if (message.channel.type === "dm") {
             message.channel.send("You can't use this command here, silly!");
         }
-        else if (message.guild.id === homeguild && message.channel.type !== "dm") {
+        else if (message.guild.id === homeguild) {
             const rule0w0 = new MessageEmbed()
             .setTitle("(Swecrwet Rwulwe) 0w0. Bwe Kwind to Youwsewf")
             .setDescription(
