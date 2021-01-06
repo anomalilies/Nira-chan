@@ -14,7 +14,7 @@ module.exports = class DespairCommand extends Commando.Command {
     }
 
     async run(message) {
-        if (allowlists.botspamchannels.includes(message.channel.id) || message.channel.type === "dm" || message.member.roles.cache.get(zoneRoles.botPass)) {
+        if (message.channel.type === "dm" || allowlists.botspamchannels.includes(message.channel.id) || message.channel.type === "dm" || message.member.roles.cache.get(zoneRoles.botPass)) {
             const embed = new MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
                 .setDescription(`Aaaa, the tape is rewinding so fast! ${emojis.despair}`)

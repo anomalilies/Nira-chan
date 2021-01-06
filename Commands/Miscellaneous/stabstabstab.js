@@ -15,7 +15,7 @@ module.exports = class FencingCommand extends Commando.Command {
     }
 
     run(message) {
-        if (allowlists.botspamchannels.includes(message.channel.id) || message.channel.type === "dm" || message.member.roles.cache.get(zoneRoles.botPass)) {
+        if (message.channel.type === "dm" || allowlists.botspamchannels.includes(message.channel.id) || message.channel.type === "dm" || message.member.roles.cache.get(zoneRoles.botPass)) {
             const stabstabstab = new MessageEmbed()
             .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
             .setColor(15849719)

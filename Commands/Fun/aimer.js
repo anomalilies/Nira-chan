@@ -21,7 +21,7 @@ module.exports = class AddCommand extends Commando.Command {
     }
 
     async run(message, {name}) {
-        if (allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== homeguild || message.member.roles.cache.get(zoneRoles.botPass)) {
+        if (message.channel.type === "dm" || allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== homeguild || message.member.roles.cache.get(zoneRoles.botPass)) {
             if (name.length <= 40) {
                 const embed = new MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))

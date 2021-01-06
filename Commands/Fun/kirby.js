@@ -16,7 +16,7 @@ module.exports = class KirbyCommand extends Commando.Command {
     }
 
     async run(message) {
-        if (allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== homeguild || message.member.roles.cache.get(zoneRoles.botPass)) {
+        if (message.channel.type === "dm" || allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== homeguild || message.member.roles.cache.get(zoneRoles.botPass)) {
             var abilityGroup = [];
             var weights = [];
 
@@ -29,6 +29,7 @@ module.exports = class KirbyCommand extends Commando.Command {
                 weights[i] += weights[i - 1] || 0;
             }
             var random = Math.random() * weights[weights.length - 1];
+            console.log(random)
             for (i = 0; i < weights.length; i++) {
                 if (weights[i] > random) {
                     break;
@@ -50,7 +51,7 @@ module.exports = class KirbyCommand extends Commando.Command {
                 `Elemental combo! Kirby got the **${ability[index]}** ability when inhaling **${nickname}**!`,
                 `Power combo! Kirby got the **${ability[index]}** ability when inhaling **${nickname}**!`,
                 `Woah! Kirby got the **${ability[index]}** super ability when inhaling **${nickname}**!`,
-                `Kirby inhaled **${nickname}** and... Turned into yarn? He uses the **${ability[index]}** attack!`,
+                `Kirby inhaled **${nickname}** and... Turned into yarn? He uses the **${ability[index]}** move!`,
                 `Kirby found a Robobot Armour docking station! After inhaling **${nickname}**, he uses **${ability[index]}**!`,
                 `With **${nickname}**, Kirby partners up with his friends! He uses the **${ability[index]}** attack!`,
                 `Wow! Kirby inhaled **${nickname}** and got the rare **${ability[index]}** ability!`,
