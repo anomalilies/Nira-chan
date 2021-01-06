@@ -336,7 +336,7 @@ module.exports = async (client, message) => {
     if (message.mentions.users.has(testingNira)) {
         message.awaitReactions((reaction, user) => user.id === testingNira && reaction.id === niraWave,
             { max: 1, time: 3500 }).then(collected => {
-                if (collected.size) {
+                if (!collected.size) {
                     message.react("756582453824454727");
                 }
             }
