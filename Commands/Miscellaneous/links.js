@@ -1,4 +1,3 @@
-require("dotenv").config();
 const Commando = require("discord.js-commando");
 const { MessageEmbed } = require("discord.js");
 const linksChannel = "742069780328087613";

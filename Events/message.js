@@ -1,4 +1,3 @@
-require("dotenv").config();
 const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
 const { prefix, commandNames, homeguild, allowlists, members, emojis } = require(`../${configFileName}`);
 const nira9000 = require("../Data/nira9000.json");

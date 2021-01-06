@@ -1,4 +1,3 @@
-require("dotenv").config();
 const Commando = require("discord.js-commando");
 const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
 const { allowlists } = require(`../../${configFileName}`);

@@ -1,4 +1,3 @@
-require("dotenv").config();
 const Commando = require("discord.js-commando");
 const { MessageEmbed } = require("discord.js");
 const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
