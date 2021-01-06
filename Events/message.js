@@ -332,12 +332,12 @@ module.exports = async (client, message) => {
 
     // Death of Nira
     const testingNira = "764990952510717973";
-    const niraDead = "756582453824454727";
+    const niraWave = emojis.wave.replace(/\D/g, "");
     if (message.mentions.users.has(testingNira)) {
-        message.awaitReactions((reaction, user) => user.id === testingNira && reaction.id === niraDead,
+        message.awaitReactions((reaction, user) => user.id === testingNira && reaction.id === niraWave,
             { max: 1, time: 3500 }).then(collected => {
-                if (collected.first() !== niraDead) {
-                    message.react(niraDead)
+                if (!collected.size === 1) {
+                    message.react("756582453824454727")
                 }
             }
         )

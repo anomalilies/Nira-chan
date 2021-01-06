@@ -82,15 +82,15 @@ module.exports = async (client, oldMessage, newMessage) => {
             newMessage.delete();
         }
     }
-
+    
     // Death of Nira
     const testingNira = "764990952510717973";
-    const niraDead = "756582453824454727";
+    const niraWave = emojis.wave.replace(/\D/g, "");
     if (newMessage.mentions.users.has(testingNira)) {
-        newMessage.awaitReactions((reaction, user) => user.id === testingNira && reaction.id === niraDead,
+        newMessage.awaitReactions((reaction, user) => user.id === testingNira && reaction.id === niraWave,
             { max: 1, time: 3500 }).then(collected => {
-                if (collected.first() !== niraDead) {
-                    newMessage.react(niraDead)
+                if (!collected.size === 1) {
+                    newMessage.react("756582453824454727")
                 }
             }
         )
