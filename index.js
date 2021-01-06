@@ -14,7 +14,6 @@ const client = new Commando.CommandoClient({
     disableEveryone: true
 });
 
-
 // Events and Commands
 fs.readdir("./Events/", (err, files) => {
     if (err) return console.error(err);

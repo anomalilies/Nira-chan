@@ -29,7 +29,6 @@ module.exports = class KirbyCommand extends Commando.Command {
                 weights[i] += weights[i - 1] || 0;
             }
             var random = Math.random() * weights[weights.length - 1];
-            console.log(random)
             for (i = 0; i < weights.length; i++) {
                 if (weights[i] > random) {
                     break;
@@ -37,7 +36,7 @@ module.exports = class KirbyCommand extends Commando.Command {
             }
             var ability = abilityGroup[i]
             const index = Math.floor(Math.random() * ability.length);
-
+            
             if (message.channel.type === "dm") {
                 var nickname = message.author.username;
             }
@@ -57,7 +56,8 @@ module.exports = class KirbyCommand extends Commando.Command {
                 `Wow! Kirby inhaled **${nickname}** and got the rare **${ability[index]}** ability!`,
                 `Kirby inhaled **${nickname}** and... Turned into yarn? He gains the **${ability[index]}** ability!`,
                 `As Kirby is approaching an impending boss fight, anxiety creeps over him. No need to worry, though; Kirby inhales **${nickname}**, and gets the **${ability[index]}** ability!`,
-                `No way... Kirby inhaled **${nickname}** and got the ultra-rare **${ability[index]}** ability!`
+                `No way... Kirby inhaled **${nickname}** and got the ultra-rare **${ability[index]}** ability!`,
+                `why tf would i absorb your **${ability}**, **${nickname}**? <:kirbuff:757349479065321483> fuck outta here fam`
             ]
 
             const embed = new MessageEmbed()

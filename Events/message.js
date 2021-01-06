@@ -345,6 +345,13 @@ module.exports = async (client, message) => {
         )
     }
 
+    // Poyo!
+    if (message.content.toLowerCase().includes("poyo")) {
+        if (message.content.toLowerCase() === "poyo" || Math.random() < 1/2) {
+            message.channel.send("Poyo!");
+        }
+    }
+
     // Server Rules
     if (message.channel.type !== "dm" && message.guild.id === homeguild) {
         if (message.member && message.member.roles.cache.get("742061218860236840")) {
