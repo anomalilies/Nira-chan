@@ -91,6 +91,9 @@ module.exports = async (client, message) => {
             }
         });
     }
+    if (message.type === "USER_PREMIUM_GUILD_SUBSCRIPTION") {
+        message.channel.send("Thank you so much! <:nirastar:777740701441064960>")
+    }
 
     // Counting and Bot Check
     if (message.channel.id === "758541031498317835") {

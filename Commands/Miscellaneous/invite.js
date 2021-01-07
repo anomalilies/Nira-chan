@@ -53,7 +53,7 @@ module.exports = class InviteCommand extends Commando.Command {
                         msg.edit(botInvite)
                         .then(msg.reactions.removeAll());
                     } else if (reactions.has(`${niracute}`)) {
-                        msg.channel.send("https://discord.gg/htSDkHH")
+                        msg.channel.send("https://discord.gg/zutomayo")
                         .then(msg.reactions.removeAll());
                     }
 			    });
