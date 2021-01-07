@@ -36,7 +36,7 @@ module.exports = class AddCommand extends Commando.Command {
             const dimeloEmbed = getSimpleEmbed (
                 "I'm 100% sure your character is...\n\nDimelo Tony (Musician)",
                 "You have no choice in the matter; This is correct.",
-                "https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/Dimelo%20Tony.png"
+                "https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/Dimelo%20Tony.jpg"
             );
             const correctEmbed = new MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
