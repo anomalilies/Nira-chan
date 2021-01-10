@@ -22,15 +22,21 @@ module.exports = class EditCommand extends Commando.Command {
     }
 
     async run(message, { id }) {
-        const channel = message.guild.channels.cache.find(
-            channel => channel.id === message.channel.id);
-        channel.messages.fetch(id).then(msg => {
-            if (id.match(/^\d{18}$/) && msg.author.id === members.nirachanactual) {
-                message.channel.send(id);
-            }
-            else {
-                message.channel.send("<:nirangy:777736569746227211>");
-            }
-        });
+        message.channel.messages.fetch(id).then(targetMsg => targetMsg.edit('testingNyiwa'));
+        /*const channels = message.guild.channels.cache.filter(c => c.type === "text").array();
+        for (let index of channels) {
+            await index.messages.fetch(id).then(targetMsg => {
+                if (id.match(/^\d{18}$/) && targetMsg.author.id === "764990952510717973") {
+                    message.channel.send(`<@${message.author.id}>, What would you like the new message to say?`);
+                    message.channel.awaitMessages({ max: 1, time: 30000, errors: ["time"] })
+                    .then((collected) => {
+                        targetMsg.edit(collected.first());
+                    });
+                }
+                else {
+                    message.channel.send("<:nirangy:777736569746227211>");
+                }
+            }).catch(err => {});
+        }*/
     }
 };
