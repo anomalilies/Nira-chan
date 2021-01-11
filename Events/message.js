@@ -124,14 +124,6 @@ module.exports = async (client, message) => {
         return;
     }
 
-    // testingNira Debug
-    let user = client.users.cache.find(user => user.username == "testingNira");
-    if (client.user.id === members.nirachanactual && user.presence.status === "online") {
-        if (message.channel.id === "765054650029309962" && message.content.startsWith(prefix)) {
-            return;
-        }
-    }
-
     // UWU-ify Channel
     if (message.channel.id === "696143475954941962" || message.channel.id === "786321508527243324") {
         var str = message.content;

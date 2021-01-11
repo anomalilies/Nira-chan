@@ -20,6 +20,6 @@ module.exports = class DespairCommand extends Commando.Command {
                 .setDescription(`Aaaa, the tape is rewinding so fast! ${emojis.despair}`)
                 .setColor(15849719);
             message.channel.send(embed);
-            }
+        }
     }
 };
