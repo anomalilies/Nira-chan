@@ -48,7 +48,7 @@ module.exports = class EditCommand extends Commando.Command {
                 }
             }
             
-            if (targetMsg.id.match(/^\d{18}$/) && targetMsg.author === members.nirachanactual) {
+            if (targetMsg.id.match(/^\d{18}$/) && targetMsg.author.id === members.nirachanactual) {
                 message.channel.send(`<@${message.author.id}>, What would you like the new message to say?`+"\nRespond with `cancel` to cancel the command. The command will automatically be cancelled in 30 seconds.");
                 const filter = m => m.author.id === message.author.id;
 
