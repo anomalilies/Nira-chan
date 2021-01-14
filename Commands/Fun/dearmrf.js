@@ -8,7 +8,7 @@ module.exports = class WriteCommand extends Commando.Command {
         super(client, {
             name: "dearmrf",
             aliases: ["write"],
-            group: "misc",
+            group: "fun",
             memberName: "dearmrf",
             description: "Write your own personal letter to Mr. F.",
             args: [

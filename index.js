@@ -5,6 +5,7 @@ const Commando = require("discord.js-commando");
 const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
 const { prefix, cronschedules, themechannels, allowlists, members } = require(`./${configFileName}`);
 const { MessageEmbed } = require("discord.js");
+const songs = require("./Data/songs.json");
 
 // Commando
 const client = new Commando.CommandoClient({
@@ -25,11 +26,7 @@ fs.readdir("./Events/", (err, files) => {
 });
 
 // Monthly Server Topics
-var channelTitles = [
-    "Byoushin wo Kamu", "Nouriueno Cracker", "Humanoid", "Mabushii DNA Dake", "Seigi", "Kettobashita Moufu", "Konnakoto Soudou", 
-    "Haze Haseru Haterumade", "Dear Mr. 'F'", "Study Me", "MILABO", "Fastening", "Ham", "Darken", "Hunch Grey", "Can't Be Right"
-];
-
+var channelTitles = songs.mvSongs.engName;
 const channelChange = new cron.CronJob(cronschedules.servertopic, () => {
     const channel = client.channels.cache.find(channel => channel.id === themechannels.servertopic);
     const random = Math.floor(Math.random() * channelTitles.length);

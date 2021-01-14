@@ -7,7 +7,7 @@ module.exports = class DespairCommand extends Commando.Command {
     constructor(client) {
         super(client, {
             name: "despair",
-            group: "misc",
+            group: "fun",
             memberName: "despair",
             description: "Express Despair the Nira Way™️.",
         });

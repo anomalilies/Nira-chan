@@ -95,7 +95,7 @@ module.exports = async (client, message) => {
         message.channel.send("Thank you so much! <:nirastar:777740701441064960>")
     }
 
-    // Counting and Bot Check
+    // Counting
     if (message.channel.id === "758541031498317835") {
         if (message.system || message.webhookID || message.author.bot || message.attachments.array().length) {
             message.delete();
@@ -120,6 +120,17 @@ module.exports = async (client, message) => {
         }
         return;
     }
+    // Grey
+    else if (message.mentions.users.has(members.nirachanactual) && message.author.id === members.grey) {
+        var greyResponses = [
+            "Long time no see.", "What's up?", "Can I call you today?", "You're awake!", "I want to be with you.",
+            "I miss you.", "I love you.", "Aren't you dead?!", "I don't want to study anymore...", "Take my sad love.",
+            "Come home to me.", "Don't forget me.", "Why won't you answer my calls?"
+        ]
+        const response = greyResponses[Math.floor(Math.random() * greyResponses.length)];
+        message.channel.send(`<@${members.grey}>, ${response}`);
+    }
+    // Bot Check
     else if (message.webhookID || message.author == client.user || message.author.bot) {
         for (let embed of message.embeds) {
             if (embed.title === (`-wolfram <query>`) && (message.channel.id === "758523806507204608" || message.channel.id === "762068348870852709")) {

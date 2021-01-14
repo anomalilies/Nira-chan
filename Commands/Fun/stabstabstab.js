@@ -8,7 +8,7 @@ module.exports = class FencingCommand extends Commando.Command {
         super(client, {
             name: "stabstabstab",
             aliases: ["stab", "fence", "fencing"],
-            group: "misc",
+            group: "fun",
             memberName: "stabstabstab",
             description: "Go fencing.",
         });    
