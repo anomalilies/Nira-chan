@@ -25,6 +25,10 @@ var statuses = ["you in disgust.", "(staring at) you.", "you in pain— owie!", 
 
 module.exports = async (client) => {
     console.log(`${client.user.tag} activated!`);
+    client.guilds.cache.forEach(guild => {
+        console.log(`${guild.name} | ${guild.id}`);
+    })
+
     function statusChange() {
         client.user.setActivity(statuses[Math.floor(Math.random() * statuses.length)], { type: "WATCHING" });
     }
