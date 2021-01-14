@@ -43,7 +43,10 @@ module.exports = class EditCommand extends Commando.Command {
     }
 
     async run(message, { id, channelID, title, desc, fieldTitle }) {
-        if (id.match(/^\d{18}$/)) {
+        if (message.channel.type === "dm") {
+            message.channel.send("You can't use this command here, silly!");
+        }
+        else if (id.match(/^\d{18}$/)) {
             var targetMsg = "";
             
             if (channelID.toUpperCase() === "N/A") {
