@@ -1,7 +1,6 @@
 const Commando = require("discord.js-commando");
 const configFileName = process.env.NIRA_DEV ? "config.dev.json" : "config.json";
 const { members } = require(`../../${configFileName}`);
-//const { MessageEmbed } = require("discord.js");
 
 module.exports = class EditCommand extends Commando.Command {
     constructor(client) {
@@ -41,10 +40,8 @@ module.exports = class EditCommand extends Commando.Command {
             else {
                 const channel = channelID.split(/(\d+)/)
                 if (channel[1].match(/^\d{18}$/)) {
-                    let targetChannel = message.guild.channels.cache.find(
-                        c => c.id === channel[1]).then(async () => {
-                        targetMsg = await targetChannel.messages.fetch(id);
-                    });
+                    let targetChannel = message.guild.channels.cache.get(channel[1]);
+                    targetMsg = await targetChannel.messages.fetch(id);
                 }
             }
             
