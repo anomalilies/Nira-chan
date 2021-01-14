@@ -128,7 +128,11 @@ module.exports = async (client, message) => {
             "Come home to me.", "Don't forget me.", "Why won't you answer my calls?"
         ]
         const response = greyResponses[Math.floor(Math.random() * greyResponses.length)];
-        message.channel.send(`<@${members.grey}>, ${response}`);
+        message.channel.startTyping();
+        setTimeout(function () {
+            message.channel.stopTyping();
+            message.channel.send(`<@${members.grey}>, ${response}`);
+        }, 3000);
     }
     // Bot Check
     else if (message.webhookID || message.author == client.user || message.author.bot) {
