@@ -43,6 +43,8 @@ module.exports = class EditCommand extends Commando.Command {
     }
 
     async run(message, { id, channelID, title, desc, fieldTitle }) {
+        const failure = message.channel.send(`<@${message.author.id}>, Cancelled command.`);
+
         if (message.channel.type === "dm") {
             message.channel.send("You can't use this command here, silly!");
         }
@@ -54,7 +56,7 @@ module.exports = class EditCommand extends Commando.Command {
                 for (let index of channels) {
                     await index.messages.fetch(id).then(msg => {
                         targetMsg = msg;
-                    }).catch(err => {});
+                    }).catch(() => { failure; });
                 }
             }
             else {
@@ -64,7 +66,6 @@ module.exports = class EditCommand extends Commando.Command {
                     targetMsg = await targetChannel.messages.fetch(id);
                 }
             }
-
             const embed = new MessageEmbed()
             .setColor(15849719)
             .setTitle(title)
@@ -80,13 +81,12 @@ module.exports = class EditCommand extends Commando.Command {
                         embed.addFields(
                             {name: fieldTitle, value: fieldValue}
                         );
+                        targetMsg.edit("", embed);
                     }
-                    else {
-                        message.channel.send(`<@${message.author.id}>, Cancelled command.`);
-                    }
-                }).catch(err => {});
+                    else { failure; }
+                }).catch(() => { failure; });
             }
-            targetMsg.edit("", embed);
-        }
+            else { failure; }}
+        else { failure; }
     }
 };
