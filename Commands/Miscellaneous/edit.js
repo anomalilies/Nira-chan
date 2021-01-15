@@ -26,6 +26,8 @@ module.exports = class EditCommand extends Commando.Command {
     }
 
     async run(message, { id, channelID }) {
+        const failure = `<@${message.author.id}>, Cancelled command.`;
+
         if (message.channel.type === "dm") {
             message.channel.send("You can't use this command here, silly!");
         }
@@ -63,7 +65,7 @@ module.exports = class EditCommand extends Commando.Command {
                         message.channel.send(`<@${message.author.id}>, Cancelled command.`);
                     }
                 }).catch(err => {});
-            }
-        }
+            } else { message.channel.send(failure) }}
+        else { message.channel.send(failure) }
     }
 };

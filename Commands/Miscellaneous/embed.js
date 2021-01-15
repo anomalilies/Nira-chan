@@ -43,7 +43,7 @@ module.exports = class EditCommand extends Commando.Command {
     }
 
     async run(message, { id, channelID, title, desc, fieldTitle }) {
-        const failure = message.channel.send(`<@${message.author.id}>, Cancelled command.`);
+        const failure = `<@${message.author.id}>, Cancelled command.`;
 
         if (message.channel.type === "dm") {
             message.channel.send("You can't use this command here, silly!");
@@ -56,7 +56,7 @@ module.exports = class EditCommand extends Commando.Command {
                 for (let index of channels) {
                     await index.messages.fetch(id).then(msg => {
                         targetMsg = msg;
-                    }).catch(err => { failure; });
+                    }).catch(err => {});
                 }
             }
             else {
@@ -69,7 +69,7 @@ module.exports = class EditCommand extends Commando.Command {
             const embed = new MessageEmbed()
             .setColor(15849719)
             .setTitle(title)
-            .setDescription(desc)
+            .setDescription(desc);
             
             if (fieldTitle.toUpperCase !== "N/A" && targetMsg.id.match(/^\d{18}$/) && targetMsg.author.id === members.nirachanactual) {
                 message.channel.send(`<@${message.author.id}>, What would you like this field to contain?`+"\nRespond with `cancel` to cancel the command. The command will automatically be cancelled in 30 seconds.");
@@ -81,10 +81,9 @@ module.exports = class EditCommand extends Commando.Command {
                         embed.addFields({name: fieldTitle, value: fieldValue});
                         targetMsg.edit("", embed);
                     }
-                    else { failure; }
-                }).catch(err => { failure; });
-            }
-        }
-        else { failure; }
+                    else { message.channel.send(failure); }
+                }).catch(err => {});
+            } else { message.channel.send(failure); }}
+        else { message.channel.send(failure); }
     }
 };
