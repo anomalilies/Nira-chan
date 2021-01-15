@@ -84,7 +84,7 @@ module.exports = class EditCommand extends Commando.Command {
                     else { failure; }
                 }).catch(err => { failure; });
             }
-            else { failure; }}
+        }
         else { failure; }
     }
 };
