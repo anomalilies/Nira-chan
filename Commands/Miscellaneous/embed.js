@@ -56,7 +56,7 @@ module.exports = class EditCommand extends Commando.Command {
                 for (let index of channels) {
                     await index.messages.fetch(id).then(msg => {
                         targetMsg = msg;
-                    }).catch(() => { failure; });
+                    }).catch(err => { failure; });
                 }
             }
             else {
@@ -78,13 +78,11 @@ module.exports = class EditCommand extends Commando.Command {
                 .then((collected) => {
                     var fieldValue = collected.first().content;
                     if (fieldValue.toLowerCase() !== "cancel") {
-                        embed.addFields(
-                            {name: fieldTitle, value: fieldValue}
-                        );
+                        embed.addFields({name: fieldTitle, value: fieldValue});
                         targetMsg.edit("", embed);
                     }
                     else { failure; }
-                }).catch(() => { failure; });
+                }).catch(err => { failure; });
             }
             else { failure; }}
         else { failure; }
