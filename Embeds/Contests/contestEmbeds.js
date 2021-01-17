@@ -4,7 +4,7 @@ const { emojis } = require(`../../${configFileName}`);
 
 global.contest1 = new Discord.MessageEmbed()
   .setTitle("ZUTOMAYO ZONE - Monthly Contest #3")
-  .setDescription(`Sorry for the delay, everyone, but our 3rd competition is finally here! ${emojis.yay}\nThis time, instead of solely art entries, we're offering physical prizes this time around for a whole range of possible entry options. <:nirateehee:756734704161390734>\n||Please note this is probably a one-off for now as celebration of the release of 'Gusare', but we're planning more prizes for the future!\nIf you'd like to help out with contest prizes financially or otherwise, feel free to DM <@228880116699103232> or <@126355183608397825>, or donate **[here](https://ko-fi.com/uniguri)**!||`)
+  .setDescription(`Sorry for the delay, everyone, but our 3rd competition is finally here!\nThis time, instead of solely art entries, we're offering physical prizes this time around for a whole range of possible entry options.\n\nPlease note this is probably a one-off for now as celebration of the release of *Gusare*, but we're planning more prizes for the future!\nIf you'd like to help out with contest prizes financially or otherwise, feel free to DM <@228880116699103232> or <@126355183608397825>, or donate **__[here](https://ko-fi.com/uniguri)__**!`)
   .setColor(15849719)
   .addFields(
     {name: "What does ZUTOMAYO mean to you?", value: "You've probably already guessed the theme of this contest from the subheader above, and as such, our monthly contest has expanded from having a sole focus on art, to allowing a ton of potential options to its entrants.\nWhether you still want to focus on drawing, make a cover of a previous song, or write a whole thesis on ZUTOMAYO lore, the possibilities are ~~somewhat~~ endless!"}
@@ -25,7 +25,7 @@ global.contest3 = new Discord.MessageEmbed()
 global.contest4 = new Discord.MessageEmbed()
   .setColor(15849719)
   .addFields(
-    {name: "When is the Deadline?", value: "The deadline for all entries will be on Saturday 20th February, 00:00 GMT/UTC.\nThe rest of the 20th, up until 00:00 on the 21st, will be dedicated to voting, where the top 3 entries in each category will be brought into a final vote to decide the final placement of entrants.\nWinners will be released by/on Monday the 22nd of February, with prizes hopefully shipping out/provided A.S.A.P. after. <:nirahappy:742102453901590529>"}
+    {name: "When is the Deadline?", value: "The deadline for all entries will be on Saturday 20th February, 00:00 GMT/UTC.\nThe rest of the 20th, up until 00:00 on the 21st, will be dedicated to voting, where the top 3 entries in each category will be brought into a final vote to decide the final placement of entrants.\nWinners will be released by/on Monday the 22nd of February, with prizes hopefully shipping out/provided A.S.A.P. after."}
 );
 global.contest5 = new Discord.MessageEmbed()
   .setColor(15849719)
@@ -35,4 +35,5 @@ global.contest5 = new Discord.MessageEmbed()
     {name: "2nd Place", value: `• 3 months Spotify Premium.\n• 750,000${emojis.uniguri}.\n• The shiny <@&761383550741643284> role.`},
     {name: "3rd Place", value: `• 1 month Spotify Premium.\n• 250,000${emojis.uniguri}.\n• The shiny <@&761383550741643284> role.`},
     {name: "Participation Awards", value: `• 50,000${emojis.uniguri}.\n• The <@&770792091353743401> role!`}
-);
+  )
+  .setFooter("*Ideally, we'd love to give prizes to those who haven't already bought Gusare. If you win and already have the physical album, you'll be given the chance to pass your prize down to any of our runners-up, however this is fully your choice, and will not be shared with the rest of the server.\n\nShipped from the U.K.: Free economy shipping up to £6.50.\nCustom charges and tax not included; Search 'Royal Mail' for more information on estimated shipping fees and restrictions!");
