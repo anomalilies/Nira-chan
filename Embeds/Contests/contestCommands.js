@@ -9,6 +9,8 @@ module.exports = async (client, id = []) => {
         const niraMessages = messages.filter(msg => msg.author == client.user);
 
         const entry = new MessageEmbed()
+        .setColor(15849719)
+        .setTitle("Contest Entry")
         .setDescription("Register your interest in joining this contest by **reacting with <:nirascoop1:777269746722668565>**!\nFor submitting entries, please **use the form below**!");
 
         if (niraMessages.size === 0) {
