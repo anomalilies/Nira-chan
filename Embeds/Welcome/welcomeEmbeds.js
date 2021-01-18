@@ -10,6 +10,6 @@ global.welcome1 = new Discord.MessageEmbed()
 global.welcome2 = new Discord.MessageEmbed()
 .setColor(15849719)
   .addFields(
-    {name: "What Should I Do Now?", value: "• New to ZUTOMAYO? Find out more about the group on <#760625396487684126>!\n• Check out our collection of exclusive ZUTOMAYO content over at <#742069780328087613>!\n• Don't feel afraid introduce yourself over at <#603246092402032673>; We pride ourselves on our friendly community, so we promise they won't bite.\n• Be sure to also familarise yourself with how the server is run on <#760621183564513312>, and grab some roles from <#781296501351383050> whilst you're at it!"},
-    {name: "Permanent Invite Link", value: "If you'd like, feel free to invite your friends to the ZONE with the link below:"}
+    {name: "What Should I Do Now?", value: "• New to ZUTOMAYO? Find out more about the group on <#760625396487684126>!\n• Check out our collection of exclusive ZUTOMAYO content over at <#742069780328087613>!\n• Don't feel afraid introduce yourself over at <#603246092402032673>; We pride ourselves on our friendly community, so we promise they won't bite.\n• Be sure to also familarise yourself with how the server is run on <#760621183564513312>, and grab some roles from <#781296501351383050> whilst you're at it!\n• Starting a ZUTOMAYO collection, or looking to add to your shrine? We hold regular contests on <#>, with prizes you're sure to be interested in!"},
+    {name: "Support Us!", value: "If you'd like to fund our giveaways, **check out our __[Ko-fi](https://ko-fi.com/uniguri)__**!\n\n However, regardless of whether or not you choose to financially support us, please feel free to invite your friends to the ZONE with the link below:"}
 );
