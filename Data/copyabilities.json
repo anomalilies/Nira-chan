@@ -252,16 +252,16 @@
     },
     "epicYarn": {
         "ability": [
-        "Car",
-        "Note",
-        "Parachute",
-        "Pendulum",
-        "Sleigh",
-        "Snake",
-        "Strength",
-        "Submarine",
-        "Top",
-        "Weight"
+            "Car",
+            "Note",
+            "Parachute",
+            "Pendulum",
+            "Sleigh",
+            "Snake",
+            "Strength",
+            "Submarine",
+            "Top",
+            "Weight"
         ],
         "weight": 4
     },
@@ -315,12 +315,7 @@
         "weight": 3
     },
     "animeOnly": {
-        "ability": [
-            "Baton",
-            "Iron",
-            "Top",
-            "Kabuki"
-        ],
+        "ability": ["Baton", "Iron", "Top", "Kabuki"],
         "weight": 2
     },
     "ravelAbilities": {
@@ -386,9 +381,7 @@
         "weight": 0.9
     },
     "stfu": {
-        "ability": [
-            "beta ass"
-        ],
+        "ability": ["beta ass"],
         "weight": 0.1
     }
 }

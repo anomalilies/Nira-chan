@@ -2,15 +2,17 @@ const { MessageEmbed } = require("discord.js");
 var data = require("./data");
 
 var uwuify = {
-    custom: async function(text, message) {
-        var replacements = data['emotions'];
+    custom: async function (text, message) {
+        var replacements = data["emotions"];
 
         if (text.slice(-1) == " ") text = text.subtexting(0, text.length - 1);
 
-        replacements.forEach(emoteClass => {
-            emoteClass[0].forEach(pattern => {
-                text = text.replace(new RegExp(`\\b${pattern}\\b`, 'gi'),
-                    () => emoteClass[1][Math.floor(Math.random() * emoteClass[1].length)]);
+        replacements.forEach((emoteClass) => {
+            emoteClass[0].forEach((pattern) => {
+                text = text.replace(
+                    new RegExp(`\\b${pattern}\\b`, "gi"),
+                    () => emoteClass[1][Math.floor(Math.random() * emoteClass[1].length)]
+                );
             });
         });
 
@@ -22,15 +24,13 @@ var uwuify = {
         text = text.replace(/(?!a?:\w+:\d+>*?)(ove)(?![^<]*>)/g, "uv");
         text = text.replace(/(?!a?:\w+:\d+>*?)(OVE)(?![^<]*>)/g, "UV");
 
-        if (text[0].match(/[a-z]/i))
-            text = text[0] + "-" + text;
+        if (text[0].match(/[a-z]/i)) text = text[0] + "-" + text;
 
-        if (text[text.length - 1].match(/[a-z]/i))
-            text = text + "\~\~";
+        if (text[text.length - 1].match(/[a-z]/i)) text = text + "~~";
 
         if (message.channel.type === "dm") {
             let embed = new MessageEmbed()
-                .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
+                .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
                 .setDescription(text)
                 .setColor(15849719);
             await message.channel.send(embed);

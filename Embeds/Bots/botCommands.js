@@ -1,11 +1,11 @@
-const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
+const configFileName = process.env.NIRA_DEV ? "config.dev.json" : "config.json";
 const { emojis } = require(`../../${configFileName}`);
 
 module.exports = async (client, id = []) => {
     const channel = await client.channels.fetch(id);
-  
+
     channel.messages.fetch().then((messages) => {
-        const niraMessages = messages.filter(msg => msg.author == client.user);
+        const niraMessages = messages.filter((msg) => msg.author == client.user);
 
         if (niraMessages.size === 0) {
             channel.send("**Please keep bot commands strictly to channels in the Bots category only** - Thank you!");
@@ -31,8 +31,7 @@ module.exports = async (client, id = []) => {
             channel.send(emojis.spacer);
             channel.send("`@` **Prefix**");
             channel.send(bc10);
-        }
-        else {
+        } else {
             niraMessages.array()[19].edit(bc1);
             niraMessages.array()[17].edit(bc2);
             niraMessages.array()[15].edit(bc3);

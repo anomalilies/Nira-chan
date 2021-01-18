@@ -13,12 +13,12 @@ module.exports = class EditCommand extends Commando.Command {
                 {
                     key: "id",
                     prompt: "What is the ID of the message would you like to edit?",
-                    type: "string",
+                    type: "string"
                 },
                 {
                     key: "channelID",
                     prompt: "What channel is your target message in? If you're unsure, respond with `N/A`.",
-                    type: "string",
+                    type: "string"
                 }
             ],
             ownerOnly: true
@@ -30,42 +30,51 @@ module.exports = class EditCommand extends Commando.Command {
 
         if (message.channel.type === "dm") {
             message.channel.send("You can't use this command here, silly!");
-        }
-        else if (id.match(/^\d{18}$/)) {
+        } else if (id.match(/^\d{18}$/)) {
             var targetMsg = "";
 
             if (channelID.toUpperCase() === "N/A") {
-                const channels = message.guild.channels.cache.filter(c => c.type === "text").array();
+                const channels = message.guild.channels.cache.filter((c) => c.type === "text").array();
                 for (let index of channels) {
-                    await index.messages.fetch(id).then(msg => {
-                        targetMsg = msg;
-                    }).catch(err => {});
+                    await index.messages
+                        .fetch(id)
+                        .then((msg) => {
+                            targetMsg = msg;
+                        })
+                        .catch((err) => {});
                 }
-            }
-            else {
-                const channel = channelID.split(/(\d+)/)
+            } else {
+                const channel = channelID.split(/(\d+)/);
                 if (channel[1].match(/^\d{18}$/)) {
                     let targetChannel = message.guild.channels.cache.get(channel[1]);
                     targetMsg = await targetChannel.messages.fetch(id);
                 }
             }
-            
+
             if (targetMsg.id.match(/^\d{18}$/) && targetMsg.author.id === members.nirachanactual) {
-                message.channel.send(`<@${message.author.id}>, What would you like the new message to say?`+"\nRespond with `cancel` to cancel the command. The command will automatically be cancelled in 30 seconds.");
-                const filter = m => m.author.id === message.author.id;
+                message.channel.send(
+                    `<@${message.author.id}>, What would you like the new message to say?` +
+                        "\nRespond with `cancel` to cancel the command. The command will automatically be cancelled in 30 seconds."
+                );
+                const filter = (m) => m.author.id === message.author.id;
 
-                message.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ["time"] })
-                .then((collected) => {
-                    let text = collected.first().content;
+                message.channel
+                    .awaitMessages(filter, { max: 1, time: 30000, errors: ["time"] })
+                    .then((collected) => {
+                        let text = collected.first().content;
 
-                    if (text.toLowerCase() !== "cancel") {
-                        targetMsg.edit(text);
-                    }
-                    else {
-                        message.channel.send(`<@${message.author.id}>, Cancelled command.`);
-                    }
-                }).catch(err => {});
-            } else { message.channel.send(failure) }}
-        else { message.channel.send(failure) }
+                        if (text.toLowerCase() !== "cancel") {
+                            targetMsg.edit(text);
+                        } else {
+                            message.channel.send(`<@${message.author.id}>, Cancelled command.`);
+                        }
+                    })
+                    .catch((err) => {});
+            } else {
+                message.channel.send(failure);
+            }
+        } else {
+            message.channel.send(failure);
+        }
     }
 };

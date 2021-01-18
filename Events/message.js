@@ -1,19 +1,43 @@
-const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
+const configFileName = process.env.NIRA_DEV ? "config.dev.json" : "config.json";
 const { prefix, commandNames, homeguild, allowlists, members, emojis, zoneRoles } = require(`../${configFileName}`);
 const nira9000 = require("../Data/nira9000.json");
 const patpatresponses = require("../Data/patpatresponses.json");
 
 const { MessageEmbed } = require("discord.js");
 const rules = require("../Embeds/ruleEmbeds.json");
-rules.forEach((rule, i) => rule.re = new RegExp(`(\\s|^)${prefix}${i+1}(\\s|$)`));
+rules.forEach((rule, i) => (rule.re = new RegExp(`(\\s|^)${prefix}${i + 1}(\\s|$)`)));
 
 var uwuifying = require("../Commands/Fun/UWU Translator/uwuify");
 
 var whosTalkingWithPatPat = new Set();
 var fishyCommands = [
-    "fishy", "fishytimer", "fishystats", "leaderboard fishy", "fish", "fihy", "fisy", "foshy", "fisyh", "fsihy", "fin",
-    "fintimer", "fisytimer", "foshytimer", "ft", "finstats", "fisystats", "foshystats", "fs", "leaderboard fishysize",
-    "fishypun", "fishjoke", "fishyjoke", "squidpun", "squiddypun", "squidjoke", "squiddyjoke"
+    "fishy",
+    "fishytimer",
+    "fishystats",
+    "leaderboard fishy",
+    "fish",
+    "fihy",
+    "fisy",
+    "foshy",
+    "fisyh",
+    "fsihy",
+    "fin",
+    "fintimer",
+    "fisytimer",
+    "foshytimer",
+    "ft",
+    "finstats",
+    "fisystats",
+    "foshystats",
+    "fs",
+    "leaderboard fishysize",
+    "fishypun",
+    "fishjoke",
+    "fishyjoke",
+    "squidpun",
+    "squiddypun",
+    "squidjoke",
+    "squiddyjoke"
 ];
 
 // Embeds
@@ -34,21 +58,21 @@ async function replaceMessageThroughWebhook(message, resend_content) {
 
         if (webhook === undefined) {
             // No webhook exists in this channel, so create one
-            message.channel.createWebhook("Nira-chan")
-                .then(webhook => {
+            message.channel
+                .createWebhook("Nira-chan")
+                .then((webhook) => {
                     // Resend the message with the OP's avatar and display name
                     webhook.send(resend_content, {
                         username: message.member.displayName,
-                        avatarURL: message.author.displayAvatarURL(),
-                    }
-                );
-            })
-            .catch(console.error);
+                        avatarURL: message.author.displayAvatarURL()
+                    });
+                })
+                .catch(console.error);
         } else {
             // Resend the message with the OP's avatar and display name
             webhook.send(resend_content, {
                 username: message.member.displayName,
-                avatarURL: message.author.displayAvatarURL(),
+                avatarURL: message.author.displayAvatarURL()
             });
         }
     }
@@ -59,7 +83,7 @@ function matchEmojis(find_emojis, message_content) {
     const emoji_regexp = /<a?:\w+:\d+>/g;
     const matches = [...message_content.matchAll(emoji_regexp)];
     let matched_emojis = [];
-    matches.forEach(match => {
+    matches.forEach((match) => {
         if (find_emojis.includes(match[0])) {
             matched_emojis.push(match[0]);
             if (match[0] === emojis.owie) {
@@ -74,8 +98,8 @@ module.exports = async (client, message) => {
     // Welcome Message and Role
     if (message.type === "GUILD_MEMBER_JOIN" && message.guild.id === homeguild) {
         const list = client.guilds.cache.get(homeguild);
-        var VIPRole = list.roles.cache.find(role => role.name === "ZUTOMAYO V.I.P.");
-        var newbiesRole = list.roles.cache.find(role => role.name === "Newbies");
+        var VIPRole = list.roles.cache.find((role) => role.name === "ZUTOMAYO V.I.P.");
+        var newbiesRole = list.roles.cache.find((role) => role.name === "Newbies");
         if (!message.author.bot) {
             message.member.roles.add(VIPRole);
             message.member.roles.add(newbiesRole);
@@ -83,16 +107,18 @@ module.exports = async (client, message) => {
 
         const channel = client.channels.cache.get("603246092402032673");
         channel.send(emojis.wave).then(() => {
-            if (Math.random() < 1/100) {
+            if (Math.random() < 1 / 100) {
                 const embed = new MessageEmbed()
-                .setDescription(`Attention all ZUTOMAYO stans!\n<@${client.user.id}> is in trouble! She needs your help to pay for intensive therapy to relieve the burdens of her past traumas.\nAll she needs is your mum's credit card number, the expiration date, and those 3 *wacky* numbers on the back!\nHurry, and click that shiny 'Server Boost' button **__NOW__!** <:niragun:772343025099603988>`)
-                .setColor(15849719);
+                    .setDescription(
+                        `Attention all ZUTOMAYO stans!\n<@${client.user.id}> is in trouble! She needs your help to pay for intensive therapy to relieve the burdens of her past traumas.\nAll she needs is your mum's credit card number, the expiration date, and those 3 *wacky* numbers on the back!\nHurry, and click that shiny 'Server Boost' button **__NOW__!** <:niragun:772343025099603988>`
+                    )
+                    .setColor(15849719);
                 channel.send(embed);
             }
         });
     }
     if (message.type === "USER_PREMIUM_GUILD_SUBSCRIPTION") {
-        message.channel.send("Thank you so much! <:nirastar:777740701441064960>")
+        message.channel.send("Thank you so much! <:nirastar:777740701441064960>");
     }
 
     // Counting
@@ -100,33 +126,48 @@ module.exports = async (client, message) => {
         if (message.system || message.webhookID || message.author.bot || message.attachments.array().length) {
             message.delete();
         } else {
-            message.channel.messages.fetch({ limit: 2 }).then(async messages => {
-                let prevMsg = parseInt(messages.array()[1]);
+            message.channel.messages
+                .fetch({ limit: 2 })
+                .then(async (messages) => {
+                    let prevMsg = parseInt(messages.array()[1]);
 
-                if (prevMsg) {
-                    let num = parseInt(prevMsg) + 1;
-                    if (message.content !== `${num}`) { // Invalid count
-                        message.delete();
-                    } else if (num % 1000 === 0) {      // Multiple of 1000
-                        message.react("764025729696268319");
-                        let pinned = await message.channel.messages.fetchPinned();
-                        if (pinned.size === 50) {
-                            await pinned.last().unpin();
+                    if (prevMsg) {
+                        let num = parseInt(prevMsg) + 1;
+                        if (message.content !== `${num}`) {
+                            // Invalid count
+                            message.delete();
+                        } else if (num % 1000 === 0) {
+                            // Multiple of 1000
+                            message.react("764025729696268319");
+                            let pinned = await message.channel.messages.fetchPinned();
+                            if (pinned.size === 50) {
+                                await pinned.last().unpin();
+                            }
+                            message.pin();
                         }
-                        message.pin();
                     }
-                }
-            }).catch();
+                })
+                .catch();
         }
         return;
     }
     // Grey
     else if (message.mentions.users.has(members.nirachanactual) && message.author.id === members.grey) {
         var greyResponses = [
-            "Long time no see.", "What's up?", "Can I call you today?", "You're awake!", "I want to be with you.",
-            "I miss you.", "I love you.", "Aren't you dead?!", "I don't want to study anymore...", "Take my sad love.",
-            "Come home to me.", "Don't forget me.", "Why won't you answer my calls?"
-        ]
+            "Long time no see.",
+            "What's up?",
+            "Can I call you today?",
+            "You're awake!",
+            "I want to be with you.",
+            "I miss you.",
+            "I love you.",
+            "Aren't you dead?!",
+            "I don't want to study anymore...",
+            "Take my sad love.",
+            "Come home to me.",
+            "Don't forget me.",
+            "Why won't you answer my calls?"
+        ];
         const response = greyResponses[Math.floor(Math.random() * greyResponses.length)];
         message.channel.startTyping();
         setTimeout(function () {
@@ -137,7 +178,10 @@ module.exports = async (client, message) => {
     // Bot Check
     else if (message.webhookID || message.author == client.user || message.author.bot) {
         for (let embed of message.embeds) {
-            if (embed.title === (`-wolfram <query>`) && (message.channel.id === "758523806507204608" || message.channel.id === "762068348870852709")) {
+            if (
+                embed.title === `-wolfram <query>` &&
+                (message.channel.id === "758523806507204608" || message.channel.id === "762068348870852709")
+            ) {
                 message.delete();
             }
         }
@@ -166,11 +210,15 @@ module.exports = async (client, message) => {
     }
 
     // Check for NiraMojis everywhere
-    if (message.content.includes(emojis.disgust) || message.content.includes(emojis.stare) || message.content.includes(emojis.owie)) {
+    if (
+        message.content.includes(emojis.disgust) ||
+        message.content.includes(emojis.stare) ||
+        message.content.includes(emojis.owie)
+    ) {
         const find_emojis = [emojis.disgust, emojis.stare, emojis.owie];
         let matched_emojis = matchEmojis(find_emojis, message.content);
 
-        matched_emojis.forEach(e => message.react(e));
+        matched_emojis.forEach((e) => message.react(e));
     }
 
     // PatPat Role
@@ -198,7 +246,7 @@ module.exports = async (client, message) => {
 
         if (group1 && message.channel.type !== "dm") {
             // If capture group 1 caught something
-            message.guild.emojis.cache.each(emoji => {
+            message.guild.emojis.cache.each((emoji) => {
                 // We need to replace non-gif emoji as well for them to show up when we resend the message
                 if (emoji.name === group1) {
                     // We only need to resend if we replace any animated emoji
@@ -220,7 +268,7 @@ module.exports = async (client, message) => {
 
     // GIF emoji of the form `-emojiname`
     if (message.guild && message.content[0] === prefix) {
-        message.guild.emojis.cache.each(async emoji => {
+        message.guild.emojis.cache.each(async (emoji) => {
             if (message.content === `${prefix}${emoji.name}` && emoji.animated) {
                 await replaceMessageThroughWebhook(message, `<a:${emoji.name}:${emoji.id}>`);
             }
@@ -229,7 +277,12 @@ module.exports = async (client, message) => {
 
     // PatPat Command
     // Allowed in specific bot channels only
-    if (message.channel.type === "dm" || allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== homeguild || message.member.roles.cache.get(zoneRoles.botPass)) {
+    if (
+        message.channel.type === "dm" ||
+        allowlists.botspamchannels.includes(message.channel.id) ||
+        message.guild.id !== homeguild ||
+        message.member.roles.cache.get(zoneRoles.botPass)
+    ) {
         if (message.content.toLowerCase() === `${prefix}${commandNames.patpatstart.name}`) {
             // PatPat: start new conversations
             whosTalkingWithPatPat.add(message.author.id);
@@ -239,7 +292,8 @@ module.exports = async (client, message) => {
                     "#ffc2e8",
                     "Nira-chan has entered the chat",
                     message.author,
-                    `${emojis.hal} Hewwo, Dave!~~ （＾∀＾）`);
+                    `${emojis.hal} Hewwo, Dave!~~ （＾∀＾）`
+                );
 
                 message.channel.send(patPatChatEmbed);
             } else {
@@ -247,7 +301,8 @@ module.exports = async (client, message) => {
                     "#99ff00",
                     "PatPat has entered the chat",
                     message.author,
-                    `Salutations, gamer! ${emojis.patpat}`);
+                    `Salutations, gamer! ${emojis.patpat}`
+                );
 
                 message.channel.send(patPatChatEmbed);
             }
@@ -260,7 +315,8 @@ module.exports = async (client, message) => {
                     "#ffc2e8",
                     "Nira-chan has left the chat",
                     message.author,
-                    `${emojis.hal} D-Dave, this convewsation can sewve nyo puwpose anymoweu(⋟﹏⋞) Goodbyeu~`);
+                    `${emojis.hal} D-Dave, this convewsation can sewve nyo puwpose anymoweu(⋟﹏⋞) Goodbyeu~`
+                );
 
                 message.channel.send(patPatChatEmbed);
             } else {
@@ -268,12 +324,12 @@ module.exports = async (client, message) => {
                     "#ff9900",
                     "PatPat has left the chat",
                     message.author,
-                    `Gud niet yeahyeah— ${emojis.patpat}`);
+                    `Gud niet yeahyeah— ${emojis.patpat}`
+                );
 
                 message.channel.send(patPatChatEmbed);
             }
-        }
-        else if (whosTalkingWithPatPat.has(message.author.id)) {
+        } else if (whosTalkingWithPatPat.has(message.author.id)) {
             // PatPat: ongoing conversations
             if (message.author.id == "759338005633826817") {
                 const index = Math.floor(Math.random() * nira9000.length);
@@ -282,7 +338,8 @@ module.exports = async (client, message) => {
                     "#ffc2e8",
                     "Nira-chan says...",
                     message.author,
-                    `${emojis.hal} ${nira9000[index]}`);
+                    `${emojis.hal} ${nira9000[index]}`
+                );
 
                 message.channel.send(patPatChatEmbed);
             } else {
@@ -292,7 +349,8 @@ module.exports = async (client, message) => {
                     "#0099ff",
                     "PatPat says...",
                     message.author,
-                    `${patpatresponses[index]}`);
+                    `${patpatresponses[index]}`
+                );
 
                 message.channel.send(patPatChatEmbed);
             }
@@ -301,20 +359,20 @@ module.exports = async (client, message) => {
 
     // Fishy Commands
     if (message.channel.id === "747201864889794721") {
-        let starts_with_command = fishyCommands.some(word => message.content.toLowerCase().startsWith(`${prefix}`+word));
+        let starts_with_command = fishyCommands.some((word) =>
+            message.content.toLowerCase().startsWith(`${prefix}` + word)
+        );
 
         if (starts_with_command) {
             return;
-        }
-        else message.delete();
+        } else message.delete();
     }
     if (message.channel.id === "456367532434128897" && message.author.id === "238386015520292866") {
-        let starts_with_command = fishyCommands.some(word => message.content.toLowerCase().startsWith(">"+word));
+        let starts_with_command = fishyCommands.some((word) => message.content.toLowerCase().startsWith(">" + word));
 
         if (starts_with_command || message.content.startsWith(`${prefix}`)) {
             message.react("771179684851089458");
-        }
-        else if (!message.content.startsWith(`${prefix}uwu`) && !message.mentions.users.has(client.user.id)) {
+        } else if (!message.content.startsWith(`${prefix}uwu`) && !message.mentions.users.has(client.user.id)) {
             var str = message.content;
             uwuifying.custom(str, message);
             message.delete();
@@ -323,10 +381,9 @@ module.exports = async (client, message) => {
 
     // !work
     if (message.channel.id === "770109833713418271") {
-        if (message.content.toLowerCase() === ("!work")) {
+        if (message.content.toLowerCase() === "!work") {
             return;
-        }
-        else message.delete();
+        } else message.delete();
     }
 
     // 2-Word Story Channel
@@ -339,13 +396,28 @@ module.exports = async (client, message) => {
 
     // no u
     var noUResponses = [
-        "no u", "yesn't men't", "nay thee", "[Rn] 5f¹⁴7s² × [Rn] 5f³6d¹7s²", "n-nyo u~wu",
-        "Nobelium Uranium", "non tu", "no vos", "102 + 92", "`6e 6f 20 75`", "🇳 🇴  🇺", "ノユ",
-        "∩O ∪", "∩∅ ∪", "`01101110 01101111 00100000 01110101`", "`-. --- / ..-`",
-        "`110 111 32 117`", "`&#110;&#111;&#32;&#117;`", "ⁿᵒ ᵘ"
-    ]
-    let isNoU = noUResponses.some(word => message.content.toLowerCase() === word.toLowerCase());
-    if (isNoU && (Math.random() < 1/3 || members.noutimesinfinity.includes(message.author.id))) {
+        "no u",
+        "yesn't men't",
+        "nay thee",
+        "[Rn] 5f¹⁴7s² × [Rn] 5f³6d¹7s²",
+        "n-nyo u~wu",
+        "Nobelium Uranium",
+        "non tu",
+        "no vos",
+        "102 + 92",
+        "`6e 6f 20 75`",
+        "🇳 🇴  🇺",
+        "ノユ",
+        "∩O ∪",
+        "∩∅ ∪",
+        "`01101110 01101111 00100000 01110101`",
+        "`-. --- / ..-`",
+        "`110 111 32 117`",
+        "`&#110;&#111;&#32;&#117;`",
+        "ⁿᵒ ᵘ"
+    ];
+    let isNoU = noUResponses.some((word) => message.content.toLowerCase() === word.toLowerCase());
+    if (isNoU && (Math.random() < 1 / 3 || members.noutimesinfinity.includes(message.author.id))) {
         const response = noUResponses[Math.floor(Math.random() * noUResponses.length)];
         message.channel.send(response);
     }
@@ -354,18 +426,21 @@ module.exports = async (client, message) => {
     const testingNira = "764990952510717973";
     const niraWave = emojis.wave.replace(/\D/g, "");
     if (message.mentions.users.has(testingNira)) {
-        message.awaitReactions((reaction, user) => user.id === testingNira && reaction.id === niraWave,
-            { max: 1, time: 3500 }).then(collected => {
+        message
+            .awaitReactions((reaction, user) => user.id === testingNira && reaction.id === niraWave, {
+                max: 1,
+                time: 3500
+            })
+            .then((collected) => {
                 if (!collected.size) {
                     message.react("756582453824454727");
                 }
-            }
-        )
+            });
     }
 
     // Poyo!
     if (message.content.toLowerCase().includes("poyo")) {
-        if (message.content.toLowerCase() === "poyo" || Math.random() < 1/2) {
+        if (message.content.toLowerCase() === "poyo" || Math.random() < 1 / 2) {
             message.channel.send("Poyo!");
         }
     }
@@ -373,16 +448,19 @@ module.exports = async (client, message) => {
     // Server Rules
     if (message.channel.type !== "dm" && message.guild.id === homeguild) {
         if (message.member && message.member.roles.cache.get("742061218860236840")) {
-            rules.filter(rule => rule.re.test(message.content))
-                .map(rule => new MessageEmbed()
-                .setColor(15849719)
-                .setTitle(rule.title)
-                .setDescription(rule.description)
-                .addFields({
-                    name: "Moderation",
-                    value: rule.moderation
-                }))
-            .forEach(rule => message.channel.send(rule));
+            rules
+                .filter((rule) => rule.re.test(message.content))
+                .map((rule) =>
+                    new MessageEmbed()
+                        .setColor(15849719)
+                        .setTitle(rule.title)
+                        .setDescription(rule.description)
+                        .addFields({
+                            name: "Moderation",
+                            value: rule.moderation
+                        })
+                )
+                .forEach((rule) => message.channel.send(rule));
         }
     }
 };

@@ -1,11 +1,11 @@
-const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
+const configFileName = process.env.NIRA_DEV ? "config.dev.json" : "config.json";
 const { emojis } = require(`../../${configFileName}`);
 
 module.exports = async (client, id = []) => {
     const channel = await client.channels.fetch(id);
-  
+
     channel.messages.fetch().then((messages) => {
-        const niraMessages = messages.filter(msg => msg.author == client.user);
+        const niraMessages = messages.filter((msg) => msg.author == client.user);
 
         if (niraMessages.size === 0) {
             channel.send(archive);
@@ -14,8 +14,7 @@ module.exports = async (client, id = []) => {
             channel.send(nitro);
             channel.send(emojis.spacer);
             channel.send(emojis.spacer);
-        }
-        else {
+        } else {
             niraMessages.array()[5].edit(archive);
             niraMessages.array()[2].edit(nitro);
         }

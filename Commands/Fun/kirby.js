@@ -1,5 +1,5 @@
 const Commando = require("discord.js-commando");
-const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
+const configFileName = process.env.NIRA_DEV ? "config.dev.json" : "config.json";
 const { homeguild, allowlists, zoneRoles } = require(`../../${configFileName}`);
 const { MessageEmbed } = require("discord.js");
 const abilities = require("../../Data/copyabilities.json");
@@ -11,12 +11,17 @@ module.exports = class KirbyCommand extends Commando.Command {
             aliases: ["copyability"],
             group: "fun",
             memberName: "kirby",
-            description: "What ability would Kirby get if he inhaled you?",
+            description: "What ability would Kirby get if he inhaled you?"
         });
     }
 
     async run(message) {
-        if (message.channel.type === "dm" || allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== homeguild || message.member.roles.cache.get(zoneRoles.botPass)) {
+        if (
+            message.channel.type === "dm" ||
+            allowlists.botspamchannels.includes(message.channel.id) ||
+            message.guild.id !== homeguild ||
+            message.member.roles.cache.get(zoneRoles.botPass)
+        ) {
             var abilityGroup = [];
             var weights = [];
 
@@ -24,7 +29,8 @@ module.exports = class KirbyCommand extends Commando.Command {
                 abilityGroup.push(abilities[key].ability);
                 weights.push(abilities[key].weight);
             }
-            var i, nickname = "";
+            var i,
+                nickname = "";
             for (i = 0; i < weights.length; i++) {
                 weights[i] += weights[i - 1] || 0;
             }
@@ -34,13 +40,12 @@ module.exports = class KirbyCommand extends Commando.Command {
                     break;
                 }
             }
-            var ability = abilityGroup[i]
+            var ability = abilityGroup[i];
             const index = Math.floor(Math.random() * ability.length);
-            
+
             if (message.channel.type === "dm") {
                 var nickname = message.author.username;
-            }
-            else {
+            } else {
                 let member = message.guild.member(message.author);
                 var nickname = member.displayName;
             }
@@ -58,10 +63,10 @@ module.exports = class KirbyCommand extends Commando.Command {
                 `As Kirby is approaching an impending boss fight, anxiety creeps over him. No need to worry, though; Kirby inhales **${nickname}**, and gets the **${ability[index]}** ability!`,
                 `No way... Kirby inhaled **${nickname}** and got the ultra-rare **${ability[index]}** ability!`,
                 `why tf would i absorb your **${ability}**, **${nickname}**? <:kirbuff:757349479065321483> fuck outta here fam`
-            ]
+            ];
 
             const embed = new MessageEmbed()
-                .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
+                .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
                 .setColor(15849719)
                 .setDescription(`<:kirbsucc:757289104789471322> ${replies[i]}`);
             message.channel.send(embed);

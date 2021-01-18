@@ -1,9 +1,17 @@
-const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
+const configFileName = process.env.NIRA_DEV ? "config.dev.json" : "config.json";
 const { emojis } = require(`../${configFileName}`);
 
 var contributorRoles = [
-    "Journalists", "Contestants", "Hackers", "Stans", "Editors",
-    "Translators", "Meme Royalty", "Theorists", "Musicians", "Artists"
+    "Journalists",
+    "Contestants",
+    "Hackers",
+    "Stans",
+    "Editors",
+    "Translators",
+    "Meme Royalty",
+    "Theorists",
+    "Musicians",
+    "Artists"
 ];
 
 module.exports = async (client, oldMember, newMember) => {
@@ -12,7 +20,7 @@ module.exports = async (client, oldMember, newMember) => {
     const isIntVIP = "776872223427788821";
 
     const isContributor = "761383555372023860";
-    const inContributorGroup = r=>contributorRoles.includes(r.name);
+    const inContributorGroup = (r) => contributorRoles.includes(r.name);
 
     if (oldMember.roles.cache.size !== newMember.roles.cache.size) {
         // Server Boost Message
@@ -34,8 +42,7 @@ module.exports = async (client, oldMember, newMember) => {
         // Contributors Role
         if (!oldMember.roles.cache.has(isContributor) && newMember.roles.cache.some(inContributorGroup)) {
             newMember.roles.add(isContributor);
-        }
-        else if (oldMember.roles.cache.has(isContributor) && !newMember.roles.cache.some(inContributorGroup)) {
+        } else if (oldMember.roles.cache.has(isContributor) && !newMember.roles.cache.some(inContributorGroup)) {
             newMember.roles.remove(isContributor);
         }
     }

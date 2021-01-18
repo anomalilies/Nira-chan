@@ -2,7 +2,18 @@ const data = {
     // This software uses code from QuazzyWazzy/UwU-fy - See LICENSE!
     emotions: [
         [
-            ["exciting", "excited", "wonderful", "nice", "joyful", "gleeful", "glee", "blessed", "delighted", "smiling"],
+            [
+                "exciting",
+                "excited",
+                "wonderful",
+                "nice",
+                "joyful",
+                "gleeful",
+                "glee",
+                "blessed",
+                "delighted",
+                "smiling"
+            ],
             ["＾ω＾", "（＾∀＾）", "≧ω≦", "(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧", "(≧◡≦)"]
         ],
         [
@@ -10,7 +21,25 @@ const data = {
             ["╥﹏╥", "(╥_╥)", "(⋟﹏⋞)", "༼ ༎ຶ ෴ ༎ຶ༽", "（>﹏<）", "（；＿；）"]
         ],
         [
-            ["angery", "mad", "annoyed", "annoying", "hate", "rage", "quit", "ragequit", "fuck", "fucks", "fucked", "shit", "shitty", "shits", "bullshit", "motherfucker", "triggered"],
+            [
+                "angery",
+                "mad",
+                "annoyed",
+                "annoying",
+                "hate",
+                "rage",
+                "quit",
+                "ragequit",
+                "fuck",
+                "fucks",
+                "fucked",
+                "shit",
+                "shitty",
+                "shits",
+                "bullshit",
+                "motherfucker",
+                "triggered"
+            ],
             ["ಠ_ಠ", "⋋_⋌", "ಠ▃ಠ", "(╬ಠ益ಠ)", "(¬_¬)", "（＞μ＜＃）", "凸ಠ益ಠ)凸", "(ノಠ益ಠ)ノ彡┻━┻"]
         ],
         [
@@ -18,7 +47,20 @@ const data = {
             ["(⌐■_■)", "(ﾒ▼_▼)"]
         ],
         [
-            ["love", "luv", "heart", "affection", "passion", "cute", "kawaii", "wife", "waifu", "husband", "husbando", "hasubando"],
+            [
+                "love",
+                "luv",
+                "heart",
+                "affection",
+                "passion",
+                "cute",
+                "kawaii",
+                "wife",
+                "waifu",
+                "husband",
+                "husbando",
+                "hasubando"
+            ],
             ["(♥ω♥*)", "(｡♥‿♥｡)", "ღゝ◡╹)ノ♡", "（♥￫ｏ￩♥）"]
         ],
         [

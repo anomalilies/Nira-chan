@@ -1,4 +1,4 @@
-const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
+const configFileName = process.env.NIRA_DEV ? "config.dev.json" : "config.json";
 const { homeguild } = require(`../${configFileName}`);
 
 module.exports = (client, member) => {

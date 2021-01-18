@@ -1,8 +1,8 @@
 module.exports = async (client, id = []) => {
     const channel = await client.channels.fetch(id);
-  
+
     channel.messages.fetch().then((messages) => {
-        const niraMessages = messages.filter(msg => msg.author == client.user);
+        const niraMessages = messages.filter((msg) => msg.author == client.user);
 
         if (niraMessages.size === 0) {
             channel.send("**About**");
@@ -23,8 +23,7 @@ module.exports = async (client, id = []) => {
             channel.send(emojis.spacer);
             channel.send(cd5);
             channel.send(emojis.spacer);
-        }
-        else {
+        } else {
             niraMessages.array()[16].edit(about1);
             niraMessages.array()[14].edit(about2);
             niraMessages.array()[12].edit(about3);
