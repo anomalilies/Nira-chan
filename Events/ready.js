@@ -43,7 +43,8 @@ module.exports = async (client) => {
     ])
     .registerDefaultTypes()
     .registerDefaultCommands({
-        unknownCommand: false
+        unknownCommand: false,
+        help: false
     })
     .registerCommandsIn(path.join(__dirname, "../Commands"));
 

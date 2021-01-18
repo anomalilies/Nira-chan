@@ -22,15 +22,13 @@ module.exports = class LinkCommand extends Commando.Command {
                     prompt: "Paste the link here!",
                     type: "string"
                 }
-            ]
+            ],
+            guildOnly: true
         });
     }
 
     async run(message, { title, description }) {
-        if (message.channel.type === "dm") {
-            message.channel.send("You can't use this command here, silly!");
-        }
-        else if (message.channel.id === "745410767574007811") {
+        if (message.channel.id === "745410767574007811") {
             const embed = new MessageEmbed()
                 .setTitle(title)
                 .setDescription(description)

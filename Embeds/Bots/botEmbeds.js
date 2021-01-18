@@ -117,6 +117,6 @@ global.bc9 = new Discord.MessageEmbed()
 );
 global.bc10 = new Discord.MessageEmbed()
   .setTitle("Celebrate Your Birthday With the Server!")
-  .setColor(15849719)
-  .setDescription("Our <@656621136808902656> allows us to celebrate our user's birthdays!\nIf you'd like to set up your birthday with the bot, you can do so using the following command in <#742550881911701615>: `bday setup`"
+  .setColor(10070709)
+  .setDescription("Our <@656621136808902656> allows us to celebrate our user's birthdays!\nIf you'd like to set up your birthday with the bot, you can do so using the following command in <#742550881911701615>: `bday set`"
 );

@@ -10,14 +10,12 @@ module.exports = class Rule0Command extends Commando.Command {
             group: "misc",
             memberName: "0",
             description: "Provide another user with some much-welcome encouragement!",
+            guildOnly: true
         });    
     }
 
     run(message) {
-        if (message.channel.type === "dm") {
-            message.channel.send("You can't use this command here, silly!");
-        }
-        else if (message.guild.id === homeguild) {
+        if (message.guild.id === homeguild) {
             const rule0 = new MessageEmbed()
             .setTitle("(Secret Rule) 0. Be Kind to Yourself")
             .setDescription(

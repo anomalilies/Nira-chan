@@ -9,14 +9,11 @@ module.exports = class AboutCommand extends Commando.Command {
             group: "misc",
             memberName: "about",
             description: "Find out about the server you're in.",
+            guildOnly: true
         });
     }
 
     async run(message) {
-        if (message.channel.type !== "dm") {
-            message.channel.send(serverInfoEmbed(message.guild));
-        } else {
-            message.channel.send("You can't use this command here, silly!");
-        }
+        message.channel.send(serverInfoEmbed(message.guild));
     }
 };

@@ -11,7 +11,6 @@ const songs = require("./Data/songs.json");
 const client = new Commando.CommandoClient({
     owner: members.currentowner,
     commandPrefix: prefix,
-    unknownCommand: false,
     disableEveryone: true
 });
 
@@ -48,8 +47,7 @@ var contributorRoles = [
 ];
 const inContributorGroup = r=>contributorRoles.includes(r.name);
 
-client.on("messageReactionAdd", async (reaction, user) => {
-    // TODO: Identify channel - object is starboard, id appears to be hall-of-fame
+client.on("messageReactionAdd", async (reaction) => {
     const starboard = client.channels.cache.find(channel => channel.id === "778734720879951922");
     const message = reaction.message;
     if (message.reactions.cache.get("⭐") && allowlists.contributionchannels.includes(message.channel.id)) {
