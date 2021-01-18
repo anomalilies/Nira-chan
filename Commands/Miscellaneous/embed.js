@@ -71,7 +71,7 @@ module.exports = class EditCommand extends Commando.Command {
             .setTitle(title)
             .setDescription(desc);
             
-            if (fieldTitle.toUpperCase !== "N/A" && targetMsg.id.match(/^\d{18}$/) && targetMsg.author.id === members.nirachanactual) {
+            if (fieldTitle.toUpperCase() !== "N/A" && targetMsg.id.match(/^\d{18}$/) && targetMsg.author.id === members.nirachanactual) {
                 message.channel.send(`<@${message.author.id}>, What would you like this field to contain?`+"\nRespond with `cancel` to cancel the command. The command will automatically be cancelled in 30 seconds.");
                 const filter = m => m.author.id === message.author.id;
                 message.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ["time"] })
@@ -83,7 +83,9 @@ module.exports = class EditCommand extends Commando.Command {
                     }
                     else { message.channel.send(failure); }
                 }).catch(err => {});
-            } else { message.channel.send(failure); }}
-        else { message.channel.send(failure); }
+            } else { 
+                targetMsg.edit("", embed); 
+            }
+        } else { message.channel.send(failure); }
     }
 };
