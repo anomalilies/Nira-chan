@@ -29,11 +29,14 @@ module.exports = async (client, id = []) => {
             channel.send(emojis.spacer);
             channel.send(bc9);
             channel.send(emojis.spacer);
-            channel.send("`@` **Prefix**");
+            channel.send("**Miscellaneous Prefixes**");
             channel.send(bc10);
+            channel.send(emojis.spacer);
+            channel.send(emojis.spacer);
+            channel.send(emojis.spacer);
         }
-        else {
-            niraMessages.array()[19].edit(bc1);
+        /*else {
+            niraMessages.array()[25].edit(bc1);
             niraMessages.array()[17].edit(bc2);
             niraMessages.array()[15].edit(bc3);
             niraMessages.array()[12].edit(bc4);
@@ -43,6 +46,16 @@ module.exports = async (client, id = []) => {
             niraMessages.array()[5].edit(bc8);
             niraMessages.array()[3].edit(bc9);
             niraMessages.array()[0].edit(bc10);
-        }
+            niraMessages.array()[19].edit(bc1);
+            niraMessages.array()[17].edit(bc2);
+            niraMessages.array()[15].edit(bc3);
+            niraMessages.array()[12].edit(bc4);
+            niraMessages.array()[10].edit(bc5);
+            niraMessages.array()[9].edit(bc6);
+            niraMessages.array()[7].edit(bc7);
+            niraMessages.array()[5].edit(bc8);
+            niraMessages.array()[3].edit(bc9);
+            niraMessages.array()[0].edit(emojis.spacer);
+        }*/
     });
 };
