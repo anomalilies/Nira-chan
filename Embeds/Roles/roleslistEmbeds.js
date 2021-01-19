@@ -22,8 +22,8 @@ global.roles2 = new Discord.MessageEmbed()
     {name: "Welcoming Pupper", value: `From <@314358105205112834>'s loving welcomes he gives to all our new members!`},
     {name: "Aimer's #1 Fan", value: "`-aimer`"},
     {name: "Nira-chan Developer", value: "Those who provide invaluable help with developing and debugging <@740606402330099752> are given the <@&793293851825668126> role!"},
-    {name: "Uniguri C.E.O.", value: "For our one-and-only Lord Davington of the server, <@759338005633826817>!"},
-    {name: "The Hacker Known as Nira-chan", value: "A.K.A., <@741044746847256656>."},
+    {name: "Uniguri C.E.O.", value: "For our one-and-only Lord Davington of the server, <@759338005633826817>."},
+    {name: "The Hacker Known as Nira-chan", value: "A.K.A., <@741044746847256656>!"},
     {name: "Grey's Caregiver", value: "For <@790571552345030686>'s creator, <@394724520872771585>!"}
 );
 global.roles3 = new Discord.MessageEmbed()
@@ -50,8 +50,8 @@ global.roles4 = new Discord.MessageEmbed()
   .setDescription("From limited-edition <#758494476174884905> listings, or given out from inside jokes!")
   .setColor(240116)
   .addFields(
-    {name: "Queen", value: `<@228880116699103232>'s nickname!`},
     {name: "h̷͂̒ē̶̓ ̶͂͝w̴̍̆h̶͛̉o̵͒̍ ̵̑̄s̸̛͝h̵̑̃a̵͂͆l̶̘̋l̶̋̕ ̷̌̍n̶̽͠ŏ̴̚ť̵̍ ̸͋̊b̵̔̅é̷̩ ̵̒͂n̸̈́͠ȃ̴̈́ṁ̴̺e̴̿͝d̷͛͐", value: `We don't know why we gave this to <@208960237988741123>, either.`},
+    {name: "Queen", value: `<@228880116699103232>'s nickname!`},
     {name: "ἰχθύς", value: `Dedicated to <@205837815630659593>!`},
     {name: "God", value: `<@737697842507939840>'s nickname... For some reason?`},
     {name: "Ghostbuster", value: `Awarded to <@155425784109072384>, after achieving the highest score in the server for the Halloween Google Doodle game.`},
