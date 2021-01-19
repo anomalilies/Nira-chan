@@ -22,10 +22,8 @@ global.roles2 = new Discord.MessageEmbed()
     {name: "Welcoming Pupper", value: `From <@314358105205112834>'s loving welcomes he gives to all our new members!`},
     {name: "Aimer's #1 Fan", value: "`-aimer`"},
     {name: "Nira-chan Developer", value: "Those who provide invaluable help with developing and debugging <@740606402330099752> are given the <@&793293851825668126> role!"},
-    {name: "Ghostbuster", value: `Awarded to <@155425784109072384>, after achieving the highest score in the server for the Halloween Google Doodle game.`},
-    {name: "Summoner", value: `A role from a server inside-joke, dedicated to <@126355183608397825>'s extraordinary ability to summon others.`},
-    {name: "Loremaster", value: `A role commemorating <@721736867107700758>'s insane dedication with researching ZUTOMAYO lore.`},
-    {name: "The Hacker Known as Nira-chan", value: "What it says on the tin."},
+    {name: "Uniguri C.E.O.", value: "For our one-and-only Lord Davington of the server, <@759338005633826817>!"},
+    {name: "The Hacker Known as Nira-chan", value: "A.K.A., <@741044746847256656>."},
     {name: "Grey's Caregiver", value: "For <@790571552345030686>'s creator, <@394724520872771585>!"}
 );
 global.roles3 = new Discord.MessageEmbed()
@@ -52,12 +50,16 @@ global.roles4 = new Discord.MessageEmbed()
   .setDescription("From limited-edition <#758494476174884905> listings, or given out from inside jokes!")
   .setColor(240116)
   .addFields(
-    {name: "h̷͂̒ē̶̓ ̶͂͝w̴̍̆h̶͛̉o̵͒̍ ̵̑̄s̸̛͝h̵̑̃a̵͂͆l̶̘̋l̶̋̕ ̷̌̍n̶̽͠ŏ̴̚ť̵̍ ̸͋̊b̵̔̅é̷̩ ̵̒͂n̸̈́͠ȃ̴̈́ṁ̴̺e̴̿͝d̷͛͐", value: `We don't know why we gave this to <@208960237988741123>, either.`},
     {name: "Queen", value: `<@228880116699103232>'s nickname!`},
-    {name: "God", value: `<@737697842507939840>'s nickname... For some reason?`},
+    {name: "h̷͂̒ē̶̓ ̶͂͝w̴̍̆h̶͛̉o̵͒̍ ̵̑̄s̸̛͝h̵̑̃a̵͂͆l̶̘̋l̶̋̕ ̷̌̍n̶̽͠ŏ̴̚ť̵̍ ̸͋̊b̵̔̅é̷̩ ̵̒͂n̸̈́͠ȃ̴̈́ṁ̴̺e̴̿͝d̷͛͐", value: `We don't know why we gave this to <@208960237988741123>, either.`},
     {name: "ἰχθύς", value: `Dedicated to <@205837815630659593>!`},
+    {name: "God", value: `<@737697842507939840>'s nickname... For some reason?`},
+    {name: "Ghostbuster", value: `Awarded to <@155425784109072384>, after achieving the highest score in the server for the Halloween Google Doodle game.`},
+    {name: "Summoner", value: `A role from a server inside-joke, dedicated to <@126355183608397825>'s extraordinary ability to summon others.`},
+    {name: "Loremaster", value: `A role commemorating <@721736867107700758>'s insane dedication with researching ZUTOMAYO lore.`},
+    {name: "Fisherban", value: `Born from the rivalry seen in <#747201864889794721>.`},
     {name: "Shamy Curator", value: `Given to <@737697842507939840> as appreciation for her amazing Shamy-mojis!`},
-    {name: "Fisherban", value: `A role created from an inside-joke, born from the rivalry seen in <#747201864889794721>.`},
+    {name: "Sugar Daddy", value: `<@623718666990780461> do be ballin', though...`},
     {name: "Paint Drinkers", value: `Still don't know how this meme started...`},
     {name: "Bri'ish", value: `For all our British members, born from yet another server inside-joke, and available from <#603248229928140801> if you react with 🇬🇧 when prompted.`}
 );

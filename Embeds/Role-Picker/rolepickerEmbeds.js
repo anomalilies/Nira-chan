@@ -5,21 +5,21 @@ global.pronouns = new Discord.MessageEmbed()
   .setDescription("React to give yourself a role.")
   .setColor(15849719)
   .addFields (
-    {name: "Key", value: "<:nirahuff:755500124091973703> : `he/him`\n<:nirasigh:742130938468630659> : `she/her`\n<:nirasnrrk:750462152199897208> : `they/them`\n<:nirahuh:742104449660747908> : `any pronouns`"}
+    {name: "Key", value: "<:niraHuff:755500124091973703> : `he/him`\n<:niraSigh:742130938468630659> : `she/her`\n<:niraSnrrk:750462152199897208> : `they/them`\n<:niraHuh:742104449660747908> : `any pronouns`"}
 );
 global.miscellaneous = new Discord.MessageEmbed()
   .setTitle("Miscellaneous")
   .setDescription("Get access to opt-in channels and all server notifications.")
   .setColor(15849719)
   .addFields (
-    {name: "Key", value: "<:nirasad:742096993731477505> : `All Notifications`\n<:niraeyeroll:742096470462824468> : `Fishy League Pass`\n<:nirascream:742090483446317107> : `Serious Discussion Pass`"}
+    {name: "Key", value: "<:niraSad:742096993731477505> : `All Notifications`\n<:niraEyeroll:742096470462824468> : `Fishy League Pass`\n<:niraScream:742090483446317107> : `Serious Discussion Pass`"}
 );
 global.dividers = new Discord.MessageEmbed()
   .setTitle("Dividers")
   .setDescription("Want to divide your roles? Claim your handy dividers here!")
   .setColor(15849719)
   .addFields (
-    {name: "Key", value: "<:nirayay:764025729696268319> : `Aesthetic Roles`\n<:nirapeace:756742977971552286> : `Awarded Roles`\n<:nirapunch:764027219323912202> : `Miscellaneous Roles`\n<:nirawink:764248315553775656> : `Contributor Roles`\n<:niragross:764026501066129408> : `ZONE Roles`\n<:nirascoop1:777269746722668565> : `Channel Passes`"}
+    {name: "Key", value: "<:niraYay:764025729696268319> : `Aesthetic Roles`\n<:niraPeace:756742977971552286> : `Awarded Roles`\n<:niraPunch:764027219323912202> : `Miscellaneous Roles`\n<:niraWink:764248315553775656> : `Contributor Roles`\n<:niraGross:764026501066129408> : `ZONE Roles`\n<:niraScoopYAY:777269746722668565> : `Channel Passes`"}
 );
 global.colours = new Discord.MessageEmbed()
   .setTitle("Colours")

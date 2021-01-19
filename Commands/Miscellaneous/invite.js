@@ -39,7 +39,7 @@ module.exports = class InviteCommand extends Commando.Command {
             if (msg.channel.type !== "dm" && msg.guild.id === homeguild) {
                 const newEmbed = getSimpleEmbed (
                     "Invitation",
-                    `Would you like to **invite <@${this.client.user.id}> to a server** (<:nirahello:${nirahello}>),\nor **share ${msg.guild.name}'s invite link** (<:niracute:${niracute}>)?`
+                    `Would you like to **invite <@${this.client.user.id}> to a server** (<:niraHello:${nirahello}>),\nor **share ${msg.guild.name}'s invite link** (<:niraCute:${niracute}>)?`
                 );
                 msg.edit(newEmbed)
                 .then(msg.react(`${nirahello}`).then(msg.react(`${niracute}`)));

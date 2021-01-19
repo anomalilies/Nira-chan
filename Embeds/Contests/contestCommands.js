@@ -11,7 +11,7 @@ module.exports = async (client, id = []) => {
         const entry = new MessageEmbed()
         .setColor(15849719)
         .setTitle("Contest Entry")
-        .setDescription("Register your interest in joining this contest by **reacting with <:nirascoop1:777269746722668565>**!\nFor submitting entries, please **use the form below**!");
+        .setDescription("Register your interest in joining this contest by **reacting with <:niraScoopYAY:777269746722668565>**!\nFor submitting entries, please **use the form below**!");
 
         if (niraMessages.size === 0) {
             channel.send(contest1);
