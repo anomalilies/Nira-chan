@@ -34,7 +34,7 @@ global.contest5 = new Discord.MessageEmbed()
   .setColor(15849719)
   .setDescription("Regardless of your place in the final 3 if you are a shortlisted runner-up in the art category, your art will still be featured as February-March's server banner!")
   .addFields(
-    {name: "1st Place", value: `• Gusare standard edition CD.*****\n• Gusare [limited edition case](https://www.instagram.com/p/CIVmZH9jG5q/), with a few extra goodies inside!*****\n• 1,000,000${emojis.uniguri}.\n• A shiny new <@&761383548476325888> role.`},
+    {name: "1st Place", value: `• Gusare standard edition CD.*\n• Gusare [limited edition case](https://www.instagram.com/p/CIVmZH9jG5q/), with a few extra goodies inside!*\n• 1,000,000${emojis.uniguri}.\n• A shiny new <@&761383548476325888> role.`},
     {name: "2nd Place", value: `• 3 months Spotify Premium.\n• 750,000${emojis.uniguri}.\n• The shiny <@&761383550741643284> role.`},
     {name: "3rd Place", value: `• 1 month Spotify Premium.\n• 250,000${emojis.uniguri}.\n• The shiny <@&761383550741643284> role.`},
     {name: "Participation Awards", value: `• 50,000${emojis.uniguri}.\n• The <@&770792091353743401> role!`}
