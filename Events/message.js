@@ -28,27 +28,31 @@ function getSimpleEmbed(color, title, author, description) {
 // Replace a regular message with a message sent through a webhook with the OP's name and avatar
 async function replaceMessageThroughWebhook(message, resend_content) {
     if (message.channel.id !== "758541031498317835") {
-        message.delete();
+        if (message.channel.type !== "dm") {
+            message.delete();
+        }
         const webhooks = await message.channel.fetchWebhooks();
-        const webhook = webhooks.first();
+        const webhook = webhooks.filter(w => w.owner.id === message.client.user.id).first();
+
+        let member = message.guild.member(message.author);
+        let nickname = member ? member.displayName : null;
+        let avatar = message.author.displayAvatarURL();
 
         if (webhook === undefined) {
             // No webhook exists in this channel, so create one
             message.channel.createWebhook("Nira-chan")
-                .then(webhook => {
-                    // Resend the message with the OP's avatar and display name
-                    webhook.send(resend_content, {
-                        username: message.member.displayName,
-                        avatarURL: message.author.displayAvatarURL(),
-                    }
-                );
-            })
-            .catch(console.error);
+            .then(webhook => {
+                // Resend the message with the OP's avatar and display name
+                webhook.send(resend_content, {
+                    username: nickname,
+                    avatarURL: avatar
+                });
+            }) .catch(console.error);
         } else {
             // Resend the message with the OP's avatar and display name
             webhook.send(resend_content, {
-                username: message.member.displayName,
-                avatarURL: message.author.displayAvatarURL(),
+                username: nickname,
+                avatarURL: avatar
             });
         }
     }
@@ -120,6 +124,7 @@ module.exports = async (client, message) => {
         }
         return;
     }
+
     // Grey
     else if (message.mentions.users.has(members.nirachanactual) && message.author.id === members.grey) {
         var greyResponses = [
@@ -134,6 +139,7 @@ module.exports = async (client, message) => {
             message.channel.send(`<@${members.grey}>, ${response}`);
         }, 3000);
     }
+
     // Bot Check
     else if (message.webhookID || message.author == client.user || message.author.bot) {
         for (let embed of message.embeds) {
@@ -189,6 +195,7 @@ module.exports = async (client, message) => {
     // Check for non-nitro user using GIF emoji to resend it with the GIF emoji
     // Capture group 1 will have the emoji name in this case
     const emoji_regexp = /<a?:\w+:\d+>|(?<!\\):(\w+):/g;
+    const guilds = await message.client.guilds.cache;
     var needs_resend = false;
 
     // Replaces emoji names with GIF emoji
@@ -198,16 +205,18 @@ module.exports = async (client, message) => {
 
         if (group1 && message.channel.type !== "dm") {
             // If capture group 1 caught something
-            message.guild.emojis.cache.each(emoji => {
-                // We need to replace non-gif emoji as well for them to show up when we resend the message
-                if (emoji.name === group1) {
-                    // We only need to resend if we replace any animated emoji
-                    // But don't make the variable false if it's already true
-                    needs_resend = emoji.animated || needs_resend;
-                    let type = emoji.animated ? "a" : "";
-                    replaceString = `<${type}:${emoji.name}:${emoji.id}>`;
-                }
-            });
+            guilds.forEach(guild => {
+                guild.emojis.cache.each(emoji => {
+                    // We need to replace non-gif emoji as well for them to show up when we resend the message
+                    if (emoji.name === group1) {
+                        // We only need to resend if we replace any animated emoji
+                        // But don't make the variable false if it's already true
+                        needs_resend = emoji.animated || needs_resend || emoji.guild;
+                        let type = emoji.animated ? "a" : "";
+                        replaceString = `<${type}:${emoji.name}:${emoji.id}>`;
+                    }
+                })
+            })
         }
         return replaceString;
     }
@@ -220,10 +229,12 @@ module.exports = async (client, message) => {
 
     // GIF emoji of the form `-emojiname`
     if (message.guild && message.content[0] === prefix) {
-        message.guild.emojis.cache.each(async emoji => {
-            if (message.content === `${prefix}${emoji.name}` && emoji.animated) {
-                await replaceMessageThroughWebhook(message, `<a:${emoji.name}:${emoji.id}>`);
-            }
+        guilds.forEach(guild => {
+            guild.emojis.cache.each(async emoji => {
+                if (message.content === `${prefix}${emoji.name}` && emoji.animated) {
+                    await replaceMessageThroughWebhook(message, `<a:${emoji.name}:${emoji.id}>`);
+                }
+            });
         });
     }
 
