@@ -69,11 +69,7 @@ global.bc6 = new Discord.MessageEmbed()
     {name: "Ship Two People Together", value: "`ship`\nExample: `-ship @Jpshum#6969 and @daradara#1456`"},
     {name: "Get Your Horoscope", value: "`horoscope/horoscope set`\nExample: `-horoscope set Aquarius` `-horoscope tomorrow`"},
     {name: "Clap👏Between👏Messages👏Like👏So", value: "`clap`\nExample: `-clap Z U T O M A Y O`"},
-    {name: "Hug Someone or Something", value: "`hug`\nExample: `-hug ACAね` `-hug @Nira-chan#7874`"},
-    {name: "UWU-ify Your Text", value: "`uwu`\nExample: `-uwu Ham is a processed pork...`"},
-    {name: "Write to Mr. F", value: "`dearmrf`\nExample: `-dearmrf ...or wild boar thigh that is salted as a lump, or a product thereof.`"},
-    {name: "Talk to PatPat", value: "Start a conversation: `patpathi`\nEnd a conversation: `patpatbye`"},
-    {name: "Talk to Nira-chan", value: "Go fencing: `stabstabstab`\nExpress your despair: `despair`"}
+    {name: "Hug Someone or Something", value: "`hug`\nExample: `-hug ACAね` `-hug @Nira-chan#7874`"}
 );
 global.bc7 = new Discord.MessageEmbed()
   .setTitle("🎧 | Last.fm")
@@ -117,6 +113,6 @@ global.bc9 = new Discord.MessageEmbed()
 );
 global.bc10 = new Discord.MessageEmbed()
   .setTitle("Celebrate Your Birthday With the Server!")
-  .setColor(15849719)
-  .setDescription("Our <@656621136808902656> allows us to celebrate our user's birthdays!\nIf you'd like to set up your birthday with the bot, you can do so using the following command in <#742550881911701615>: `bday setup`"
+  .setColor(10070709)
+  .setDescription("Our <@656621136808902656> allows us to celebrate our user's birthdays!\nIf you'd like to set up your birthday with the bot, you can do so using the following command in <#742550881911701615>: `bday set`"
 );

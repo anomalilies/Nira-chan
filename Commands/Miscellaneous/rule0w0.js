@@ -10,14 +10,12 @@ module.exports = class Rule0w0Command extends Commando.Command {
             group: "misc",
             memberName: "0w0",
             description: "P-Pwovide anyothew usew with some much-wewcome encouwagement! -( ﾟ▽ﾟ)/ ",
+            guildOnly: true
         });    
     }
 
     run(message) {
-        if (message.channel.type === "dm") {
-            message.channel.send("You can't use this command here, silly!");
-        }
-        else if (message.guild.id === homeguild && message.channel.type !== "dm") {
+        if (message.guild.id === homeguild) {
             const rule0w0 = new MessageEmbed()
             .setTitle("(Swecrwet Rwulwe) 0w0. Bwe Kwind to Youwsewf")
             .setDescription(

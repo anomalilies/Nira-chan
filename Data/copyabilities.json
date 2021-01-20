@@ -383,6 +383,12 @@
             "Pilot",
             "Carpenter"
         ],
-        "weight": 1
+        "weight": 0.9
+    },
+    "stfu": {
+        "ability": [
+            "beta ass"
+        ],
+        "weight": 0.1
     }
 }

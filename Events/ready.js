@@ -21,11 +21,14 @@ const rolepickerCommands = require ("../Embeds/Role-Picker/rolepickerCommands");
 const roleslistCommands = require("../Embeds/Roles/roleslistCommands");
 const welcomeCommands = require("../Embeds/Welcome/welcomeCommands");
 
-
 var statuses = ["you in disgust.", "(staring at) you.", "you in pain— owie!", "over the fishy league!", "you~wu~(♥ω♥*)!", "you, forever & always.", ";´༎ຶਊ ༎ຶ`;"];
 
 module.exports = async (client) => {
     console.log(`${client.user.tag} activated!`);
+    client.guilds.cache.forEach(guild => {
+        console.log(`${guild.name} | ${guild.id}`);
+    })
+
     function statusChange() {
         client.user.setActivity(statuses[Math.floor(Math.random() * statuses.length)], { type: "WATCHING" });
     }
@@ -40,7 +43,8 @@ module.exports = async (client) => {
     ])
     .registerDefaultTypes()
     .registerDefaultCommands({
-        unknownCommand: false
+        unknownCommand: false,
+        help: false
     })
     .registerCommandsIn(path.join(__dirname, "../Commands"));
 
@@ -57,9 +61,20 @@ module.exports = async (client) => {
             }
         });
     }
+    function checkNewbies() {
+        const guild = client.guilds.cache.get("603246092402032670");
+        var newbiesRole = guild.roles.cache.find(role => role.name === "Newbies");
+
+        newbiesRole.members.forEach(member => {
+            if (Date.now() - member.joinedTimestamp > 259200000) {
+                member.roles.remove(newbiesRole);
+            }
+        });
+    }
 
     if (client.user.id === members.nirachanactual) {
         setInterval(checkLurkers, 3600000);
+        setInterval(checkNewbies, 3600000);
 
         // TODO: Identify channels
         const channel = client.channels.cache.get("770726574865514517");

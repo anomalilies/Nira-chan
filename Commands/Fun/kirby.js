@@ -1,6 +1,6 @@
 const Commando = require("discord.js-commando");
 const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
-const { homeguild, allowlists } = require(`../../${configFileName}`);
+const { homeguild, allowlists, zoneRoles } = require(`../../${configFileName}`);
 const { MessageEmbed } = require("discord.js");
 const abilities = require("../../Data/copyabilities.json");
 
@@ -16,7 +16,7 @@ module.exports = class KirbyCommand extends Commando.Command {
     }
 
     async run(message) {
-        if (message.channel.type === "dm" || allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== homeguild || message.member.roles.cache.get("752308894474174515")) {
+        if (message.channel.type === "dm" || allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== homeguild || message.member.roles.cache.get(zoneRoles.botPass)) {
             var abilityGroup = [];
             var weights = [];
 
@@ -36,7 +36,7 @@ module.exports = class KirbyCommand extends Commando.Command {
             }
             var ability = abilityGroup[i]
             const index = Math.floor(Math.random() * ability.length);
-
+            
             if (message.channel.type === "dm") {
                 var nickname = message.author.username;
             }
@@ -50,13 +50,14 @@ module.exports = class KirbyCommand extends Commando.Command {
                 `Elemental combo! Kirby got the **${ability[index]}** ability when inhaling **${nickname}**!`,
                 `Power combo! Kirby got the **${ability[index]}** ability when inhaling **${nickname}**!`,
                 `Woah! Kirby got the **${ability[index]}** super ability when inhaling **${nickname}**!`,
-                `Kirby inhaled **${nickname}** and... Turned into yarn? He uses the **${ability[index]}** attack!`,
+                `Kirby inhaled **${nickname}** and... Turned into yarn? He uses the **${ability[index]}** move!`,
                 `Kirby found a Robobot Armour docking station! After inhaling **${nickname}**, he uses **${ability[index]}**!`,
                 `With **${nickname}**, Kirby partners up with his friends! He uses the **${ability[index]}** attack!`,
                 `Wow! Kirby inhaled **${nickname}** and got the rare **${ability[index]}** ability!`,
                 `Kirby inhaled **${nickname}** and... Turned into yarn? He gains the **${ability[index]}** ability!`,
                 `As Kirby is approaching an impending boss fight, anxiety creeps over him. No need to worry, though; Kirby inhales **${nickname}**, and gets the **${ability[index]}** ability!`,
-                `No way... Kirby inhaled **${nickname}** and got the ultra-rare **${ability[index]}** ability!`
+                `No way... Kirby inhaled **${nickname}** and got the ultra-rare **${ability[index]}** ability!`,
+                `why tf would i absorb your **${ability}**, **${nickname}**? <:kirbuff:757349479065321483> fuck outta here fam`
             ]
 
             const embed = new MessageEmbed()

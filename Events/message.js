@@ -1,5 +1,5 @@
 const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
-const { prefix, commandNames, homeguild, allowlists, members, emojis } = require(`../${configFileName}`);
+const { prefix, commandNames, homeguild, allowlists, members, emojis, zoneRoles } = require(`../${configFileName}`);
 const nira9000 = require("../Data/nira9000.json");
 const patpatresponses = require("../Data/patpatresponses.json");
 
@@ -88,8 +88,10 @@ module.exports = async (client, message) => {
     if (message.type === "GUILD_MEMBER_JOIN" && message.guild.id === homeguild) {
         const list = client.guilds.cache.get(homeguild);
         var VIPRole = list.roles.cache.find(role => role.name === "ZUTOMAYO V.I.P.");
+        var newbiesRole = list.roles.cache.find(role => role.name === "Newbies");
         if (!message.author.bot) {
             message.member.roles.add(VIPRole);
+            message.member.roles.add(newbiesRole);
         }
 
         const channel = client.channels.cache.get("603246092402032673");
@@ -102,8 +104,11 @@ module.exports = async (client, message) => {
             }
         });
     }
+    if (message.type === ("USER_PREMIUM_GUILD_SUBSCRIPTION" || "USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_1" || "USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_2" || "USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_3")) {
+        message.channel.send("Thank you so much! <:niraStar:777740701441064960>")
+    }
 
-    // Counting and Bot Check
+    // Counting
     if (message.channel.id === "758541031498317835") {
         if (message.system || message.webhookID || message.author.bot || message.attachments.array().length) {
             message.delete();
@@ -128,6 +133,23 @@ module.exports = async (client, message) => {
         }
         return;
     }
+
+    // Grey
+    else if (message.mentions.users.has(members.nirachanactual) && message.author.id === members.grey) {
+        var greyResponses = [
+            "Long time no see.", "What's up?", "Can I call you today?", "You're awake!", "I want to be with you.",
+            "I miss you.", "I love you.", "Aren't you dead?!", "I don't want to study anymore...", "Take my sad love.",
+            "Come home to me.", "Don't forget me.", "Why won't you answer my calls?"
+        ]
+        const response = greyResponses[Math.floor(Math.random() * greyResponses.length)];
+        message.channel.startTyping();
+        setTimeout(function () {
+            message.channel.stopTyping();
+            message.channel.send(`<@${members.grey}>, ${response}`);
+        }, 3000);
+    }
+
+    // Bot Check
     else if (message.webhookID || message.author == client.user || message.author.bot) {
         for (let embed of message.embeds) {
             if (embed.title === (`-wolfram <query>`) && (message.channel.id === "758523806507204608" || message.channel.id === "762068348870852709")) {
@@ -182,7 +204,7 @@ module.exports = async (client, message) => {
             message.react("761487227921367051");
         }
     }
-
+  
     // Nira Wave
     if (message.mentions.users.has(client.user.id)) {
         message.react("742394597174673458");
@@ -213,10 +235,10 @@ module.exports = async (client, message) => {
         // If there were any GIF emoji added to the message
         await replaceMessageThroughWebhook(message, resend_content);
     }
-
+          
     // PatPat Command
     // Allowed in specific bot channels only
-    if (message.channel.type !== "dm" && (allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== homeguild)) {
+    if (message.channel.type === "dm" || allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== homeguild || message.member.roles.cache.get(zoneRoles.botPass)) {
         if (message.content.toLowerCase() === `${prefix}${commandNames.patpatstart.name}`) {
             // PatPat: start new conversations
             whosTalkingWithPatPat.add(message.author.id);
@@ -335,6 +357,26 @@ module.exports = async (client, message) => {
     if (isNoU && (Math.random() < 1/3 || members.noutimesinfinity.includes(message.author.id))) {
         const response = noUResponses[Math.floor(Math.random() * noUResponses.length)];
         message.channel.send(response);
+    }
+
+    // Death of Nira
+    const testingNira = "764990952510717973";
+    const niraWave = emojis.wave.replace(/\D/g, "");
+    if (message.mentions.users.has(testingNira)) {
+        message.awaitReactions((reaction, user) => user.id === testingNira && reaction.id === niraWave,
+            { max: 1, time: 3500 }).then(collected => {
+                if (!collected.size) {
+                    message.react("756582453824454727");
+                }
+            }
+        )
+    }
+
+    // Poyo!
+    if (message.content.toLowerCase().includes("poyo")) {
+        if (message.content.toLowerCase() === "poyo" || Math.random() < 1/2) {
+            message.channel.send("Poyo!");
+        }
     }
 
     // Server Rules

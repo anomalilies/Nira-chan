@@ -82,7 +82,20 @@ module.exports = async (client, oldMessage, newMessage) => {
             newMessage.delete();
         }
     }
-
+    
+    // Death of Nira
+    const testingNira = "764990952510717973";
+    const niraWave = emojis.wave.replace(/\D/g, "");
+    if (newMessage.mentions.users.has(testingNira)) {
+        newMessage.awaitReactions((reaction, user) => user.id === testingNira && reaction.id === niraWave,
+            { max: 1, time: 3500 }).then(collected => {
+                if (!collected.size) {
+                    newMessage.react("756582453824454727")
+                }
+            }
+        )
+    }
+    
     // no u
     var noUResponses = [
         "no u", "yesn't men't", "nay thee", "[Rn] 5f¹⁴7s² × [Rn] 5f³6d¹7s²", "n-nyo u~wu",
@@ -94,5 +107,12 @@ module.exports = async (client, oldMessage, newMessage) => {
     if (isNoU && (Math.random() < 1/3 || members.noutimesinfinity.includes(newMessage.author.id))) {
         const response = noUResponses[Math.floor(Math.random() * noUResponses.length)];
         newMessage.channel.send(response);
+    }
+
+    // Poyo!
+    if (newMessage.content.toLowerCase().includes("poyo")) {
+        if (newMessage.content.toLowerCase() === "poyo" || Math.random() < 1/2) {
+            newMessage.channel.send("Poyo!");
+        }
     }
 };

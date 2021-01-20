@@ -13,7 +13,7 @@ global.about1 = new Discord.MessageEmbed()
 global.about2 = new Discord.MessageEmbed()
   .setTitle("Origins")
   .setAuthor("Source: Wikipedia", "https://i.imgur.com/u8AnEzu.jpg", "https://en.wikipedia.org/wiki/Zutomayo")
-  .setThumbnail("https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/Space-ACAne.gif")
+  .setThumbnail("https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/Space%20ACAne.gif")
   .setDescription("On June 4th, 2018, ZUTOMAYO debuted via. YouTube with their first song, [秒針を噛む](https://youtu.be/GJI4Gv7NbmE) (Byoushin wo Kamu).")
   .setColor(15849719)
   .addFields(

@@ -5,16 +5,14 @@ const Commando = require("discord.js-commando");
 const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
 const { prefix, cronschedules, themechannels, allowlists, members } = require(`./${configFileName}`);
 const { MessageEmbed } = require("discord.js");
-const { start } = require("repl");
+const songs = require("./Data/songs.json");
 
 // Commando
 const client = new Commando.CommandoClient({
     owner: members.currentowner,
     commandPrefix: prefix,
-    unknownCommand: false,
     disableEveryone: true
 });
-
 
 // Events and Commands
 fs.readdir("./Events/", (err, files) => {
@@ -27,11 +25,7 @@ fs.readdir("./Events/", (err, files) => {
 });
 
 // Monthly Server Topics
-var channelTitles = [
-    "Byoushin wo Kamu", "Nouriueno Cracker", "Humanoid", "Mabushii DNA Dake", "Seigi", "Kettobashita Moufu", "Konnakoto Soudou", 
-    "Haze Haseru Haterumade", "Dear Mr. 'F'", "Study Me", "MILABO", "Fastening", "Ham", "Darken", "Hunch Grey", "Can't Be Right"
-];
-
+var channelTitles = songs.mvSongs.engName;
 const channelChange = new cron.CronJob(cronschedules.servertopic, () => {
     const channel = client.channels.cache.find(channel => channel.id === themechannels.servertopic);
     const random = Math.floor(Math.random() * channelTitles.length);
@@ -53,8 +47,7 @@ var contributorRoles = [
 ];
 const inContributorGroup = r=>contributorRoles.includes(r.name);
 
-client.on("messageReactionAdd", async (reaction, user) => {
-    // TODO: Identify channel - object is starboard, id appears to be hall-of-fame
+client.on("messageReactionAdd", async (reaction) => {
     const starboard = client.channels.cache.find(channel => channel.id === "778734720879951922");
     const message = reaction.message;
     if (message.reactions.cache.get("⭐") && allowlists.contributionchannels.includes(message.channel.id)) {

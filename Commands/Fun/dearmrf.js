@@ -1,6 +1,6 @@
 const Commando = require("discord.js-commando");
 const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
-const { allowlists, emojis } = require(`../../${configFileName}`);
+const { allowlists, emojis, zoneRoles } = require(`../../${configFileName}`);
 const { MessageEmbed } = require("discord.js");
 
 module.exports = class WriteCommand extends Commando.Command {
@@ -8,7 +8,7 @@ module.exports = class WriteCommand extends Commando.Command {
         super(client, {
             name: "dearmrf",
             aliases: ["write"],
-            group: "misc",
+            group: "fun",
             memberName: "dearmrf",
             description: "Write your own personal letter to Mr. F.",
             args: [
@@ -22,7 +22,7 @@ module.exports = class WriteCommand extends Commando.Command {
     }
 
     async run(message, { text }) {
-        if (allowlists.botspamchannels.includes(message.channel.id) || message.channel.type === "dm") {
+        if (message.channel.type === "dm" || allowlists.botspamchannels.includes(message.channel.id) || message.channel.type === "dm" || message.member.roles.cache.get(zoneRoles.botPass)) {
             const embed = new MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL({dynamic:true}))
                 .addFields({

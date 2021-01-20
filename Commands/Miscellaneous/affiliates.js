@@ -28,15 +28,13 @@ module.exports = class AffiliatesCommand extends Commando.Command {
                     type: "string"
                 }
             ],
-            ownerOnly: true
+            ownerOnly: true,
+            guildOnly: true
         });
     }
 
     async run(message, { title, description, link }) {
-        if (message.channel.type === "dm") {
-            message.channel.send("You can't use this command here, silly!");
-        }
-        else if (message.guild.id === homeguild) {
+        if (message.guild.id === homeguild) {
             const embed = new MessageEmbed()
             .setTitle(title)
             .setDescription(description)
