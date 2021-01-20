@@ -7,10 +7,9 @@ const { MessageEmbed } = require("discord.js");
 const rules = require("../Embeds/ruleEmbeds.json");
 rules.forEach((rule, i) => rule.re = new RegExp(`(\\s|^)${prefix}${i+1}(\\s|$)`));
 
-const { getMessageEmotes, replaceMessageEmotes } = require("../Commands/Miscellaneous/webhook.js")
 var uwuifying = require("../Commands/Fun/UWU Translator/uwuify");
-
 var whosTalkingWithPatPat = new Set();
+
 var fishyCommands = [
     "fishy", "fishytimer", "fishystats", "leaderboard fishy", "fish", "fihy", "fisy", "foshy", "fisyh", "fsihy", "fin",
     "fintimer", "fisytimer", "foshytimer", "ft", "finstats", "fisystats", "foshystats", "fs", "leaderboard fishysize",
@@ -188,15 +187,6 @@ module.exports = async (client, message) => {
         matched_emojis.forEach(e => message.react(e));
     }
 
-    var needs_resend = false;
-    if (needs_resend && message.member) {
-        getMessageEmotes(message)
-        .then(async content => {
-            console.log(content);
-            await replaceMessageEmotes(message, content);
-        });
-    }
-    
     // PatPat Role
     // The member attribute is undefined on some messages so check if it's defined first
     if (message.member && message.member.roles.cache.get("765347466169024512")) {
