@@ -7,6 +7,7 @@ const { MessageEmbed } = require("discord.js");
 const rules = require("../Embeds/ruleEmbeds.json");
 rules.forEach((rule, i) => rule.re = new RegExp(`(\\s|^)${prefix}${i+1}(\\s|$)`));
 
+const { getMessageEmotes, replaceMessageEmotes } = require("../Commands/Miscellaneous/webhook.js")
 var uwuifying = require("../Commands/Fun/UWU Translator/uwuify");
 
 var whosTalkingWithPatPat = new Set();
@@ -15,15 +16,6 @@ var fishyCommands = [
     "fintimer", "fisytimer", "foshytimer", "ft", "finstats", "fisystats", "foshystats", "fs", "leaderboard fishysize",
     "fishypun", "fishjoke", "fishyjoke", "squidpun", "squiddypun", "squidjoke", "squiddyjoke"
 ];
-
-// Embeds
-function getSimpleEmbed(color, title, author, description) {
-    return new MessageEmbed()
-        .setColor(color)
-        .setTitle(title)
-        .setAuthor(author.username, author.avatarURL({ dynamic: true }))
-        .setDescription(description);
-}
 
 // Replace a regular message with a message sent through a webhook with the OP's name and avatar
 async function replaceMessageThroughWebhook(message, resend_content) {
@@ -56,6 +48,23 @@ async function replaceMessageThroughWebhook(message, resend_content) {
             });
         }
     }
+}
+function findEmoji(client, message, emojiName) {
+    var nameFn = emoji => emoji.name.toLowerCase() === emojiName.toLowerCase();
+    var match = message.guild.emojis.cache.find(nameFn);
+    if (!match) {
+        match = client.guilds.cache.flatMap(guild => guild.emojis.cache).find(nameFn);
+    }
+    return match;
+}
+
+// Embeds
+function getSimpleEmbed(color, title, author, description) {
+    return new MessageEmbed()
+        .setColor(color)
+        .setTitle(title)
+        .setAuthor(author.username, author.avatarURL({ dynamic: true }))
+        .setDescription(description);
 }
 
 // Find specific emojis in a message
@@ -179,6 +188,15 @@ module.exports = async (client, message) => {
         matched_emojis.forEach(e => message.react(e));
     }
 
+    var needs_resend = false;
+    if (needs_resend && message.member) {
+        getMessageEmotes(message)
+        .then(async content => {
+            console.log(content);
+            await replaceMessageEmotes(message, content);
+        });
+    }
+    
     // PatPat Role
     // The member attribute is undefined on some messages so check if it's defined first
     if (message.member && message.member.roles.cache.get("765347466169024512")) {
@@ -186,7 +204,7 @@ module.exports = async (client, message) => {
             message.react("761487227921367051");
         }
     }
-
+  
     // Nira Wave
     if (message.mentions.users.has(client.user.id)) {
         message.react("742394597174673458");
@@ -194,31 +212,22 @@ module.exports = async (client, message) => {
 
     // Check for non-nitro user using GIF emoji to resend it with the GIF emoji
     // Capture group 1 will have the emoji name in this case
-    const emoji_regexp = /<a?:\w+:\d+>|(?<!\\):(\w+):/g;
-    const guilds = await message.client.guilds.cache;
+    const emoji_regexp = /<a?:\w+:\d+>|(?<!\\):(\w+):|^-(\w+)$/g;
     var needs_resend = false;
 
     // Replaces emoji names with GIF emoji
-    function replaceEmoji(match, group1) {
-        // The string to replace the match with
-        let replaceString = match;
-
-        if (group1 && message.channel.type !== "dm") {
-            // If capture group 1 caught something
-            guilds.forEach(guild => {
-                guild.emojis.cache.each(emoji => {
-                    // We need to replace non-gif emoji as well for them to show up when we resend the message
-                    if (emoji.name === group1) {
-                        // We only need to resend if we replace any animated emoji
-                        // But don't make the variable false if it's already true
-                        needs_resend = emoji.animated || needs_resend || emoji.guild.id !== message.guild.id;
-                        let type = emoji.animated ? "a" : "";
-                        replaceString = `<${type}:${emoji.name}:${emoji.id}>`;
-                    }
-                })
-            })
+    function replaceEmoji(match, group1, group2) {
+        let emojiMatch = group1 || group2;
+        if (emojiMatch) {
+            let emoji = findEmoji(client, message, emojiMatch);
+            if (emoji) {
+                // We only need to resend if we replace any animated emoji
+                needs_resend = needs_resend || emoji.animated || emoji.guild.id !== message.guild.id;
+                let type = emoji.animated ? "a" : "";
+                return `<${type}:${emoji.name}:${emoji.id}>`;
+            }
         }
-        return replaceString;
+        return match;
     }
 
     let resend_content = message.content.replace(emoji_regexp, replaceEmoji);
@@ -226,19 +235,7 @@ module.exports = async (client, message) => {
         // If there were any GIF emoji added to the message
         await replaceMessageThroughWebhook(message, resend_content);
     }
-
-    // GIF emoji of the form `-emojiname`
-    if (message.guild && message.content[0] === prefix) {
-        guilds.forEach(guild => {
-            guild.emojis.cache.each(async emoji => {
-                if (message.content === `${prefix}${emoji.name}` && (emoji.animated || emoji.guild.id !== message.guild.id)) {
-                    let type = emoji.animated ? "a" : "";
-                    await replaceMessageThroughWebhook(message, `<${type}:${emoji.name}:${emoji.id}>`);
-                }
-            });
-        });
-    }
-
+          
     // PatPat Command
     // Allowed in specific bot channels only
     if (message.channel.type === "dm" || allowlists.botspamchannels.includes(message.channel.id) || message.guild.id !== homeguild || message.member.roles.cache.get(zoneRoles.botPass)) {
