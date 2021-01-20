@@ -50,7 +50,7 @@ async function replaceMessageThroughWebhook(message, resend_content) {
     }
 }
 function findEmoji(client, message, emojiName) {
-    var nameFn = emoji => emoji.name === emojiName;
+    var nameFn = emoji => emoji.name.toLowerCase() === emojiName.toLowerCase();
     var match = message.guild.emojis.cache.find(nameFn);
     if (!match) {
         match = client.guilds.cache.flatMap(guild => guild.emojis.cache).find(nameFn);
