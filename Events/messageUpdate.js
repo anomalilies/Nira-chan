@@ -87,13 +87,14 @@ module.exports = async (client, oldMessage, newMessage) => {
     const testingNira = "764990952510717973";
     const niraWave = emojis.wave.replace(/\D/g, "");
     if (newMessage.mentions.users.has(testingNira)) {
-        newMessage.awaitReactions((reaction, user) => user.id === testingNira && reaction.id === niraWave,
-            { max: 1, time: 3500 }).then(collected => {
-                if (!collected.size) {
-                    newMessage.react("756582453824454727")
-                }
+        const filter = (reaction, user) => { user.id === testingNira && reaction.emoji.id === niraWave; }
+        
+        message.awaitReactions(filter, { max: 1, time: 3500 })
+        .then(collected => {
+            if (!collected.size) {
+                message.react("756582453824454727");
             }
-        )
+        });
     }
     
     // no u
