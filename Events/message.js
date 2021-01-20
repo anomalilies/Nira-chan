@@ -17,17 +17,13 @@ var fishyCommands = [
     "fishypun", "fishjoke", "fishyjoke", "squidpun", "squiddypun", "squidjoke", "squiddyjoke"
 ];
 
-async function priorityList(client, message, group1) {
-    const inMsgGuild = message.guild.emojis.cache.find(emoji => emoji.name === group1);
-    if (inMsgGuild) {
-        var fetchedEmoji = inMsgGuild;
+function findEmoji(client, message, emojiName) {
+    let nameFn = emoji => emoji.name === emojiName;
+    const match = message.guild.emojis.cache.find(nameFn);
+    if (!match) {
+        match = client.guilds.cache.flatMap(guild => guild.emojis.cache).find(nameFn);
     }
-    else {
-        client.guilds.cache.forEach(guild => {
-            var fetchedEmoji = guild.emojis.cache.find(emoji => emoji.name === group1);
-        })
-    }
-    return fetchedEmoji;
+    return match;
 }
 
 // Embeds
@@ -177,12 +173,12 @@ module.exports = async (client, message) => {
                 guild.emojis.cache.each(async emoji => {
                     // We need to replace non-gif emoji as well for them to show up when we resend the message
                     if (emoji.name === group1) {
-                        await priorityList(client, message, group1);
+                        await findEmoji(client, message, group1);
                         // We only need to resend if we replace any animated emoji
                         // But don't make the variable false if it's already true
-                        needs_resend = fetchedEmoji.animated || needs_resend || fetchedEmoji.guild.id !== message.guild.id;
-                        let type = fetchedEmoji.animated ? "a" : "";
-                        replaceString = `<${type}:${fetchedEmoji.name}:${fetchedEmoji.id}>`;
+                        needs_resend = emoji.animated || needs_resend || emoji.guild.id !== message.guild.id;
+                        let type = match.animated ? "a" : "";
+                        replaceString = `<${type}:${match.name}:${match.id}>`;
                     }
                 })
             })
