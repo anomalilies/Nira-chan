@@ -7,6 +7,7 @@ const { MessageEmbed } = require("discord.js");
 const rules = require("../Embeds/ruleEmbeds.json");
 rules.forEach((rule, i) => rule.re = new RegExp(`(\\s|^)${prefix}${i+1}(\\s|$)`));
 
+const { getMessageEmotes, replaceMessageEmotes } = require("../Commands/Miscellaneous/webhook.js")
 var uwuifying = require("../Commands/Fun/UWU Translator/uwuify");
 
 var whosTalkingWithPatPat = new Set();
@@ -23,35 +24,6 @@ function getSimpleEmbed(color, title, author, description) {
         .setTitle(title)
         .setAuthor(author.username, author.avatarURL({ dynamic: true }))
         .setDescription(description);
-}
-
-// Replace a regular message with a message sent through a webhook with the OP's name and avatar
-async function replaceMessageThroughWebhook(message, resend_content) {
-    if (message.channel.id !== "758541031498317835") {
-        message.delete();
-        const webhooks = await message.channel.fetchWebhooks();
-        const webhook = webhooks.first();
-
-        if (webhook === undefined) {
-            // No webhook exists in this channel, so create one
-            message.channel.createWebhook("Nira-chan")
-                .then(webhook => {
-                    // Resend the message with the OP's avatar and display name
-                    webhook.send(resend_content, {
-                        username: message.member.displayName,
-                        avatarURL: message.author.displayAvatarURL(),
-                    }
-                );
-            })
-            .catch(console.error);
-        } else {
-            // Resend the message with the OP's avatar and display name
-            webhook.send(resend_content, {
-                username: message.member.displayName,
-                avatarURL: message.author.displayAvatarURL(),
-            });
-        }
-    }
 }
 
 // Find specific emojis in a message
@@ -153,6 +125,24 @@ module.exports = async (client, message) => {
         matched_emojis.forEach(e => message.react(e));
     }
 
+    var needs_resend = false;
+    if (needs_resend && message.member) {
+        getMessageEmotes(message)
+        .then(async content => {
+            console.log(content);
+            await replaceMessageEmotes(message, content);
+        });
+    }
+
+    /*// GIF emoji of the form `-emojiname`
+    if (message.guild && message.content[0] === prefix) {
+        message.guild.emojis.cache.each(async emoji => {
+            if (message.content === `${prefix}${emoji.name}` && emoji.animated) {
+                await replaceMessageThroughWebhook(message, `<a:${emoji.name}:${emoji.id}>`);
+                }
+        });
+    }*/
+
     // PatPat Role
     // The member attribute is undefined on some messages so check if it's defined first
     if (message.member && message.member.roles.cache.get("765347466169024512")) {
@@ -164,47 +154,6 @@ module.exports = async (client, message) => {
     // Nira Wave
     if (message.mentions.users.has(client.user.id)) {
         message.react("742394597174673458");
-    }
-
-    // Check for non-nitro user using GIF emoji to resend it with the GIF emoji
-    // Capture group 1 will have the emoji name in this case
-    const emoji_regexp = /<a?:\w+:\d+>|(?<!\\):(\w+):/g;
-    var needs_resend = false;
-
-    // Replaces emoji names with GIF emoji
-    function replaceEmoji(match, group1) {
-        // The string to replace the match with
-        let replaceString = match;
-
-        if (group1 && message.channel.type !== "dm") {
-            // If capture group 1 caught something
-            message.guild.emojis.cache.each(emoji => {
-                // We need to replace non-gif emoji as well for them to show up when we resend the message
-                if (emoji.name === group1) {
-                    // We only need to resend if we replace any animated emoji
-                    // But don't make the variable false if it's already true
-                    needs_resend = emoji.animated || needs_resend;
-                    let type = emoji.animated ? "a" : "";
-                    replaceString = `<${type}:${emoji.name}:${emoji.id}>`;
-                }
-            });
-        }
-        return replaceString;
-    }
-
-    let resend_content = message.content.replace(emoji_regexp, replaceEmoji);
-    if (needs_resend && message.member) {
-        // If there were any GIF emoji added to the message
-        await replaceMessageThroughWebhook(message, resend_content);
-    }
-
-    // GIF emoji of the form `-emojiname`
-    if (message.guild && message.content[0] === prefix) {
-        message.guild.emojis.cache.each(async emoji => {
-            if (message.content === `${prefix}${emoji.name}` && emoji.animated) {
-                await replaceMessageThroughWebhook(message, `<a:${emoji.name}:${emoji.id}>`);
-            }
-        });
     }
 
     // PatPat Command
