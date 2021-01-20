@@ -190,14 +190,14 @@ module.exports = async (client, message) => {
 
     // Check for non-nitro user using GIF emoji to resend it with the GIF emoji
     // Capture group 1 will have the emoji name in this case
-    const emoji_regexp = /<a?:\w+:\d+>|(?<!\\):(\w+):/g;
-    const guilds = await message.client.guilds.cache;
+    const emoji_regexp = /<a?:\w+:\d+>|(?<!\\):(\w+):|^-(\w+)$/g;
     var needs_resend = false;
 
     // Replaces emoji names with GIF emoji
-    function replaceEmoji(match, group1) {
-        if (group1) {
-            let emoji = findEmoji(client, message, group1);
+    function replaceEmoji(match, group1, group2) {
+        let emojiMatch = group1 || group2;
+        if (emojiMatch) {
+            let emoji = findEmoji(client, message, emojiMatch);
             if (emoji) {
                 // We only need to resend if we replace any animated emoji
                 needs_resend = needs_resend || emoji.animated || emoji.guild.id !== message.guild.id;
@@ -212,18 +212,6 @@ module.exports = async (client, message) => {
     if (needs_resend && message.member) {
         // If there were any GIF emoji added to the message
         await replaceMessageThroughWebhook(message, resend_content);
-    }
-
-    // GIF emoji of the form `-emojiname`
-    if (message.guild && message.content[0] === prefix) {
-        guilds.forEach(guild => {
-            guild.emojis.cache.each(async emoji => {
-                if (message.content === `${prefix}${emoji.name}` && (emoji.animated || emoji.guild.id !== message.guild.id)) {
-                    let type = emoji.animated ? "a" : "";
-                    await findEmoji(message, `<${type}:${emoji.name}:${emoji.id}>`);
-                }
-            });
-        });
     }
 
     // PatPat Command
