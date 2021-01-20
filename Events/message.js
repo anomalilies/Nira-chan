@@ -211,7 +211,7 @@ module.exports = async (client, message) => {
                     if (emoji.name === group1) {
                         // We only need to resend if we replace any animated emoji
                         // But don't make the variable false if it's already true
-                        needs_resend = emoji.animated || needs_resend || !emoji.guild;
+                        needs_resend = emoji.animated || needs_resend || emoji.guild.id !== message.guild.id;
                         let type = emoji.animated ? "a" : "";
                         replaceString = `<${type}:${emoji.name}:${emoji.id}>`;
                     }
@@ -231,8 +231,9 @@ module.exports = async (client, message) => {
     if (message.guild && message.content[0] === prefix) {
         guilds.forEach(guild => {
             guild.emojis.cache.each(async emoji => {
-                if (message.content === `${prefix}${emoji.name}` && (emoji.animated || !emoji.guild)) {
-                    await replaceMessageThroughWebhook(message, `<a:${emoji.name}:${emoji.id}>`);
+                if (message.content === `${prefix}${emoji.name}` && (emoji.animated || emoji.guild.id !== message.guild.id)) {
+                    let type = emoji.animated ? "a" : "";
+                    await replaceMessageThroughWebhook(message, `<${type}:${emoji.name}:${emoji.id}>`);
                 }
             });
         });
