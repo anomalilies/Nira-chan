@@ -17,9 +17,41 @@ var fishyCommands = [
     "fishypun", "fishjoke", "fishyjoke", "squidpun", "squiddypun", "squidjoke", "squiddyjoke"
 ];
 
+// Replace a regular message with a message sent through a webhook with the OP's name and avatar
+async function replaceMessageThroughWebhook(message, resend_content) {
+    if (message.channel.id !== "758541031498317835") {
+        if (message.channel.type !== "dm") {
+            message.delete();
+        }
+        const webhooks = await message.channel.fetchWebhooks();
+        const webhook = webhooks.filter(w => w.owner.id === message.client.user.id).first();
+
+        let member = message.guild.member(message.author);
+        let nickname = member ? member.displayName : null;
+        let avatar = message.author.displayAvatarURL();
+
+        if (webhook === undefined) {
+            // No webhook exists in this channel, so create one
+            message.channel.createWebhook("Nira-chan")
+            .then(webhook => {
+                // Resend the message with the OP's avatar and display name
+                webhook.send(resend_content, {
+                    username: nickname,
+                    avatarURL: avatar
+                });
+            }) .catch(console.error);
+        } else {
+            // Resend the message with the OP's avatar and display name
+            webhook.send(resend_content, {
+                username: nickname,
+                avatarURL: avatar
+            });
+        }
+    }
+}
 function findEmoji(client, message, emojiName) {
-    let nameFn = emoji => emoji.name === emojiName;
-    const match = message.guild.emojis.cache.find(nameFn);
+    var nameFn = emoji => emoji.name === emojiName;
+    var match = message.guild.emojis.cache.find(nameFn);
     if (!match) {
         match = client.guilds.cache.flatMap(guild => guild.emojis.cache).find(nameFn);
     }
@@ -164,26 +196,16 @@ module.exports = async (client, message) => {
 
     // Replaces emoji names with GIF emoji
     function replaceEmoji(match, group1) {
-        // The string to replace the match with
-        let replaceString = match;
-
-        if (group1 && message.channel.type !== "dm") {
-            // If capture group 1 caught something
-            guilds.forEach(guild => {
-                guild.emojis.cache.each(async emoji => {
-                    // We need to replace non-gif emoji as well for them to show up when we resend the message
-                    if (emoji.name === group1) {
-                        await findEmoji(client, message, group1);
-                        // We only need to resend if we replace any animated emoji
-                        // But don't make the variable false if it's already true
-                        needs_resend = emoji.animated || needs_resend || emoji.guild.id !== message.guild.id;
-                        let type = match.animated ? "a" : "";
-                        replaceString = `<${type}:${match.name}:${match.id}>`;
-                    }
-                })
-            })
+        if (group1) {
+            let emoji = findEmoji(client, message, group1);
+            if (emoji) {
+                // We only need to resend if we replace any animated emoji
+                needs_resend = needs_resend || emoji.animated || emoji.guild.id !== message.guild.id;
+                let type = emoji.animated ? "a" : "";
+                return `<${type}:${emoji.name}:${emoji.id}>`;
+            }
         }
-        return replaceString;
+        return match;
     }
 
     let resend_content = message.content.replace(emoji_regexp, replaceEmoji);
@@ -198,7 +220,7 @@ module.exports = async (client, message) => {
             guild.emojis.cache.each(async emoji => {
                 if (message.content === `${prefix}${emoji.name}` && (emoji.animated || emoji.guild.id !== message.guild.id)) {
                     let type = emoji.animated ? "a" : "";
-                    await replaceMessageThroughWebhook(message, `<${type}:${emoji.name}:${emoji.id}>`);
+                    await findEmoji(message, `<${type}:${emoji.name}:${emoji.id}>`);
                 }
             });
         });
