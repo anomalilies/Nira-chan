@@ -220,8 +220,9 @@ module.exports = async (client, message) => {
         return match;
     }
 
+    const fishyChannel = "747201864889794721";
     let resend_content = message.content.replace(emoji_regexp, replaceEmoji);
-    if (needs_resend && message.member) {
+    if (needs_resend && message.member && message.channel.id !== fishyChannel) {
         // If there were any GIF emoji added to the message
         await replaceMessageThroughWebhook(message, resend_content);
     }
@@ -299,7 +300,7 @@ module.exports = async (client, message) => {
     }
 
     // Fishy Commands
-    if (message.channel.id === "747201864889794721") {
+    if (message.channel.id === fishyChannel) {
         let starts_with_command = fishyCommands.some(word => message.content.toLowerCase().startsWith(`${prefix}`+word));
 
         if (starts_with_command) {
@@ -310,7 +311,7 @@ module.exports = async (client, message) => {
     if (message.channel.id === "456367532434128897" && message.author.id === "238386015520292866") {
         let starts_with_command = fishyCommands.some(word => message.content.toLowerCase().startsWith(">"+word));
 
-        if (starts_with_command || message.content.startsWith(`${prefix}`)) {
+        if (starts_with_command || message.content.startsWith(">")) {
             message.react("771179684851089458");
         }
         else if (!message.content.startsWith(`${prefix}uwu`) && !message.mentions.users.has(client.user.id)) {
@@ -336,19 +337,6 @@ module.exports = async (client, message) => {
         }
     }
 
-    // no u
-    var noUResponses = [
-        "no u", "yesn't men't", "nay thee", "[Rn] 5f¹⁴7s² × [Rn] 5f³6d¹7s²", "n-nyo u~wu",
-        "Nobelium Uranium", "non tu", "no vos", "102 + 92", "`6e 6f 20 75`", "🇳 🇴  🇺", "ノユ",
-        "∩O ∪", "∩∅ ∪", "`01101110 01101111 00100000 01110101`", "`-. --- / ..-`",
-        "`110 111 32 117`", "`&#110;&#111;&#32;&#117;`", "ⁿᵒ ᵘ"
-    ]
-    let isNoU = noUResponses.some(word => message.content.toLowerCase() === word.toLowerCase());
-    if (isNoU && (Math.random() < 1/3 || members.noutimesinfinity.includes(message.author.id))) {
-        const response = noUResponses[Math.floor(Math.random() * noUResponses.length)];
-        message.channel.send(response);
-    }
-
     // Death of Nira
     const testingNira = "764990952510717973";
     const niraWave = emojis.wave.replace(/\D/g, "");
@@ -363,11 +351,46 @@ module.exports = async (client, message) => {
         });
     }
 
-    // Poyo!
+    // Responses
     if (message.content.toLowerCase().includes("poyo")) {
-        if (message.content.toLowerCase() === "poyo" || Math.random() < 1/2) {
+        if (message.content.toLowerCase() === ("poyo" || "poyo!") || Math.random() < 1/2) {
             message.channel.send("Poyo!");
         }
+    }
+    const winemoji = "802352890571653170"
+    var paladinResponses = [
+        "decant", "grand paladin", `<:1945grandpaladin:${winemoji}>`
+    ]
+    let isPaladin = paladinResponses.some(word => message.content.toLowerCase().includes(word.toLowerCase()));
+    if (isPaladin) {
+        if (message.content === "Decant.") {
+            message.react("🇩")
+            .then (() => message.react("🇪"))
+            .then (() => message.react("🇨"))
+            .then (() => message.react("🇦"))
+            .then (() => message.react("🇳"))
+            .then (() => message.react("🇹"));
+        }
+        else {
+            message.react(winemoji);
+            if (Math.random() < 1/10) {
+                const embed = new MessageEmbed()
+                .setDescription("It is perfection. Irreplaceable. You don't drink the 1945 Grand Paladin anymore than you'd write a shopping list on the Mona Lisa!")
+                .setColor(15849719);
+                message.channel.send(embed);
+            }
+        }
+    }
+    var noUResponses = [
+        "no u", "yesn't men't", "nay thee", "[Rn] 5f¹⁴7s² × [Rn] 5f³6d¹7s²", "n-nyo u~wu",
+        "Nobelium Uranium", "non tu", "no vos", "102 + 92", "`6e 6f 20 75`", "🇳 🇴  🇺", "ノユ",
+        "∩O ∪", "∩∅ ∪", "`01101110 01101111 00100000 01110101`", "`-. --- / ..-`",
+        "`110 111 32 117`", "`&#110;&#111;&#32;&#117;`", "ⁿᵒ ᵘ"
+    ]
+    let isNoU = noUResponses.some(word => message.content.toLowerCase() === word.toLowerCase());
+    if (isNoU && (Math.random() < 1/3 || members.noutimesinfinity.includes(message.author.id))) {
+        const response = noUResponses[Math.floor(Math.random() * noUResponses.length)];
+        message.channel.send(response);
     }
 
     // Server Rules

@@ -12,7 +12,7 @@
   "dependencies": {
     "cron": "^1.8.2",
     "discord.js": "^12.5.1",
-    "discord.js-commando": "git+https://github.com/discordjs/Commando.git",
+    "discord.js-commando": "^0.11.1",
     "dotenv": "^8.2.0",
     "fs": "0.0.1-security",
     "moment": "^2.29.1",
