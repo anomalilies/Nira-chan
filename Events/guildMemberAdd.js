@@ -9,7 +9,8 @@ module.exports = (client, member) => {
     if (member.guild.id === homeguild) {
         modlog.send(`**${member.user.username}** joined! <:niraHello:777736555829002281>`);
         const embed = new MessageEmbed()
-        .setDescription(`<@${members.currentowner}> tells me that **${member.user.username}** will join shortly... 🪄`);
+        .setDescription(`<@${members.currentowner}> tells me that **${member.user.username}** will join shortly... 🪄`)
+        .setColor(15849719);
         channel.send(embed);
     }
 };
