@@ -49,12 +49,14 @@ async function replaceMessageThroughWebhook(message, resend_content) {
     }
 }
 function findEmoji(client, message, emojiName) {
-    var nameFn = emoji => emoji.name.toLowerCase() === emojiName.toLowerCase();
-    var match = message.guild.emojis.cache.find(nameFn);
-    if (!match) {
-        match = client.guilds.cache.flatMap(guild => guild.emojis.cache).find(nameFn);
+    if (message.channel.type !== "dm") {
+        var nameFn = emoji => emoji.name.toLowerCase() === emojiName.toLowerCase();
+        var match = message.guild.emojis.cache.find(nameFn);
+        if (!match) {
+            match = client.guilds.cache.flatMap(guild => guild.emojis.cache).find(nameFn);
+        }
+        return match;
     }
-    return match;
 }
 
 // Embeds
@@ -375,7 +377,7 @@ module.exports = async (client, message) => {
             message.react(winemoji);
             if (Math.random() < 1/10) {
                 const embed = new MessageEmbed()
-                .setDescription("It is perfection. Irreplaceable. You don't drink the 1945 Grand Paladin anymore than you'd write a shopping list on the Mona Lisa!")
+                .setDescription("It is perfection. Irreplaceable. You don't drink the **1945 Grand Paladin** anymore than you'd write a shopping list on the Mona Lisa!")
                 .setColor(15849719);
                 message.channel.send(embed);
             }
