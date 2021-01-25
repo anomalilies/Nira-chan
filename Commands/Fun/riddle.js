@@ -1,6 +1,7 @@
 const Commando = require("discord.js-commando");
 const { MessageEmbed } = require("discord.js");
 const riddlesList = require("../../Data/riddles.json");
+const { allowlists, zoneRoles } = require(`../../${configFileName}`);
 
 module.exports = class RiddleCommand extends Commando.Command {
     constructor(client) {
