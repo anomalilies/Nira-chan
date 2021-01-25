@@ -1,7 +1,8 @@
 const Commando = require("discord.js-commando");
+const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
+const { allowlists, zoneRoles } = require(`../../${configFileName}`);
 const { MessageEmbed } = require("discord.js");
 const riddlesList = require("../../Data/riddles.json");
-const { allowlists, zoneRoles } = require(`../../${configFileName}`);
 
 module.exports = class RiddleCommand extends Commando.Command {
     constructor(client) {
