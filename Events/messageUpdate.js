@@ -1,7 +1,7 @@
 const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
 const { allowlists, members, emojis } = require(`../${configFileName}`);
 
-// Find specific emojis in a message
+// Find specific emojis in a newMessage
 function matchEmojis(find_emojis, message_content) {
     const emoji_regexp = /<a?:\w+:\d+>/g;
     const matches = [...message_content.matchAll(emoji_regexp)];
@@ -97,23 +97,45 @@ module.exports = async (client, oldMessage, newMessage) => {
         });
     }
     
-    // no u
+    // Responses
+    if (newMessage.content.toLowerCase().includes("poyo")) {
+        if (newMessage.content.toLowerCase() === ("poyo" || "poyo!") || Math.random() < 1/2) {
+            newMessage.channel.send("Poyo!");
+        }
+    }
+    const winemoji = "802352890571653170"
+    var paladinResponses = [
+        "decant", "grand paladin", `<:1945grandpaladin:${winemoji}>`
+    ]
+    let isPaladin = paladinResponses.some(word => newMessage.content.toLowerCase().includes(word.toLowerCase()));
+    if (isPaladin) {
+        if (newMessage.content === "Decant.") {
+            newMessage.react("🇩")
+            .then (() => newMessage.react("🇪"))
+            .then (() => newMessage.react("🇨"))
+            .then (() => newMessage.react("🇦"))
+            .then (() => newMessage.react("🇳"))
+            .then (() => newMessage.react("🇹"));
+        }
+        else {
+            newMessage.react(winemoji);
+            if (Math.random() < 1/10) {
+                const embed = new MessageEmbed()
+                .setDescription("It is perfection. Irreplaceable. You don't drink the **1945 Grand Paladin** anymore than you'd write a shopping list on the Mona Lisa!")
+                .setColor(15849719);
+                newMessage.channel.send(embed);
+            }
+        }
+    }
     var noUResponses = [
         "no u", "yesn't men't", "nay thee", "[Rn] 5f¹⁴7s² × [Rn] 5f³6d¹7s²", "n-nyo u~wu",
         "Nobelium Uranium", "non tu", "no vos", "102 + 92", "`6e 6f 20 75`", "🇳 🇴  🇺", "ノユ",
         "∩O ∪", "∩∅ ∪", "`01101110 01101111 00100000 01110101`", "`-. --- / ..-`",
         "`110 111 32 117`", "`&#110;&#111;&#32;&#117;`", "ⁿᵒ ᵘ"
-    ];
+    ]
     let isNoU = noUResponses.some(word => newMessage.content.toLowerCase() === word.toLowerCase());
     if (isNoU && (Math.random() < 1/3 || members.noutimesinfinity.includes(newMessage.author.id))) {
         const response = noUResponses[Math.floor(Math.random() * noUResponses.length)];
         newMessage.channel.send(response);
-    }
-
-    // Poyo!
-    if (newMessage.content.toLowerCase().includes("poyo")) {
-        if (newMessage.content.toLowerCase() === "poyo" || Math.random() < 1/2) {
-            newMessage.channel.send("Poyo!");
-        }
     }
 };

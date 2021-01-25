@@ -1,5 +1,6 @@
 const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
 const { homeguild, members } = require(`../${configFileName}`);
+const { MessageEmbed } = require("discord.js");
 
 module.exports = (client, member) => {
     const modlog = client.channels.cache.get("742513756059467917");
@@ -7,6 +8,8 @@ module.exports = (client, member) => {
 
     if (member.guild.id === homeguild) {
         modlog.send(`**${member.user.username}** joined! <:niraHello:777736555829002281>`);
-        channel.send(`<@${members.currentowner}> tells me that **${member.user.username}** will join shortly... 🪄`)
+        const embed = new MessageEmbed()
+        .setDescription(`<@${members.currentowner}> tells me that **${member.user.username}** will join shortly... 🪄`);
+        channel.send(embed);
     }
 };
