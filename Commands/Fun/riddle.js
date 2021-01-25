@@ -21,7 +21,6 @@ module.exports = class RiddleCommand extends Commando.Command {
                 riddles.push(riddlesList[key].riddle);
                 answers.push(riddlesList[key].answer);
             }
-            console.log(answers)
             const i = Math.floor(Math.random() * riddles.length);
 
             const embed = new MessageEmbed()
