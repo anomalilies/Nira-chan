@@ -7,7 +7,7 @@ global.links1 = new Discord.MessageEmbed()
   .setAuthor("All content courtesy of our wonderful Stans!\nPlease keep links solely to the server to recognise their efforts.")
   .setFooter("Please be aware that the majority of ZUTOMAYO's lives use strobe effects and other intense, flashing lights.\nIf you have photosensitive epilepsy, or any other conditions that cause sensitivity to light, please take caution before viewing!")
   .addFields(
-    {name: "YAKI YAKI YANKEE Tour", value: "**[Download Link](https://drive.google.com/file/d/1fAc7Xm5LEFmbfa_XfQjuCAGxno_G5rj_/view)**"},
+    {name: "YAKI YAKI YANKEE TOUR", value: "**[Download Link](https://drive.google.com/file/d/1fAc7Xm5LEFmbfa_XfQjuCAGxno_G5rj_/view)**\n Audio-only: [MP3](https://drive.google.com/drive/folders/16y9-5tgqFG2VO6Lferwy27z0YZ4Q002x?usp=sharing)"},
     {name: "NHK SONGS Live", value: "**[Download Link](https://drive.google.com/file/d/1NlYxYusY3C-Rqsi4hOezOL7MrtZjoYH7/)**"},
     {name: "Mini Twin Piano Live", value: "**[Download Link](https://drive.google.com/file/d/1NlYxYusY3C-Rqsi4hOezOL7MrtZjoYH7/)**\nAudio-only: [MP3](https://drive.google.com/drive/folders/1JZ7uxGaRl_j3c05LBFFxSfyunL6-zZzk)"},
     {name: "JAPAN ONLINE FESTIVAL 2020", value: "**[Download Link](https://mega.nz/file/WyAgiBZB#YYzZJcW28dW7QutFYsb4JjViCq_OUldN9-hD2XctQZc)**\nAudio-only: [MP3](https://drive.google.com/drive/folders/1IibXSwEOAnxVDOm_oRfEcWd08YejLgL0)"},
