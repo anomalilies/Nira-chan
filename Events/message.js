@@ -92,7 +92,6 @@ module.exports = async (client, message) => {
         if (!message.author.bot) {
             message.member.roles.add(newbiesRole);
         }
-
         const channel = client.channels.cache.get("603246092402032673");
         channel.send(emojis.wave).then(() => {
             if (Math.random() < 1/100) {

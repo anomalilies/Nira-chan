@@ -1,3 +1,5 @@
+const message = require("../../Events/message");
+
 const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
 const { emojis } = require(`../../${configFileName}`);
 
@@ -23,7 +25,7 @@ module.exports = async (client, id = []) => {
 
         client.on("messageReactionAdd", async (reaction, user) => {
             if (reaction.message.id === niraMessages.array()[4].id) {
-                if (!user.bot && reaction.emoji.id === "756679974953549914") {
+                if (!user.bot && !(message.member.roles.cache.get("790791220179632128") && message.member.roles.cache.get("774482130737561600")) && reaction.emoji.id === "756679974953549914") {
                     await reaction.message.guild.members.cache.get(user.id).roles.add("791126700972441600");
                 }
             }
