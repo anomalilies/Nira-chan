@@ -64,10 +64,11 @@ module.exports = async (client) => {
     function checkNewbies() {
         const guild = client.guilds.cache.get("603246092402032670");
         var newbiesRole = guild.roles.cache.find(role => role.name === "Newbies");
+        var VIPRole = list.roles.cache.find(role => role.name === "ZUTOMAYO V.I.P.");
 
         newbiesRole.members.forEach(member => {
             if (Date.now() - member.joinedTimestamp > 259200000) {
-                member.roles.remove(newbiesRole);
+                member.roles.add(VIPRole).then(member.roles.remove(newbiesRole));
             }
         });
     }

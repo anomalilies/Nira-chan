@@ -88,10 +88,8 @@ module.exports = async (client, message) => {
     // Welcome Message and Role
     if (message.type === "GUILD_MEMBER_JOIN" && message.guild.id === homeguild) {
         const list = client.guilds.cache.get(homeguild);
-        var VIPRole = list.roles.cache.find(role => role.name === "ZUTOMAYO V.I.P.");
         var newbiesRole = list.roles.cache.find(role => role.name === "Newbies");
         if (!message.author.bot) {
-            message.member.roles.add(VIPRole);
             message.member.roles.add(newbiesRole);
         }
 
