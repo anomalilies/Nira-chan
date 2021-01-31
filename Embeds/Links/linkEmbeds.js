@@ -4,9 +4,12 @@ global.links1 = new Discord.MessageEmbed()
   .setTitle("Lives and Performances")
   .setDescription("If you missed a live show, here's your chance to catch-up!")
   .setColor(15849719)
-  .setAuthor("All content courtesy of our wonderful Stans!\nPlease keep links solely to the server to recognise their efforts.", "https://i.imgur.com/yySSsCK.png")
+  .setAuthor("All content courtesy of our wonderful Stans!\nPlease keep links solely to the server to recognise their efforts.")
   .setFooter("Please be aware that the majority of ZUTOMAYO's lives use strobe effects and other intense, flashing lights.\nIf you have photosensitive epilepsy, or any other conditions that cause sensitivity to light, please take caution before viewing!")
   .addFields(
+    {name: "YAKI YAKI YANKEE Tour", value: "**[Download Link](https://drive.google.com/file/d/1fAc7Xm5LEFmbfa_XfQjuCAGxno_G5rj_/view)**"},
+    {name: "NHK SONGS Live", value: "**[Download Link](https://drive.google.com/file/d/1NlYxYusY3C-Rqsi4hOezOL7MrtZjoYH7/)**"},
+    {name: "Mini Twin Piano Live", value: "**[Download Link](https://drive.google.com/file/d/1NlYxYusY3C-Rqsi4hOezOL7MrtZjoYH7/)**\nAudio-only: [MP3](https://drive.google.com/drive/folders/1JZ7uxGaRl_j3c05LBFFxSfyunL6-zZzk)"},
     {name: "JAPAN ONLINE FESTIVAL 2020", value: "**[Download Link](https://mega.nz/file/WyAgiBZB#YYzZJcW28dW7QutFYsb4JjViCq_OUldN9-hD2XctQZc)**\nAudio-only: [MP3](https://drive.google.com/drive/folders/1IibXSwEOAnxVDOm_oRfEcWd08YejLgL0)"},
     {name: "Online Live NIWA TO NIRA", value: "**[Download Link](https://mega.nz/file/abQnHQpZ#JB1sN4qVS9MCHCGUw0Mz0mzJdEbOopu3N8h41bC5RSk)** ([Mirror](https://drive.google.com/file/d/1yDwELl6mAggdViqajabl1QOO6NMspHYl/view?usp=sharing))\nAudio-only: [MP3](https://drive.google.com/drive/folders/1Qs9uNdTLwi7rrMey9y4OFSoN6m-sgaSm?usp=sharing)"},
     {name: "Midnight Forever Live from YouTube Space Tokyo", value: "**[YouTube Link](https://youtu.be/PwVFxexqenE)** ([Mirror 1](https://mega.nz/file/LeBGwABR#ev4H4Ha9pKXaytiCg7fXH_30rzoeN6147ys22h7P90s) | [Mirror 2](https://drive.google.com/file/d/1-cv5b44qK_vWnPo-tgAYybuB_6CjuNpb/view?usp=sharing))\nAudio-only: [MP3](https://drive.google.com/drive/folders/1Z0FW3ygYTzIortW18LhHkqZfQ67DmJnD?usp=sharing)"},

@@ -32,7 +32,7 @@
     {
         "title": "7. Support ZUTOMAYO Wherever Possible",
         "description": "As a server, we strive on being able to provide exclusive content that is hard-to-find outside of Japan for international fans wherever possible.\nTherefore, we will always share links and information on how you can support the band, whether financially or otherwise, so please check them out on <#603248261461180480> when they become available!\nHowever, illegal piracy of copyrighted goods, particularly those of that are easily accessible (including, but not limited to, CD rips), will **not** be tolerated.\nWe will also not support illegal distribution of copied merch; For more information on how to buy official goods, please see <#760625396487684126>.\n\nPlease be aware that links our members generously provide will be monitored to uphold these standards, and **can therefore be removed at any time**.",
-        "moderation": "1. The offending content will be deleted immediately, and the user will be warned.\n2. If the user's behaviour continues, they will be temporarily muted.\n3. If the rule is violated again, the user will be kicked.\n4. If the user joins and continues to post content that breaks the rules, they will be permanently banned."
+        "moderation": "1. The content will be deleted immediately, and the user will be warned.\n2. If the user's behaviour continues, they will be temporarily muted.\n3. If the rule is violated again, the user will be kicked.\n4. If the user joins and continues to post content that breaks the rules, they will be permanently banned."
     },
     {
         "title": "8. Keep the Server Free from Toxicity",
@@ -45,7 +45,17 @@
         "moderation": "1. The user will be warned if necessary, and reminded of our policy."
     },
     {
-        "title": "10. Have Fun!",
+        "title": "10. Keep Conversations to English Only",
+        "description": "We're happy for fans from all over the world to join us, however this is an English-speaking server, and as such, we require you to keep all conversations to English only.",
+        "moderation": "1. The user will be warned if necessary, and reminded of our policy."
+    },
+    {
+        "title": "11. Do Not Share Links",
+        "description": "All content on <#742069780328087613> is courtesy of our wonderful <@>! As such, please keep links solely to the server to recognise their efforts.\n**Note that you will not be able to view <#805540656662839329> until you have been in the server for __3+ days__.**",
+        "moderation": "1. The content will be deleted immediately, and the user will be warned.\n2. If the user's behaviour continues, they will be temporarily muted.\n3. If the rule is violated again, the user will be kicked.\n4. If the user joins and continues to post content that breaks the rules, they will be permanently banned."
+    },
+    {
+        "title": "12. Have Fun!",
         "description": "As possibly one of our most important rules, we just want you to have fun!\nWith all the serious garble out of the way, ultimately we're all here to support one of our favourite artists, ZUTOMAYO.\nOur server thrives on the positive and caring spirit shown by our community, and by joining us, we hope that you'll contribute to this.",
         "moderation": "<:niragun:772343025099603988>"
     }

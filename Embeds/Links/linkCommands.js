@@ -11,8 +11,6 @@ module.exports = async (client, id = []) => {
             channel.send(links1);
             channel.send(links2);
             channel.send(links3);
-            channel.send(emojis.spacer);
-            channel.send("**Miscellaneous**");
         }
         else {
             const channel = client.channels.cache.get("742069780328087613");
