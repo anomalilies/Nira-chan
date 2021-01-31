@@ -72,7 +72,7 @@ module.exports = async (client) => {
             if (Date.now() - member.joinedTimestamp > 259200000) {
                 member.roles.add(VIPRole).then(member.roles.remove(newbiesRole));
             }
-            else if (member.roles.get(sticklerRole)) {
+            else if (member.roles.cache.get(sticklerRole)) {
                 member.roles.remove(sticklerRole);
             }
         });
