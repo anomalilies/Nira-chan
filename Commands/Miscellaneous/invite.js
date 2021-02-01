@@ -45,7 +45,7 @@ module.exports = class InviteCommand extends Commando.Command {
                 .then(msg.react(`${nirahello}`).then(msg.react(`${niracute}`)));
 
                 const filter = (reaction, user) => [`${nirahello}`, `${niracute}`].includes(reaction.emoji.id) && user.id === message.author.id;
-                const reactions = msg.awaitReactions(filter, {
+                msg.awaitReactions(filter, {
                     max: 1,
 				    time: 60000
 			    }).then(reactions => {

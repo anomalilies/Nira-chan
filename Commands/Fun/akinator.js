@@ -46,7 +46,7 @@ module.exports = class AddCommand extends Commando.Command {
             message.channel.send(ACAneEmbed).then(async msg => {
                 msg.react(yes).then(msg.react(no));
                 const filter = (reaction, user) => [yes, no].includes(reaction.emoji.name) && user.id === message.author.id;
-                const reactions = msg.awaitReactions(filter, {
+                msg.awaitReactions(filter, {
                     max: 1,
                     time: 30000
                 }).then(reactions => {
