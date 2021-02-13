@@ -78,5 +78,29 @@
     "fencing": "🤺",
     "hello": "<:niraHello:777736555829002281>",
     "wail": "<:niraWail:777736598854696980>"
-  }
+  },
+  "roles": {
+    "regular": "751209585464836137",
+    "contributor": "761383555372023860",
+    "mute": "745439119479406693",
+    "newbies": "774482130737561600",
+    "VIP": "790791220179632128",
+    "serverBoosters": "744738039116464151",
+    "patpat": "765347466169024512",
+    "uniguri": "770022309393334302",
+    "rainbowPass": "781295857706336296",
+    "botPass": "796211149397819442"
+  },
+  "contributorRoleNames": [
+    "Journalists",
+    "Contestants",
+    "Hackers",
+    "Stans",
+    "Editors",
+    "Translators",
+    "Meme Royalty",
+    "Theorists",
+    "Musicians",
+    "Artists"
+  ]
 }

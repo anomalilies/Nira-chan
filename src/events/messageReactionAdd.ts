@@ -3,20 +3,7 @@ import { CommandoClient } from 'discord.js-commando';
 
 import { configFile } from '..';
 
-const contributorRoles = [
-  'Journalists',
-  'Contestants',
-  'Hackers',
-  'Stans',
-  'Editors',
-  'Translators',
-  'Meme Royalty',
-  'Theorists',
-  'Musicians',
-  'Artists',
-];
-
-const handleStarboard = async (hallOfFame: TextChannel, reaction: MessageReaction) => {
+const handleStarboard = async (hallOfFame: TextChannel, reaction: MessageReaction, contributorRoles: string[]) => {
   const message = reaction.message;
 
   const image = message.attachments.size > 0 ? message.attachments.array()[0].url : '';
@@ -39,7 +26,7 @@ const handleStarboard = async (hallOfFame: TextChannel, reaction: MessageReactio
 };
 
 export default async function (client: CommandoClient, partialReaction: MessageReaction) {
-  const { themechannels, allowlists } = await import('../config/' + configFile);
+  const { themechannels, allowlists, contributorRoleNames } = await import('../config/' + configFile);
 
   const hallOfFame = <TextChannel>client.channels.cache.find((channel) => channel.id === themechannels.halloffame);
 
@@ -70,6 +57,6 @@ export default async function (client: CommandoClient, partialReaction: MessageR
       return;
     }
 
-    await handleStarboard(hallOfFame, reaction);
+    await handleStarboard(hallOfFame, reaction, contributorRoleNames);
   }
 }
