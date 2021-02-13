@@ -1,14 +1,16 @@
-// const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
-// const { homeguild } = require(`../${configFileName}`);
+import { GuildMember, TextChannel } from 'discord.js';
+import { CommandoClient } from 'discord.js-commando';
+import { configFile } from '..';
 
-// module.exports = (client, member) => {
-//     const modlog = client.channels.cache.get("742513756059467917");
+export default async function (client: CommandoClient, member: GuildMember) {
+  const { homeguild, emojis, themechannels } = await import('../config/' + configFile);
+  const modlog = <TextChannel>client.channels.cache.get(themechannels.modlog);
 
-//     if (member.guild.id === homeguild) {
-//         modlog.send(`**${member.user.username}** left... <:niraWail:777736598854696980>`);
-//     }
-// };
+  if (modlog == undefined) {
+    return console.error("Couldn't find modlog channel with ID", themechannels.modlog);
+  }
 
-export default function () {
-  console.log('hi');
+  if (member.guild.id === homeguild) {
+    modlog.send(`**${member.user.username}** left... ${emojis.wail}`);
+  }
 }
