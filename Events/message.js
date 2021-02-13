@@ -393,6 +393,16 @@ module.exports = async (client, message) => {
         message.channel.send(response);
     }
 
+    // The Queen
+    if (message.content.toLowerCase() === (prefix+"wk zutomayo")) {
+        const embed = new MessageEmbed()
+        .setColor(15849719)
+        .setTitle("Did you know?")
+        .setDescription(
+            `In reality, <@${members.currentowner}> has the crown. <:queen:762902044683403272>`);
+        message.channel.send(embed);
+    }
+
     // Server Rules
     if (message.channel.type !== "dm" && message.guild.id === homeguild) {
         if (message.member && message.member.roles.cache.get("742061218860236840")) {
