@@ -1,15 +1,15 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
-import cron from 'cron';
 import fs from 'fs';
 import { ClientEvents, MessageEmbed } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
+import { updateChannelTitleJob } from './jobs/updateChannelTitle';
+import { sendMessageInCountdownJob } from './jobs/sendMessageInCountdown';
 
-import songs from '../Data/songs.json';
+export const configFile = process.env.NODE_ENV == 'production' ? 'production.json' : 'development.json';
 
 (async () => {
-  const configFile = process.env.NODE_ENV == 'production' ? 'production.json' : 'development.json';
-  const { prefix, cronschedules, themechannels, allowlists, members } = await import('./config/' + configFile);
+  const { prefix, allowlists, members } = await import('./config/' + configFile);
 
   // Commando
   const client = new CommandoClient({
@@ -29,34 +29,6 @@ import songs from '../Data/songs.json';
       client.on(<keyof ClientEvents>eventName, event.default);
     }
   });
-
-  // Monthly Server Topics
-  // const channelTitles = songs.mvSongs.engName;
-  // const channelChange = new cron.CronJob(
-  //   cronschedules.servertopic,
-  //   () => {
-  //     const channel = client.channels.cache.find((channel) => channel.id === themechannels.servertopic);
-  //     const random = Math.floor(Math.random() * channelTitles.length);
-  //     channel.setName(channelTitles[random]);
-  //   },
-  //   null,
-  //   true,
-  //   'Etc/UTC',
-  // );
-  // channelChange.start();
-
-  // // s
-  // const scheduledMessage = new cron.CronJob(
-  //   cronschedules.countdown,
-  //   () => {
-  //     const channel = client.channels.cache.find((channel) => channel.id === themechannels.countdown);
-  //     channel.send('s');
-  //   },
-  //   null,
-  //   true,
-  //   'Europe/London',
-  // );
-  // scheduledMessage.start();
 
   // // Starboard
   // const contributorRoles = [
@@ -117,5 +89,7 @@ import songs from '../Data/songs.json';
   //   }
   // });
 
-  client.login(process.env.CLIENT_TOKEN);
+  await client.login(process.env.CLIENT_TOKEN);
+  (await updateChannelTitleJob(client)).start();
+  (await sendMessageInCountdownJob(client)).start();
 })();
