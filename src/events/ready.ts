@@ -10,6 +10,7 @@ import { rolePickerCommands } from '../embeds/rolePicker/rolePickerCommands';
 import { linkCommands } from '../embeds/links/linkCommands';
 import { contestCommands } from '../embeds/contest/contestCommands';
 import { botCommands } from '../embeds/bots/botCommands';
+import { archiveCommands } from '../embeds/archive/archiveCommands';
 
 const statuses = [
   'you in disgust.',
@@ -77,7 +78,7 @@ export default function (client: CommandoClient) {
 
     // TODO INCLUDE THIS AGAIN
     // aboutCommands(client, themechannels.about);
-    // archiveCommands(client, themechannels.archive);
+    archiveCommands(client);
     botCommands(client);
     contestCommands(client);
     linkCommands(client);
