@@ -118,3 +118,4 @@ dist
 # Exclusions for Nira-Chan
 config.dev.json
 src/config/development.json
+notes.txt

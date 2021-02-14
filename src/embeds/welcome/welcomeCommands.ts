@@ -1,10 +1,11 @@
-const message = require('../../Eventsasdf/message');
+import { TextChannel, User } from 'discord.js';
+import { CommandoClient } from 'discord.js-commando';
 
-const configFileName = process.env.NIRA_DEV ? 'config.dev.json' : 'config.json';
-const { emojis } = require(`../../${configFileName}`);
+import { themechannels, emojis } from '../../config/config.json';
+import { welcome1, welcome2 } from './welcomeEmbeds';
 
-module.exports = async (client, id = []) => {
-  const channel = await client.channels.fetch(id);
+export const welcomeCommands = async (client: CommandoClient) => {
+  const channel = <TextChannel>await client.channels.fetch(themechannels.welcome);
 
   channel.messages.fetch().then((messages) => {
     const niraMessages = messages.filter((msg) => msg.author == client.user);
@@ -27,13 +28,14 @@ module.exports = async (client, id = []) => {
         if (
           !user.bot &&
           !(
-            message.member.roles.cache.get('790791220179632128') && message.member.roles.cache.get('774482130737561600')
+            reaction.message.member.roles.cache.get('790791220179632128') &&
+            reaction.message.member.roles.cache.get('774482130737561600')
           ) &&
           reaction.emoji.id === '756679974953549914'
         ) {
           await reaction.message.guild.members.cache.get(user.id).roles.add('791126700972441600');
         } else {
-          reaction.users.remove(user);
+          reaction.users.remove(<User>user);
         }
       }
     });
