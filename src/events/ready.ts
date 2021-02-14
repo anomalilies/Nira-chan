@@ -11,6 +11,7 @@ import { linkCommands } from '../embeds/links/linkCommands';
 import { contestCommands } from '../embeds/contest/contestCommands';
 import { botCommands } from '../embeds/bots/botCommands';
 import { archiveCommands } from '../embeds/archive/archiveCommands';
+import { aboutCommands } from '../embeds/about/aboutCommands';
 
 const statuses = [
   'you in disgust.',
@@ -76,8 +77,7 @@ export default function (client: CommandoClient) {
       }, 300000);
     });
 
-    // TODO INCLUDE THIS AGAIN
-    // aboutCommands(client, themechannels.about);
+    aboutCommands(client);
     archiveCommands(client);
     botCommands(client);
     contestCommands(client);
