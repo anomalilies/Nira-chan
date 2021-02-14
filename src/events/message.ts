@@ -1,4 +1,4 @@
-import { GuildEmoji, Message, MessageEmbed, MessageReaction, TextChannel, User } from 'discord.js';
+import { GuildEmoji, Message, MessageEmbed, TextChannel, User } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
 import {
@@ -14,6 +14,18 @@ import {
 import patpatresponses from '../../Data/patpatresponses.json';
 import nira9000 from '../../Data/nira9000.json';
 import rules from '../../Embeds/ruleEmbeds.json';
+import {
+  handleCountingMessage,
+  handleDeathOfNira,
+  handleNiraWave,
+  handleNoUMessage,
+  handlePaladinMessage,
+  handlePoyoMessage,
+  handleTwoWordStoryMessage,
+  handleWorkInUniguriMessage,
+  handleCheckNiraMojis,
+  handlePatPatRole,
+} from '../handler';
 
 // TODO change to import
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -72,31 +84,6 @@ const fishyCommands = [
   'squidjoke',
   'squiddyjoke',
 ];
-
-const noUResponses = [
-  'no u',
-  "yesn't men't",
-  'nay thee',
-  '[Rn] 5f¹⁴7s² × [Rn] 5f³6d¹7s²',
-  'n-nyo u~wu',
-  'Nobelium Uranium',
-  'non tu',
-  'no vos',
-  '102 + 92',
-  '`6e 6f 20 75`',
-  '🇳 🇴  🇺',
-  'ノユ',
-  '∩O ∪',
-  '∩∅ ∪',
-  '`01101110 01101111 00100000 01110101`',
-  '`-. --- / ..-`',
-  '`110 111 32 117`',
-  '`&#110;&#111;&#32;&#117;`',
-  'ⁿᵒ ᵘ',
-];
-
-const winemoji = '802352890571653170';
-const paladinResponses = ['decant', 'grand paladin', `<:1945grandpaladin:${winemoji}>`];
 
 /**
  * Replace a regular message with a message sent through a webhook with the OP's name and avatar
@@ -162,24 +149,6 @@ function createSimpleEmbed(color: string, title: string, author: User, descripti
 }
 
 /**
- * Find specific emojis in a message
- */
-function matchEmojis(findEmojis: string[], messageContent: string, emojis: any) {
-  const emoji_regexp = /<a?:\w+:\d+>/g;
-  const matches = [...messageContent.matchAll(emoji_regexp)];
-  const matchedEmojis: string[] = [];
-  matches.forEach((match) => {
-    if (findEmojis.includes(match[0])) {
-      matchedEmojis.push(match[0]);
-      if (match[0] === emojis.owie) {
-        matchedEmojis.push(emojis.cursed);
-      }
-    }
-  });
-  return matchedEmojis;
-}
-
-/**
  * Welcome Message and Role
  */
 function handleWelcomeMessage(client: CommandoClient, message: Message) {
@@ -204,39 +173,6 @@ function handleWelcomeMessage(client: CommandoClient, message: Message) {
 
 function handleSubscriptionThankYouMessage(message: Message) {
   message.channel.send('Thank you so much! <:niraStar:777740701441064960>');
-}
-
-async function handleCountingMessage(message: Message) {
-  if (message.system || message.webhookID || message.author.bot || message.attachments.array().length) {
-    return message.delete();
-  }
-
-  try {
-    const messages = await message.channel.messages.fetch({ limit: 2 });
-
-    const prevNumber = parseInt(messages.array()[1].content);
-
-    if (isNaN(prevNumber)) {
-      return console.error('Previous number is not a number!');
-    }
-
-    const nextNumber = prevNumber + 1;
-    if (message.content !== nextNumber.toString()) {
-      return message.delete();
-    }
-
-    if (nextNumber % 1000 === 0) {
-      const pinned = await message.channel.messages.fetchPinned();
-      if (pinned.size === 50) {
-        await pinned.last().unpin();
-      }
-
-      message.react(emojis.yay);
-      message.pin();
-    }
-  } catch (error) {
-    console.error(error);
-  }
 }
 
 function handleGreyMessage(message: Message) {
@@ -335,14 +271,6 @@ function handleFishyCommandsMessage(message: Message, prefix: string) {
   message.delete();
 }
 
-function handleWorkInUniguriMessage(message: Message) {
-  if (message.content.toLowerCase() === '!work') {
-    return;
-  }
-
-  message.delete();
-}
-
 function handleOtherFishyMessage(message: Message, client: CommandoClient) {
   const starts_with_command = fishyCommands.some((word) => message.content.toLowerCase().startsWith('>' + word));
 
@@ -355,29 +283,6 @@ function handleOtherFishyMessage(message: Message, client: CommandoClient) {
     uwuifying.custom(str, message);
     message.delete();
   }
-}
-
-async function handlePaladinMessage(message: Message) {
-  if (message.content === 'Decant.') {
-    await message.react('🇩');
-    await message.react('🇪');
-    await message.react('🇨');
-    await message.react('🇦');
-    await message.react('🇳');
-    await message.react('🇹');
-    return;
-  }
-
-  if (Math.random() < 1 / 10) {
-    const embed = new MessageEmbed()
-      .setDescription(
-        "It is perfection. Irreplaceable. You don't drink the **1945 Grand Paladin** anymore than you'd write a shopping list on the Mona Lisa!",
-      )
-      .setColor(15849719);
-    message.channel.send(embed);
-  }
-
-  message.react(winemoji);
 }
 
 async function handleServerRulesMessage(message: Message, prefix: string) {
@@ -411,7 +316,7 @@ export default async function (client: CommandoClient, message: Message) {
 
   // Counting
   if (message.channel.id === themechannels.counting) {
-    return handleCountingMessage(message);
+    return await handleCountingMessage(message);
   }
 
   // Grey
@@ -445,29 +350,13 @@ export default async function (client: CommandoClient, message: Message) {
   }
 
   // Check for NiraMojis everywhere
-  if (
-    message.content.includes(emojis.disgust) ||
-    message.content.includes(emojis.stare) ||
-    message.content.includes(emojis.owie)
-  ) {
-    const find_emojis = [emojis.disgust, emojis.stare, emojis.owie];
-    const matched_emojis = matchEmojis(find_emojis, message.content, emojis);
-
-    return matched_emojis.forEach((e) => message.react(e));
-  }
+  handleCheckNiraMojis(message);
 
   // PatPat Role
-  // The member attribute is undefined on some messages so check if it's defined first
-  if (message.member && message.member.roles.cache.get(roles.patpat)) {
-    if (message.content.toLowerCase().includes('patpat')) {
-      message.react(emojis.patpat);
-    }
-  }
+  handlePatPatRole(message);
 
   // Nira Wave
-  if (message.mentions.users.has(client.user.id)) {
-    message.react('742394597174673458');
-  }
+  handleNiraWave(message, client);
 
   // TODO: start rewrite this
   // Check for non-nitro user using GIF emoji to resend it with the GIF emoji
@@ -517,50 +406,20 @@ export default async function (client: CommandoClient, message: Message) {
   }
 
   // Uniguri !work
-  if (message.channel.id === themechannels.uniguri) {
-    return handleWorkInUniguriMessage(message);
-  }
+  handleWorkInUniguriMessage(message);
 
   // 2-Word Story Channel
-  if (message.channel.id === themechannels.twoWordStory) {
-    if (message.content.trim().split(/ +/g).length != 2) {
-      return message.delete();
-    }
-  }
+  handleTwoWordStoryMessage(message);
 
-  // TODO move this piece of code into its own file
   // Death of Nira
-  const testingNira = '764990952510717973';
-  const niraWave = emojis.wave.replace(/\D/g, '');
-  if (message.mentions.users.has(testingNira)) {
-    const filter = (reaction: MessageReaction, user: User) => user.id === testingNira && reaction.emoji.id === niraWave;
-
-    message.awaitReactions(filter, { max: 1, time: 3500 }).then((collected) => {
-      if (!collected.size) {
-        message.react('756582453824454727');
-      }
-    });
-  }
+  handleDeathOfNira(message);
 
   // Responses
-  if (message.content.toLowerCase().includes('poyo')) {
-    if (['poyo', 'poyo!'].includes(message.content.toLowerCase()) || Math.random() < 1 / 2) {
-      message.channel.send('Poyo!');
-    }
-  }
+  handlePoyoMessage(message);
 
-  const isPaladin = paladinResponses.some((word) => message.content.toLowerCase().includes(word.toLowerCase()));
-  if (isPaladin) {
-    await handlePaladinMessage(message);
-  }
+  await handlePaladinMessage(message);
 
-  const isNoU = noUResponses.some((word) => message.content.toLowerCase() === word.toLowerCase());
-  const isNoUInfinityMember = members.noutimesinfinity.includes(message.author.id);
-  const noUChance = Math.random() < 1 / 3;
-  if (isNoU && (noUChance || isNoUInfinityMember)) {
-    const response = noUResponses[Math.floor(Math.random() * noUResponses.length)];
-    message.channel.send(response);
-  }
+  handleNoUMessage(message);
 
   // TODO move this over to commands
   // The Queen
