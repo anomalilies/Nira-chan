@@ -3,7 +3,7 @@ import { TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
 import { themechannels, cronschedules } from '../config/config.json';
-import songs from '../../Data/songs.json';
+import songs from '../data/songs.json';
 
 export const updateChannelTitleJob = async (client: CommandoClient) => {
   const channelTitles = songs.mvSongs.engName;

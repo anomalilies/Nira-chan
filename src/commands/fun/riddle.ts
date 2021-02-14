@@ -2,7 +2,7 @@ import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
 import { allowlists, zoneRoles } from '../../config/config.json';
-import riddlesList from '../../../Data/riddles.json';
+import riddlesList from '../../data/riddles.json';
 
 export default class RiddleCommand extends Command {
   constructor(client: CommandoClient) {

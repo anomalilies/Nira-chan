@@ -2,7 +2,7 @@ import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
 import { allowlists, homeguild, zoneRoles } from '../../config/config.json';
-import abilities from '../../../Data/copyabilities.json';
+import abilities from '../../data/copyabilities.json';
 
 export default class KirbyCommand extends Command {
   constructor(client: CommandoClient) {

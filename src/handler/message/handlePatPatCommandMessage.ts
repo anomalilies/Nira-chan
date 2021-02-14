@@ -1,8 +1,8 @@
 import { Message } from 'discord.js';
 
 import { homeguild, members, allowlists, zoneRoles, commandNames, emojis } from '../../config/config.json';
-import patpatresponses from '../../../Data/patpatresponses.json';
-import nira9000 from '../../../Data/nira9000.json';
+import patpatresponses from '../../data/patpatresponses.json';
+import nira9000 from '../../data/nira9000.json';
 import { createDefaultEmbed } from '../../util/createDefaultEmbed';
 
 const whosTalkingWithPatPat = new Set();

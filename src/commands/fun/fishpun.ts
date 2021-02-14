@@ -1,6 +1,6 @@
 import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
-import fishpuns from '../../../Data/fishpuns.json';
+import fishpuns from '../../data/fishpuns.json';
 
 import { allowlists, homeguild, zoneRoles } from '../../config/config.json';
 
