@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 import fs from 'fs';
+import path from 'path';
 import { ClientEvents } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 import { updateChannelTitleJob } from './jobs/updateChannelTitle';
@@ -27,6 +28,23 @@ import { prefix, members } from './config/config.json';
       client.on(<keyof ClientEvents>eventName, event.default.bind(null, client));
     }
   });
+
+  client.registry
+    .registerGroups([
+      ['fun', 'Fun'],
+      ['misc', 'Miscellaneous'],
+      ['util', 'Utility'],
+      ['commands', 'Commands'],
+    ])
+    .registerDefaultTypes()
+    .registerDefaultCommands({
+      unknownCommand: false,
+      help: false,
+    })
+    .registerCommandsIn({
+      filter: /^([^.].*)\.(js|ts)$/,
+      dirname: path.join(__dirname, './commands'),
+    });
 
   // Start
   await client.login(process.env.CLIENT_TOKEN);
