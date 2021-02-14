@@ -1,7 +1,7 @@
 import { MessageEmbed, TextChannel } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { homeguild, emojis, themechannels, members } from '../../config/config.json';
+import { homeGuild, emojis, allChannels, members } from '../../config/config.json';
 
 interface PromptArgs {
   title: string;
@@ -43,7 +43,7 @@ export default class SayCommand extends Command {
   }
 
   async run(message: CommandoMessage, { title, description, check }: PromptArgs) {
-    if (message.guild.id === homeguild && check.toLowerCase()) {
+    if (message.guild.id === homeGuild && check.toLowerCase()) {
       const embed = new MessageEmbed().setTitle(title).setDescription(description).setColor(15849719);
 
       if (check.toLowerCase() === ('n' || 'no')) {
@@ -52,7 +52,7 @@ export default class SayCommand extends Command {
 
           await channel.send(embed);
           await message.channel.send('Successfully created embed!');
-        } else if (message.author.id === members.currentowner) {
+        } else if (message.author.id === members.currentOwner) {
           const faqEmbed = new MessageEmbed().setTitle(title).setDescription(description).setColor(15849719);
           const channel = <TextChannel>message.guild.channels.cache.get('760621183564513312');
 
@@ -65,11 +65,11 @@ export default class SayCommand extends Command {
         return message;
       }
 
-      const user = await message.guild.members.fetch(members.currentowner);
+      const user = await message.guild.members.fetch(members.currentOwner);
 
       await user.send(embed);
       await message.channel.send(
-        `Your link is currently being checked over by Lily, and will be added to <#${themechannels.links}> shortly!`,
+        `Your link is currently being checked over by Lily, and will be added to <#${allChannels.livesAndPerformances}> shortly!`,
       );
     }
 

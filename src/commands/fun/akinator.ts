@@ -1,7 +1,7 @@
 import { MessageEmbed, MessageReaction, User } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { allowlists, zoneRoles } from '../../config/config.json';
+import { allowLists, roles } from '../../config/config.json';
 
 const yes = '✅';
 const no = '❎';
@@ -29,8 +29,8 @@ export default class AkinatorCommand extends Command {
   async run(message: CommandoMessage) {
     if (
       message.channel.type === 'dm' ||
-      allowlists.botspamchannels.includes(message.channel.id) ||
-      message.member.roles.cache.get(zoneRoles.botPass)
+      allowLists.botSpamChannel.includes(message.channel.id) ||
+      message.member.roles.cache.get(roles.botPass)
     ) {
       const random = Math.floor(Math.random() * (99 - 75 + 1) + 75);
 

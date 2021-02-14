@@ -1,11 +1,11 @@
 import { GuildEmoji, Message, TextChannel, User } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
-import { themechannels } from '../../config/config.json';
+import { allChannels } from '../../config/config.json';
 
 // Replace a regular message with a message sent through a webhook with the OP's name and avatar
 async function replaceMessageThroughWebhook(message: Message, resendContent: string) {
-  if (message.channel.id === themechannels.counting) {
+  if (message.channel.id === allChannels.counting) {
     return;
   }
 
@@ -77,7 +77,7 @@ export const handleNonNitroEmoji = async (message: Message, client: CommandoClie
     return match;
   });
 
-  if (needsToResend && message.member && message.channel.id !== themechannels.fishy) {
+  if (needsToResend && message.member && message.channel.id !== allChannels.fishy) {
     // If there were any GIF emoji added to the message
     await replaceMessageThroughWebhook(message, resendContent);
   }

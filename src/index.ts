@@ -12,7 +12,7 @@ import { prefix, members } from './config/config.json';
 (async () => {
   // Commando
   const client = new CommandoClient({
-    owner: members.currentowner,
+    owner: members.currentOwner,
     commandPrefix: prefix,
     disableMentions: 'everyone',
   });

@@ -1,11 +1,11 @@
 import { MessageEmbed, TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
-import { themechannels, emojis } from '../../config/config.json';
+import { allChannels, emojis } from '../../config/config.json';
 import { contest1, contest2, contest3, contest4, contest5 } from './contestEmbeds';
 
 export const contestCommands = async (client: CommandoClient) => {
-  const channel = <TextChannel>await client.channels.fetch(themechannels.contest);
+  const channel = <TextChannel>await client.channels.fetch(allChannels.contest);
 
   const messages = await channel.messages.fetch();
   const niraMessages = messages.filter((msg) => msg.author == client.user);

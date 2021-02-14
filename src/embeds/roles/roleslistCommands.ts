@@ -5,7 +5,7 @@ import { emojis, themechannels } from '../../config/config.json';
 import { roles1, roles2, roles3, roles4 } from './roleslistEmbeds';
 
 export const rolesListCommands = async (client: CommandoClient) => {
-  const channel = <TextChannel>await client.channels.fetch(themechannels.roleslist);
+  const channel = <TextChannel>await client.channels.fetch(allChannels.rolesList);
 
   const messages = await channel.messages.fetch();
   const niraMessages = messages.filter((msg) => msg.author == client.user);

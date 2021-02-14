@@ -1,32 +1,32 @@
 {
   "prefix": "-",
   "commandNames": {
-    "patpatstart": {
+    "patpatStart": {
       "name": "patpathi",
       "description": "Start a conversation with one of PatPat's clones."
     },
-    "patpatstop": {
+    "patpatStop": {
       "name": "patpatbye",
       "description": "End conversation with PatPat's clone."
     }
   },
-  "homeguild": "603246092402032670",
-  "cronschedules": {
-    "servertopic": "0 0 1 * *",
+  "homeGuild": "603246092402032670",
+  "cronSchedules": {
+    "serverTopic": "0 0 1 * *",
     "countdown": "0 0 * * *"
   },
-  "themechannels": {
-    "servertopic": "767550623767068742",
+  "allChannels": {
+    "serverTopic": "767550623767068742",
     "countdown": "528641575752957983",
-    "halloffame": "778734720879951922",
+    "hallOfFame": "778734720879951922",
     "starboard": "752363402608902215",
     "about": "760625396487684126",
     "archive": "770726574865514517",
-    "botcommands": "742548177462231120",
+    "botCommands": "742548177462231120",
     "contest": "770795084002230292",
-    "links": "805540656662839329",
-    "roleslist": "758494476174884905",
-    "rolepicker": "781296501351383050",
+    "livesAndPerformances": "805540656662839329",
+    "rolesList": "758494476174884905",
+    "rolePicker": "781296501351383050",
     "welcome": "603248229928140801",
     "modlog": "742513756059467917",
     "general": "603246092402032673",
@@ -38,8 +38,8 @@
     "uniguri": "770109833713418271",
     "twoWordStory": "776229267998375946"
   },
-  "allowlists": {
-    "botspamchannels": [
+  "allowLists": {
+    "botSpamChannel": [
       "742550881911701615",
       "758523455850938408",
       "765054650029309962",
@@ -47,7 +47,7 @@
       "770028576078430239",
       "761326959154167838"
     ],
-    "contributionchannels": [
+    "contributionChannels": [
       "735658144646168697",
       "603248096607993866",
       "603248158088101929",
@@ -55,20 +55,17 @@
       "747207562277158934",
       "758492257543913502"
     ],
-    "disgustchannels": ["603246659295510557"],
-    "starechannels": ["747663718959153906"],
-    "owiechannels": ["750558283315544155"]
+    "disgustChannels": ["603246659295510557"],
+    "stareChannels": ["747663718959153906"],
+    "owieChannels": ["750558283315544155"]
   },
   "members": {
-    "nirachanactual": "740606402330099752",
-    "currentowner": "228880116699103232",
+    "niraChan": "740606402330099752",
+    "currentOwner": "228880116699103232",
     "grey": "790571552345030686",
     "davetan": "759338005633826817",
     "friendsofnira9000": ["759338005633826817"],
     "noutimesinfinity": ["314358105205112834"]
-  },
-  "zoneRoles": {
-    "botPass": "796211149397819442"
   },
   "emojis": {
     "disgust": "<:niraDisgust:742092526097268797>",
@@ -85,7 +82,8 @@
     "spacer": "<:spacer:757807111756447806>",
     "fencing": "🤺",
     "hello": "<:niraHello:777736555829002281>",
-    "wail": "<:niraWail:777736598854696980>"
+    "wail": "<:niraWail:777736598854696980>",
+    "cute": "<:niraCute:788632707789225985>"
   },
   "roles": {
     "regular": "751209585464836137",

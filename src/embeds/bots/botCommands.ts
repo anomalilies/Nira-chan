@@ -1,11 +1,11 @@
 import { TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
-import { emojis, themechannels } from '../../config/config.json';
+import { emojis, allChannels } from '../../config/config.json';
 import { bc1, bc10, bc2, bc3, bc4, bc5, bc6, bc7, bc8, bc9 } from './botEmbeds';
 
 export const botCommands = async (client: CommandoClient) => {
-  const channel = <TextChannel>await client.channels.fetch(themechannels.botcommands);
+  const channel = <TextChannel>await client.channels.fetch(allChannels.botCommands);
 
   const messages = await channel.messages.fetch();
   const niraMessages = messages.filter((msg) => msg.author == client.user);

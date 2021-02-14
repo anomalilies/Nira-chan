@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { allowlists, homeguild, zoneRoles } from '../../config/config.json';
+import { allowLists, homeGuild, roles } from '../../config/config.json';
 
 interface PromptArgs {
   name: string;
@@ -32,9 +32,9 @@ export default class AimerCommand extends Command {
   async run(message: CommandoMessage, { name }: PromptArgs) {
     if (
       message.channel.type === 'dm' ||
-      allowlists.botspamchannels.includes(message.channel.id) ||
-      message.guild.id !== homeguild ||
-      message.member.roles.cache.get(zoneRoles.botPass)
+      allowLists.botSpamChannel.includes(message.channel.id) ||
+      message.guild.id !== homeGuild ||
+      message.member.roles.cache.get(roles.botPass)
     ) {
       const embed = new MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))

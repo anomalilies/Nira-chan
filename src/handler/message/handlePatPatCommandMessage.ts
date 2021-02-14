@@ -1,6 +1,6 @@
 import { Message } from 'discord.js';
 
-import { homeguild, members, allowlists, zoneRoles, commandNames, emojis } from '../../config/config.json';
+import { homeGuild, members, allowLists, commandNames, emojis, roles } from '../../config/config.json';
 import patpatresponses from '../../data/patpatresponses.json';
 import nira9000 from '../../data/nira9000.json';
 import { createDefaultEmbed } from '../../util/createDefaultEmbed';
@@ -11,9 +11,9 @@ export const handlePatPatCommandMessage = async (message: Message, prefix: strin
   // Allowed in specific bot channels only
 
   const isDmChannel = message.channel.type === 'dm';
-  const isBotSpamChannel = allowlists.botspamchannels.includes(message.channel.id);
-  const isHomeGuild = message.guild.id === homeguild;
-  const hasBotPass = message.member.roles.cache.get(zoneRoles.botPass);
+  const isBotSpamChannel = allowLists.botSpamChannel.includes(message.channel.id);
+  const isHomeGuild = message.guild.id === homeGuild;
+  const hasBotPass = message.member.roles.cache.get(roles.botPass);
 
   if (isDmChannel || isBotSpamChannel || !isHomeGuild || hasBotPass) {
     let color: string;
@@ -21,7 +21,7 @@ export const handlePatPatCommandMessage = async (message: Message, prefix: strin
     const author = message.author;
     let description: string;
 
-    if (message.content.toLowerCase() === prefix + commandNames.patpatstart.name) {
+    if (message.content.toLowerCase() === prefix + commandNames.patpatStart.name) {
       // PatPat: start new conversations
       whosTalkingWithPatPat.add(message.author.id);
 
@@ -39,7 +39,7 @@ export const handlePatPatCommandMessage = async (message: Message, prefix: strin
       return message.channel.send(patPatEmbed);
     }
 
-    if (message.content.toLowerCase() === prefix + commandNames.patpatstop.name) {
+    if (message.content.toLowerCase() === prefix + commandNames.patpatStop.name) {
       // PatPat: end conversations
       whosTalkingWithPatPat.delete(message.author.id);
 

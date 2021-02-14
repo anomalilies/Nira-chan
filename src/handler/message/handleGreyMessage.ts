@@ -18,7 +18,7 @@ const greyResponses = [
 ];
 
 export const handleGreyMessage = (message: Message) => {
-  if (message.mentions.users.has(members.nirachanactual) && message.author.id === members.grey) {
+  if (message.mentions.users.has(members.niraChan) && message.author.id === members.grey) {
     const response = greyResponses[Math.floor(Math.random() * greyResponses.length)];
     message.channel.startTyping();
 

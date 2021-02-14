@@ -1,14 +1,14 @@
 import { Message, TextChannel, MessageEmbed } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
-import { homeguild, emojis, roles } from '../../config/config.json';
+import { homeGuild, emojis, roles } from '../../config/config.json';
 
 /**
  * Welcome Message and Role
  */
 export const handleWelcomeMessage = (message: Message, client: CommandoClient) => {
-  if (message.type === 'GUILD_MEMBER_JOIN' && message.guild.id === homeguild) {
-    const list = client.guilds.cache.get(homeguild);
+  if (message.type === 'GUILD_MEMBER_JOIN' && message.guild.id === homeGuild) {
+    const list = client.guilds.cache.get(homeGuild);
     const newbiesRole = list.roles.cache.find((role) => role.id == roles.newbies);
     if (!message.author.bot) {
       message.member.roles.add(newbiesRole);

@@ -2,17 +2,17 @@ import { CronJob } from 'cron';
 import { TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
-import { themechannels, cronschedules } from '../config/config.json';
+import { allChannels, cronSchedules } from '../config/config.json';
 import songs from '../data/songs.json';
 
 export const updateChannelTitleJob = async (client: CommandoClient) => {
   const channelTitles = songs.mvSongs.engName;
   return new CronJob(
-    cronschedules.servertopic,
+    cronSchedules.serverTopic,
     () => {
-      const channel = <TextChannel>client.channels.cache.find((channel) => channel.id === themechannels.servertopic);
+      const channel = <TextChannel>client.channels.cache.find((channel) => channel.id === allChannels.serverTopic);
       if (channel == undefined) {
-        return console.error("Couldn't find channel with ID", themechannels.servertopic);
+        return console.error("Couldn't find channel with ID", allChannels.serverTopic);
       }
       const random = Math.floor(Math.random() * channelTitles.length);
       channel.setName(channelTitles[random]);
