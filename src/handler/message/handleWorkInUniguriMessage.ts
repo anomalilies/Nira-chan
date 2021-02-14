@@ -1,9 +1,9 @@
 import { Message } from 'discord.js';
 
-import { themeChannels } from '../../config/config.json';
+import { allChannels } from '../../config/config.json';
 
 export const handleWorkInUniguriMessage = (message: Message) => {
-  if (message.channel.id !== themeChannels.uniguri) {
+  if (message.channel.id !== allChannels.uniguri) {
     return;
   }
 

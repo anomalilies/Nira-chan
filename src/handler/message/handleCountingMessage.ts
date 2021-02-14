@@ -1,9 +1,9 @@
 import { Message } from 'discord.js';
 
-import { emojis, themeChannels } from '../../config/config.json';
+import { emojis, allChannels } from '../../config/config.json';
 
 export const handleCountingMessage = async (message: Message) => {
-  if (message.channel.id === themeChannels.counting) {
+  if (message.channel.id === allChannels.counting) {
     if (message.system || message.webhookID || message.author.bot || message.attachments.array().length) {
       return message.delete();
     }

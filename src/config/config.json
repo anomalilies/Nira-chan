@@ -15,7 +15,7 @@
     "serverTopic": "0 0 1 * *",
     "countdown": "0 0 * * *"
   },
-  "themeChannels": {
+  "allChannels": {
     "serverTopic": "767550623767068742",
     "countdown": "528641575752957983",
     "hallOfFame": "778734720879951922",
@@ -24,7 +24,7 @@
     "archive": "770726574865514517",
     "botCommands": "742548177462231120",
     "contest": "770795084002230292",
-    "links": "805540656662839329",
+    "livesAndPerformances": "805540656662839329",
     "rolesList": "758494476174884905",
     "rolePicker": "781296501351383050",
     "welcome": "603248229928140801",

@@ -1,7 +1,7 @@
 import { MessageEmbed, MessageReaction, TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
-import { themeChannels, allowLists, contributorRoleNames } from '../config/config.json';
+import { allChannels, allowLists, contributorRoleNames } from '../config/config.json';
 
 const handleStarboard = async (hallOfFame: TextChannel, reaction: MessageReaction) => {
   const message = reaction.message;
@@ -26,7 +26,7 @@ const handleStarboard = async (hallOfFame: TextChannel, reaction: MessageReactio
 };
 
 export default async function (client: CommandoClient, partialReaction: MessageReaction) {
-  const hallOfFame = <TextChannel>client.channels.cache.find((channel) => channel.id === themeChannels.hallOfFame);
+  const hallOfFame = <TextChannel>client.channels.cache.find((channel) => channel.id === allChannels.hallOfFame);
 
   if (hallOfFame == undefined) {
     return;

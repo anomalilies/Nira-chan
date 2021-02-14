@@ -1,6 +1,6 @@
 import { MessageEmbed } from 'discord.js';
 
-export const links1 = new MessageEmbed()
+export const livesAndPerformances1 = new MessageEmbed()
   .setTitle('Lives and Performances')
   .setDescription("If you missed a live show, here's your chance to catch-up!")
   .setColor(15849719)
@@ -56,7 +56,7 @@ export const links1 = new MessageEmbed()
     },
   );
 
-export const links2 = new MessageEmbed().setTitle('Scans').setColor(15849719).addFields(
+export const livesAndPerformances2 = new MessageEmbed().setTitle('Scans').setColor(15849719).addFields(
   {
     name: 'Hisohiso Banashi: Band Score',
     value:
@@ -74,7 +74,7 @@ export const links2 = new MessageEmbed().setTitle('Scans').setColor(15849719).ad
   },
 );
 
-export const links3 = new MessageEmbed().setTitle('Music').setColor(15849719).addFields(
+export const livesAndPerformances3 = new MessageEmbed().setTitle('Music').setColor(15849719).addFields(
   { name: 'Official Instrumentals', value: '**[Download Link](https://piapro.jp/zutomayo)**' },
   {
     name: "ACAね's Song Covers",

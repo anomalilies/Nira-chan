@@ -1,7 +1,7 @@
 import { MessageEmbed, TextChannel } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { homeGuild, emojis, themeChannels, members } from '../../config/config.json';
+import { homeGuild, emojis, allChannels, members } from '../../config/config.json';
 
 interface PromptArgs {
   title: string;
@@ -69,7 +69,7 @@ export default class SayCommand extends Command {
 
       await user.send(embed);
       await message.channel.send(
-        `Your link is currently being checked over by Lily, and will be added to <#${themeChannels.links}> shortly!`,
+        `Your link is currently being checked over by Lily, and will be added to <#${allChannels.livesAndPerformances}> shortly!`,
       );
     }
 
