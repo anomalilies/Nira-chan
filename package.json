@@ -9,7 +9,7 @@
     "dev": "nodemon --config nodemon.json src/index.ts",
     "postinstall": "tsc"
   },
-  "author": "anomalilies, cubetastic33, davetan2, jy761, niradisgust",
+  "author": "anomalilies, cubetastic33, davetan2, Glup3, jy761, niradisgust",
   "license": "ISC",
   "dependencies": {
     "common-tags": "^1.8.0",
