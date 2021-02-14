@@ -38,7 +38,7 @@ export default async function (client: CommandoClient, message: Message) {
 
   handleBotCheckMessage(message, client);
 
-  handleUwuChannelMessage(message);
+  await handleUwuChannelMessage(message);
 
   handleNiraMojisInChannels(message);
 

@@ -1,13 +1,12 @@
 import { Message } from 'discord.js';
-// TODO change to import
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-// const uwuifying = require('../../Commands/Fun/UWU Translator/uwuify');
+import { uwuify } from '../../util/uwuTranslator/uwuify';
 
 import { themechannels } from '../../config/config.json';
 
-// TODO BROKEN - pls fix
-export const handleUwuChannelMessage = (message: Message) => {
+export const handleUwuChannelMessage = async (message: Message) => {
   if (message.channel.id === themechannels.uwu) {
-    // uwuifying.custom(message.content, message).then(() => message.delete());
+    await uwuify(message.content, message);
+
+    await message.delete();
   }
 };
