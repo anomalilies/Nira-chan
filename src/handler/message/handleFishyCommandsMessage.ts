@@ -2,7 +2,7 @@ import { Message } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 import { uwuify } from '../../util/uwuTranslator/uwuify';
 
-import { themechannels } from '../../config/config.json';
+import { themeChannels } from '../../config/config.json';
 
 const fishyCommands = [
   'fishy',
@@ -35,7 +35,7 @@ const fishyCommands = [
 ];
 
 export const handleFishyCommandsMessage = (message: Message, prefix: string) => {
-  if (message.channel.id === themechannels.fishy) {
+  if (message.channel.id === themeChannels.fishy) {
     const startsWithFishyCommand = fishyCommands.some((word) => {
       return message.content.toLowerCase().startsWith(prefix + word);
     });

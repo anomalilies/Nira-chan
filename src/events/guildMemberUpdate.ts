@@ -1,15 +1,15 @@
 import { GuildMember, TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
-import { emojis, themechannels, roles, contributorRoleNames } from '../config/config.json';
+import { emojis, themeChannels, roles, contributorRoleNames } from '../config/config.json';
 
 // Server Boost Message
 const handleServerBoosterRole = async (client: CommandoClient, oldMember: GuildMember, newMember: GuildMember) => {
   if (!oldMember.roles.cache.has(roles.serverBoosters) && newMember.roles.cache.has(roles.serverBoosters)) {
-    const channel = <TextChannel>client.channels.cache.get(themechannels.general);
+    const channel = <TextChannel>client.channels.cache.get(themeChannels.general);
 
     if (channel == undefined) {
-      return console.error("Couldn't find General Channel with ID", themechannels.general);
+      return console.error("Couldn't find General Channel with ID", themeChannels.general);
     }
 
     channel.send(emojis.yay);

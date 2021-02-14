@@ -1,7 +1,7 @@
 import { GuildMember, MessageReaction, TextChannel, User } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
-import { emojis, themechannels } from '../../config/config.json';
+import { emojis, themeChannels } from '../../config/config.json';
 import { colours, dividers, miscellaneous, pronouns } from './rolePickerEmbeds';
 
 /**
@@ -89,7 +89,7 @@ function handleReaction(reaction: MessageReaction, picker: Picker, user: User, a
 }
 
 export const rolePickerCommands = async (client: CommandoClient) => {
-  const channel = <TextChannel>await client.channels.fetch(themechannels.rolepicker);
+  const channel = <TextChannel>await client.channels.fetch(themeChannels.rolePicker);
 
   const messages = await channel.messages.fetch();
   const niraMessages = messages.filter((msg) => msg.author == client.user);

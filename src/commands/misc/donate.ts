@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { homeguild } from '../../config/config.json';
+import { homeGuild } from '../../config/config.json';
 
 export default class DonateCommand extends Command {
   constructor(client: CommandoClient) {
@@ -15,7 +15,7 @@ export default class DonateCommand extends Command {
   }
 
   async run(message: CommandoMessage) {
-    if (message.guild.id === homeguild) {
+    if (message.guild.id === homeGuild) {
       const embed = new MessageEmbed()
         .setTitle(`Support ${message.guild.name}`)
         .setThumbnail(message.guild.iconURL({ dynamic: true }))

@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { homeguild } from '../../config/config.json';
+import { homeGuild } from '../../config/config.json';
 
 export default class SayCommand extends Command {
   constructor(client: CommandoClient) {
@@ -15,7 +15,7 @@ export default class SayCommand extends Command {
   }
 
   async run(msg: CommandoMessage) {
-    if (msg.guild.id === homeguild) {
+    if (msg.guild.id === homeGuild) {
       const rule0 = new MessageEmbed()
         .setTitle('(Secret Rule) 0. Be Kind to Yourself')
         .setDescription(

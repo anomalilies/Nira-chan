@@ -1,10 +1,10 @@
 import { Message, MessageEmbed } from 'discord.js';
 
-import { homeguild, roles } from '../../config/config.json';
+import { homeGuild, roles } from '../../config/config.json';
 import rules from '../../embeds/ruleEmbeds.json';
 
 export const handleServerRulesMessage = async (message: Message, prefix: string) => {
-  if (message.guild.id === homeguild) {
+  if (message.guild.id === homeGuild) {
     if (message.member && message.member.roles.cache.get(roles.moderators)) {
       const ruleEmbeds = rules
         .filter((_, i) => {

@@ -3,7 +3,7 @@ import serverInfoEmbed from '../embeds/serverInfoEmbed';
 import { TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
-import { members, themechannels } from '../config/config.json';
+import { members, themeChannels } from '../config/config.json';
 import { welcomeCommands } from '../embeds/welcome/welcomeCommands';
 import { rolesListCommands } from '../embeds/roles/rolesListCommands';
 import { rolePickerCommands } from '../embeds/rolePicker/rolePickerCommands';
@@ -64,12 +64,12 @@ export default function (client: CommandoClient) {
 
   setInterval(() => changeBotStatus(client), 1 * 60 * 1000);
 
-  if (client.user.id === members.nirachanactual) {
+  if (client.user.id === members.niraChan) {
     setInterval(checkLurkers, 1 * 60 * 60 * 1000);
     setInterval(checkNewbies, 1 * 60 * 60 * 1000);
 
     // TODO: Identify channels, ???
-    const channel = <TextChannel>client.channels.cache.get(themechannels.archive);
+    const channel = <TextChannel>client.channels.cache.get(themeChannels.archive);
     channel.messages.fetch({ around: '776320801729019934', limit: 1 }).then((msg) => {
       const fetchedMsg = msg.first();
       setInterval(function () {

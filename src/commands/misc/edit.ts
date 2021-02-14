@@ -51,7 +51,7 @@ export default class EditCommand extends Command {
         }
       }
 
-      if (targetMsg.id.match(/^\d{18}$/) && targetMsg.author.id === members.nirachanactual) {
+      if (targetMsg.id.match(/^\d{18}$/) && targetMsg.author.id === members.niraChan) {
         await message.channel.send(
           `<@${message.author.id}>, What would you like the new message to say?` +
             '\nRespond with `cancel` to cancel the command. The command will automatically be cancelled in 30 seconds.',

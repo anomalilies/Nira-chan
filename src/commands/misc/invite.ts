@@ -1,6 +1,6 @@
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { homeguild } from '../../config/config.json';
+import { homeGuild } from '../../config/config.json';
 import { createDefaultEmbed } from '../../util/createDefaultEmbed';
 
 // TODO move to config.json
@@ -27,7 +27,7 @@ export default class InviteCommand extends Command {
       `Click __**[here](https://discord.com/api/oauth2/authorize?client_id=${this.client.user.id}&permissions=805661760&scope=bot)**__ to invite <@${this.client.user.id}>!`,
     );
 
-    if (msg.channel.type !== 'dm' && msg.guild.id === homeguild) {
+    if (msg.channel.type !== 'dm' && msg.guild.id === homeGuild) {
       const newEmbed = createDefaultEmbed(
         'Invitation',
         `Would you like to **invite <@${this.client.user.id}> to a server** (<:niraHello:${nirahello}>),\nor **share ${msg.guild.name}'s invite link** (<:niraCute:${niracute}>)?`,

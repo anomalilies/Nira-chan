@@ -78,7 +78,7 @@ export default class FAQCommand extends Command {
       if (
         fieldTitle.toUpperCase() !== 'N/A' &&
         targetMsg.id.match(/^\d{18}$/) &&
-        targetMsg.author.id === members.nirachanactual
+        targetMsg.author.id === members.niraChan
       ) {
         await message.channel.send(
           `<@${message.author.id}>, What would you like this field to contain?` +
