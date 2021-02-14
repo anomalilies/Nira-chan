@@ -1,11 +1,7 @@
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { homeGuild } from '../../config/config.json';
+import { homeGuild, emojis } from '../../config/config.json';
 import { createDefaultEmbed } from '../../util/createDefaultEmbed';
-
-// TODO move to config.json
-const nirahello = '777736555829002281';
-const niracute = '788632707789225985';
 
 export default class InviteCommand extends Command {
   constructor(client: CommandoClient) {
@@ -30,33 +26,33 @@ export default class InviteCommand extends Command {
     if (msg.channel.type !== 'dm' && msg.guild.id === homeGuild) {
       const newEmbed = createDefaultEmbed(
         'Invitation',
-        `Would you like to **invite <@${this.client.user.id}> to a server** (<:niraHello:${nirahello}>),\nor **share ${msg.guild.name}'s invite link** (<:niraCute:${niracute}>)?`,
+        `Would you like to **invite <@${this.client.user.id}> to a server** (<:niraHello:${emojis.hello}>),\nor **share ${msg.guild.name}'s invite link** (<:niraCute:${emojis.cute}>)?`,
       );
 
       await msg.edit(newEmbed);
-      await msg.react(nirahello);
-      await msg.react(niracute);
+      await msg.react(emojis.hello);
+      await msg.react(emojis.cute);
 
       const reactions = await msg.awaitReactions(
-        (reaction, user) => user.id === message.author.id && [nirahello, niracute].includes(reaction.emoji.id),
+        (reaction, user) => user.id === message.author.id && [emojis.hello, emojis.cute].includes(reaction.emoji.id),
         {
           max: 1,
           time: 60000,
         },
       );
 
-      if (reactions.has(nirahello)) {
+      if (reactions.has(emojis.hello)) {
         await msg.edit(botInvite);
         await msg.reactions.removeAll();
-      } else if (reactions.has(niracute)) {
+      } else if (reactions.has(emojis.cute)) {
         await msg.channel.send('https://discord.gg/zutomayo');
         await msg.reactions.removeAll();
       }
       return message;
     }
 
-    setTimeout(() => {
-      msg.edit(botInvite);
+    setTimeout(async () => {
+      await msg.edit(botInvite);
     }, 1000);
   }
 }
