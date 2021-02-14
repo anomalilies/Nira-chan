@@ -1,9 +1,9 @@
 import { MessageEmbed, MessageReaction, TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
-import { configFile } from '..';
+import { themechannels, allowlists, contributorRoleNames } from '../config/config.json';
 
-const handleStarboard = async (hallOfFame: TextChannel, reaction: MessageReaction, contributorRoles: string[]) => {
+const handleStarboard = async (hallOfFame: TextChannel, reaction: MessageReaction) => {
   const message = reaction.message;
 
   const image = message.attachments.size > 0 ? message.attachments.array()[0].url : '';
@@ -11,7 +11,7 @@ const handleStarboard = async (hallOfFame: TextChannel, reaction: MessageReactio
   const existingMsg = msgs.find((msg) =>
     msg.embeds.length === 1 ? msg.embeds[0].footer.text.startsWith(reaction.message.id) : false,
   );
-  if (!existingMsg && message.member.roles.cache.some((r) => contributorRoles.includes(r.name))) {
+  if (!existingMsg && message.member.roles.cache.some((r) => contributorRoleNames.includes(r.name))) {
     const embed = new MessageEmbed()
       .setColor(16755763)
       .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
@@ -26,8 +26,6 @@ const handleStarboard = async (hallOfFame: TextChannel, reaction: MessageReactio
 };
 
 export default async function (client: CommandoClient, partialReaction: MessageReaction) {
-  const { themechannels, allowlists, contributorRoleNames } = await import('../config/' + configFile);
-
   const hallOfFame = <TextChannel>client.channels.cache.find((channel) => channel.id === themechannels.halloffame);
 
   if (hallOfFame == undefined) {
@@ -57,6 +55,6 @@ export default async function (client: CommandoClient, partialReaction: MessageR
       return;
     }
 
-    await handleStarboard(hallOfFame, reaction, contributorRoleNames);
+    await handleStarboard(hallOfFame, reaction);
   }
 }

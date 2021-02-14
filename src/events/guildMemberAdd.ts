@@ -1,11 +1,9 @@
 import { GuildMember, MessageEmbed, TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
-import { configFile } from '..';
+import { homeguild, members, emojis, themechannels } from '../config/config.json';
 
 export default async function (client: CommandoClient, member: GuildMember) {
-  const { homeguild, members, emojis, themechannels } = await import('../config/' + configFile);
-
   const modlog = <TextChannel>client.channels.cache.get(themechannels.modlog);
   const generalChannel = <TextChannel>client.channels.cache.get(themechannels.general);
 

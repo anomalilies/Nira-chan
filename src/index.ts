@@ -6,11 +6,9 @@ import { CommandoClient } from 'discord.js-commando';
 import { updateChannelTitleJob } from './jobs/updateChannelTitle';
 import { sendMessageInCountdownJob } from './jobs/sendMessageInCountdown';
 
-export const configFile = process.env.NODE_ENV == 'production' ? 'production.json' : 'development.json';
+import { prefix, members } from './config/config.json';
 
 (async () => {
-  const { prefix, members } = await import('./config/' + configFile);
-
   // Commando
   const client = new CommandoClient({
     owner: members.currentowner,

@@ -2,10 +2,9 @@ import { CronJob } from 'cron';
 import { TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
-import { configFile } from '..';
+import { themechannels, cronschedules } from '../config/config.json';
 
 export const sendMessageInCountdownJob = async (client: CommandoClient) => {
-  const { themechannels, cronschedules } = await import('../config/' + configFile);
   return new CronJob(
     cronschedules.servertopic,
     () => {

@@ -1,7 +1,16 @@
 import { GuildEmoji, Message, MessageEmbed, MessageReaction, TextChannel, User } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
-import { configFile } from '..';
+import {
+  emojis,
+  homeguild,
+  roles,
+  themechannels,
+  members,
+  allowlists,
+  commandNames,
+  zoneRoles,
+} from '../config/config.json';
 import patpatresponses from '../../Data/patpatresponses.json';
 import nira9000 from '../../Data/nira9000.json';
 import rules from '../../Embeds/ruleEmbeds.json';
@@ -92,8 +101,8 @@ const paladinResponses = ['decant', 'grand paladin', `<:1945grandpaladin:${winem
 /**
  * Replace a regular message with a message sent through a webhook with the OP's name and avatar
  */
-async function replaceMessageThroughWebhook(message: Message, resendContent: string, countingChannel: string) {
-  if (message.channel.id === countingChannel) {
+async function replaceMessageThroughWebhook(message: Message, resendContent: string) {
+  if (message.channel.id === themechannels.counting) {
     return;
   }
 
@@ -173,8 +182,8 @@ function matchEmojis(findEmojis: string[], messageContent: string, emojis: any) 
 /**
  * Welcome Message and Role
  */
-function handleWelcomeMessage(client: CommandoClient, message: Message, homeGuild: string, emojis: any, roles: any) {
-  const list = client.guilds.cache.get(homeGuild);
+function handleWelcomeMessage(client: CommandoClient, message: Message) {
+  const list = client.guilds.cache.get(homeguild);
   const newbiesRole = list.roles.cache.find((role) => role.id == roles.newbies);
   if (!message.author.bot) {
     message.member.roles.add(newbiesRole);
@@ -197,7 +206,7 @@ function handleSubscriptionThankYouMessage(message: Message) {
   message.channel.send('Thank you so much! <:niraStar:777740701441064960>');
 }
 
-async function handleCountingMessage(message: Message, emojis: any) {
+async function handleCountingMessage(message: Message) {
   if (message.system || message.webhookID || message.author.bot || message.attachments.array().length) {
     return message.delete();
   }
@@ -230,7 +239,7 @@ async function handleCountingMessage(message: Message, emojis: any) {
   }
 }
 
-function handleGreyMessage(message: Message, members: any) {
+function handleGreyMessage(message: Message) {
   const response = greyResponses[Math.floor(Math.random() * greyResponses.length)];
   message.channel.startTyping();
 
@@ -240,11 +249,11 @@ function handleGreyMessage(message: Message, members: any) {
   }, 3000);
 }
 
-function handleBotCheckMessage(message: Message, channelIds: any) {
+function handleBotCheckMessage(message: Message) {
   for (const embed of message.embeds) {
     if (
       embed.title === `-wolfram <query>` &&
-      (message.channel.id === channelIds.dj || message.channel.id === channelIds.vcDiscussion)
+      (message.channel.id === themechannels.dj || message.channel.id === themechannels.vcDiscussion)
     ) {
       message.delete();
     }
@@ -255,7 +264,7 @@ function handleUwuChannelMessage(message: Message) {
   uwuifying.custom(message.content, message).then(() => message.delete());
 }
 
-function handlePatPatCommandMessage(message: Message, commandNames: any, prefix: string, members: any, emojis: any) {
+function handlePatPatCommandMessage(message: Message, prefix: string) {
   let color: string;
   let title: string;
   const author = message.author;
@@ -371,8 +380,8 @@ async function handlePaladinMessage(message: Message) {
   message.react(winemoji);
 }
 
-async function handleServerRulesMessage(message: Message, prefix: string, moderatorsId: string) {
-  if (message.member && message.member.roles.cache.get(moderatorsId)) {
+async function handleServerRulesMessage(message: Message, prefix: string) {
+  if (message.member && message.member.roles.cache.get(roles.moderators)) {
     const ruleEmbeds = rules
       .filter((_, i) => {
         const regex = new RegExp(`(\\s|^)${prefix}${i + 1}(\\s|$)`);
@@ -392,12 +401,8 @@ async function handleServerRulesMessage(message: Message, prefix: string, modera
 }
 
 export default async function (client: CommandoClient, message: Message) {
-  const { emojis, homeguild, roles, themechannels, members, allowlists, commandNames, zoneRoles } = await import(
-    '../config/' + configFile
-  );
-
   if (message.type === 'GUILD_MEMBER_JOIN' && message.guild.id === homeguild) {
-    return handleWelcomeMessage(client, message, homeguild, emojis, roles);
+    return handleWelcomeMessage(client, message);
   }
 
   if (subscriptionTypes.includes(message.type)) {
@@ -406,21 +411,21 @@ export default async function (client: CommandoClient, message: Message) {
 
   // Counting
   if (message.channel.id === themechannels.counting) {
-    return handleCountingMessage(message, emojis);
+    return handleCountingMessage(message);
   }
 
   // Grey
   if (message.mentions.users.has(members.nirachanactual) && message.author.id === members.grey) {
-    return handleGreyMessage(message, members);
+    return handleGreyMessage(message);
   }
 
   // Bot Check
   if (message.webhookID || message.author == client.user || message.author.bot) {
-    return handleBotCheckMessage(message, themechannels);
+    return handleBotCheckMessage(message);
   }
 
   // UwU Channel
-  if (message.channel.id === '786321508527243324') {
+  if (message.channel.id === themechannels.uwu) {
     return handleUwuChannelMessage(message);
   }
 
@@ -454,7 +459,7 @@ export default async function (client: CommandoClient, message: Message) {
   // PatPat Role
   // The member attribute is undefined on some messages so check if it's defined first
   if (message.member && message.member.roles.cache.get(roles.patpat)) {
-    if (message.content.toLowerCase().includes('patpat', emojis.patpat)) {
+    if (message.content.toLowerCase().includes('patpat')) {
       message.react(emojis.patpat);
     }
   }
@@ -486,7 +491,7 @@ export default async function (client: CommandoClient, message: Message) {
 
   if (needsToResend && message.member && message.channel.id !== themechannels.fishy) {
     // If there were any GIF emoji added to the message
-    await replaceMessageThroughWebhook(message, resendContent, themechannels.counting);
+    await replaceMessageThroughWebhook(message, resendContent);
   }
 
   // TODO: end rewrite this
@@ -499,7 +504,7 @@ export default async function (client: CommandoClient, message: Message) {
     message.guild.id !== homeguild ||
     message.member.roles.cache.get(zoneRoles.botPass)
   ) {
-    return handlePatPatCommandMessage(message, commandNames, client.commandPrefix, members, emojis);
+    return handlePatPatCommandMessage(message, client.commandPrefix);
   }
 
   // Fishy Commands
@@ -569,6 +574,6 @@ export default async function (client: CommandoClient, message: Message) {
 
   // Server Rules
   if (message.guild.id === homeguild) {
-    await handleServerRulesMessage(message, client.commandPrefix, roles.moderators);
+    await handleServerRulesMessage(message, client.commandPrefix);
   }
 }

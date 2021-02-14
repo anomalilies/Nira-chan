@@ -1,11 +1,10 @@
 import { GuildMember, TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
-import { configFile } from '..';
+
+import { emojis, themechannels, roles, contributorRoleNames } from '../config/config.json';
 
 // Server Boost Message
 const handleServerBoosterRole = async (client: CommandoClient, oldMember: GuildMember, newMember: GuildMember) => {
-  const { emojis, themechannels, roles } = await import('../config/' + configFile);
-
   if (!oldMember.roles.cache.has(roles.serverBoosters) && newMember.roles.cache.has(roles.serverBoosters)) {
     const channel = <TextChannel>client.channels.cache.get(themechannels.general);
 
@@ -23,21 +22,16 @@ const handleServerBoosterRole = async (client: CommandoClient, oldMember: GuildM
 };
 
 // Lock Regulars for Non-Newbies
-const handleLockRegularRole = (oldMember: GuildMember, newMember: GuildMember, roles: any) => {
+const handleLockRegularRole = (oldMember: GuildMember, newMember: GuildMember) => {
   if (oldMember.roles.cache.has(roles.newbies) && newMember.roles.cache.has(roles.regular)) {
     newMember.roles.remove(roles.regular);
   }
 };
 
 // Contributors Role
-const handleContributorsRole = (
-  oldMember: GuildMember,
-  newMember: GuildMember,
-  roles: any,
-  contributorRoles: string[],
-) => {
+const handleContributorsRole = (oldMember: GuildMember, newMember: GuildMember) => {
   const hadContributorRole = oldMember.roles.cache.has(roles.contributor);
-  const hasSomeContributorRole = newMember.roles.cache.some((r) => contributorRoles.includes(r.name));
+  const hasSomeContributorRole = newMember.roles.cache.some((r) => contributorRoleNames.includes(r.name));
 
   if (!hadContributorRole && hasSomeContributorRole) {
     return newMember.roles.add(roles.contributor);
@@ -49,7 +43,7 @@ const handleContributorsRole = (
 };
 
 // Mute Role
-const handleMuteRole = (oldMember: GuildMember, newMember: GuildMember, roles: any) => {
+const handleMuteRole = (oldMember: GuildMember, newMember: GuildMember) => {
   const hasRoleMute = newMember.roles.cache.has(roles.mute);
   const hasRoleNewbies = newMember.roles.cache.has(roles.newbies);
   const hadRoleMute = oldMember.roles.cache.has(roles.mute);
@@ -74,14 +68,12 @@ const handleMuteRole = (oldMember: GuildMember, newMember: GuildMember, roles: a
 };
 
 export default async function (client: CommandoClient, oldMember: GuildMember, newMember: GuildMember) {
-  const { roles, contributorRoleNames } = await import('../config/' + configFile);
-
   if (oldMember.roles.cache.size === newMember.roles.cache.size) {
     return;
   }
 
   await handleServerBoosterRole(client, oldMember, newMember);
-  handleLockRegularRole(oldMember, newMember, roles);
-  handleContributorsRole(oldMember, newMember, roles, contributorRoleNames);
-  handleMuteRole(oldMember, newMember, roles);
+  handleLockRegularRole(oldMember, newMember);
+  handleContributorsRole(oldMember, newMember);
+  handleMuteRole(oldMember, newMember);
 }

@@ -2,11 +2,10 @@ import { CronJob } from 'cron';
 import { TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
-import { configFile } from '..';
+import { themechannels, cronschedules } from '../config/config.json';
 import songs from '../../Data/songs.json';
 
 export const updateChannelTitleJob = async (client: CommandoClient) => {
-  const { themechannels, cronschedules } = await import('../config/' + configFile);
   const channelTitles = songs.mvSongs.engName;
   return new CronJob(
     cronschedules.servertopic,
