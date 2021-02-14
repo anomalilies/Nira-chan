@@ -1,8 +1,8 @@
 import { TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
-import { emojis, allChannels } from '../../config/config.json';
-import { roles1, roles2, roles3, roles4 } from './rolesListEmbeds';
+import { emojis, themechannels } from '../../config/config.json';
+import { roles1, roles2, roles3, roles4 } from './roleslistEmbeds';
 
 export const rolesListCommands = async (client: CommandoClient) => {
   const channel = <TextChannel>await client.channels.fetch(allChannels.rolesList);

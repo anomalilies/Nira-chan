@@ -3,9 +3,7 @@ import { CommandoClient } from 'discord.js-commando';
 
 import { allChannels } from '../../config/config.json';
 
-/**
- * Replace a regular message with a message sent through a webhook with the OP's name and avatar
- */
+// Replace a regular message with a message sent through a webhook with the OP's name and avatar
 async function replaceMessageThroughWebhook(message: Message, resendContent: string) {
   if (message.channel.id === allChannels.counting) {
     return;
@@ -65,7 +63,7 @@ export const handleNonNitroEmoji = async (message: Message, client: CommandoClie
   const emojiRegex = /<a?:\w+:\d+>|(?<!\\):(\w+):|^-(\w+)$/g;
   let needsToResend = false;
 
-  const resendContent = message.content.replace(emojiRegex, (match: string, group1: any, group2: any) => {
+  const resendContent = message.content.replace(emojiRegex, (match: string, group1: string, group2: string) => {
     const emojiMatch = group1 || group2;
     if (emojiMatch) {
       const emoji = findEmoji(client, message, emojiMatch);
