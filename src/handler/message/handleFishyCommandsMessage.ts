@@ -48,7 +48,6 @@ export const handleFishyCommandsMessage = (message: Message, prefix: string) => 
   }
 };
 
-// TODO refactor this
 export const handleOtherFishyMessage = (message: Message, client: CommandoClient) => {
   if (message.channel.id === '456367532434128897' && message.author.id === '238386015520292866') {
     const starts_with_command = fishyCommands.some((word) => message.content.toLowerCase().startsWith('>' + word));
