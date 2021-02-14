@@ -1,0 +1,115 @@
+{
+  "prefix": "-",
+  "commandNames": {
+    "patpatstart": {
+      "name": "patpathi",
+      "description": "Start a conversation with one of PatPat's clones."
+    },
+    "patpatstop": {
+      "name": "patpatbye",
+      "description": "End conversation with PatPat's clone."
+    }
+  },
+  "homeguild": "603246092402032670",
+  "cronschedules": {
+    "servertopic": "0 0 1 * *",
+    "countdown": "0 0 * * *"
+  },
+  "themechannels": {
+    "servertopic": "767550623767068742",
+    "countdown": "528641575752957983",
+    "halloffame": "778734720879951922",
+    "starboard": "752363402608902215",
+    "about": "760625396487684126",
+    "archive": "770726574865514517",
+    "botcommands": "742548177462231120",
+    "contest": "770795084002230292",
+    "links": "805540656662839329",
+    "roleslist": "758494476174884905",
+    "rolepicker": "781296501351383050",
+    "welcome": "603248229928140801",
+    "modlog": "742513756059467917",
+    "general": "603246092402032673",
+    "counting": "758541031498317835",
+    "dj": "758523806507204608",
+    "vcDiscussion": "762068348870852709",
+    "uwu": "786321508527243324",
+    "fishy": "747201864889794721",
+    "uniguri": "770109833713418271",
+    "twoWordStory": "776229267998375946"
+  },
+  "allowlists": {
+    "botspamchannels": [
+      "742550881911701615",
+      "758523455850938408",
+      "765054650029309962",
+      "747207562277158934",
+      "770028576078430239",
+      "761326959154167838"
+    ],
+    "contributionchannels": [
+      "735658144646168697",
+      "603248096607993866",
+      "603248158088101929",
+      "761326959154167838",
+      "747207562277158934",
+      "758492257543913502"
+    ],
+    "disgustchannels": ["603246659295510557"],
+    "starechannels": ["747663718959153906"],
+    "owiechannels": ["750558283315544155"]
+  },
+  "members": {
+    "nirachanactual": "740606402330099752",
+    "currentowner": "228880116699103232",
+    "grey": "790571552345030686",
+    "davetan": "759338005633826817",
+    "friendsofnira9000": ["759338005633826817"],
+    "noutimesinfinity": ["314358105205112834"]
+  },
+  "zoneRoles": {
+    "botPass": "796211149397819442"
+  },
+  "emojis": {
+    "disgust": "<:niraDisgust:742092526097268797>",
+    "stare": "<:niraStare:742093326823587840>",
+    "owie": "<:niraOwie:748995687093370902>",
+    "cursed": "<:niraCursed:765005652803321856>",
+    "patpat": "<a:patpat:761487227921367051>",
+    "despair": "<:niraDespair:742512729398706396>",
+    "wince": "<:niraWince:745096191364169738>",
+    "wave": "<:niraWave:742394597174673458>",
+    "yay": "<:niraYay:764025729696268319>",
+    "uniguri": "<:uniguri:742121262997962805>",
+    "hal": "<:hal9000:771576442034847784>",
+    "spacer": "<:spacer:757807111756447806>",
+    "fencing": "🤺",
+    "hello": "<:niraHello:777736555829002281>",
+    "wail": "<:niraWail:777736598854696980>"
+  },
+  "roles": {
+    "regular": "751209585464836137",
+    "contributor": "761383555372023860",
+    "mute": "745439119479406693",
+    "newbies": "774482130737561600",
+    "VIP": "790791220179632128",
+    "serverBoosters": "744738039116464151",
+    "patpat": "765347466169024512",
+    "uniguri": "770022309393334302",
+    "rainbowPass": "781295857706336296",
+    "botPass": "796211149397819442",
+    "moderators": "742061218860236840"
+  },
+  "contributorRoleNames": [
+    "Journalists",
+    "Contestants",
+    "Hackers",
+    "Stans",
+    "Editors",
+    "Translators",
+    "Meme Royalty",
+    "Theorists",
+    "Musicians",
+    "Artists"
+  ]
+}
