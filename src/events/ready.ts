@@ -1,4 +1,4 @@
-import serverInfoEmbed from '../../Embeds/serverInfoEmbed';
+import serverInfoEmbed from '../embeds/serverInfoEmbed';
 
 import { TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';

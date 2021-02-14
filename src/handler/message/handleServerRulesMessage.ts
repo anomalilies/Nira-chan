@@ -1,7 +1,7 @@
 import { Message, MessageEmbed } from 'discord.js';
 
 import { homeguild, roles } from '../../config/config.json';
-import rules from '../../../Embeds/ruleEmbeds.json';
+import rules from '../../embeds/ruleEmbeds.json';
 
 export const handleServerRulesMessage = async (message: Message, prefix: string) => {
   if (message.guild.id === homeguild) {
