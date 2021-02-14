@@ -91,38 +91,38 @@ function handleReaction(reaction: MessageReaction, picker: Picker, user: User, a
 export const rolePickerCommands = async (client: CommandoClient) => {
   const channel = <TextChannel>await client.channels.fetch(themechannels.rolepicker);
 
-  channel.messages.fetch().then((messages) => {
-    const niraMessages = messages.filter((msg) => msg.author == client.user);
+  const messages = await channel.messages.fetch();
+  const niraMessages = messages.filter((msg) => msg.author == client.user);
 
-    if (niraMessages.size === 0) {
-      channel.send(pronouns);
-      channel.send(emojis.spacer);
-      channel.send(miscellaneous);
-      channel.send(emojis.spacer);
-      channel.send(dividers);
-      channel.send(emojis.spacer);
-      channel.send(colours);
-    } else {
-      const embedMessages = niraMessages.filter((msg) => !msg.content.startsWith(emojis.spacer)).array();
+  if (niraMessages.size === 0) {
+    await channel.send(pronouns);
+    await channel.send(emojis.spacer);
+    await channel.send(miscellaneous);
+    await channel.send(emojis.spacer);
+    await channel.send(dividers);
+    await channel.send(emojis.spacer);
+    await channel.send(colours);
+    return;
+  }
 
-      let index = 0;
-      for (const [, value] of Object.entries(data)) {
-        const message = embedMessages[index];
+  const embedMessages = niraMessages.filter((msg) => !msg.content.startsWith(emojis.spacer)).array();
 
-        for (const reaction in value.roles) {
-          message.react(reaction);
-        }
+  let index = 0;
+  for (const [, value] of Object.entries(data)) {
+    const message = embedMessages[index];
 
-        const collector = message.createReactionCollector(
-          (reaction: MessageReaction) => value.roles.has(reaction.emoji.id),
-          { dispose: true },
-        );
-
-        collector.on('collect', (reaction, user) => handleReaction(reaction, value, user, true));
-        collector.on('remove', (reaction, user) => handleReaction(reaction, value, user, false));
-
-        index++;
-      }
+    for (const reaction in value.roles) {
+      message.react(reaction);
     }
-  });
+
+    const collector = message.createReactionCollector(
+      (reaction: MessageReaction) => value.roles.has(reaction.emoji.id),
+      { dispose: true },
+    );
+
+    collector.on('collect', (reaction, user) => handleReaction(reaction, value, user, true));
+    collector.on('remove', (reaction, user) => handleReaction(reaction, value, user, false));
+
+    index++;
+  }
 };

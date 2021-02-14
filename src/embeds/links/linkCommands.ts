@@ -11,9 +11,9 @@ export const linkCommands = async (client: CommandoClient) => {
   const niraMessages = messages.filter((msg) => msg.author == client.user);
 
   if (niraMessages.size === 0) {
-    channel.send(links1);
-    channel.send(links2);
-    channel.send(links3);
+    await channel.send(links1);
+    await channel.send(links2);
+    await channel.send(links3);
     return;
   }
 
