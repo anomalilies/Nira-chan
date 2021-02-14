@@ -6,6 +6,7 @@ import { CommandoClient } from 'discord.js-commando';
 import { members, themechannels } from '../config/config.json';
 import { welcomeCommands } from '../embeds/welcome/welcomeCommands';
 import { rolesListCommands } from '../embeds/roles/rolesListCommands';
+import { rolePickerCommands } from '../embeds/rolePicker/rolePickerCommands';
 
 const statuses = [
   'you in disgust.',
@@ -77,7 +78,7 @@ export default function (client: CommandoClient) {
     // botCommands(client, themechannels.botcommands);
     // contestCommands(client, themechannels.contest);
     // linkCommands(client, themechannels.links);
-    // rolepickerCommands(client, themechannels.rolepicker);
+    rolePickerCommands(client);
     rolesListCommands(client);
     welcomeCommands(client);
   }
