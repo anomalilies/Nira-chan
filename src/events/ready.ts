@@ -5,7 +5,7 @@ import { CommandoClient } from 'discord.js-commando';
 
 import { members, themechannels } from '../config/config.json';
 import { welcomeCommands } from '../embeds/welcome/welcomeCommands';
-import { rolesListCommands } from '../embeds/roles/rolesListCommands';
+import { rolesListCommands } from '../embeds/roles/roleslistCommands';
 import { rolePickerCommands } from '../embeds/rolePicker/rolePickerCommands';
 import { linkCommands } from '../embeds/links/linkCommands';
 import { contestCommands } from '../embeds/contest/contestCommands';
