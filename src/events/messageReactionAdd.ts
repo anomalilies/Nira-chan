@@ -29,7 +29,7 @@ export default async function (client: CommandoClient, partialReaction: MessageR
   const hallOfFame = <TextChannel>client.channels.cache.find((channel) => channel.id === themechannels.halloffame);
 
   if (hallOfFame == undefined) {
-    return console.error("Couldn't find hall-of-fame, ID:", themechannels.halloffame);
+    return;
   }
 
   let reaction = partialReaction;
@@ -39,22 +39,15 @@ export default async function (client: CommandoClient, partialReaction: MessageR
   }
 
   const message = reaction.message;
-  const starEmoji = '⭐';
+  const msgReaction = message.reactions.cache.get('⭐');
 
-  // TODO invert if and return early --> eliminate 1 layer
-  if (message.reactions.cache.get(starEmoji) && allowlists.contributionchannels.includes(message.channel.id)) {
-    const msgReaction = message.reactions.cache.get(starEmoji);
-
-    if (msgReaction == undefined) {
-      return console.error("Couldn't find star reactions in message");
-    }
-
-    const starReaction = await msgReaction.fetch();
-
-    if (starReaction.count < 5) {
-      return;
-    }
-
-    await handleStarboard(hallOfFame, reaction);
+  if (msgReaction == undefined || !allowlists.contributionchannels.includes(message.channel.id)) {
+    return;
   }
+
+  if ((await msgReaction.fetch()).count < 5) {
+    return;
+  }
+
+  await handleStarboard(hallOfFame, reaction);
 }
