@@ -20,6 +20,7 @@ import { handlePatPatCommandMessage } from './message/handlePatPatCommandMessage
 import { handleNonNitroEmoji } from './message/handleNonNitroEmoji';
 import { handleServerRulesMessage } from './message/handleServerRulesMessage';
 import { handleFishyCommandsMessage, handleOtherFishyMessage } from './message/handleFishyCommandsMessage';
+import { handleQueenCommandMessage } from './message/handleQueenCommandMessage';
 
 export {
   handleCountingEditedMessage,
@@ -45,4 +46,5 @@ export {
   handleServerRulesMessage,
   handleFishyCommandsMessage,
   handleOtherFishyMessage,
+  handleQueenCommandMessage,
 };

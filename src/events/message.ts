@@ -1,7 +1,5 @@
-import { Message, MessageEmbed } from 'discord.js';
+import { Message } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
-
-import { members } from '../config/config.json';
 
 import {
   handleCountingMessage,
@@ -25,6 +23,7 @@ import {
   handleServerRulesMessage,
   handleFishyCommandsMessage,
   handleOtherFishyMessage,
+  handleQueenCommandMessage,
 } from '../handler';
 
 export default async function (client: CommandoClient, message: Message) {
@@ -38,7 +37,7 @@ export default async function (client: CommandoClient, message: Message) {
 
   handleBotCheckMessage(message, client);
 
-  await handleUwuChannelMessage(message);
+  handleUwuChannelMessage(message);
 
   handleNiraMojisInChannels(message);
 
@@ -68,15 +67,7 @@ export default async function (client: CommandoClient, message: Message) {
 
   handleNoUMessage(message);
 
-  // TODO move this over to commands
-  // The Queen
-  if (message.content.toLowerCase() === client.commandPrefix + 'wk zutomayo') {
-    const embed = new MessageEmbed()
-      .setColor(15849719)
-      .setTitle('Did you know?')
-      .setDescription(`In reality, <@${members.currentowner}> has the crown. <:queen:762902044683403272>`);
-    message.channel.send(embed);
-  }
+  handleQueenCommandMessage(message);
 
   await handleServerRulesMessage(message, client.commandPrefix);
 }
