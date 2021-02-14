@@ -1,18 +1,11 @@
-import { Message, MessageEmbed, User } from 'discord.js';
+import { Message } from 'discord.js';
 
 import { homeguild, members, allowlists, zoneRoles, commandNames, emojis } from '../../config/config.json';
 import patpatresponses from '../../../Data/patpatresponses.json';
 import nira9000 from '../../../Data/nira9000.json';
+import { createDefaultEmbed } from '../../util/createDefaultEmbed';
 
 const whosTalkingWithPatPat = new Set();
-
-function createSimpleEmbed(color: string, title: string, author: User, description: string) {
-  return new MessageEmbed()
-    .setColor(color)
-    .setTitle(title)
-    .setAuthor(author.username, author.avatarURL({ dynamic: true }))
-    .setDescription(description);
-}
 
 export const handlePatPatCommandMessage = async (message: Message, prefix: string) => {
   // Allowed in specific bot channels only
@@ -42,7 +35,7 @@ export const handlePatPatCommandMessage = async (message: Message, prefix: strin
         description = `Salutations, gamer! ${emojis.patpat}`;
       }
 
-      const patPatEmbed = createSimpleEmbed(color, title, author, description);
+      const patPatEmbed = createDefaultEmbed(title, description, color, author);
       return message.channel.send(patPatEmbed);
     }
 
@@ -60,7 +53,7 @@ export const handlePatPatCommandMessage = async (message: Message, prefix: strin
         description = `Gud niet yeahyeah— ${emojis.patpat}`;
       }
 
-      const patPatEmbed = createSimpleEmbed(color, title, author, description);
+      const patPatEmbed = createDefaultEmbed(title, description, color, author);
       return message.channel.send(patPatEmbed);
     }
 
@@ -76,7 +69,7 @@ export const handlePatPatCommandMessage = async (message: Message, prefix: strin
         description = `${patpatresponses[Math.floor(Math.random() * patpatresponses.length)]}`;
       }
 
-      const patPatEmbed = createSimpleEmbed(color, title, author, description);
+      const patPatEmbed = createDefaultEmbed(title, description, color, author);
       message.channel.send(patPatEmbed);
     }
   }
