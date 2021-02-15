@@ -1,7 +1,9 @@
+import { oneLine } from 'common-tags';
 import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { allowLists, emojis, roles } from '../../config/config.json';
+import { emojis } from '../../config/config.json';
+import { doesUserHaveBotpass, isBotspamChannel, isDmChannel } from '../../util/checks';
 
 interface PromptArgs {
   text: string;
@@ -26,25 +28,22 @@ export default class DearMrFCommand extends Command {
   }
 
   async run(message: CommandoMessage, { text }: PromptArgs) {
-    if (
-      message.channel.type === 'dm' ||
-      allowLists.botSpamChannel.includes(message.channel.id) ||
-      message.member.roles.cache.get(roles.botPass)
-    ) {
+    if (isDmChannel(message) || isBotspamChannel(message) || doesUserHaveBotpass(message)) {
       const embed = new MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-        .addFields(
+        .addFields([
           {
             name: 'Dear Mr. F:',
             value: text,
           },
           {
             name: 'Your Response:',
-            value:
-              `Mr. F, I have no idea what **${message.author}** is saying, but something ` +
-              `tells me you best pay really close attention! ${emojis.wince}`,
+            value: oneLine`
+              Mr. F, I have no idea what **${message.author}** is saying, but something
+              tells me you best pay really close attention! ${emojis.wince}
+            `,
           },
-        )
+        ])
         .setColor(15849719);
 
       return await message.channel.send(embed);
