@@ -1,8 +1,13 @@
 import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { allowLists, homeGuild, roles } from '../../config/config.json';
 import abilities from '../../data/copyabilities.json';
+import { doesUserHaveBotpass, isBotspamChannel, isDmChannel, isHomeGuild } from '../../util/checks';
+
+interface Ability {
+  keyName: string;
+  names: string[];
+}
 
 export default class KirbyCommand extends Command {
   constructor(client: CommandoClient) {
@@ -16,65 +21,58 @@ export default class KirbyCommand extends Command {
   }
 
   async run(message: CommandoMessage) {
-    if (
-      message.channel.type === 'dm' ||
-      allowLists.botSpamChannel.includes(message.channel.id) ||
-      message.guild.id !== homeGuild ||
-      message.member.roles.cache.get(roles.botPass)
-    ) {
-      const abilityGroup: string[] = [];
-      const weights: number[] = [];
+    if (isDmChannel(message) || isBotspamChannel(message) || !isHomeGuild(message) || doesUserHaveBotpass(message)) {
+      let ability: Ability;
+      let total = 0;
 
-      for (const [, value] of Object.entries(abilities)) {
-        abilityGroup.push(...value.ability);
-        weights.push(value.weight);
+      for (const [, ability] of Object.entries(abilities)) {
+        total += ability.weight;
       }
 
-      let i: number;
+      const threshold = Math.random() * total;
 
-      for (i = 0; i < weights.length; i++) {
-        weights[i] += weights[i - 1] || 0;
-      }
+      total = 0;
 
-      const random = Math.random() * weights[weights.length - 1];
+      for (const [key, value] of Object.entries(abilities)) {
+        total += value.weight;
 
-      for (i = 0; i < weights.length; i++) {
-        if (weights[i] > random) {
+        if (total >= threshold) {
+          ability = {
+            keyName: key,
+            names: value.names,
+          };
           break;
         }
       }
 
-      const ability = abilityGroup[i];
-      const index = Math.floor(Math.random() * ability.length);
+      const index = Math.floor(Math.random() * ability.names.length);
 
-      let nickname: string;
+      let nickname = message.author.username;
 
-      if (message.channel.type === 'dm') {
-        nickname = message.author.username;
-      } else {
+      if (!isDmChannel(message)) {
         nickname = message.guild.member(message.author).displayName;
       }
 
       const replies = [
-        `Kirby inhaled **${nickname}** and got the **${ability[index]}** ability!`,
-        `Somehow, when Kirby inhaled **${nickname}**, he got the **${ability[index]}** ability!`,
-        `Elemental combo! Kirby got the **${ability[index]}** ability when inhaling **${nickname}**!`,
-        `Power combo! Kirby got the **${ability[index]}** ability when inhaling **${nickname}**!`,
-        `Woah! Kirby got the **${ability[index]}** super ability when inhaling **${nickname}**!`,
-        `Kirby inhaled **${nickname}** and... Turned into yarn? He uses the **${ability[index]}** move!`,
-        `Kirby found a Robobot Armour docking station! After inhaling **${nickname}**, he uses **${ability[index]}**!`,
-        `With **${nickname}**, Kirby partners up with his friends! He uses the **${ability[index]}** attack!`,
-        `Wow! Kirby inhaled **${nickname}** and got the rare **${ability[index]}** ability!`,
-        `Kirby inhaled **${nickname}** and... Turned into yarn? He gains the **${ability[index]}** ability!`,
-        `As Kirby is approaching an impending boss fight, anxiety creeps over him. No need to worry, though; Kirby inhales **${nickname}**, and gets the **${ability[index]}** ability!`,
-        `No way... Kirby inhaled **${nickname}** and got the ultra-rare **${ability[index]}** ability!`,
-        `why tf would i absorb your **${ability}**, **${nickname}**? <:kirbuff:757349479065321483> fuck outta here fam`,
+        `Kirby inhaled **${nickname}** and got the **${ability.names[index]}** ability!`,
+        `Somehow, when Kirby inhaled **${nickname}**, he got the **${ability.names[index]}** ability!`,
+        `Elemental combo! Kirby got the **${ability.names[index]}** ability when inhaling **${nickname}**!`,
+        `Power combo! Kirby got the **${ability.names[index]}** ability when inhaling **${nickname}**!`,
+        `Woah! Kirby got the **${ability.names[index]}** super ability when inhaling **${nickname}**!`,
+        `Kirby inhaled **${nickname}** and... Turned into yarn? He uses the **${ability.names[index]}** move!`,
+        `Kirby found a Robobot Armour docking station! After inhaling **${nickname}**, he uses **${ability.names[index]}**!`,
+        `With **${nickname}**, Kirby partners up with his friends! He uses the **${ability.names[index]}** attack!`,
+        `Wow! Kirby inhaled **${nickname}** and got the rare **${ability.names[index]}** ability!`,
+        `Kirby inhaled **${nickname}** and... Turned into yarn? He gains the **${ability.names[index]}** ability!`,
+        `As Kirby is approaching an impending boss fight, anxiety creeps over him. No need to worry, though; Kirby inhales **${nickname}**, and gets the **${ability.names[index]}** ability!`,
+        `No way... Kirby inhaled **${nickname}** and got the ultra-rare **${ability.names[index]}** ability!`,
+        `why tf would i absorb your **${ability.keyName}**, **${nickname}**? <:kirbuff:757349479065321483> fuck outta here fam`,
       ];
 
       const embed = new MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
         .setColor(15849719)
-        .setDescription(`<:kirbsucc:757289104789471322> ${replies[i]}`);
+        .setDescription(`<:kirbsucc:757289104789471322> ${replies[Math.floor(Math.random() * replies.length)]}`);
 
       return await message.channel.send(embed);
     }

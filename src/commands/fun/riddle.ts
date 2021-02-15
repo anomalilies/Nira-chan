@@ -1,8 +1,8 @@
 import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { allowLists, roles } from '../../config/config.json';
-import riddlesList from '../../data/riddles.json';
+import riddles from '../../data/riddles.json';
+import { doesUserHaveBotpass, isBotspamChannel, isDmChannel } from '../../util/checks';
 
 export default class RiddleCommand extends Command {
   constructor(client: CommandoClient) {
@@ -15,26 +15,14 @@ export default class RiddleCommand extends Command {
   }
 
   async run(message: CommandoMessage) {
-    if (
-      message.channel.type === 'dm' ||
-      allowLists.botSpamChannel.includes(message.channel.id) ||
-      message.member.roles.cache.get(roles.botPass)
-    ) {
-      const riddles = [];
-      const answers = [];
-
-      for (const key in riddlesList) {
-        riddles.push(riddlesList[key].riddle);
-        answers.push(riddlesList[key].answer);
-      }
-
+    if (isDmChannel(message) || isBotspamChannel(message) || doesUserHaveBotpass(message)) {
       const i = Math.floor(Math.random() * riddles.length);
 
       const embed = new MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
         .setColor(15849719)
-        .setDescription(riddles[i])
-        .addField('Answer', `||${answers[i]}||`);
+        .setDescription(riddles[i].riddle)
+        .addField('Answer', `||${riddles[i].answer}||`);
 
       return await message.channel.send(embed);
     }

@@ -17,3 +17,7 @@ export const doesUserHaveBotpass = (message: Message): boolean => {
 export const isHomeGuild = (message: Message): boolean => {
   return message.guild.id === homeGuild;
 };
+
+export const isInChannel = (message: Message, channelId: string): boolean => {
+  return message.channel.id === channelId;
+};

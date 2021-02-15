@@ -1,7 +1,8 @@
 import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { allowLists, emojis, roles } from '../../config/config.json';
+import { emojis } from '../../config/config.json';
+import { doesUserHaveBotpass, isBotspamChannel, isDmChannel } from '../../util/checks';
 
 export default class DespairCommand extends Command {
   constructor(client: CommandoClient) {
@@ -14,11 +15,7 @@ export default class DespairCommand extends Command {
   }
 
   async run(message: CommandoMessage) {
-    if (
-      message.channel.type === 'dm' ||
-      allowLists.botSpamChannel.includes(message.channel.id) ||
-      message.member.roles.cache.get(roles.botPass)
-    ) {
+    if (isDmChannel(message) || isBotspamChannel(message) || doesUserHaveBotpass(message)) {
       const embed = new MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
         .setDescription(`Aaaa, the tape is rewinding so fast! ${emojis.despair}`)

@@ -1,3 +1,4 @@
+import { stripIndents } from 'common-tags';
 import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
@@ -16,7 +17,28 @@ export default class JustDoItCommand extends Command {
     const embed = new MessageEmbed()
       .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
       .setDescription(
-        "Do it\nJust do it\nDon't let your dreams be dreams\nYesterday you said tomorrow\nSo just do it\nMake your dreams come true\nJust do it\nSome people dream of success\nWhile you're gonna wake up and work hard at it\nNothing is impossible\nYou should get to the point\nWhere anyone else would quit\nAnd you're not going to stop there\nNo, what are you waiting for?\nDo it\nJust do it\nYes you can\nJust do it\nIf you're tired of starting over\nStop giving up",
+        stripIndents`
+          Do it
+          Just do it
+          Don't let your dreams be dreams
+          Yesterday you said tomorrow
+          So just do it
+          Make your dreams come true
+          Just do it
+          Some people dream of success
+          While you're gonna wake up and work hard at it
+          Nothing is impossible
+          You should get to the point
+          Where anyone else would quit
+          And you're not going to stop there
+          No, what are you waiting for?
+          Do it
+          Just do it
+          Yes you can
+          Just do it
+          If you're tired of starting over
+          Stop giving up
+        `,
       )
       .setColor(15849719);
 

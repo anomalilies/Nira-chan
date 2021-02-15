@@ -1,8 +1,9 @@
 import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
-import fishpuns from '../../data/fishpuns.json';
 
-import { allowLists, homeGuild, roles } from '../../config/config.json';
+import { doesUserHaveBotpass, isBotspamChannel, isDmChannel, isHomeGuild, isInChannel } from '../../util/checks';
+import { allChannels } from '../../config/config.json';
+import fishpuns from '../../data/fishpuns.json';
 
 export default class FishpunCommand extends Command {
   constructor(client: CommandoClient) {
@@ -17,11 +18,11 @@ export default class FishpunCommand extends Command {
 
   async run(message: CommandoMessage) {
     if (
-      message.channel.type === 'dm' ||
-      allowLists.botSpamChannel.includes(message.channel.id) ||
-      message.channel.id === '747201864889794721' ||
-      message.guild.id !== homeGuild ||
-      message.member.roles.cache.get(roles.botPass)
+      isDmChannel(message) ||
+      isBotspamChannel(message) ||
+      isInChannel(message, allChannels.fishy) ||
+      !isHomeGuild(message) ||
+      doesUserHaveBotpass(message)
     ) {
       const embed = new MessageEmbed()
         .setTitle('Mr. Fish says...')
