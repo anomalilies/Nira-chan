@@ -2,7 +2,7 @@ import { oneLine } from 'common-tags';
 import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { allowLists, homeGuild, roles } from '../../config/config.json';
+import { doesUserHaveBotpass, isBotspamChannel, isDmChannel, isHomeGuild } from '../../util/checks';
 
 interface PromptArgs {
   name: string;
@@ -31,12 +31,7 @@ export default class AimerCommand extends Command {
   }
 
   async run(message: CommandoMessage, { name }: PromptArgs) {
-    const isDmChannel = message.channel.type === 'dm';
-    const isBotSpamChannel = allowLists.botSpamChannel.includes(message.channel.id);
-    const isHomeGuild = message.guild.id === homeGuild;
-    const hasBotPass = message.member.roles.cache.get(roles.botPass);
-
-    if (isDmChannel || isBotSpamChannel || !isHomeGuild || hasBotPass) {
+    if (isDmChannel(message) || isBotspamChannel(message) || !isHomeGuild(message) || doesUserHaveBotpass(message)) {
       let userName = name;
 
       if (userName.toLowerCase() === 'aimer') {
