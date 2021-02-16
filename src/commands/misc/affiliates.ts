@@ -1,16 +1,13 @@
 import { MessageEmbed, TextChannel } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { homeGuild, emojis } from '../../config/config.json';
+import { homeGuild, emojis, allChannels } from '../../config/config.json';
 
 interface PromptArgs {
   title: string;
   description: string;
   link: string;
 }
-
-// TODO move to config.json
-const affiliatesChannel = '758082713885343844';
 
 export default class AffiliatesCommand extends Command {
   constructor(client: CommandoClient) {
@@ -45,12 +42,13 @@ export default class AffiliatesCommand extends Command {
     if (message.guild.id === homeGuild) {
       const embed = new MessageEmbed().setTitle(title).setDescription(description).setColor(15849719);
 
-      const channel = <TextChannel>message.guild.channels.cache.get(affiliatesChannel);
+      const channel = <TextChannel>await this.client.channels.fetch(allChannels.affiliates);
+
       await channel.send(embed);
       await channel.send(link);
       await channel.send(emojis.spacer);
 
-      return message.channel.send('Successfully created embed!');
+      return await message.channel.send('Successfully created embed!');
     }
   }
 }

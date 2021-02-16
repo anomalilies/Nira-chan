@@ -56,7 +56,7 @@ function checkNewbies(client: CommandoClient) {
   });
 }
 
-export default function (client: CommandoClient) {
+export default async function (client: CommandoClient) {
   console.log(`${client.user.tag} activated!`);
   client.guilds.cache.forEach((guild) => {
     console.log(`${guild.name} | ${guild.id}`);
@@ -70,12 +70,12 @@ export default function (client: CommandoClient) {
 
     // TODO: Identify channels, ???
     const channel = <TextChannel>client.channels.cache.get(allChannels.archive);
-    channel.messages.fetch({ around: '776320801729019934', limit: 1 }).then((msg) => {
-      const fetchedMsg = msg.first();
-      setInterval(function () {
-        fetchedMsg.edit(serverInfoEmbed(fetchedMsg.guild));
-      }, 300000);
-    });
+    const msg = await channel.messages.fetch({ around: '776320801729019934', limit: 1 });
+    const fetchedMsg = msg.first();
+
+    setInterval(async function () {
+      fetchedMsg.edit(await serverInfoEmbed(fetchedMsg.guild));
+    }, 300000);
 
     aboutCommands(client);
     archiveCommands(client);

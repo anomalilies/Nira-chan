@@ -1,7 +1,8 @@
+import { oneLine } from 'common-tags';
 import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { homeGuild } from '../../config/config.json';
+import { isHomeGuild } from '../../util/checks';
 
 export default class DonateCommand extends Command {
   constructor(client: CommandoClient) {
@@ -15,17 +16,21 @@ export default class DonateCommand extends Command {
   }
 
   async run(message: CommandoMessage) {
-    if (message.guild.id === homeGuild) {
+    if (isHomeGuild(message)) {
       const embed = new MessageEmbed()
         .setTitle(`Support ${message.guild.name}`)
         .setThumbnail(message.guild.iconURL({ dynamic: true }))
         .addField(
           'Donations',
-          "If you'd like to support the ZONE by finanically funding giveaways, **check out our __[Ko-fi](https://ko-fi.com/uniguri)__**!",
+          oneLine`
+            "If you'd like to support the ZONE by finanically funding giveaways,
+            **check out our __[Ko-fi](https://ko-fi.com/uniguri)__**!",
+          `,
         )
         .setColor(15849719)
         .setFooter('Thank you!');
-      return message.channel.send(embed);
+
+      return await message.channel.send(embed);
     }
   }
 }

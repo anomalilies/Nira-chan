@@ -1,3 +1,5 @@
+import { oneLineTrim, stripIndent } from 'common-tags';
+import { MessageReaction, User } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
 import { homeGuild, emojis } from '../../config/config.json';
@@ -14,19 +16,23 @@ export default class InviteCommand extends Command {
   }
 
   async run(message: CommandoMessage) {
-    const embed = createDefaultEmbed('Loading...', '<a:loading:791389606616236052>');
+    const embed = createDefaultEmbed('Loading...', emojis.loading);
 
     const msg = await message.channel.send(embed);
 
     const botInvite = createDefaultEmbed(
       'Bot Invitation',
-      `Click __**[here](https://discord.com/api/oauth2/authorize?client_id=${this.client.user.id}&permissions=805661760&scope=bot)**__ to invite <@${this.client.user.id}>!`,
+      oneLineTrim`
+        Click __**[here](https://discord.com/api/oauth2/authorize?client_id=${this.client.user.id}
+        &permissions=805661760&scope=bot)**__ to invite <@${this.client.user.id}>!
+      `,
     );
 
     if (msg.channel.type !== 'dm' && msg.guild.id === homeGuild) {
       const newEmbed = createDefaultEmbed(
         'Invitation',
-        `Would you like to **invite <@${this.client.user.id}> to a server** (<:niraHello:${emojis.hello}>),\nor **share ${msg.guild.name}'s invite link** (<:niraCute:${emojis.cute}>)?`,
+        stripIndent`Would you like to **invite <@${this.client.user.id}> to a server** (${emojis.hello}),
+        or **share ${msg.guild.name}'s invite link** (${emojis.cute})?`,
       );
 
       await msg.edit(newEmbed);
@@ -34,7 +40,7 @@ export default class InviteCommand extends Command {
       await msg.react(emojis.cute);
 
       const reactions = await msg.awaitReactions(
-        (reaction, user) => user.id === message.author.id && [emojis.hello, emojis.cute].includes(reaction.emoji.id),
+        (r: MessageReaction, u: User) => u.id === message.author.id && [emojis.hello, emojis.cute].includes(r.emoji.id),
         {
           max: 1,
           time: 60000,
@@ -48,6 +54,7 @@ export default class InviteCommand extends Command {
         await msg.channel.send('https://discord.gg/zutomayo');
         await msg.reactions.removeAll();
       }
+
       return message;
     }
 

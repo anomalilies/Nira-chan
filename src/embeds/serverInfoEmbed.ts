@@ -1,4 +1,5 @@
 import { Guild, MessageEmbed } from 'discord.js';
+
 import moment from 'moment';
 
 const guildRegionKeyToName = (regionKey: string): string => {
@@ -47,18 +48,19 @@ const guildRegionKeyToName = (regionKey: string): string => {
   }
 };
 
-export default function (guild: Guild) {
+export default async function (guild: Guild) {
   const roles = guild.roles.cache.sort((a, b) => b.position - a.position).map((role) => role.toString());
   const members = guild.members.cache;
   const channels = guild.channels.cache;
   const serverEmojis = guild.emojis.cache;
+  const owner = await guild.members.fetch(guild.ownerID);
 
   const serverInfo = new MessageEmbed()
     .setTitle(`About ${guild.name}`)
     .setThumbnail(guild.iconURL({ dynamic: true }))
     .setColor(15849719)
     .addField('General', [
-      `**❯ Owner:** ${guild.owner.user.tag}`,
+      `**❯ Owner:** ${owner.user.tag}`,
       `**❯ Region:** ${guildRegionKeyToName(guild.region)}`,
       `**❯ Boost Tier:** ${guild.premiumTier ? `Tier ${guild.premiumTier}` : 'None'}`,
       `**❯ Creation Date:** ${moment(guild.createdTimestamp).format('LT')}, ${moment(guild.createdTimestamp).format(

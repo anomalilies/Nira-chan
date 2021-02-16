@@ -1,15 +1,13 @@
 import { MessageEmbed, TextChannel } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { homeGuild, emojis } from '../../config/config.json';
+import { emojis, allChannels } from '../../config/config.json';
+import { isHomeGuild } from '../../util/checks';
 
 interface PromptArgs {
   title: string;
   description: string;
 }
-
-// TODO move this to config.json
-const FAQChannel = '760621183564513312';
 
 export default class FAQCommand extends Command {
   constructor(client: CommandoClient) {
@@ -36,10 +34,10 @@ export default class FAQCommand extends Command {
   }
 
   async run(message: CommandoMessage, { title, description }: PromptArgs) {
-    if (message.guild.id === homeGuild) {
+    if (isHomeGuild(message)) {
       const embed = new MessageEmbed().setTitle(title).setDescription(description).setColor(15849719);
 
-      const channel = <TextChannel>message.guild.channels.cache.get(FAQChannel);
+      const channel = <TextChannel>await this.client.channels.fetch(allChannels.faq);
       await channel.send(embed);
       await channel.send(emojis.spacer);
     }

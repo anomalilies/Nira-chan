@@ -15,6 +15,6 @@ export default class ServerInfoCommand extends Command {
   }
 
   async run(msg: CommandoMessage) {
-    return msg.channel.send(serverInfoEmbed(msg.guild));
+    return msg.channel.send(await serverInfoEmbed(msg.guild));
   }
 }

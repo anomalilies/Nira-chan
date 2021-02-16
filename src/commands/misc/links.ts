@@ -1,7 +1,12 @@
+import { oneLine } from 'common-tags';
 import { MessageEmbed, TextChannel } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { homeGuild, emojis, allChannels, members } from '../../config/config.json';
+import { emojis, allChannels, members } from '../../config/config.json';
+import { isHomeGuild, isInChannel } from '../../util/checks';
+
+const yesChoices = ['y', 'yes'];
+const noChoices = ['n', 'no'];
 
 interface PromptArgs {
   title: string;
@@ -31,11 +36,7 @@ export default class SayCommand extends Command {
           key: 'check',
           prompt: 'Is this link for a concert? (y/n)',
           type: 'string',
-          validate: (check: string) => {
-            const validArgs = ['n', 'no', 'y', 'yes'];
-            if (validArgs.some((word) => check.toLowerCase() === word)) return true;
-            return 'Incorrect syntax.';
-          },
+          oneOf: yesChoices.concat(noChoices),
         },
       ],
       guildOnly: true,
@@ -43,24 +44,23 @@ export default class SayCommand extends Command {
   }
 
   async run(message: CommandoMessage, { title, description, check }: PromptArgs) {
-    if (message.guild.id === homeGuild && check.toLowerCase()) {
+    if (isHomeGuild(message)) {
       const embed = new MessageEmbed().setTitle(title).setDescription(description).setColor(15849719);
 
-      if (check.toLowerCase() === ('n' || 'no')) {
-        if (message.channel.id === '745410767574007811') {
-          const channel = <TextChannel>message.guild.channels.cache.get('742069780328087613');
+      if (noChoices.includes(check)) {
+        if (isInChannel(message, allChannels.addALink)) {
+          const channel = <TextChannel>await this.client.channels.fetch(allChannels.links);
 
           await channel.send(embed);
           await message.channel.send('Successfully created embed!');
         } else if (message.author.id === members.currentOwner) {
-          const faqEmbed = new MessageEmbed().setTitle(title).setDescription(description).setColor(15849719);
-          const channel = <TextChannel>message.guild.channels.cache.get('760621183564513312');
+          const channel = <TextChannel>await this.client.channels.fetch(allChannels.faq);
 
-          await channel.send(faqEmbed);
+          await channel.send(embed);
           await channel.send(emojis.spacer);
           await message.channel.send('Successfully created embed!');
         } else {
-          await message.channel.send('<:nirangy:777736569746227211>');
+          await message.channel.send(emojis.ngy);
         }
         return message;
       }
@@ -69,7 +69,10 @@ export default class SayCommand extends Command {
 
       await user.send(embed);
       await message.channel.send(
-        `Your link is currently being checked over by Lily, and will be added to <#${allChannels.livesAndPerformances}> shortly!`,
+        oneLine`
+          Your link is currently being checked over by Lily, and will be added 
+          to <#${allChannels.livesAndPerformances}> shortly!
+        `,
       );
     }
 
