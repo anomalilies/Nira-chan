@@ -8,6 +8,7 @@ import { updateChannelTitleJob } from './jobs/updateChannelTitle';
 import { sendMessageInCountdownJob } from './jobs/sendMessageInCountdown';
 
 import { prefix, members } from './config/config.json';
+import { initHandlers } from './handler/initHandlers';
 
 (async () => {
   // Commando
@@ -45,6 +46,8 @@ import { prefix, members } from './config/config.json';
       filter: /^([^.].*)\.(js|ts)$/,
       dirname: path.join(__dirname, './commands'),
     });
+
+  await initHandlers();
 
   // Start
   await client.login(process.env.CLIENT_TOKEN);

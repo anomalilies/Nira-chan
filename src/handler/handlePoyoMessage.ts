@@ -1,11 +1,20 @@
-import { Message } from 'discord.js';
+import { CommandoMessage } from 'discord.js-commando';
+import { keyv } from '../database/keyv';
 
-export const handlePoyoMessage = (message: Message) => {
-  if (message.content.toLowerCase().includes('poyo')) {
+import { poyoMessage } from '../config/event_handler.json';
+
+export const handlePoyoMessage = async (message: CommandoMessage) => {
+  if ((await keyv.get(Object.keys({ poyoMessage })[0])) === false) {
+    return;
+  }
+
+  const content = message.content.toLowerCase();
+
+  if (content.includes('poyo') && message.author.id !== message.client.user.id) {
     const replyChance = Math.random() < 1 / 2;
 
-    if (['poyo', 'poyo!'].includes(message.content.toLowerCase()) || replyChance) {
-      message.channel.send('Poyo!');
+    if (['poyo', 'poyo!'].includes(content) || replyChance) {
+      message.say('Poyo!');
     }
   }
 };

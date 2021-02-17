@@ -1,5 +1,4 @@
-import { Message } from 'discord.js';
-import { CommandoClient } from 'discord.js-commando';
+import { CommandoClient, CommandoMessage } from 'discord.js-commando';
 
 import {
   handleCountingMessage,
@@ -26,7 +25,7 @@ import {
   handleQueenCommandMessage,
 } from '../handler';
 
-export default async function (client: CommandoClient, message: Message) {
+export default async function (client: CommandoClient, message: CommandoMessage) {
   handleWelcomeMessage(message, client);
 
   handleSubscriptionThankYouMessage(message);
@@ -61,7 +60,7 @@ export default async function (client: CommandoClient, message: Message) {
 
   handleDeathOfNira(message);
 
-  handlePoyoMessage(message);
+  await handlePoyoMessage(message);
 
   await handlePaladinMessage(message);
 

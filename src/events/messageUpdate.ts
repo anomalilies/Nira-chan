@@ -1,5 +1,4 @@
-import { Message } from 'discord.js';
-import { CommandoClient } from 'discord.js-commando';
+import { CommandoClient, CommandoMessage } from 'discord.js-commando';
 
 import {
   handleCountingEditedMessage,
@@ -15,7 +14,7 @@ import {
   handleTwoWordStoryMessage,
 } from '../handler';
 
-export default async function (client: CommandoClient, oldMessage: Message, newMessage: Message) {
+export default async function (client: CommandoClient, oldMessage: CommandoMessage, newMessage: CommandoMessage) {
   if (newMessage.content === oldMessage.content) {
     return;
   }
