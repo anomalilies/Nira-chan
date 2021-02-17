@@ -1,6 +1,8 @@
-import { Message } from 'discord.js';
+import { CommandoMessage } from 'discord.js-commando';
 
 import { emojis } from '../config/config.json';
+import { checkNiraMojis } from '../config/event_handler.json';
+import { keyv } from '../database/keyv';
 
 /**
  * Find specific emojis in a message
@@ -21,15 +23,19 @@ function matchEmojis(findEmojis: string[], messageContent: string) {
 }
 
 // Check for NiraMojis everywhere
-export const handleCheckNiraMojis = (message: Message) => {
+export const handleCheckNiraMojis = async (message: CommandoMessage) => {
+  if ((await keyv.get(Object.keys({ checkNiraMojis })[0])) === false) {
+    return;
+  }
+
   const hasEmojiDisgust = message.content.includes(emojis.disgust);
   const hasEmojiStare = message.content.includes(emojis.stare);
   const hasEmojiOwie = message.content.includes(emojis.owie);
 
   if (hasEmojiDisgust || hasEmojiStare || hasEmojiOwie) {
-    const find_emojis = [emojis.disgust, emojis.stare, emojis.owie];
-    const matched_emojis = matchEmojis(find_emojis, message.content);
+    const searchEmojis = [emojis.disgust, emojis.stare, emojis.owie];
+    const foundEmojis = matchEmojis(searchEmojis, message.content);
 
-    matched_emojis.forEach((e) => message.react(e));
+    foundEmojis.forEach((e) => message.react(e));
   }
 };

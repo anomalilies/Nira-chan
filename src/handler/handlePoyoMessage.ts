@@ -1,7 +1,7 @@
 import { CommandoMessage } from 'discord.js-commando';
-import { keyv } from '../database/keyv';
 
 import { poyoMessage } from '../config/event_handler.json';
+import { keyv } from '../database/keyv';
 
 export const handlePoyoMessage = async (message: CommandoMessage) => {
   if ((await keyv.get(Object.keys({ poyoMessage })[0])) === false) {

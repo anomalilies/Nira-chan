@@ -1,11 +1,18 @@
-import { Message, MessageEmbed } from 'discord.js';
+import { MessageEmbed } from 'discord.js';
 
-import { homeGuild, roles } from '../../config/config.json';
 import rules from '../../embeds/ruleEmbeds.json';
+import { homeGuild, roles } from '../../config/config.json';
+import { serverRulesMessage } from '../../config/event_handler.json';
+import { keyv } from '../../database/keyv';
+import { CommandoMessage } from 'discord.js-commando';
 
-export const handleServerRulesMessage = async (message: Message, prefix: string) => {
+export const handleServerRulesMessage = async (message: CommandoMessage, prefix: string) => {
+  if ((await keyv.get(Object.keys({ serverRulesMessage })[0])) === false) {
+    return;
+  }
+
   if (message.guild.id === homeGuild) {
-    if (message.member && message.member.roles.cache.get(roles.moderators)) {
+    if (message.member && message.member.roles.cache.get(roles.VIP)) {
       const ruleEmbeds = rules
         .filter((_, i) => {
           const regex = new RegExp(`(\\s|^)${prefix}${i + 1}(\\s|$)`);
@@ -19,7 +26,7 @@ export const handleServerRulesMessage = async (message: Message, prefix: string)
         );
 
       for (const embed of ruleEmbeds) {
-        await message.channel.send(embed);
+        await message.say(embed);
       }
     }
   }

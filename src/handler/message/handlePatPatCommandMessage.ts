@@ -1,21 +1,22 @@
-import { Message } from 'discord.js';
+import { CommandoMessage } from 'discord.js-commando';
 
-import { homeGuild, members, allowLists, commandNames, emojis, roles } from '../../config/config.json';
+import { members, commandNames, emojis } from '../../config/config.json';
 import patpatresponses from '../../data/patpatresponses.json';
 import nira9000 from '../../data/nira9000.json';
 import { createDefaultEmbed } from '../../util/createDefaultEmbed';
+import { isDmChannel, isBotspamChannel, isHomeGuild, doesUserHaveBotpass } from '../../util/checks';
+import { patPatCommandMessage } from '../../config/event_handler.json';
+import { keyv } from '../../database/keyv';
 
 const whosTalkingWithPatPat = new Set();
 
-export const handlePatPatCommandMessage = async (message: Message, prefix: string) => {
+export const handlePatPatCommandMessage = async (message: CommandoMessage, prefix: string) => {
+  if ((await keyv.get(Object.keys({ patPatCommandMessage })[0])) === false) {
+    return;
+  }
+
   // Allowed in specific bot channels only
-
-  const isDmChannel = message.channel.type === 'dm';
-  const isBotSpamChannel = allowLists.botSpamChannel.includes(message.channel.id);
-  const isHomeGuild = message.guild.id === homeGuild;
-  const hasBotPass = message.member.roles.cache.get(roles.botPass);
-
-  if (isDmChannel || isBotSpamChannel || !isHomeGuild || hasBotPass) {
+  if (isDmChannel(message) || isBotspamChannel(message) || !isHomeGuild(message) || doesUserHaveBotpass(message)) {
     let color: string;
     let title: string;
     const author = message.author;
@@ -36,7 +37,7 @@ export const handlePatPatCommandMessage = async (message: Message, prefix: strin
       }
 
       const patPatEmbed = createDefaultEmbed(title, description, color, author);
-      return message.channel.send(patPatEmbed);
+      return await message.channel.send(patPatEmbed);
     }
 
     if (message.content.toLowerCase() === prefix + commandNames.patpatStop.name) {
@@ -54,7 +55,7 @@ export const handlePatPatCommandMessage = async (message: Message, prefix: strin
       }
 
       const patPatEmbed = createDefaultEmbed(title, description, color, author);
-      return message.channel.send(patPatEmbed);
+      return await message.channel.send(patPatEmbed);
     }
 
     if (whosTalkingWithPatPat.has(message.author.id)) {
@@ -70,7 +71,7 @@ export const handlePatPatCommandMessage = async (message: Message, prefix: strin
       }
 
       const patPatEmbed = createDefaultEmbed(title, description, color, author);
-      message.channel.send(patPatEmbed);
+      return await message.channel.send(patPatEmbed);
     }
   }
 };

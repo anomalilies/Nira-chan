@@ -1,8 +1,14 @@
-import { Message } from 'discord.js';
+import { CommandoMessage } from 'discord.js-commando';
 
 import { emojis, allChannels } from '../../config/config.json';
+import { countingMessage } from '../../config/event_handler.json';
+import { keyv } from '../../database/keyv';
 
-export const handleCountingMessage = async (message: Message) => {
+export const handleCountingMessage = async (message: CommandoMessage) => {
+  if ((await keyv.get(Object.keys({ countingMessage })[0])) === false) {
+    return;
+  }
+
   if (message.channel.id === allChannels.counting) {
     if (message.system || message.webhookID || message.author.bot || message.attachments.array().length) {
       return message.delete();
@@ -14,7 +20,8 @@ export const handleCountingMessage = async (message: Message) => {
       const prevNumber = parseInt(messages.array()[1].content);
 
       if (isNaN(prevNumber)) {
-        return console.error('Previous number is not a number!');
+        console.error('Previous number is not a number!');
+        return message.delete();
       }
 
       const nextNumber = prevNumber + 1;
@@ -32,7 +39,7 @@ export const handleCountingMessage = async (message: Message) => {
         message.pin();
       }
     } catch (error) {
-      console.error(error);
+      console.error('counting', error);
     }
   }
 };

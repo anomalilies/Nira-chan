@@ -26,47 +26,47 @@ import {
 } from '../handler';
 
 export default async function (client: CommandoClient, message: CommandoMessage) {
-  handleWelcomeMessage(message, client);
+  await handleWelcomeMessage(message, client);
 
-  handleSubscriptionThankYouMessage(message);
+  await handleSubscriptionThankYouMessage(message);
 
   await handleCountingMessage(message);
 
-  handleGreyMessage(message);
+  await handleGreyMessage(message);
 
-  handleBotCheckMessage(message, client);
+  await handleBotCheckMessage(message, client);
 
-  handleUwuChannelMessage(message);
+  await handleUwuChannelMessage(message);
 
-  handleNiraMojisInChannels(message);
+  await handleNiraMojisInChannels(message);
 
-  handleCheckNiraMojis(message);
+  await handleCheckNiraMojis(message);
 
-  handlePatPatRole(message);
+  await handlePatPatRole(message);
 
-  handleNiraWave(message, client);
+  await handleNiraWave(message, client);
 
   await handleNonNitroEmoji(message, client);
 
   await handlePatPatCommandMessage(message, client.commandPrefix);
 
-  handleFishyCommandsMessage(message, client.commandPrefix);
+  await handleFishyCommandsMessage(message, client.commandPrefix);
 
-  handleOtherFishyMessage(message, client);
+  await handleOtherFishyMessage(message, client);
 
-  handleWorkInUniguriMessage(message);
+  await handleWorkInUniguriMessage(message);
 
-  handleTwoWordStoryMessage(message);
+  await handleTwoWordStoryMessage(message);
 
-  handleDeathOfNira(message);
+  await handleDeathOfNira(message);
 
   await handlePoyoMessage(message);
 
   await handlePaladinMessage(message);
 
-  handleNoUMessage(message);
+  await handleNoUMessage(message);
 
-  handleQueenCommandMessage(message);
+  await handleQueenCommandMessage(message);
 
   await handleServerRulesMessage(message, client.commandPrefix);
 }

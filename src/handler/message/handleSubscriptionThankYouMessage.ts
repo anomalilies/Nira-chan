@@ -1,4 +1,7 @@
-import { Message } from 'discord.js';
+import { CommandoMessage } from 'discord.js-commando';
+
+import { subscriptionThankYouMessage } from '../../config/event_handler.json';
+import { keyv } from '../../database/keyv';
 
 const subscriptionTypes = [
   'USER_PREMIUM_GUILD_SUBSCRIPTION',
@@ -7,8 +10,12 @@ const subscriptionTypes = [
   'USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_3',
 ];
 
-export const handleSubscriptionThankYouMessage = (message: Message) => {
+export const handleSubscriptionThankYouMessage = async (message: CommandoMessage) => {
+  if ((await keyv.get(Object.keys({ subscriptionThankYouMessage })[0])) === false) {
+    return;
+  }
+
   if (subscriptionTypes.includes(message.type)) {
-    message.channel.send('Thank you so much! <:niraStar:777740701441064960>');
+    message.say('Thank you so much! <:niraStar:777740701441064960>');
   }
 };

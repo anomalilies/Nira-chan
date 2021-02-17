@@ -21,23 +21,23 @@ export default async function (client: CommandoClient, oldMessage: CommandoMessa
 
   await handleNiraMessageReactions(newMessage, client);
 
-  handleNiraMojisInChannels(newMessage);
+  await handleNiraMojisInChannels(newMessage);
 
-  handleCheckNiraMojis(newMessage);
+  await handleCheckNiraMojis(newMessage);
 
-  handlePatPatRole(newMessage);
+  await handlePatPatRole(newMessage);
 
-  handleNiraWave(newMessage, client);
+  await handleNiraWave(newMessage, client);
 
-  handleCountingEditedMessage(newMessage);
+  await handleCountingEditedMessage(newMessage);
 
-  handleTwoWordStoryMessage(newMessage);
+  await handleTwoWordStoryMessage(newMessage);
 
-  handleDeathOfNira(newMessage);
+  await handleDeathOfNira(newMessage);
 
-  handlePoyoMessage(newMessage);
+  await handlePoyoMessage(newMessage);
 
-  handlePaladinMessage(newMessage);
+  await handlePaladinMessage(newMessage);
 
-  handleNoUMessage(newMessage);
+  await handleNoUMessage(newMessage);
 }

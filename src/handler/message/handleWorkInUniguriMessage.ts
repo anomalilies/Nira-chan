@@ -1,15 +1,20 @@
-import { Message } from 'discord.js';
+import { CommandoMessage } from 'discord.js-commando';
 
 import { allChannels } from '../../config/config.json';
+import { isInChannel } from '../../util/checks';
+import { workInUniguriMessage } from '../../config/event_handler.json';
+import { keyv } from '../../database/keyv';
 
-export const handleWorkInUniguriMessage = (message: Message) => {
-  if (message.channel.id !== allChannels.uniguri) {
+export const handleWorkInUniguriMessage = async (message: CommandoMessage) => {
+  if ((await keyv.get(Object.keys({ workInUniguriMessage })[0])) === false) {
     return;
   }
 
-  if (message.content.toLowerCase() === '!work') {
+  if (!isInChannel(message, allChannels.uniguri)) {
     return;
   }
 
-  message.delete();
+  if (message.content.toLowerCase() !== '!work') {
+    return message.delete();
+  }
 };

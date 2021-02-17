@@ -1,6 +1,8 @@
-import { Message } from 'discord.js';
+import { CommandoMessage } from 'discord.js-commando';
 
 import { members } from '../config/config.json';
+import { noUMessage } from '../config/event_handler.json';
+import { keyv } from '../database/keyv';
 
 const noUResponses = [
   'no u',
@@ -24,13 +26,18 @@ const noUResponses = [
   'ⁿᵒ ᵘ',
 ];
 
-export const handleNoUMessage = (message: Message) => {
+export const handleNoUMessage = async (message: CommandoMessage) => {
+  if ((await keyv.get(Object.keys({ noUMessage })[0])) === false) {
+    return;
+  }
+
   const isNoU = noUResponses.some((word) => message.content.toLowerCase() === word.toLowerCase());
   const isNoUInfinityMember = members.noutimesinfinity.includes(message.author.id);
   const noUChance = Math.random() < 1 / 3;
 
   if (isNoU && (noUChance || isNoUInfinityMember)) {
     const response = noUResponses[Math.floor(Math.random() * noUResponses.length)];
-    message.channel.send(response);
+
+    message.say(response);
   }
 };

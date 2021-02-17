@@ -1,10 +1,12 @@
-import { GuildEmoji, Message, TextChannel, User } from 'discord.js';
-import { CommandoClient } from 'discord.js-commando';
+import { GuildEmoji, TextChannel, User } from 'discord.js';
+import { CommandoClient, CommandoMessage } from 'discord.js-commando';
 
 import { allChannels } from '../../config/config.json';
+import { nonNitroEmoji } from '../../config/event_handler.json';
+import { keyv } from '../../database/keyv';
 
 // Replace a regular message with a message sent through a webhook with the OP's name and avatar
-async function replaceMessageThroughWebhook(message: Message, resendContent: string) {
+async function replaceMessageThroughWebhook(message: CommandoMessage, resendContent: string) {
   if (message.channel.id === allChannels.counting) {
     return;
   }
@@ -43,7 +45,7 @@ async function replaceMessageThroughWebhook(message: Message, resendContent: str
   });
 }
 
-function findEmoji(client: CommandoClient, message: Message, emojiName: string) {
+function findEmoji(client: CommandoClient, message: CommandoMessage, emojiName: string) {
   if (message.channel.type !== 'dm') {
     const sameEmoji = (emoji: GuildEmoji) => emoji.name.toLowerCase() === emojiName.toLowerCase();
     let match = message.guild.emojis.cache.find(sameEmoji);
@@ -59,7 +61,11 @@ function findEmoji(client: CommandoClient, message: Message, emojiName: string) 
 // TODO: start rewrite this
 // Check for non-nitro user using GIF emoji to resend it with the GIF emoji
 // Capture group 1 will have the emoji name in this case
-export const handleNonNitroEmoji = async (message: Message, client: CommandoClient) => {
+export const handleNonNitroEmoji = async (message: CommandoMessage, client: CommandoClient) => {
+  if ((await keyv.get(Object.keys({ nonNitroEmoji })[0])) === false) {
+    return;
+  }
+
   const emojiRegex = /<a?:\w+:\d+>|(?<!\\):(\w+):|^-(\w+)$/g;
   let needsToResend = false;
 

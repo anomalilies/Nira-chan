@@ -1,5 +1,8 @@
-import { Message } from 'discord.js';
+import { CommandoMessage } from 'discord.js-commando';
+
 import { members } from '../../config/config.json';
+import { greyMessage } from '../../config/event_handler.json';
+import { keyv } from '../../database/keyv';
 
 const greyResponses = [
   'Long time no see.',
@@ -17,7 +20,11 @@ const greyResponses = [
   "Why won't you answer my calls?",
 ];
 
-export const handleGreyMessage = (message: Message) => {
+export const handleGreyMessage = async (message: CommandoMessage) => {
+  if ((await keyv.get(Object.keys({ greyMessage })[0])) === false) {
+    return;
+  }
+
   if (message.mentions.users.has(members.niraChan) && message.author.id === members.grey) {
     const response = greyResponses[Math.floor(Math.random() * greyResponses.length)];
     message.channel.startTyping();
