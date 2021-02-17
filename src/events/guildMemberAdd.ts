@@ -2,8 +2,14 @@ import { GuildMember, MessageEmbed, TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
 import { homeGuild, members, emojis, allChannels } from '../config/config.json';
+import { onGuildMemberAdd } from '../config/event_handler.json';
+import { keyv } from '../database/keyv';
 
 export default async function (client: CommandoClient, member: GuildMember) {
+  if ((await keyv.get(Object.keys({ onGuildMemberAdd })[0])) === false) {
+    return;
+  }
+
   const modlog = <TextChannel>client.channels.cache.get(allChannels.modlog);
   const generalChannel = <TextChannel>client.channels.cache.get(allChannels.general);
 

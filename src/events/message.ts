@@ -24,8 +24,14 @@ import {
   handleOtherFishyMessage,
   handleQueenCommandMessage,
 } from '../handler';
+import { onMessage } from '../config/event_handler.json';
+import { keyv } from '../database/keyv';
 
 export default async function (client: CommandoClient, message: CommandoMessage) {
+  if ((await keyv.get(Object.keys({ onMessage })[0])) === false) {
+    return;
+  }
+
   await handleWelcomeMessage(message, client);
 
   await handleSubscriptionThankYouMessage(message);

@@ -22,5 +22,11 @@
   "paladinMessage": true,
   "patPatRole": true,
   "poyoMessage": true,
-  "twoWordStoryMessage": true
+  "twoWordStoryMessage": true,
+  "onMessage": true,
+  "onMessageUpdate": true,
+  "onMessageReactionAdd": true,
+  "onGuildMemberAdd": true,
+  "onGuildMemberRemove": true,
+  "onGuildMemberUpdate": true
 }

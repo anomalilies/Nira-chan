@@ -2,6 +2,8 @@ import { MessageEmbed, MessageReaction, TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
 import { allChannels, allowLists, contributorRoleNames } from '../config/config.json';
+import { onMessageReactionAdd } from '../config/event_handler.json';
+import { keyv } from '../database/keyv';
 
 const handleStarboard = async (hallOfFame: TextChannel, reaction: MessageReaction) => {
   const message = reaction.message;
@@ -26,6 +28,10 @@ const handleStarboard = async (hallOfFame: TextChannel, reaction: MessageReactio
 };
 
 export default async function (client: CommandoClient, partialReaction: MessageReaction) {
+  if ((await keyv.get(Object.keys({ onMessageReactionAdd })[0])) === false) {
+    return;
+  }
+
   const hallOfFame = <TextChannel>client.channels.cache.find((channel) => channel.id === allChannels.hallOfFame);
 
   if (hallOfFame == undefined) {

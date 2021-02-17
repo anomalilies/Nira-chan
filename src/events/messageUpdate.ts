@@ -13,8 +13,14 @@ import {
   handlePatPatRole,
   handleTwoWordStoryMessage,
 } from '../handler';
+import { onMessageUpdate } from '../config/event_handler.json';
+import { keyv } from '../database/keyv';
 
 export default async function (client: CommandoClient, oldMessage: CommandoMessage, newMessage: CommandoMessage) {
+  if ((await keyv.get(Object.keys({ onMessageUpdate })[0])) === false) {
+    return;
+  }
+
   if (newMessage.content === oldMessage.content) {
     return;
   }

@@ -2,9 +2,15 @@ import { GuildMember, TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
 import { emojis, allChannels, roles, contributorRoleNames } from '../config/config.json';
+import { onGuildMemberUpdate } from '../config/event_handler.json';
+import { keyv } from '../database/keyv';
 
 // Server Boost Message
 const handleServerBoosterRole = async (client: CommandoClient, oldMember: GuildMember, newMember: GuildMember) => {
+  if ((await keyv.get(Object.keys({ onGuildMemberUpdate })[0])) === false) {
+    return;
+  }
+
   if (!oldMember.roles.cache.has(roles.serverBoosters) && newMember.roles.cache.has(roles.serverBoosters)) {
     const channel = <TextChannel>client.channels.cache.get(allChannels.general);
 
