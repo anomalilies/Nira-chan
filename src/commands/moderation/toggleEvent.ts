@@ -1,7 +1,9 @@
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
+import { roles } from '../../config/config.json';
 import handlers from '../../config/event_handler.json';
 import { keyv } from '../../database/keyv';
+import { hasRole } from '../../util/checks';
 
 type PromptArgs = {
   name: string;
@@ -21,12 +23,15 @@ export default class ToggleEventCommand extends Command {
           type: 'string',
         },
       ],
-      ownerOnly: true,
       guildOnly: true,
     });
   }
 
   async run(msg: CommandoMessage, { name }: PromptArgs) {
+    if (!hasRole(roles.niraDev, msg) && !hasRole(roles.moderators, msg)) {
+      return msg.say('You need to be a Nira-chan developer or Moderator to use this command!');
+    }
+
     if (!Object.keys(handlers).includes(name)) {
       return msg.say(`Could not find event handler ${name}!`);
     }

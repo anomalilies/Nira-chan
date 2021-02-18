@@ -11,7 +11,11 @@ export const isBotspamChannel = (message: Message): boolean => {
 };
 
 export const doesUserHaveBotpass = (message: Message): boolean => {
-  return message.member.roles.cache.get(roles.botPass) != undefined;
+  return hasRole(roles.botPass, message);
+};
+
+export const hasRole = (role: string, message: Message): boolean => {
+  return message.member.roles.cache.get(role) != undefined;
 };
 
 export const isHomeGuild = (message: Message): boolean => {
