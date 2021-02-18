@@ -9,7 +9,7 @@ export default class SayCommand extends Command {
     super(client, {
       name: 'say',
       aliases: ['echo'],
-      group: 'misc',
+      group: 'moderation',
       memberName: 'say',
       description: 'Say something!',
       args: [

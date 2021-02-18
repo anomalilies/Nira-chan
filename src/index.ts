@@ -36,6 +36,7 @@ import { initHandlers } from './handler/initHandlers';
       ['misc', 'Miscellaneous'],
       ['util', 'Utility'],
       ['commands', 'Commands'],
+      ['moderation', 'Moderation'],
     ])
     .registerDefaultTypes()
     .registerDefaultCommands({

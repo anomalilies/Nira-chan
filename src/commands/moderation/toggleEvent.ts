@@ -11,7 +11,7 @@ export default class ToggleEventCommand extends Command {
   constructor(client: CommandoClient) {
     super(client, {
       name: 'toggle',
-      group: 'misc',
+      group: 'moderation',
       memberName: 'toggle',
       description: 'Toggle an event handler on/off',
       args: [

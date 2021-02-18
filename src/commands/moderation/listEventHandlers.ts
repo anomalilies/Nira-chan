@@ -8,7 +8,7 @@ export default class ListEventHandlersCommand extends Command {
   constructor(client: CommandoClient) {
     super(client, {
       name: 'list',
-      group: 'misc',
+      group: 'moderation',
       memberName: 'list',
       description: 'Displays all event handlers',
       ownerOnly: true,
