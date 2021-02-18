@@ -64,7 +64,7 @@ export default async function (client: CommandoClient) {
 
   setInterval(() => changeBotStatus(client), 1 * 60 * 1000);
 
-  if (client.user.id === members.niraChan) {
+  if (process.env.NODE_ENV === 'production') {
     setInterval(checkLurkers, 1 * 60 * 60 * 1000);
     setInterval(checkNewbies, 1 * 60 * 60 * 1000);
 

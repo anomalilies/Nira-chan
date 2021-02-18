@@ -119,3 +119,4 @@ dist
 config.dev.json
 src/config/development.json
 notes.txt
+server.json
