@@ -26,10 +26,12 @@ export const uwuify = async function (text: string, message: Message) {
   if (text[text.length - 1].match(/[a-z]/i)) text = text + '~~';
 
   if (message.channel.type === 'dm') {
-    const embed = new MessageEmbed()
-      .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-      .setDescription(text)
-      .setColor('#F1D8F7');
+    const embed = new MessageEmbed({
+      author: { name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
+      description: text,
+      color: '#F1D8F7',
+    });
+
     await message.channel.send(embed);
   } else {
     const webhooks = await message.channel.fetchWebhooks();

@@ -16,10 +16,11 @@ export default class DespairCommand extends Command {
 
   async run(message: CommandoMessage) {
     if (isDmChannel(message) || isBotspamChannel(message) || doesUserHaveBotpass(message)) {
-      const embed = new MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-        .setDescription(`Aaaa, the tape is rewinding so fast! ${emojis.despair}`)
-        .setColor('#F1D8F7');
+      const embed = new MessageEmbed({
+        author: { name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
+        description: `Aaaa, the tape is rewinding so fast! ${emojis.despair}`,
+        color: '#F1D8F7',
+      });
 
       return await message.channel.send(embed);
     }

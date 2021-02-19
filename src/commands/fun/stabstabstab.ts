@@ -17,10 +17,11 @@ export default class StabStabStabCommand extends Command {
 
   async run(message: CommandoMessage) {
     if (isDmChannel(message) || isBotspamChannel(message) || doesUserHaveBotpass(message)) {
-      const stabstabstab = new MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-        .setColor('#F1D8F7')
-        .setDescription(`pokepokepoke ${emojis.fencing}`);
+      const stabstabstab = new MessageEmbed({
+        author: { name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
+        color: '#F1D8F7',
+        description: `pokepokepoke ${emojis.fencing}`,
+      });
 
       return await message.channel.send(stabstabstab);
     }

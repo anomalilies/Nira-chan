@@ -55,44 +55,50 @@ export default async function (guild: Guild) {
   const serverEmojis = guild.emojis.cache;
   const owner = await guild.members.fetch(guild.ownerID);
 
-  const serverInfo = new MessageEmbed()
-    .setTitle(`About ${guild.name}`)
-    .setThumbnail(guild.iconURL({ dynamic: true }))
-    .setColor('#F1D8F7')
-    .addField('General', [
-      `**❯ Owner:** ${owner.user.tag}`,
-      `**❯ Region:** ${guildRegionKeyToName(guild.region)}`,
-      `**❯ Boost Tier:** ${guild.premiumTier ? `Tier ${guild.premiumTier}` : 'None'}`,
-      `**❯ Creation Date:** ${moment(guild.createdTimestamp).format('LT')}, ${moment(guild.createdTimestamp).format(
-        'LL',
-      )} (${moment(guild.createdTimestamp).fromNow()})`,
-      '\u200b',
-    ])
-    .addField(
-      'Statistics',
-      [
-        `**❯ Role Count:** ${roles.length}`,
-        `**❯ Emoji Count:** ${serverEmojis.size} (${serverEmojis.filter((emoji) => emoji.animated).size} animated)`,
-        `**❯ Member Count:** ${guild.memberCount} (${members.filter((member) => member.user.bot).size} bots)`,
-        `**❯ Text Channels:** ${channels.filter((channel) => channel.type === 'text').size}`,
-        `**❯ Voice Channels:** ${channels.filter((channel) => channel.type === 'voice').size}`,
-        `**❯ Boost Count:** ${guild.premiumSubscriptionCount || '0'}`,
-        '\u200b',
-      ],
-      true,
-    )
-    .addField(
-      'Presence',
-      [
-        `**❯ Online:** ${members.filter((member) => member.presence.status === 'online').size}`,
-        `**❯ Idle:** ${members.filter((member) => member.presence.status === 'idle').size}`,
-        `**❯ Do Not Disturb:** ${members.filter((member) => member.presence.status === 'dnd').size}`,
-        `**❯ Offline:** ${members.filter((member) => member.presence.status === 'offline').size}`,
-      ],
-      true,
-    )
-    .setFooter('Last updated')
-    .setTimestamp();
+  const ts1 = moment(guild.createdTimestamp).format('LT');
+  const ts2 = moment(guild.createdTimestamp).format('LL');
+  const ts3 = moment(guild.createdTimestamp).fromNow();
 
-  return serverInfo;
+  return new MessageEmbed({
+    title: `About ${guild.name}`,
+    thumbnail: { url: guild.iconURL({ dynamic: true }) },
+    color: '#F1D8F7',
+    fields: [
+      {
+        name: 'General',
+        value: [
+          `**❯ Owner:** ${owner.user.tag}`,
+          `**❯ Region:** ${guildRegionKeyToName(guild.region)}`,
+          `**❯ Boost Tier:** ${guild.premiumTier ? `Tier ${guild.premiumTier}` : 'None'}`,
+          `**❯ Creation Date:** ${ts1}, ${ts2} (${ts3})`,
+          '\u200b',
+        ],
+      },
+      {
+        name: 'Statistics',
+        value: [
+          `**❯ Role Count:** ${roles.length}`,
+          `**❯ Emoji Count:** ${serverEmojis.size} (${serverEmojis.filter((emoji) => emoji.animated).size} animated)`,
+          `**❯ Member Count:** ${guild.memberCount} (${members.filter((member) => member.user.bot).size} bots)`,
+          `**❯ Text Channels:** ${channels.filter((channel) => channel.type === 'text').size}`,
+          `**❯ Voice Channels:** ${channels.filter((channel) => channel.type === 'voice').size}`,
+          `**❯ Boost Count:** ${guild.premiumSubscriptionCount || '0'}`,
+          '\u200b',
+        ],
+        inline: true,
+      },
+      {
+        name: 'Presence',
+        inline: true,
+        value: [
+          `**❯ Online:** ${members.filter((member) => member.presence.status === 'online').size}`,
+          `**❯ Idle:** ${members.filter((member) => member.presence.status === 'idle').size}`,
+          `**❯ Do Not Disturb:** ${members.filter((member) => member.presence.status === 'dnd').size}`,
+          `**❯ Offline:** ${members.filter((member) => member.presence.status === 'offline').size}`,
+        ],
+      },
+    ],
+    footer: { text: 'Last updated' },
+    timestamp: Date.now(),
+  });
 }

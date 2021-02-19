@@ -40,7 +40,7 @@ export default class AffiliatesCommand extends Command {
 
   async run(message: CommandoMessage, { title, description, link }: PromptArgs) {
     if (message.guild.id === homeGuild) {
-      const embed = new MessageEmbed().setTitle(title).setDescription(description).setColor('#F1D8F7');
+      const embed = new MessageEmbed({ title, description, color: '#F1D8F7' });
 
       const channel = <TextChannel>await this.client.channels.fetch(allChannels.affiliates);
 

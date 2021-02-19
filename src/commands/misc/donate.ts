@@ -17,18 +17,21 @@ export default class DonateCommand extends Command {
 
   async run(message: CommandoMessage) {
     if (isHomeGuild(message)) {
-      const embed = new MessageEmbed()
-        .setTitle(`Support ${message.guild.name}`)
-        .setThumbnail(message.guild.iconURL({ dynamic: true }))
-        .addField(
-          'Donations',
-          oneLine`
-            "If you'd like to support the ZONE by finanically funding giveaways,
-            **check out our __[Ko-fi](https://ko-fi.com/uniguri)__**!",
-          `,
-        )
-        .setColor('#F1D8F7')
-        .setFooter('Thank you!');
+      const embed = new MessageEmbed({
+        title: `Support ${message.guild.name}`,
+        thumbnail: { url: message.guild.iconURL({ dynamic: true }) },
+        color: '#F1D8F7',
+        fields: [
+          {
+            name: 'Donations',
+            value: oneLine`
+              "If you'd like to support the ZONE by finanically funding giveaways,
+              **check out our __[Ko-fi](https://ko-fi.com/uniguri)__**!",
+            `,
+          },
+        ],
+        footer: { text: 'Thank you!' },
+      });
 
       return await message.channel.send(embed);
     }

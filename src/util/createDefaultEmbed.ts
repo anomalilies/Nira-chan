@@ -6,7 +6,11 @@ export const createDefaultEmbed = (
   color: string | number = 15849719,
   author?: User,
 ) => {
-  const embed = new MessageEmbed().setColor(color).setTitle(title).setDescription(description);
+  const embed = new MessageEmbed({
+    color,
+    title,
+    description,
+  });
 
   if (author != null || author != undefined) {
     embed.setAuthor(author.username, author.avatarURL({ dynamic: true }));

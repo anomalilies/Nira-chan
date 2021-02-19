@@ -16,12 +16,13 @@ export default class SayCommand extends Command {
 
   async run(msg: CommandoMessage) {
     if (msg.guild.id === homeGuild) {
-      const rule0 = new MessageEmbed()
-        .setTitle('(Secret Rule) 0. Be Kind to Yourself')
-        .setDescription(
-          'We care for you, so stop beating yourself up!\nNot everything is your fault, so please keep trusting' +
-            ' yourself, and our respect and love for you.',
-        );
+      const rule0 = new MessageEmbed({
+        title: '(Secret Rule) 0. Be Kind to Yourself',
+        description:
+          'We care for you, so stop beating yourself up!\nNot everything is your fault, so please keep trusting ' +
+          'yourself, and our respect and love for you.',
+      });
+
       return msg.channel.send(rule0);
     }
   }

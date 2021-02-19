@@ -29,9 +29,9 @@ export default class DearMrFCommand extends Command {
 
   async run(message: CommandoMessage, { text }: PromptArgs) {
     if (isDmChannel(message) || isBotspamChannel(message) || doesUserHaveBotpass(message)) {
-      const embed = new MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-        .addFields([
+      const embed = new MessageEmbed({
+        author: { name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
+        fields: [
           {
             name: 'Dear Mr. F:',
             value: text,
@@ -43,8 +43,9 @@ export default class DearMrFCommand extends Command {
               tells me you best pay really close attention! ${emojis.wince}
             `,
           },
-        ])
-        .setColor('#F1D8F7');
+        ],
+        color: '#F1D8F7',
+      });
 
       return await message.channel.send(embed);
     }

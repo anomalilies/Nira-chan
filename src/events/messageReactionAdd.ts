@@ -14,13 +14,15 @@ const handleStarboard = async (hallOfFame: TextChannel, reaction: MessageReactio
     msg.embeds.length === 1 ? msg.embeds[0].footer.text.startsWith(reaction.message.id) : false,
   );
   if (!existingMsg && message.member.roles.cache.some((r) => contributorRoleNames.includes(r.name))) {
-    const embed = new MessageEmbed()
-      .setColor('#FFAC33')
-      .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-      .setDescription(`${message.content}\n\n[context](${message.url})`)
-      .setImage(image)
-      .setFooter(reaction.message.id)
-      .setTimestamp();
+    const embed = new MessageEmbed({
+      color: '#FFAC33',
+      author: { name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
+      description: `${message.content}\n\n[context](${message.url})`,
+      image: { url: image },
+      footer: { text: reaction.message.id },
+      timestamp: Date.now(),
+    });
+
     if (hallOfFame) {
       hallOfFame.send(embed);
     }

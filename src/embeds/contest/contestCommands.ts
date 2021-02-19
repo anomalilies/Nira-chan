@@ -1,3 +1,4 @@
+import { stripIndent } from 'common-tags';
 import { MessageEmbed, TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
@@ -10,12 +11,14 @@ export const contestCommands = async (client: CommandoClient) => {
   const messages = await channel.messages.fetch();
   const niraMessages = messages.filter((msg) => msg.author == client.user);
 
-  const entry = new MessageEmbed()
-    .setColor('#F1D8F7')
-    .setTitle('Contest Entry')
-    .setDescription(
-      'Register your interest in joining this contest by **reacting with <:niraScoopYAY:777269746722668565>**!\nFor submitting entries, please **use the form below**!',
-    );
+  const entry = new MessageEmbed({
+    color: '#F1D8F7',
+    title: 'Contest Entry',
+    description: stripIndent`
+      Register your interest in joining this contest by **reacting with <:niraScoopYAY:777269746722668565>**!
+      For submitting entries, please **use the form below**!
+    `,
+  });
 
   if (niraMessages.size === 0) {
     await channel.send(contest1);

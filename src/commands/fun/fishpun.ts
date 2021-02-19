@@ -24,11 +24,12 @@ export default class FishpunCommand extends Command {
       !isHomeGuild(message) ||
       doesUserHaveBotpass(message)
     ) {
-      const embed = new MessageEmbed()
-        .setTitle('Mr. Fish says...')
-        .setThumbnail('https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/Fishy.jpg')
-        .setDescription(fishpuns[Math.floor(Math.random() * fishpuns.length)])
-        .setColor('#F1D8F7');
+      const embed = new MessageEmbed({
+        title: 'Mr. Fish says...',
+        thumbnail: { url: 'https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/Fishy.jpg' },
+        description: fishpuns[Math.floor(Math.random() * fishpuns.length)],
+        color: '#F1D8F7',
+      });
 
       return await message.channel.send(embed);
     }

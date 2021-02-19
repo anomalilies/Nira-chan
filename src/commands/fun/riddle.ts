@@ -18,11 +18,12 @@ export default class RiddleCommand extends Command {
     if (isDmChannel(message) || isBotspamChannel(message) || doesUserHaveBotpass(message)) {
       const i = Math.floor(Math.random() * riddles.length);
 
-      const embed = new MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-        .setColor('#F1D8F7')
-        .setDescription(riddles[i].riddle)
-        .addField('Answer', `||${riddles[i].answer}||`);
+      const embed = new MessageEmbed({
+        author: { name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
+        color: '#F1D8F7',
+        description: riddles[i].riddle,
+        fields: [{ name: 'Answer', value: `||${riddles[i].answer}||` }],
+      });
 
       return await message.channel.send(embed);
     }

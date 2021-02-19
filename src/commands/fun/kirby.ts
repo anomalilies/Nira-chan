@@ -69,10 +69,11 @@ export default class KirbyCommand extends Command {
         `why tf would i absorb your **${ability.keyName}**, **${nickname}**? <:kirbuff:757349479065321483> fuck outta here fam`,
       ];
 
-      const embed = new MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-        .setColor('#F1D8F7')
-        .setDescription(`<:kirbsucc:757289104789471322> ${replies[Math.floor(Math.random() * replies.length)]}`);
+      const embed = new MessageEmbed({
+        author: { name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
+        color: '#F1D8F7',
+        description: `<:kirbsucc:757289104789471322> ${replies[Math.floor(Math.random() * replies.length)]}`,
+      });
 
       return await message.channel.send(embed);
     }

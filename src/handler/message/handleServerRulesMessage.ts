@@ -18,11 +18,14 @@ export const handleServerRulesMessage = async (message: CommandoMessage, prefix:
           const regex = new RegExp(`(\\s|^)${prefix}${i + 1}(\\s|$)`);
           return regex.test(message.content);
         })
-        .map((rule) =>
-          new MessageEmbed().setColor('#F1D8F7').setTitle(rule.title).setDescription(rule.description).addFields({
-            name: 'Moderation',
-            value: rule.moderation,
-          }),
+        .map(
+          (rule) =>
+            new MessageEmbed({
+              color: '#F1D8F7',
+              title: rule.title,
+              description: rule.description,
+              fields: [{ name: 'Moderation', value: rule.moderation }],
+            }),
         );
 
       for (const embed of ruleEmbeds) {

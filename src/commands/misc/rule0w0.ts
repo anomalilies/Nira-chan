@@ -16,12 +16,13 @@ export default class SayCommand extends Command {
 
   async run(msg: CommandoMessage) {
     if (msg.guild.id === homeGuild) {
-      const rule0w0 = new MessageEmbed()
-        .setTitle('(Swecrwet Rwulwe) 0w0. Bwe Kwind to Youwsewf')
-        .setDescription(
+      const rule0w0 = new MessageEmbed({
+        title: '(Swecrwet Rwulwe) 0w0. Bwe Kwind to Youwsewf',
+        description:
           'We cawe fow ywou, so stwop byeatwing youwsewf up. (・`ω´・)\nNyot evewything is youw fauwt, so ' +
-            'pwease keep twusting youwsewf, and ouw wespect and wuv fow you.',
-        );
+          'pwease keep twusting youwsewf, and ouw wespect and wuv fow you.',
+      });
+
       return msg.channel.send(rule0w0);
     }
   }
