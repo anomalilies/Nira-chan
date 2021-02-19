@@ -227,13 +227,13 @@ export const cd4 = new MessageEmbed({
       name: 'CD Exclusive Tracks',
       value: stripIndent`
         7. Saturn [Acoustic ver.] (サターン) - *Limited edition only*
-        8. Kettobashita Moufu [Bathroom Twin Piano Live (2020.05.06) ver.] (蹴っ飛ばした毛布) - *Normal edition only*
-        9. Fastening (Instrumental)
-        10. Obenkyou Shitoiteyo (Instrumental)
-        11. Ham (Instrumental)
-        12. JK BOMBER (Instrumental)
-        13. Marine Blue Garden (Instrumental)
-        14. MILABO (Instrumental)
+        7. Kettobashita Moufu [Bathroom Twin Piano Live (2020.05.06) ver.] (蹴っ飛ばした毛布) - *Normal edition only*
+        8. Fastening (Instrumental)
+        9. Obenkyou Shitoiteyo (Instrumental)
+        10. Ham (Instrumental)
+        11. JK BOMBER (Instrumental)
+        12. Marine Blue Garden (Instrumental)
+        13. MILABO (Instrumental)
       `,
     },
   ],
