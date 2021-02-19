@@ -1,10 +1,10 @@
 import { MessageEmbed } from 'discord.js';
 
-export const roles1 = new MessageEmbed()
-  .setTitle('Staff Roles')
-  .setDescription('All our staff (and bots) can be categorised with their purple role colours!')
-  .setColor('#240116')
-  .addFields(
+export const roles1 = new MessageEmbed({
+  title: 'Staff Roles',
+  description: 'All our staff (and bots) can be categorised with their purple role colours!',
+  color: '#240116',
+  fields: [
     { name: 'Admins', value: `<@&603441627729625139> are charge of the server and its general upkeep.` },
     {
       name: '(Former) King',
@@ -26,15 +26,15 @@ export const roles1 = new MessageEmbed()
       name: 'Bots',
       value: `<@&742082022729580715> are pretty much what you'd imagine them to be... With <@&799020025356746813> being 'sentient'.`,
     },
-  );
+  ],
+});
 
-export const roles2 = new MessageEmbed()
-  .setTitle('Awarded Roles')
-  .setDescription(
+export const roles2 = new MessageEmbed({
+  title: 'Awarded Roles',
+  color: '#240116',
+  description:
     'Exclusive roles dedicated to our most active contributors, or to the winners of our monthly server contests!',
-  )
-  .setColor('#240116')
-  .addFields(
+  fields: [
     {
       name: 'Contest Winners',
       value: `An exclusive role solely for our <@&761383548476325888> from the <#761326959154167838> channel.`,
@@ -56,13 +56,14 @@ export const roles2 = new MessageEmbed()
     { name: 'Uniguri C.E.O.', value: 'For our one-and-only Lord Davington of the server, <@759338005633826817>.' },
     { name: 'The Hacker Known as Nira-chan', value: 'A.K.A., <@741044746847256656>!' },
     { name: "Grey's Caregiver", value: "For <@790571552345030686>'s creator, <@394724520872771585>!" },
-  );
+  ],
+});
 
-export const roles3 = new MessageEmbed()
-  .setTitle('Contributor Roles')
-  .setDescription('Given to those who have contributed their time to the server!')
-  .setColor('#240116')
-  .addFields(
+export const roles3 = new MessageEmbed({
+  title: 'Contributor Roles',
+  description: 'Given to those who have contributed their time to the server!',
+  color: '#240116',
+  fields: [
     { name: 'Server Boosters', value: `For our lovely <@&744738039116464151>!` },
     { name: 'Regulars', value: `The <@&751209585464836137> role is given to our most active users on a weekly basis.` },
     {
@@ -97,13 +98,14 @@ export const roles3 = new MessageEmbed()
       name: 'Affiliates',
       value: `Our <@&744728162843492404> from **[r/ZUTOMAYO](https://www.reddit.com/r/ZUTOMAYO/)**, and other Discord servers!`,
     },
-  );
+  ],
+});
 
-export const roles4 = new MessageEmbed()
-  .setTitle('Exclusive Roles')
-  .setDescription('From limited-edition <#758494476174884905> listings, or given out from inside jokes!')
-  .setColor('#240116')
-  .addFields(
+export const roles4 = new MessageEmbed({
+  title: 'Exclusive Roles',
+  description: 'From limited-edition <#758494476174884905> listings, or given out from inside jokes!',
+  color: '#240116',
+  fields: [
     { name: 'h̷͂̒ē̶̓ ̶͂͝w̴̍̆h̶͛̉o̵͒̍ ̵̑̄s̸̛͝h̵̑̃a̵͂͆l̶̘̋l̶̋̕ ̷̌̍n̶̽͠ŏ̴̚ť̵̍ ̸͋̊b̵̔̅é̷̩ ̵̒͂n̸̈́͠ȃ̴̈́ṁ̴̺e̴̿͝d̷͛͐', value: `We don't know why we gave this to <@208960237988741123>, either.` },
     { name: 'Queen', value: `<@228880116699103232>'s nickname!` },
     { name: 'ἰχθύς', value: `Dedicated to <@205837815630659593>!` },
@@ -128,4 +130,5 @@ export const roles4 = new MessageEmbed()
       name: "Bri'ish",
       value: `For all our British members, born from yet another server inside-joke, and available from <#603248229928140801> if you react with 🇬🇧 when prompted.`,
     },
-  );
+  ],
+});
