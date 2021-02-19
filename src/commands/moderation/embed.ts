@@ -73,7 +73,7 @@ export default class FAQCommand extends Command {
         }
       }
 
-      const embed = new MessageEmbed().setColor(15849719).setTitle(title).setDescription(desc);
+      const embed = new MessageEmbed().setColor('#F1D8F7').setTitle(title).setDescription(desc);
 
       if (
         fieldTitle.toUpperCase() !== 'N/A' &&

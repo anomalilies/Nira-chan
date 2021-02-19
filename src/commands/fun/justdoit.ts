@@ -40,7 +40,7 @@ export default class JustDoItCommand extends Command {
           Stop giving up
         `,
       )
-      .setColor(15849719);
+      .setColor('#F1D8F7');
 
     return await message.channel.send(embed);
   }

@@ -19,7 +19,7 @@ export const handleServerRulesMessage = async (message: CommandoMessage, prefix:
           return regex.test(message.content);
         })
         .map((rule) =>
-          new MessageEmbed().setColor(15849719).setTitle(rule.title).setDescription(rule.description).addFields({
+          new MessageEmbed().setColor('#F1D8F7').setTitle(rule.title).setDescription(rule.description).addFields({
             name: 'Moderation',
             value: rule.moderation,
           }),

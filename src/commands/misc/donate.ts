@@ -27,7 +27,7 @@ export default class DonateCommand extends Command {
             **check out our __[Ko-fi](https://ko-fi.com/uniguri)__**!",
           `,
         )
-        .setColor(15849719)
+        .setColor('#F1D8F7')
         .setFooter('Thank you!');
 
       return await message.channel.send(embed);

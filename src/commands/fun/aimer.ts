@@ -40,7 +40,7 @@ export default class AimerCommand extends Command {
 
       const embed = new MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-        .setColor(15849719)
+        .setColor('#F1D8F7')
         .setDescription(
           oneLine`
             Pretend that you’re surprised. Yes, I love ${userName}. Yes, my love for ${userName} is borderline obsessive.

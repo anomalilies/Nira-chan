@@ -15,7 +15,7 @@ const handleStarboard = async (hallOfFame: TextChannel, reaction: MessageReactio
   );
   if (!existingMsg && message.member.roles.cache.some((r) => contributorRoleNames.includes(r.name))) {
     const embed = new MessageEmbed()
-      .setColor(16755763)
+      .setColor('#FFAC33')
       .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
       .setDescription(`${message.content}\n\n[context](${message.url})`)
       .setImage(image)

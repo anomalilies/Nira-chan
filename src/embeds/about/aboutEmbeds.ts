@@ -5,7 +5,7 @@ export const about1 = new MessageEmbed()
   .setDescription(
     'Zutto Mayonaka de Iinoni (abbreviated in English as ZUTOMAYO) are a Japanese rock group that debuted in 2018.',
   )
-  .setColor(15849719)
+  .setColor('#F1D8F7')
   .addFields(
     { name: 'Origin', value: 'Japan', inline: true },
     { name: 'Genres', value: 'Rock, J-Pop', inline: true },
@@ -20,7 +20,7 @@ export const about2 = new MessageEmbed()
   .setDescription(
     'On June 4th, 2018, ZUTOMAYO debuted via. YouTube with their first song, [秒針を噛む](https://youtu.be/GJI4Gv7NbmE) (Byoushin wo Kamu).',
   )
-  .setColor(15849719)
+  .setColor('#F1D8F7')
   .addFields(
     {
       name: 'Byoushin wo Kamu',
@@ -40,7 +40,7 @@ export const about3 = new MessageEmbed()
   .setDescription(
     '**[YouTube](https://www.youtube.com/c/ZUTOMAYO/)** | [(Staff)](https://twitter.com/zutomayo_staff) [Twitter](https://twitter.com/zutomayo) | [Instagram](https://www.instagram.com/zutomayo/) | [Official Website](https://www.zutomayo.com/)',
   )
-  .setColor(15849719)
+  .setColor('#F1D8F7')
   .addFields(
     {
       name: 'Streaming Platforms',
@@ -58,7 +58,7 @@ export const cd1 = new MessageEmbed()
   .setTitle('正しい偽りからの起床')
   .setThumbnail('https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/1.jpg')
   .setDescription('Tadashii Itsuwari Kara no Kishō')
-  .setColor(15849719)
+  .setColor('#F1D8F7')
   .addFields(
     { name: 'Release Date', value: 'November 14th, 2018', inline: true },
     { name: 'Oricon Weekly Albums Chart', value: 'Position: 8', inline: true },
@@ -79,7 +79,7 @@ export const cd2 = new MessageEmbed()
   .setTitle('今は今で誓いは笑みで')
   .setThumbnail('https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/2.jpg')
   .setDescription('Imawa Imade Chikaiwa Emide')
-  .setColor(15849719)
+  .setColor('#F1D8F7')
   .addFields(
     { name: 'Release Date', value: 'June 12, 2019', inline: true },
     { name: 'Oricon Weekly Albums Chart', value: 'Position: 1', inline: true },
@@ -100,7 +100,7 @@ export const cd3 = new MessageEmbed()
   .setTitle('潜潜話')
   .setThumbnail('https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/3.jpg')
   .setDescription('Hisohiso Banashi')
-  .setColor(15849719)
+  .setColor('#F1D8F7')
   .addFields(
     { name: 'Release Date', value: 'October 30th, 2019', inline: true },
     { name: 'Oricon Weekly Albums Chart', value: 'Position: 5', inline: true },
@@ -121,7 +121,7 @@ export const cd4 = new MessageEmbed()
   .setTitle('朗らかな皮膚とて不服')
   .setThumbnail('https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/4.jpg')
   .setDescription('Hogarakana Hifutote Fufuku')
-  .setColor(15849719)
+  .setColor('#F1D8F7')
   .addFields(
     { name: 'Release Date', value: 'August 5, 2020', inline: true },
     { name: 'Oricon Weekly Albums Chart', value: 'Position: 2', inline: true },
@@ -142,7 +142,7 @@ export const cd5 = new MessageEmbed()
   .setTitle('ぐされ')
   .setThumbnail('https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/5.jpg')
   .setDescription('Gusare')
-  .setColor(15849719)
+  .setColor('#F1D8F7')
   .addFields(
     { name: 'Release Date', value: 'February 10, 2021', inline: true },
     { name: 'Oricon Weekly Albums Chart', value: 'Position: N/A', inline: true },

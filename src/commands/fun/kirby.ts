@@ -71,7 +71,7 @@ export default class KirbyCommand extends Command {
 
       const embed = new MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-        .setColor(15849719)
+        .setColor('#F1D8F7')
         .setDescription(`<:kirbsucc:757289104789471322> ${replies[Math.floor(Math.random() * replies.length)]}`);
 
       return await message.channel.send(embed);

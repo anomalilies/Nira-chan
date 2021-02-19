@@ -45,7 +45,7 @@ export default class SayCommand extends Command {
 
   async run(message: CommandoMessage, { title, description, check }: PromptArgs) {
     if (isHomeGuild(message)) {
-      const embed = new MessageEmbed().setTitle(title).setDescription(description).setColor(15849719);
+      const embed = new MessageEmbed().setTitle(title).setDescription(description).setColor('#F1D8F7');
 
       if (noChoices.includes(check)) {
         if (isInChannel(message, allChannels.addALink)) {

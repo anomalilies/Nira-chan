@@ -7,7 +7,7 @@ export const contest1 = new MessageEmbed()
   .setDescription(
     `Sorry for the delay, everyone, but our 3rd competition is finally here!\nThis time, instead of solely art entries, we're offering physical prizes this time around for a whole range of possible entry options.\n\nPlease note this is probably a one-off for now as celebration of the release of *Gusare*, but we're planning more prizes for the future!\nIf you'd like to help out with contest prizes financially or otherwise, feel free to DM <@228880116699103232> or <@126355183608397825>, or donate **__[here](https://ko-fi.com/uniguri)__**!\n${emojis.spacer}`,
   )
-  .setColor(15849719)
+  .setColor('#F1D8F7')
   .addFields(
     {
       name: 'What does ZUTOMAYO mean to you?',
@@ -20,7 +20,7 @@ export const contest1 = new MessageEmbed()
     },
   );
 
-export const contest2 = new MessageEmbed().setColor(15849719).addFields(
+export const contest2 = new MessageEmbed().setColor('#F1D8F7').addFields(
   {
     name: 'Category #1: Art',
     value:
@@ -41,7 +41,7 @@ export const contest2 = new MessageEmbed().setColor(15849719).addFields(
 export const contest3 = new MessageEmbed()
   .setTitle('Rules and Regulations')
   .setDescription('By joining this contest, you hereby agree to have read the following rules and regulations;')
-  .setColor(15849719)
+  .setColor('#F1D8F7')
   .addFields(
     {
       name: 'Plaigarism',
@@ -55,14 +55,14 @@ export const contest3 = new MessageEmbed()
     },
   );
 
-export const contest4 = new MessageEmbed().setColor(15849719).addFields({
+export const contest4 = new MessageEmbed().setColor('#F1D8F7').addFields({
   name: 'When is the Deadline?',
   value:
     'The deadline for all entries will be on Saturday 20th February, 00:00 GMT/UTC.\nThe rest of the 20th, up until 00:00 on the 21st, will be dedicated to voting, where the top 3 entries in each category will be brought into a final vote to decide the final placement of entrants.\nWinners will be released by/on Monday the 22nd of February, with prizes hopefully shipping out/provided A.S.A.P. after.',
 });
 
 export const contest5 = new MessageEmbed()
-  .setColor(15849719)
+  .setColor('#F1D8F7')
   .setDescription(
     "Regardless of your place in the final 3 if you are a shortlisted runner-up in the art category, your art will still be featured as February-March's server banner!",
   )

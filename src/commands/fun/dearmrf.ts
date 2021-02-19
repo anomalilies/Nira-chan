@@ -44,7 +44,7 @@ export default class DearMrFCommand extends Command {
             `,
           },
         ])
-        .setColor(15849719);
+        .setColor('#F1D8F7');
 
       return await message.channel.send(embed);
     }

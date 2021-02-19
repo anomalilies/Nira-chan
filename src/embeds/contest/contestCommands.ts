@@ -11,7 +11,7 @@ export const contestCommands = async (client: CommandoClient) => {
   const niraMessages = messages.filter((msg) => msg.author == client.user);
 
   const entry = new MessageEmbed()
-    .setColor(15849719)
+    .setColor('#F1D8F7')
     .setTitle('Contest Entry')
     .setDescription(
       'Register your interest in joining this contest by **reacting with <:niraScoopYAY:777269746722668565>**!\nFor submitting entries, please **use the form below**!',

@@ -19,7 +19,7 @@ export default class DespairCommand extends Command {
       const embed = new MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
         .setDescription(`Aaaa, the tape is rewinding so fast! ${emojis.despair}`)
-        .setColor(15849719);
+        .setColor('#F1D8F7');
 
       return await message.channel.send(embed);
     }

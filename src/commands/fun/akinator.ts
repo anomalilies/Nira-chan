@@ -45,7 +45,7 @@ export default class AkinatorCommand extends Command {
         const correctEmbed = new MessageEmbed()
           .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
           .setDescription('Great! I guessed correctly. I love playing with you!')
-          .setColor(6732650);
+          .setColor('#66BB6A');
 
         await msg.edit(correctEmbed);
       } else if (reactions.has(no)) {

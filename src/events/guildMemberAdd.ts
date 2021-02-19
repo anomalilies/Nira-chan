@@ -23,7 +23,7 @@ export default async function (client: CommandoClient, member: GuildMember) {
 
   const embed = new MessageEmbed()
     .setDescription(`<@${members.currentOwner}> tells me that **${member.user.username}** will join shortly... 🪄`)
-    .setColor(15849719);
+    .setColor('#F1D8F7');
 
   modlog.send(`**${member.user.username}** joined! ${emojis.hello}`);
   generalChannel.send(embed);

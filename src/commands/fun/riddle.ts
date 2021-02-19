@@ -20,7 +20,7 @@ export default class RiddleCommand extends Command {
 
       const embed = new MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-        .setColor(15849719)
+        .setColor('#F1D8F7')
         .setDescription(riddles[i].riddle)
         .addField('Answer', `||${riddles[i].answer}||`);
 

@@ -2,7 +2,7 @@ import { MessageEmbed } from 'discord.js';
 
 export const bc1 = new MessageEmbed()
   .setTitle('💰 | Economy and Income')
-  .setColor(15849719)
+  .setColor('#F1D8F7')
   .addFields(
     { name: "Get the Server's Economy Stats", value: '`economy`' },
     { name: 'Desposit Money to Your Account', value: '`deposit`' },
@@ -17,7 +17,7 @@ export const bc1 = new MessageEmbed()
 
 export const bc2 = new MessageEmbed()
   .setTitle('🎲 | Fun and Games')
-  .setColor(15849719)
+  .setColor('#F1D8F7')
   .addFields(
     { name: 'Play Truth or Dare', value: '`truth-or-dare`\nExample: `!truth-or-dare truth` `!truth-or-dare dare`' },
     { name: 'Get a Random Dog Picture', value: '`dog`' },
@@ -26,7 +26,7 @@ export const bc2 = new MessageEmbed()
     { name: 'Play a Game of Akinator', value: '`akinator`' },
   );
 
-export const bc3 = new MessageEmbed().setTitle('🎰 | Gambling').setColor(15849719).addFields(
+export const bc3 = new MessageEmbed().setTitle('🎰 | Gambling').setColor('#F1D8F7').addFields(
   {
     name: 'Blackjack',
     value:
@@ -48,7 +48,7 @@ export const bc3 = new MessageEmbed().setTitle('🎰 | Gambling').setColor(15849
   },
 );
 
-export const bc4 = new MessageEmbed().setTitle('🔨 | Tools and Utilities').setColor(15849719).addFields(
+export const bc4 = new MessageEmbed().setTitle('🔨 | Tools and Utilities').setColor('#F1D8F7').addFields(
   { name: 'Calculator', value: '`calc/c/caluclate`\nExample: `-c 2+2`' },
   { name: 'Time', value: '`currentTime/ctime/gettime`\nExample: `-ctime GMT+1` `-ctime Tokyo` `-ctime Pacific`' },
   {
@@ -65,7 +65,7 @@ export const bc4 = new MessageEmbed().setTitle('🔨 | Tools and Utilities').set
   { name: 'Define Something', value: '`define`\nExample: `-define hedgehog`' },
 );
 
-export const bc5 = new MessageEmbed().setTitle('🎉 | Fun and Games').setColor(15849719).addFields(
+export const bc5 = new MessageEmbed().setTitle('🎉 | Fun and Games').setColor('#F1D8F7').addFields(
   { name: 'Define Something Using Urban Dictionary', value: '`urban`\nExample: `-urban ZUTOMAYO`' },
   { name: 'Find Out the Weather Forecast', value: '`weather`\nExample: `-weather London`' },
   { name: 'Find Out a Cat Fact', value: '`catfact/cf/cat/catfacts`' },
@@ -80,7 +80,7 @@ export const bc5 = new MessageEmbed().setTitle('🎉 | Fun and Games').setColor(
   { name: 'Ask the 8-Ball', value: '`8ball`\nExample: `-8ball Will I get to see ZUTOMAYO live?`' },
 );
 
-export const bc6 = new MessageEmbed().setColor(15849719).addFields(
+export const bc6 = new MessageEmbed().setColor('#F1D8F7').addFields(
   { name: 'Ask WolframAlpha', value: '`wolfram`\nExample: `-wolfram Tell me a joke`' },
   {
     name: 'Take a Typing Test',
@@ -101,7 +101,7 @@ export const bc6 = new MessageEmbed().setColor(15849719).addFields(
 export const bc7 = new MessageEmbed()
   .setTitle('🎧 | Last.fm')
   .setDescription('Connect your [Last.fm](https://www.last.fm/) account to track and compare your listening history!')
-  .setColor(15849719)
+  .setColor('#F1D8F7')
   .addFields(
     { name: 'Connect Your Account', value: '`fm set`\nExample: `fm set anomalilies`' },
     {
@@ -130,7 +130,7 @@ export const bc8 = new MessageEmbed()
   .setDescription(
     'These commands will only work if you are in a voice channel!\nSpotify, Apple Music, and YouTube links are all supported!',
   )
-  .setColor(15849719)
+  .setColor('#F1D8F7')
   .addFields(
     {
       name: 'Add a Song to the Queue',
@@ -152,7 +152,7 @@ export const bc8 = new MessageEmbed()
 
 export const bc9 = new MessageEmbed()
   .setTitle('🏆 | Statistics and Leaderboards')
-  .setColor(15849719)
+  .setColor('#F1D8F7')
   .addFields(
     { name: 'Crowns', value: '`leaderboard crowns`' },
     { name: 'Typing', value: '`leaderboard wpm`' },
@@ -161,7 +161,7 @@ export const bc9 = new MessageEmbed()
 
 export const bc10 = new MessageEmbed()
   .setTitle('Celebrate Your Birthday With the Server!')
-  .setColor(10070709)
+  .setColor('#99AAB5')
   .setDescription(
     "Our <@656621136808902656> allows us to celebrate our user's birthdays!\nIf you'd like to set up your birthday with the bot, you can do so using the following command in <#742550881911701615>: `bday set`",
   );

@@ -29,7 +29,7 @@ export const uwuify = async function (text: string, message: Message) {
     const embed = new MessageEmbed()
       .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
       .setDescription(text)
-      .setColor(15849719);
+      .setColor('#F1D8F7');
     await message.channel.send(embed);
   } else {
     const webhooks = await message.channel.fetchWebhooks();

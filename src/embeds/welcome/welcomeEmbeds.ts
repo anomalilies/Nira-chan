@@ -5,14 +5,14 @@ export const welcome1 = new MessageEmbed()
   .setDescription(
     "Thanks so much for joining us; It's an absolute pleasure to have you here!\nWe're a pretty laidback server as a whole, however to combat spam, we require you to have read the rules before chatting with us.\nPlease follow Discord's built-in tutorial on how to do so!",
   )
-  .setColor(15849719)
+  .setColor('#F1D8F7')
   .addFields({
     name: 'Moderation of Rules',
     value:
       "**Please also note that Admins have the final say when it comes to the enforcement of *all* rules, particularly if multiple have been broken.**\nWe will always talk our actions through where possible, but if this isn’t an option, we have __every right__ to choose how a problematic member is handled.\nThank you for your understanding!\n\n**Can't see the rules?** Please react below with <:niranotes:756679974953549914> to gain access to <#791126859320000522>, where you'll be able to check over our moderation policies.",
   });
 
-export const welcome2 = new MessageEmbed().setColor(15849719).addFields(
+export const welcome2 = new MessageEmbed().setColor('#F1D8F7').addFields(
   {
     name: 'What Should I Do Now?',
     value:

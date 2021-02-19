@@ -3,7 +3,7 @@ import { MessageEmbed } from 'discord.js';
 export const pronouns = new MessageEmbed()
   .setTitle('Pronouns')
   .setDescription('React to give yourself a role.')
-  .setColor(15849719)
+  .setColor('#F1D8F7')
   .addFields({
     name: 'Key',
     value:
@@ -13,7 +13,7 @@ export const pronouns = new MessageEmbed()
 export const miscellaneous = new MessageEmbed()
   .setTitle('Miscellaneous')
   .setDescription('Get access to opt-in channels and all server notifications.')
-  .setColor(15849719)
+  .setColor('#F1D8F7')
   .addFields({
     name: 'Key',
     value:
@@ -23,7 +23,7 @@ export const miscellaneous = new MessageEmbed()
 export const dividers = new MessageEmbed()
   .setTitle('Dividers')
   .setDescription('Want to divide your roles? Claim your handy dividers here!')
-  .setColor(15849719)
+  .setColor('#F1D8F7')
   .addFields({
     name: 'Key',
     value:
@@ -35,7 +35,7 @@ export const colours = new MessageEmbed()
   .setDescription(
     "Want to change your role colour? You've come to the right place!\nWith the <@&781295857706336296> role, you'll be able to change your roles infinite times.\n\n**The highest role in the list below will become the colour for your username:**\n• If you'd like to add a role you don't already have, react with the corresponding emoji once.\n• If you'd like to remove a pre-existing role you already have, react with the corresponding emoji twice.\n• If you'd like to remove a given role, remove your reaction by reacting with the corresponding emoji again.",
   )
-  .setColor(15849719)
+  .setColor('#F1D8F7')
   .addFields({
     name: 'Key',
     value:

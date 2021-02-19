@@ -58,7 +58,7 @@ export default async function (guild: Guild) {
   const serverInfo = new MessageEmbed()
     .setTitle(`About ${guild.name}`)
     .setThumbnail(guild.iconURL({ dynamic: true }))
-    .setColor(15849719)
+    .setColor('#F1D8F7')
     .addField('General', [
       `**❯ Owner:** ${owner.user.tag}`,
       `**❯ Region:** ${guildRegionKeyToName(guild.region)}`,

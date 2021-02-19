@@ -28,7 +28,7 @@ export default class FishpunCommand extends Command {
         .setTitle('Mr. Fish says...')
         .setThumbnail('https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/Fishy.jpg')
         .setDescription(fishpuns[Math.floor(Math.random() * fishpuns.length)])
-        .setColor(15849719);
+        .setColor('#F1D8F7');
 
       return await message.channel.send(embed);
     }
