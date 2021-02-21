@@ -3,7 +3,7 @@ import serverInfoEmbed from '../embeds/serverInfoEmbed';
 import { TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
-import { members, allChannels } from '../config/config.json';
+import { allChannels } from '../config/config.json';
 import { welcomeCommands } from '../embeds/welcome/welcomeCommands';
 import { rolesListCommands } from '../embeds/roles/roleslistCommands';
 import { rolePickerCommands } from '../embeds/rolePicker/rolePickerCommands';
