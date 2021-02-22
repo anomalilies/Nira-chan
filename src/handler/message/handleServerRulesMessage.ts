@@ -12,7 +12,7 @@ export const handleServerRulesMessage = async (message: CommandoMessage, prefix:
   }
 
   if (message.guild.id === homeGuild) {
-    if (message.member && message.member.roles.cache.get(roles.VIP)) {
+    if (message.member && message.member.roles.cache.get(roles.moderators)) {
       const ruleEmbeds = rules
         .filter((_, i) => {
           const regex = new RegExp(`(\\s|^)${prefix}${i + 1}(\\s|$)`);
