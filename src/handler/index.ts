@@ -21,6 +21,10 @@ import { handleNonNitroEmoji } from './message/handleNonNitroEmoji';
 import { handleServerRulesMessage } from './message/handleServerRulesMessage';
 import { handleFishyCommandsMessage, handleOtherFishyMessage } from './message/handleFishyCommandsMessage';
 import { handleQueenCommandMessage } from './message/handleQueenCommandMessage';
+import { handleContributorsRole } from './guildMemberUpdate/handleContributorsRole';
+import { handleLockRegularRole } from './guildMemberUpdate/handleLockRegularRole';
+import { handleMuteRole } from './guildMemberUpdate/handleMuteRole';
+import { handleServerBoosterRole } from './guildMemberUpdate/handleServerBoosterRole';
 
 export {
   handleCountingEditedMessage,
@@ -47,4 +51,8 @@ export {
   handleFishyCommandsMessage,
   handleOtherFishyMessage,
   handleQueenCommandMessage,
+  handleContributorsRole,
+  handleLockRegularRole,
+  handleMuteRole,
+  handleServerBoosterRole,
 };
