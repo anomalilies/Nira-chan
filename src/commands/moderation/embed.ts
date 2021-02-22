@@ -11,7 +11,7 @@ interface PromptArgs {
   fieldTitle: string;
 }
 
-export default class FAQCommand extends Command {
+export default class EmbedCommand extends Command {
   constructor(client: CommandoClient) {
     super(client, {
       name: 'embed',

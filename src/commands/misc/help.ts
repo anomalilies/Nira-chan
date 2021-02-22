@@ -1,4 +1,4 @@
-import { stripIndents, oneLine } from 'common-tags';
+import { stripIndents } from 'common-tags';
 import { MessageEmbed } from 'discord.js';
 
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
@@ -22,27 +22,16 @@ export default class HelpCommand extends Command {
 
     const embed = new MessageEmbed({
       color: '#F1D8F7',
+      title: `${showAll ? 'All Commands' : `Available commands in ${msg.guild || 'this DM'}`}`,
       description: stripIndents`
-        ${oneLine`
-          To run a command in ${msg.guild ? msg.guild.name : 'any server'},
-          use ${Command.usage('command', msg.guild ? msg.guild.commandPrefix : null, this.client.user)}.
-          For example, ${Command.usage('prefix', msg.guild ? msg.guild.commandPrefix : null, this.client.user)}.
-        `}
-        To run a command in this DM, simply use ${Command.usage('command', null, null)} with no prefix.
-
-        Use ${this.usage('<command>', null, null)} to view detailed information about a specific command.
-        Use ${this.usage('all', null, null)} to view a list of *all* commands, not just available ones.
-
-        __**${showAll ? 'All commands' : `Available commands in ${msg.guild || 'this DM'}`}**__
-
         ${groups
           .filter((grp) => grp.commands.some((cmd) => !cmd.hidden && (showAll || cmd.isUsable(msg))))
           .map(
             (grp) => stripIndents`
-            __${grp.name}__
+            **${grp.name}**
             ${grp.commands
               .filter((cmd) => !cmd.hidden && (showAll || cmd.isUsable(msg)))
-              .map((cmd) => `**${cmd.name}:** ${cmd.description}${cmd.nsfw ? ' (NSFW)' : ''}`)
+              .map((cmd) => `\u0060${cmd.name}\u0060: ${cmd.description}`)
               .join('\n')}
             `,
           )
