@@ -35,6 +35,7 @@ const fishyCommands = [
   'squidjoke',
   'squiddyjoke',
 ];
+const efh = '500385855072894982';
 
 export const handleFishyCommandsMessage = async (message: CommandoMessage, prefix: string) => {
   if ((await keyv.get(Object.keys({ fishyCommandsMessage })[0])) === false) {
@@ -45,6 +46,10 @@ export const handleFishyCommandsMessage = async (message: CommandoMessage, prefi
     const startsWithFishyCommand = fishyCommands.some((word) => {
       return message.content.toLowerCase().startsWith(prefix + word);
     });
+
+    if (message.author.id === efh) {
+      return;
+    }
 
     if (!startsWithFishyCommand) {
       return message.delete();
