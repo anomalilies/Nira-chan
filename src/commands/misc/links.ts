@@ -14,7 +14,7 @@ interface PromptArgs {
   check: string;
 }
 
-export default class SayCommand extends Command {
+export default class LinkCommand extends Command {
   constructor(client: CommandoClient) {
     super(client, {
       name: 'link',
