@@ -16,6 +16,7 @@ import { initHandlers } from './handler/initHandlers';
     owner: members.currentOwner,
     commandPrefix: prefix,
     disableMentions: 'everyone',
+    partials: ['REACTION', 'MESSAGE'],
   });
 
   // Events

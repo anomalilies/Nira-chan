@@ -25,6 +25,8 @@ import { handleContributorsRole } from './guildMemberUpdate/handleContributorsRo
 import { handleLockRegularRole } from './guildMemberUpdate/handleLockRegularRole';
 import { handleMuteRole } from './guildMemberUpdate/handleMuteRole';
 import { handleServerBoosterRole } from './guildMemberUpdate/handleServerBoosterRole';
+import { handleStarboard } from './messageReactionAdd/handleStarboard';
+import { handleHallOfFame } from './messageReactionAdd/handleHallOfFame';
 
 export {
   handleCountingEditedMessage,
@@ -55,4 +57,6 @@ export {
   handleLockRegularRole,
   handleMuteRole,
   handleServerBoosterRole,
+  handleStarboard,
+  handleHallOfFame,
 };
