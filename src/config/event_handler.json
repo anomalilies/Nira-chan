@@ -27,6 +27,8 @@
   "lockRegularRole": true,
   "contributorsRole": true,
   "muteRole": true,
+  "starboardMessage": true,
+  "hallOfFameMessage": true,
   "onMessage": true,
   "onMessageUpdate": true,
   "onMessageReactionAdd": true,
