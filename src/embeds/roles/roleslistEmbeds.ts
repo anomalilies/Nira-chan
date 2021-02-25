@@ -3,7 +3,7 @@ import { MessageEmbed } from 'discord.js';
 export const roles1 = new MessageEmbed({
   title: 'Staff Roles',
   description: 'All our staff (and bots) can be categorised with their purple role colours!',
-  color: '#240116',
+  color: '#03A9F4',
   fields: [
     { name: 'Admins', value: `<@&603441627729625139> are charge of the server and its general upkeep.` },
     {
@@ -31,7 +31,7 @@ export const roles1 = new MessageEmbed({
 
 export const roles2 = new MessageEmbed({
   title: 'Awarded Roles',
-  color: '#240116',
+  color: '#03A9F4',
   description:
     'Exclusive roles dedicated to our most active contributors, or to the winners of our monthly server contests!',
   fields: [
@@ -62,7 +62,7 @@ export const roles2 = new MessageEmbed({
 export const roles3 = new MessageEmbed({
   title: 'Contributor Roles',
   description: 'Given to those who have contributed their time to the server!',
-  color: '#240116',
+  color: '#03A9F4',
   fields: [
     { name: 'Server Boosters', value: `For our lovely <@&744738039116464151>!` },
     { name: 'Regulars', value: `The <@&751209585464836137> role is given to our most active users on a weekly basis.` },
@@ -104,7 +104,7 @@ export const roles3 = new MessageEmbed({
 export const roles4 = new MessageEmbed({
   title: 'Exclusive Roles',
   description: 'From limited-edition <#758494476174884905> listings, or given out from inside jokes!',
-  color: '#240116',
+  color: '#03A9F4',
   fields: [
     { name: 'h̷͂̒ē̶̓ ̶͂͝w̴̍̆h̶͛̉o̵͒̍ ̵̑̄s̸̛͝h̵̑̃a̵͂͆l̶̘̋l̶̋̕ ̷̌̍n̶̽͠ŏ̴̚ť̵̍ ̸͋̊b̵̔̅é̷̩ ̵̒͂n̸̈́͠ȃ̴̈́ṁ̴̺e̴̿͝d̷͛͐', value: `We don't know why we gave this to <@208960237988741123>, either.` },
     { name: 'Queen', value: `<@228880116699103232>'s nickname!` },

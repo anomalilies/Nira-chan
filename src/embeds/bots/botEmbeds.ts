@@ -198,7 +198,7 @@ export const bc9 = new MessageEmbed({
 
 export const bc10 = new MessageEmbed({
   title: 'Celebrate Your Birthday With the Server!',
-  color: '#99AAB5',
+  color: '#E6E6E6',
   description: oneLine`
     Our <@656621136808902656> allows us to celebrate our user's birthdays!\n
     If you'd like to set up your birthday with the bot, you can do so using the
