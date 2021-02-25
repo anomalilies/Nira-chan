@@ -18,9 +18,9 @@ export const welcomeCommands = async (client: CommandoClient) => {
     await channel.send('https://discord.gg/htSDkHH');
     await channel.send(emojis.spacer);
   } else {
-    niraMessages.array()[4].edit(welcome1);
-    niraMessages.array()[2].edit(welcome2);
-    niraMessages.array()[4].react('756679974953549914');
+    niraMessages.array()[3].edit(welcome1);
+    niraMessages.array()[1].edit(welcome2);
+    niraMessages.array()[3].react('756679974953549914');
 
     channel.guild
       .fetchVanityData()
@@ -33,7 +33,7 @@ export const welcomeCommands = async (client: CommandoClient) => {
   }
 
   client.on('messageReactionAdd', async (reaction, user) => {
-    if (reaction.message.id === niraMessages.array()[4].id) {
+    if (reaction.message.id === niraMessages.array()[3].id) {
       if (
         !user.bot &&
         !(
@@ -49,7 +49,7 @@ export const welcomeCommands = async (client: CommandoClient) => {
     }
   });
   client.on('messageReactionRemove', async (reaction, user) => {
-    if (reaction.message.id === niraMessages.array()[4].id) {
+    if (reaction.message.id === niraMessages.array()[3].id) {
       if (!user.bot && reaction.emoji.id === '756679974953549914') {
         await reaction.message.guild.members.cache.get(user.id).roles.remove('791126700972441600');
       }
