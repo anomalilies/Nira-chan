@@ -9,7 +9,8 @@ export const handlePatPatRole = async (message: CommandoMessage) => {
     return;
   }
 
-  if (message.member && message.member.roles.cache.get(roles.patpat) != undefined) {
+  const member = message.guild.member(message.author);
+  if (member && member.roles.cache.get(roles.patpat) != undefined) {
     if (message.content.toLowerCase().includes('patpat')) {
       message.react(emojis.patpat);
     }
