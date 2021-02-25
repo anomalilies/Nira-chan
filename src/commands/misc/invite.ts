@@ -17,7 +17,6 @@ export default class InviteCommand extends Command {
 
   async run(message: CommandoMessage) {
     const embed = createDefaultEmbed('Loading...', emojis.loading);
-
     const msg = await message.channel.send(embed);
 
     const botInvite = createDefaultEmbed(
@@ -34,32 +33,40 @@ export default class InviteCommand extends Command {
         stripIndent`Would you like to **invite <@${this.client.user.id}> to a server** (${emojis.hello}),
         or **share ${msg.guild.name}'s invite link** (${emojis.cute})?`,
       );
-
       await msg.edit(newEmbed);
+
+      const hello = emojis.hello.replace(/\D/g, '');
+      const cute = emojis.cute.replace(/\D/g, '');
+
       await msg.react(emojis.hello);
       await msg.react(emojis.cute);
 
-      const reactions = await msg.awaitReactions(
-        (r: MessageReaction, u: User) => u.id === message.author.id && [emojis.hello, emojis.cute].includes(r.emoji.id),
-        {
-          max: 1,
-          time: 60000,
-        },
-      );
+      const filter = (r: MessageReaction, u: User) => u.id === message.author.id && [hello, cute].includes(r.emoji.id);
+      const reactions = await msg.awaitReactions(filter, {
+        max: 1,
+        time: 6000,
+      });
 
-      if (reactions.has(emojis.hello)) {
+      if (reactions.has(hello)) {
         await msg.edit(botInvite);
         await msg.reactions.removeAll();
-      } else if (reactions.has(emojis.cute)) {
-        await msg.channel.send('https://discord.gg/zutomayo');
+      } else if (reactions.has(cute)) {
+        message.guild
+          .fetchVanityData()
+          .then((invite) => {
+            msg.channel.send(`https://discord.gg/${invite.code}`);
+          })
+          .catch(() => {
+            msg.channel.send('https://discord.gg/htSDkHH');
+          });
+
         await msg.reactions.removeAll();
       }
-
-      return message;
+    } else {
+      setTimeout(() => {
+        msg.edit(botInvite);
+      }, 1000);
     }
-
-    setTimeout(async () => {
-      await msg.edit(botInvite);
-    }, 1000);
+    return message;
   }
 }
