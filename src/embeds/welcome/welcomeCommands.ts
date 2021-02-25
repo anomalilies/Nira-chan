@@ -21,6 +21,15 @@ export const welcomeCommands = async (client: CommandoClient) => {
     niraMessages.array()[4].edit(welcome1);
     niraMessages.array()[2].edit(welcome2);
     niraMessages.array()[4].react('756679974953549914');
+
+    channel.guild
+      .fetchVanityData()
+      .then((invite) => {
+        niraMessages.array()[0].edit(`https://discord.gg/${invite.code}`);
+      })
+      .catch(() => {
+        niraMessages.array()[0].edit('https://discord.gg/htSDkHH');
+      });
   }
 
   client.on('messageReactionAdd', async (reaction, user) => {
