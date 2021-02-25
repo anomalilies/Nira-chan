@@ -6,9 +6,7 @@ import { homeGuild, emojis, roles, allChannels } from '../../config/config.json'
 import { welcomeMessage } from '../../config/event_handler.json';
 import { keyv } from '../../database/keyv';
 
-/**
- * Welcome Message and Role
- */
+// Welcome Message and Role
 export const handleWelcomeMessage = async (message: CommandoMessage, client: CommandoClient) => {
   if ((await keyv.get(Object.keys({ welcomeMessage })[0])) === false) {
     return;

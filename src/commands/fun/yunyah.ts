@@ -34,9 +34,7 @@ export default class YunyahCommand extends Command {
       message.delete();
 
       await webhook.send(quote, {
-        username: message.member.displayName,
-        avatarURL: message.author.displayAvatarURL(),
-        files: message.attachments.array(),
+        username: 'yunyah',
       });
     }
     return message;

@@ -22,6 +22,7 @@ export default class AkinatorCommand extends Command {
       const percentChance = Math.floor(Math.random() * (99 - 75 + 1) + 75);
 
       const questionEmbed = new MessageEmbed({
+        color: '#03A9F4',
         author: { name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
         description: `I'm ${percentChance}% sure your character is...\n\nACAね (Singer)`,
         footer: { text: `Is this correct? (${yes}/${no})` },
@@ -52,6 +53,7 @@ export default class AkinatorCommand extends Command {
         await msg.edit(correctEmbed);
       } else if (reactions.has(no)) {
         const dimeloEmbed = new MessageEmbed({
+          color: '#03A9F4',
           author: { name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
           description: "I'm 100% sure your character is...\n\nDimelo Tony (Musician)",
           footer: { text: 'You have no choice in the matter; This is correct.' },

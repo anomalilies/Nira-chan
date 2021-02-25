@@ -24,10 +24,8 @@ export default class DonateCommand extends Command {
         fields: [
           {
             name: 'Donations',
-            value: oneLine`
-              "If you'd like to support the ZONE by finanically funding giveaways,
-              **check out our __[Ko-fi](https://ko-fi.com/uniguri)__**!",
-            `,
+            value: oneLine`If you'd like to support the ZONE by finanically funding giveaways,
+              **check out our __[Ko-fi](https://ko-fi.com/uniguri)__**!`,
           },
         ],
         footer: { text: 'Thank you!' },
