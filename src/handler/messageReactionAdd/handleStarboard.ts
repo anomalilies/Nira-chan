@@ -23,9 +23,21 @@ export const handleStarboard = async (reaction: MessageReaction) => {
     return;
   }
 
-  // TODO check if already in starboard
+  const starboardChannel = <TextChannel>await reaction.client.channels.fetch(allChannels.starboard);
+  const lastMessages = await starboardChannel.messages.fetch({ limit: 100 });
+  const msg = lastMessages.find((m) => {
+    if (m.embeds.length < 1) {
+      return false;
+    }
 
-  const starboardChannel = <TextChannel>await reaction.client.channels.fetch(allChannels.debug);
+    if (m.embeds[0].footer == null) {
+      return false;
+    }
+
+    return m.embeds[0].footer.text.split(' ')[3] === message.id;
+  });
+
+  const footer = [stars, emojis.star, '#' + (<TextChannel>message.channel).name, message.id];
   const embed = new MessageEmbed({
     author: { name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
     image: { url: message.attachments.size > 0 ? message.attachments.first().url : '' },
@@ -35,9 +47,13 @@ export const handleStarboard = async (reaction: MessageReaction) => {
 
       [context](${message.url})
     `,
-    footer: { text: message.id },
+    footer: { text: footer.join(' ') },
     timestamp: Date.now(),
   });
+
+  if (msg != undefined) {
+    return await msg.edit(embed);
+  }
 
   await starboardChannel.send(embed);
 };
