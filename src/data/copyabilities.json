@@ -1,6 +1,8 @@
-{
-  "copyAbilities": {
-    "names": [
+[
+  {
+    "name": "copyAbilities",
+    "format": "Kirby inhaled **{name}** and got the **{ability}** ability!",
+    "abilities": [
       "Animal",
       "Archer",
       "Artist",
@@ -67,8 +69,10 @@
     ],
     "weight": 45
   },
-  "smashAbilities": {
-    "names": [
+  {
+    "name": "smashAbilities",
+    "format": "Somehow, when Kirby inhaled **{name}**, he got the **{ability}** ability!",
+    "abilities": [
       "Mario",
       "Donkey Kong",
       "Link",
@@ -159,8 +163,10 @@
     ],
     "weight": 20
   },
-  "starAllies": {
-    "names": [
+  {
+    "name": "starAllies",
+    "format": "Elemental combo! Kirby got the **{ability}** ability when inhaling **{name}**!",
+    "abilities": [
       "Blizzard Bomb",
       "Blizzard Cutter",
       "Blizzard Hammer",
@@ -204,8 +210,10 @@
     ],
     "weight": 10
   },
-  "comboAbilities": {
-    "names": [
+  {
+    "name": "comboAbilities",
+    "format": "Power combo! Kirby got the **{ability}** ability when inhaling **{name}**!",
+    "abilities": [
       "Fire Phoenix",
       "Volcano",
       "Melting Ice Cube",
@@ -235,8 +243,10 @@
     ],
     "weight": 5
   },
-  "superAbilities": {
-    "names": [
+  {
+    "name": "superAbilities",
+    "format": "Woah! Kirby got the **{ability}** super ability when inhaling **{name}**!",
+    "abilities": [
       "Flare Beam",
       "Grand Hammer",
       "Monster Flame",
@@ -250,12 +260,16 @@
     ],
     "weight": 4
   },
-  "epicYarn": {
-    "names": ["Car", "Note", "Parachute", "Pendulum", "Sleigh", "Snake", "Strength", "Submarine", "Top", "Weight"],
+  {
+    "name": "epicYarn",
+    "format": "Kirby inhaled **{name}** and... Turned into yarn? He uses the **{ability}** move!",
+    "abilities": ["Car", "Note", "Parachute", "Pendulum", "Sleigh", "Snake", "Strength", "Submarine", "Top", "Weight"],
     "weight": 4
   },
-  "planetRobobot": {
-    "names": [
+  {
+    "name": "planetRobobot",
+    "format": "Kirby found a Robobot Armour docking station! After inhaling **{name}**, he uses **{ability}**!",
+    "abilities": [
       "Beam Mode",
       "Bomb Mode",
       "Cutter Mode",
@@ -272,8 +286,10 @@
     ],
     "weight": 3
   },
-  "friendAbilities": {
-    "names": [
+  {
+    "name": "friendAbilities",
+    "format": "With **{name}**, Kirby partners up with his friends! He uses the **{ability}** attack!",
+    "abilities": [
       "Friend Circle",
       "Friend Star",
       "Friend Bridge",
@@ -303,12 +319,16 @@
     ],
     "weight": 3
   },
-  "animeOnly": {
-    "names": ["Baton", "Iron", "Top", "Kabuki"],
+  {
+    "name": "animeOnly",
+    "format": "Wow! Kirby inhaled **{name}** and got the rare **{ability}** ability!",
+    "abilities": ["Baton", "Iron", "Top", "Kabuki"],
     "weight": 2
   },
-  "ravelAbilities": {
-    "names": [
+  {
+    "name": "ravelAbilities",
+    "format": "Kirby inhaled **{name}** and... Turned into yarn? He gains the **{ability}** ability!",
+    "abilities": [
       "Digger",
       "Dolphin",
       "Fire Engine",
@@ -328,8 +348,10 @@
     ],
     "weight": 2
   },
-  "bossOnly": {
-    "names": [
+  {
+    "name": "bossOnly",
+    "format": "As Kirby is approaching an impending boss fight, anxiety creeps over him. No need to worry, though; Kirby inhales **{name}**, and gets the **{ability}** ability!",
+    "abilities": [
       "Galaxia",
       "Halberd Mode",
       "Landia",
@@ -344,8 +366,10 @@
     ],
     "weight": 1
   },
-  "costumes": {
-    "names": [
+  {
+    "name": "costumes",
+    "format": "No way... Kirby inhaled **{name}** and got the ultra-rare **{ability}** ability!",
+    "abilities": [
       "Baseball",
       "Conductor",
       "Construction Worker",
@@ -369,8 +393,10 @@
     ],
     "weight": 0.9
   },
-  "stfu": {
-    "names": ["beta ass"],
+  {
+    "name": "stfu",
+    "format": "why tf would i absorb your **{ability}**, **{name}**? <:kirbuff:757349479065321483> fuck outta here fam",
+    "abilities": ["beta ass"],
     "weight": 0.1
   }
-}
+]
