@@ -21,7 +21,7 @@ export default class KirbyCommand extends Command {
       const threshold = Math.random() * total;
 
       let sum = 0;
-      const group = abilities.find(group => {
+      const group = abilities.find((group) => {
         sum += group.weight;
         return sum >= threshold;
       });
@@ -34,7 +34,7 @@ export default class KirbyCommand extends Command {
         nickname = message.member.displayName;
       }
 
-      const reply = group.format.replace("{ability}", ability).replace("{name}", nickname);
+      const reply = group.format.replace('{ability}', ability).replace('{name}', nickname);
 
       const embed = new MessageEmbed({
         author: { name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
