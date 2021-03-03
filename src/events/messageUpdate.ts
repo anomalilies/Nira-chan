@@ -21,34 +21,28 @@ export default async function (client: CommandoClient, oldMessage: CommandoMessa
     return;
   }
 
-  if (
-    newMessage.content === oldMessage.content ||
-    newMessage.webhookID ||
-    newMessage.author == client.user ||
-    newMessage.author.bot
-  ) {
+  if (newMessage.content === oldMessage.content) {
     return;
-  } else {
-    await handleNiraMessageReactions(newMessage, client);
-
-    await handleNiraMojisInChannels(newMessage);
-
-    await handleCheckNiraMojis(newMessage);
-
-    await handlePatPatRole(newMessage);
-
-    await handleNiraWave(newMessage, client);
-
-    await handleCountingEditedMessage(newMessage);
-
-    await handleTwoWordStoryMessage(newMessage);
-
-    await handleDeathOfNira(newMessage);
-
-    await handlePoyoMessage(newMessage);
-
-    await handlePaladinMessage(newMessage);
-
-    await handleNoUMessage(newMessage);
   }
+  await handleNiraMessageReactions(newMessage, client);
+
+  await handleNiraMojisInChannels(newMessage);
+
+  await handleCheckNiraMojis(newMessage);
+
+  await handlePatPatRole(newMessage);
+
+  await handleNiraWave(newMessage, client);
+
+  await handleCountingEditedMessage(newMessage);
+
+  await handleTwoWordStoryMessage(newMessage);
+
+  await handleDeathOfNira(newMessage);
+
+  await handlePoyoMessage(newMessage);
+
+  await handlePaladinMessage(newMessage);
+
+  await handleNoUMessage(newMessage);
 }

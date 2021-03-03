@@ -31,51 +31,47 @@ export default async function (client: CommandoClient, message: CommandoMessage)
   if ((await keyv.get(Object.keys({ onMessage })[0])) === false) {
     return;
   }
-  if (message.webhookID || message.author == client.user || message.author.bot) {
-    return;
-  } else {
-    await handleWelcomeMessage(message, client);
+  await handleWelcomeMessage(message, client);
 
-    await handleSubscriptionThankYouMessage(message);
+  await handleSubscriptionThankYouMessage(message);
 
-    await handleCountingMessage(message);
+  await handleCountingMessage(message);
 
-    await handleGreyMessage(message);
+  await handleGreyMessage(message);
 
-    await handleBotCheckMessage(message, client);
+  await handleBotCheckMessage(message, client);
 
-    await handleUwuChannelMessage(message);
+  await handleUwuChannelMessage(message);
 
-    await handleNiraMojisInChannels(message);
+  await handleNiraMojisInChannels(message);
 
-    await handleCheckNiraMojis(message);
+  await handleCheckNiraMojis(message);
 
-    await handlePatPatRole(message);
+  await handlePatPatRole(message);
 
-    await handleNiraWave(message, client);
+  await handleNiraWave(message, client);
 
-    await handleNonNitroEmoji(message, client);
+  await handleNonNitroEmoji(message, client);
 
-    await handlePatPatCommandMessage(message, client.commandPrefix);
+  await handlePatPatCommandMessage(message, client.commandPrefix);
 
-    await handleFishyCommandsMessage(message, client.commandPrefix);
+  await handleFishyCommandsMessage(message, client.commandPrefix);
 
-    await handleOtherFishyMessage(message, client);
+  await handleOtherFishyMessage(message, client);
 
-    await handleWorkInUniguriMessage(message);
+  await handleWorkInUniguriMessage(message);
 
-    await handleTwoWordStoryMessage(message);
+  await handleTwoWordStoryMessage(message);
 
-    await handleDeathOfNira(message);
+  await handleDeathOfNira(message);
 
-    await handlePoyoMessage(message);
+  await handlePoyoMessage(message);
 
-    await handlePaladinMessage(message);
+  await handlePaladinMessage(message);
 
-    await handleNoUMessage(message);
+  await handleNoUMessage(message);
 
-    await handleQueenCommandMessage(message);
+  await handleQueenCommandMessage(message);
 
-    await handleServerRulesMessage(message, client.commandPrefix);
-  }
+  await handleServerRulesMessage(message, client.commandPrefix);
 }

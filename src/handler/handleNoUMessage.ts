@@ -24,6 +24,7 @@ const noUResponses = [
   '`110 111 32 117`',
   '`&#110;&#111;&#32;&#117;`',
   'ⁿᵒ ᵘ',
+  'no tu',
 ];
 
 export const handleNoUMessage = async (message: CommandoMessage) => {
@@ -35,7 +36,7 @@ export const handleNoUMessage = async (message: CommandoMessage) => {
   const isNoUInfinityMember = members.noutimesinfinity.includes(message.author.id);
   const noUChance = Math.random() < 1 / 3;
 
-  if (isNoU && (noUChance || isNoUInfinityMember)) {
+  if (isNoU && (noUChance || isNoUInfinityMember) && message.author.id !== message.client.user.id) {
     const response = noUResponses[Math.floor(Math.random() * noUResponses.length)];
 
     message.say(response);
