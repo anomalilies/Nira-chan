@@ -30,7 +30,7 @@ export const handleStarReaction = async (reaction: MessageReaction, channelID: s
     return m.embeds[0].footer.text.split(' ')[3] === message.id;
   });
 
-  const footer = [stars, emojis.star, '#' + `${(<TextChannel>message.channel).name}  • `, message.id];
+  const footer = [stars, emojis.star, '#' + (<TextChannel>message.channel).name, message.id];
   const embed = new MessageEmbed({
     author: { name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
     image: { url: message.attachments.size > 0 ? message.attachments.first().url : '' },
