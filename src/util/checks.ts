@@ -18,12 +18,16 @@ export const hasRole = (role: string, message: Message): boolean => {
   if (message.member) {
     return message.member.roles.cache.get(role) != undefined;
   }
+
+  return false;
 };
 
 export const isHomeGuild = (message: Message): boolean => {
   if (message.guild) {
     return message.guild.id === homeGuild;
   }
+
+  return false;
 };
 
 export const isInChannel = (message: Message, channelId: string): boolean => {
