@@ -11,7 +11,6 @@ export default class HelpCommand extends Command {
       memberName: 'help',
       aliases: ['commands'],
       description: 'Displays a list of all commands',
-      examples: ['help'],
       guarded: true,
     });
   }
