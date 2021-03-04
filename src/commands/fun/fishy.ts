@@ -16,7 +16,7 @@ export default class FishyCommand extends Command {
       args: [
         {
           key: 'name',
-          prompt: 'Who would you like to admire?',
+          prompt: 'Who would you like to fish for?',
           type: 'string',
           default: '',
           validate: (name: string) => {
