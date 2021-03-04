@@ -1,7 +1,10 @@
 import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 import axios from 'axios';
+import moment from 'moment';
+
 let cooldown = false;
+const timestamp = Date.now();
 
 export default class KirbTrackerCommand extends Command {
   constructor(client: CommandoClient) {
@@ -10,6 +13,7 @@ export default class KirbTrackerCommand extends Command {
       group: 'fun',
       memberName: 'wherethefuckiskirb',
       description: `WHERE IS HE?`,
+      guildOnly: true,
     });
   }
 
@@ -22,8 +26,8 @@ export default class KirbTrackerCommand extends Command {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .then(async (res: any) => {
           const embed = new MessageEmbed({
-            title: `KirbEx`,
-            thumbnail: { url: 'https://cdn.discordapp.com/emojis/816761691986591794.png' },
+            title: `No Kirb, Just the Almighty Loaf`,
+            thumbnail: { url: 'https://cdn.discordapp.com/emojis/816811190034235423.png' },
             description: res.data,
             color: '#F1D8F7',
           });
@@ -37,7 +41,17 @@ export default class KirbTrackerCommand extends Command {
         cooldown = false;
       }, 90000);
     } else {
-      message.channel.send('Please wait to use this command again!');
+      const embed = new MessageEmbed({
+        title: `Patience is a Virtue, You Know?`,
+        description:
+          '> **Please wait ' +
+          moment.duration(timestamp + 90000 - Date.now(), 'milliseconds').humanize() +
+          '!**\n To prevent API abuse, this command is on global cooldown.',
+        thumbnail: { url: 'https://cdn.discordapp.com/emojis/766865951458721844.gif' },
+        color: '#F1D8F7',
+      });
+
+      message.channel.send(embed.setTimestamp());
     }
     return message;
   }

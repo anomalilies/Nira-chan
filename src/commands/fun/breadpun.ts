@@ -19,7 +19,7 @@ export default class BreadPunCommand extends Command {
       .then(async (res: any) => {
         const embed = new MessageEmbed({
           title: `The Almighty Loaf says...`,
-          thumbnail: { url: 'https://cdn.discordapp.com/emojis/816761691986591794.png' },
+          thumbnail: { url: 'https://cdn.discordapp.com/emojis/816811190034235423.png' },
           description: res.data,
           color: '#F1D8F7',
         });

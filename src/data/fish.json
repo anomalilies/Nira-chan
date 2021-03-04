@@ -1,30 +1,53 @@
 [
   {
-    "title": "You're Trash",
-    "catch": ["Caught **trash**", "! {trashMoji} Better luck next time."],
+    "catch": "Caught trash! 🥾 Better luck next time.",
     "puns": [
       "I caught a boot! I hope someone lost this AND DIDN'T TOSS IT HERE!",
       "I caught a boot! It, uh, wasn't made for swimming.",
       "I caught a boot! Keep our waters clean!",
       "I caught a boot! Now where's your mate?",
+      "You caught an old shoe! Gross! Put your foot down and say NO to littering!"
+    ],
+    "weight": 3,
+    "reaction": "753491840321323039"
+  }, {
+    "catch": "Caught trash! 🥫 Better luck next time.",
+    "puns": [
       "I caught an empty can! Aren't you supposed to catch the fish before you can it?",
       "I caught an empty can! Aw, maaaan...",
       "I caught an empty can! This isn't a can... it's a CAN't!",
       "I caught an empty can! You CAN't litter!",
+      "You caught an empty can! Nasty! You can't throw it back in!"
+    ],
+    "weight": 3,
+    "reaction": "753491840321323039"
+  }, {
+    "catch": "Caught trash! 🚗 Better luck next time.",
+    "puns": [
       "I caught an old tire! Did this come from someone's car?!",
       "I caught an old tire! I sure am tired of that!",
       "I caught an old tire! It was just treading water...",
       "I caught an old tire! Whose car did this come from?",
-      "You caught a tire! Blech! Roll on over to the dump and drop it off!",
-      "You caught an empty can! Nasty! You can't throw it back in!",
-      "You caught an old shoe! Gross! Put your foot down and say NO to littering!"
+      "You caught a tire! Blech! Roll on over to the dump and drop it off!"
     ],
-    "weight": 9,
+    "weight": 3,
     "reaction": "753491840321323039"
-  },
-  {
-    "title": "Common Catch",
-    "catch": ["Caught **{amount}** fishies", "! 🎣"],
+  }, {
+    "catch": "Caught only {amount} fishy! 🎣",
+    "puns": [
+      "I caught a sea bass! No, wait- it's at least a C+!",
+      "I caught a sea bass! Not again!",
+      "I caught a sea bass! Not you again!",
+      "I caught a sea bass! See? A bass!",
+      "I caught a sea bass! See? Bass! (Why do I keep saying things like that?)",
+      "I caught a sea bass! What?! You again?!"
+    ],
+    "weight": 2,
+    "reaction": "753491840321323039",
+    "min": 1,
+    "max": 1
+  }, {
+    "catch": "Caught {amount} fishies! 🎣",
     "puns": [
       "I caught a barbel steed! I'm not horsin' around!",
       "I caught a barbel steed! It just needs a barbel saddle!",
@@ -110,12 +133,6 @@
       "I caught a salmon! Now we're jammin'!",
       "I caught a salmon! Oh, that's slammin'!",
       "I caught a salmon! Welcome back!",
-      "I caught a sea bass! No, wait- it's at least a C+!",
-      "I caught a sea bass! Not again!",
-      "I caught a sea bass! Not you again!",
-      "I caught a sea bass! See? A bass!",
-      "I caught a sea bass! See? Bass! (Why do I keep saying things like that?)",
-      "I caught a sea bass! What?! You again?!",
       "I caught a small bass! Now I just need to catch a small bass amp. (Oh, that was terrible...)",
       "I caught a squid! Do they...not actually 'bloop'?",
       "I caught a squid! I had an inkling I might!",
@@ -187,12 +204,13 @@
       "I got some sea grapes! See? Grapes!",
       "I got some seaweed! I just couldn't kelp myself!"
     ],
-    "weight": 60,
-    "reaction": "753491840380174407"
+    "weight": 58,
+    "reaction": "753491840380174407",
+    "min": 2,
+    "max": 29
   },
   {
-    "title": "Uncommon Catch",
-    "catch": ["Caught **{amount}** uncommon fishies", "! 🐡"],
+    "catch": "Caught {amount} uncommon fishies! 🐡",
     "puns": [
       "AWESOME! I caught a football fish! TOUCHDOWN!",
       "I caught a blowfish! And that's not just hot air!",
@@ -262,11 +280,12 @@
       "Woohoo! Woohoo! I caught a king salmon! Where are his horses and men?"
     ],
     "weight": 20,
-    "reaction": "753491840656998432"
+    "reaction": "753491840656998432",
+    "min": 30,
+    "max": 99
   },
   {
-    "title": "⭐ Super Rare Catch ⭐",
-    "catch": ["Caught **{amount}** super rare fishies", "! 🐠"],
+    "catch": "Caught {amount} super-rare fishies! 🐠",
     "puns": [
       "I caught a barreleye! Like eyeing fish in a barrel!",
       "I caught a dorado! I should make that my motto!",
@@ -310,11 +329,12 @@
       "I got a Venus' flower basket! Why was she picking flowers here?"
     ],
     "weight": 10,
-    "reaction": "753491840820314142"
+    "reaction": "753491840820314142",
+    "min": 100,
+    "max": 399
   },
   {
-    "title": "🌟 Legendary Catch! 🌟",
-    "catch": ["Caught **{amount}** legendary fishies**", "! 🐬"],
+    "catch": "Caught {amount} legendary fishies! 🐬",
     "puns": [
       "A coelacanth? I caught a living fossil! Amazing! Who knew these things were still around?",
       "AWESOME! I caught a football fish! TOUCHDOWN!",
@@ -341,6 +361,8 @@
       "WOW!!! I caught an arapaima! This thing is huge!"
     ],
     "weight": 1,
-    "reaction": "753491840673775666"
+    "reaction": "753491840673775666",
+    "min": 400,
+    "max": 750
   }
 ]
