@@ -27,7 +27,7 @@ export const handleStarReaction = async (reaction: MessageReaction, channelID: s
       return false;
     }
 
-    return m.embeds[0].footer.text.split(' ')[3] === message.id;
+    return m.embeds[0].footer.text.split(' ')[4] === message.id;
   });
 
   const footer = [stars, emojis.star, '#' + (<TextChannel>message.channel).name, '•', message.id];
