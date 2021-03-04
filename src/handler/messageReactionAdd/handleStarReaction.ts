@@ -41,7 +41,7 @@ export const handleStarReaction = async (reaction: MessageReaction, channelID: s
       [context](${message.url})
     `,
     footer: { text: footer.join(' ') },
-    timestamp: Date.now(),
+    timestamp: message.createdAt,
   });
 
   if (msg != undefined) {
