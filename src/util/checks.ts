@@ -15,11 +15,15 @@ export const doesUserHaveBotpass = (message: Message): boolean => {
 };
 
 export const hasRole = (role: string, message: Message): boolean => {
-  return message.member.roles.cache.get(role) != undefined;
+  if (message.member) {
+    return message.member.roles.cache.get(role) != undefined;
+  }
 };
 
 export const isHomeGuild = (message: Message): boolean => {
-  return message.guild.id === homeGuild;
+  if (message.guild) {
+    return message.guild.id === homeGuild;
+  }
 };
 
 export const isInChannel = (message: Message, channelId: string): boolean => {
