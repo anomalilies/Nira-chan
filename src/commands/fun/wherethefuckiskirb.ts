@@ -6,7 +6,6 @@ import { MessageAttachment, MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 import axios from 'axios';
 import moment from 'moment';
-import fs from 'fs';
 
 let cooldown = false;
 const timestamp = Date.now();
@@ -49,17 +48,15 @@ export default class KirbTrackerCommand extends Command {
           'X-Requested-With': 'XMLHttpRequest',
         },
       });
+      var lat = res.data.lat;
+      var lon = res.data.lon;
 
-      const lat = res.data.lat;
-      const lon = res.data.lon;
-      message.channel.send(`${lon},${lat}`);
-
-      const embed = new MessageEmbed({
-        title: `Kirb™ Identification System`,
+      var embed = new MessageEmbed({
+        title: `Kirb Identification Radar Bot`,
         description:
           `Kirb was last reported to be in **${
             res.data.areaCode
-          }** :flag_${res.data.arrivalPort.countryCode.toLowerCase()}:\n (${res.data.areaName}) at **` +
+          }** :flag_${res.data.arrivalPort.countryCode.toLowerCase()}:\n(${res.data.areaName}) at **` +
           moment.unix(res.data.lastPos).format('HH:mm:ss') +
           ' UTC** on ' +
           moment.unix(res.data.lastPos).format('DD/MM/YY') +
@@ -89,21 +86,21 @@ export default class KirbTrackerCommand extends Command {
         ],
         color: '#F1D8F7',
       });
-    try {
-      const imageRes = axios({
-        method: 'get',
-        url: `https://maps.geoapify.com/v1/staticmap?style=osm-bright&width=600&height=400&center=lonlat:${lon},${lat}&zoom=15&apiKey=${process.env.GEOAPIFY_KEY}`,
-        responseType: 'stream',
-      }).then(function (response) {
-        response.datapipe(fs.createWriteStream('test.jpg'));
-      });
-
-      embed.setImage(imageRes);
-      message.channel.send(embed)
-      
       setTimeout(() => {
         cooldown = false;
       }, 30000);
+    } catch (err) {
+      console.log(err);
+    }
+    try {
+      axios({
+        method: 'get',
+        url: `https://maps.geoapify.com/v1/staticmap?style=osm-bright&width=600&height=400&center=lonlat:${lon},${lat}&zoom=15&marker=lonlat:${lon},${lat};type:awesome;color:%23fc7c93;strokecolor:%23ffffff;size:large;whitecircle:no&scaleFactor=2&apiKey=${process.env.GEOAPIFY_KEY}`,
+        responseType: 'stream',
+      }).then(function (response) {
+        embed.attachFiles([new MessageAttachment(response.data, 'map.png')]).setImage('attachment://map.png');
+        message.channel.send(embed.setTimestamp());
+      });
     } catch (err) {
       console.log(err);
     }
