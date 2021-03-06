@@ -6,7 +6,7 @@ import { allChannels, cronSchedules } from '../config/config.json';
 import songs from '../data/songs.json';
 
 export const updateChannelTitleJob = async (client: CommandoClient) => {
-  const channelTitles = songs.mvSongs.engName;
+  const channelTitles = songs.filter((e) => e.link).map((e) => e.engName);
   return new CronJob(
     cronSchedules.serverTopic,
     () => {
