@@ -45,7 +45,7 @@ export default class AboutCommand extends Command {
           **Thank you for everything. <:niralove:811608668466446356>** You're all amazing!`,
         },
       ],
-      thumbnail: { url: this.client.user.displayAvatarURL({ dynamic: true }) },
+      thumbnail: { url: 'https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/Nira.png' },
     });
 
     return await message.channel.send(embed);
