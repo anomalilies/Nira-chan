@@ -7,6 +7,7 @@ import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 import axios from 'axios';
 import moment from 'moment';
 
+import { emojis } from '../../config/config.json';
 let cooldown = false;
 const timestamp = Date.now();
 
@@ -14,6 +15,7 @@ export default class KirbTrackerCommand extends Command {
   constructor(client: CommandoClient) {
     super(client, {
       name: 'wherethefuckiskirb',
+      aliases: ['whereishe', 'kirbtracker'],
       group: 'fun',
       memberName: 'wherethefuckiskirb',
       description: `WHERE IS HE?`,
@@ -37,6 +39,8 @@ export default class KirbTrackerCommand extends Command {
       return message.channel.send(embed.setTimestamp());
     }
     cooldown = true;
+    var msg = await message.channel.send(`Loading... ${emojis.loading}`);
+
     try {
       const res = await axios.get<any>('https://www.marinetraffic.com/vesselDetails/latestPosition/shipid:3521181', {
         headers: {
@@ -85,6 +89,10 @@ export default class KirbTrackerCommand extends Command {
           },
         ],
         color: '#F1D8F7',
+        footer: {
+          text: `${message.author.tag}`,
+          iconURL: message.author.displayAvatarURL({ dynamic: true }),
+        },
       });
       setTimeout(() => {
         cooldown = false;
@@ -100,6 +108,7 @@ export default class KirbTrackerCommand extends Command {
       }).then(function (response) {
         embed.attachFiles([new MessageAttachment(response.data, 'map.png')]).setImage('attachment://map.png');
         message.channel.send(embed.setTimestamp());
+        msg.delete();
       });
     } catch (err) {
       console.log(err);

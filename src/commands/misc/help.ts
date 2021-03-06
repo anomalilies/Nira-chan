@@ -21,7 +21,9 @@ export default class HelpCommand extends Command {
 
     const embed = new MessageEmbed({
       color: '#F1D8F7',
-      title: `${showAll ? 'All Commands' : `Available commands in ${msg.guild || 'this DM'}`}`,
+      title: `${
+        showAll ? `${this.client.user.username}'s Commands` : `Available commands in ${msg.guild || 'this DM'}`
+      }`,
       description: stripIndents`
         ${groups
           .filter((grp) => grp.commands.some((cmd) => !cmd.hidden && (showAll || cmd.isUsable(msg))))
