@@ -2,8 +2,9 @@ import { TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
 export const hachan = async (client: CommandoClient) => {
-  const channel = <TextChannel>await client.channels.cache.get('818722533624905778');
-
-  await channel.send('JAJAJAJAJAJAJA');
+  const targetGuild = client.guilds.cache.get('764936595966918706');
+  const targetChannel = targetGuild.channels.cache.find((channel: any) => channel.name.toLowerCase() === 'nira-chan');
+  console.log(targetChannel);
+  (targetChannel as TextChannel).send('JAJAJAJAJAJAJA');
   return;
 };
