@@ -53,7 +53,7 @@ function checkNewbies(client: CommandoClient) {
 
   const newbiesRole = guild.roles.cache.find((role) => role.name === 'Newbies');
   const VIPRole = guild.roles.cache.find((role) => role.name === 'ZUTOMAYO V.I.P.');
-  const sticklerRole = guild.roles.cache.find((role) => role.name === 'Sticker for Rules').id;
+  const sticklerRole = guild.roles.cache.find((role) => role.name === 'Stickler for Rules').id;
 
   newbiesRole.members.forEach((member) => {
     if (Date.now() - member.joinedTimestamp > 259200000) {
@@ -75,8 +75,8 @@ export default async function (client: CommandoClient) {
   setInterval(() => changeBotStatus(client), 1 * 60 * 1000);
 
   if (process.env.NODE_ENV === 'production') {
-    setInterval(checkLurkers, 1 * 60 * 60 * 1000, client);
-    setInterval(checkNewbies, 1 * 60 * 1000, client);
+    setInterval(() => checkLurkers(client), 1 * 60 * 60 * 1000);
+    setInterval(() => checkNewbies(client), 1 * 60 * 60 * 1000);
 
     const channel = <TextChannel>client.channels.cache.get(allChannels.archive);
     const msg = await channel.messages.fetch({ around: '776320801729019934', limit: 1 });
