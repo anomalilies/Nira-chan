@@ -76,7 +76,7 @@ export default async function (client: CommandoClient) {
 
   if (process.env.NODE_ENV === 'production') {
     setInterval(checkLurkers, 1 * 60 * 60 * 1000, client);
-    setInterval(checkNewbies, 1 * 60 * 60 * 1000, client);
+    setInterval(checkNewbies, 1 * 60 * 1000, client);
 
     const channel = <TextChannel>client.channels.cache.get(allChannels.archive);
     const msg = await channel.messages.fetch({ around: '776320801729019934', limit: 1 });
