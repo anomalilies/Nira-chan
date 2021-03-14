@@ -12,6 +12,7 @@ import { contestCommands } from '../embeds/contest/contestCommands';
 import { botCommands } from '../embeds/bots/botCommands';
 import { archiveCommands } from '../embeds/archive/archiveCommands';
 import { aboutCommands } from '../embeds/about/aboutCommands';
+import { hachanJAJAJA } from '../jobs/hachanJAJAJA';
 import songsList from '../data/songs.json';
 
 const strings: Array<string> = [
@@ -94,5 +95,6 @@ export default async function (client: CommandoClient) {
     rolePickerCommands(client);
     rolesListCommands(client);
     welcomeCommands(client);
+    hachanJAJAJA(client);
   }
 }
