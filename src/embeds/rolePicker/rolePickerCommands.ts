@@ -45,7 +45,7 @@ const data: RolePickerData = {
       ['742096993731477505', '772657659635171348'],
       ['742096470462824468', '758482374232506397'],
       ['742090483446317107', '753248752332046467'],
-      ['820733048290410546', '742090783913541732'],
+      ['742090783913541732', '820733048290410546'],
     ]),
     hasPermission: () => true,
   },
@@ -92,9 +92,6 @@ export const rolePickerCommands = async (client: CommandoClient) => {
 
   const messages = await channel.messages.fetch();
   const niraMessages = messages.filter((msg) => msg.author == client.user);
-
-  niraMessages.array()[4].edit(miscellaneous);
-  niraMessages.array()[4].react('742090783913541732');
 
   if (niraMessages.size === 0) {
     await channel.send(pronouns);
