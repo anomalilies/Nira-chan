@@ -93,6 +93,9 @@ export const rolePickerCommands = async (client: CommandoClient) => {
   const messages = await channel.messages.fetch();
   const niraMessages = messages.filter((msg) => msg.author == client.user);
 
+  niraMessages.array()[4].edit(miscellaneous);
+  niraMessages.array()[4].react('742090783913541732');
+
   if (niraMessages.size === 0) {
     await channel.send(pronouns);
     await channel.send(emojis.spacer);
