@@ -54,7 +54,7 @@ export default class AimerCommand extends Command {
           mind that I am ${userName}'s biggest fan. It doesn't matter if someone has listened to ${userName} more than
           I have, or if someone knows all of ${userName}'s lyrics word-by-word. I just simply know that no one feels
           the way I do. There is a person that understands me and supports me, and I’m happy that this person also
-          likes ${userName}. I am the biggest fan of ${userName}because ${userName} has become part of my life.
+          likes ${userName}. I am the biggest fan of ${userName} because ${userName} has become part of my life.
         `,
       });
 
