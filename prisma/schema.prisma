@@ -1,0 +1,33 @@
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Fishy {
+  id                Int        @default(autoincrement()) @id
+  userId            Int
+  totalFish         Int
+  totalFishGifted   Int
+  timesFished       Int
+  biggestFish       Int
+  totalTrash        Int
+  totalCommon       Int
+  totalUncommon     Int
+  totalRare         Int
+  totalLegendary    Int
+  lastFish          DateTime   @updatedAt
+  published         Boolean    @default(false)
+}
+
+model Prefix {
+  id                Int        @default(autoincrement()) @id
+  guildId           Int
+  prefix            String
+  published         Boolean    @default(false)
+}
+
+// npx prisma db push --preview-feature
