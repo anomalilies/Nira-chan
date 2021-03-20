@@ -13,11 +13,12 @@ export default class EmojiListCommand extends Command {
   }
 
   async run(msg: CommandoMessage) {
-    let emojis = this.client.guilds.cache.map((guild) => ({
+    const emojis = this.client.guilds.cache.map((guild) => ({
       guildName: guild.name,
+      guildOwner: guild.owner.user.username,
       emojis: guild.emojis.cache.map((e) => `${e}`),
     }));
-    let data = Buffer.from(JSON.stringify(emojis), 'utf8');
+    const data = Buffer.from(JSON.stringify(emojis), 'utf8');
     return msg.say(new MessageAttachment(data, 'emoji.json'));
   }
 }
