@@ -1,8 +1,11 @@
 /* eslint-disable no-var */
 import { MessageEmbed } from 'discord.js';
+import { PrismaClient } from '@prisma/client';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 import { isInChannel, isDmChannel, isHomeGuild } from '../../util/checks';
 import { allChannels, prefix } from '../../config/config.json';
+
+const prisma = new PrismaClient();
 import fish from '../../data/fish.json';
 
 export default class FishyCommand extends Command {
@@ -37,6 +40,12 @@ export default class FishyCommand extends Command {
         .replace(/[<@!>]/g, '');
     }
     const user = this.client.users.cache.get(userID);
+
+    const hasFished = await prisma.fishy.findMany({
+      where: {
+        include: { userId: user.id.toInt },
+      },
+    });
 
     if (isDmChannel(message) || isInChannel(message, allChannels.fishy) || !isHomeGuild(message)) {
       const total = fish.reduce((acc, cur) => acc + cur.weight, 0);
