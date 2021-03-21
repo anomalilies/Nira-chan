@@ -20,7 +20,7 @@ export default async function (client: CommandoClient, guild: Guild) {
     description: `**Owner:** ${guild.owner.user.tag}\n**Owner ID:** ${guild.owner.user.id}`,
     color: '#66BB6A',
     thumbnail: { url: guild.iconURL({ dynamic: true }) },
-    footer: { text: `${guild.id} | ${guild.name} now has ${guild.memberCount} member${plural}.` },
+    footer: { text: `${guild.name} (${guild.id}) now has ${guild.memberCount} member${plural}.` },
   });
 
   const guildLog = <TextChannel>await client.channels.fetch('823270262194569216');
