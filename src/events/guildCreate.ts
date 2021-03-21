@@ -48,6 +48,7 @@ export default async function (client: CommandoClient, guild: Guild) {
           }
         } else {
           guild.owner.send(embed);
+          found = 1;
         }
         return;
       }
