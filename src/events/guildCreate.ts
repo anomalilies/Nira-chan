@@ -11,8 +11,8 @@ export default async function (client: CommandoClient, guild: Guild) {
   }
 
   const joinEmbed = new MessageEmbed({
-    title: 'Joined Guild!',
-    description: `Joined ${guild.name} with ${guild.memberCount} members.`,
+    title: `Joined ${guild.name}!`,
+    description: `Server ID: ${guild.id}\nOwner: ${guild.owner.user.username}\nMember Count: ${guild.memberCount}`,
     color: '#66BB6A',
     thumbnail: { url: guild.iconURL({ dynamic: true }) },
   });
@@ -37,16 +37,19 @@ export default async function (client: CommandoClient, guild: Guild) {
   let found = 0;
   guild.channels.cache.map((c) => {
     try {
-      if (found === 0 && c.type === 'text') {
-        if (
-          c.permissionsFor(client.user).has('VIEW_CHANNEL') === true &&
-          c.permissionsFor(client.user).has('SEND_MESSAGES') === true
-        ) {
-          (c as TextChannel).send(embed);
-          found = 1;
+      if (found === 0) {
+        if (c.type === 'text') {
+          if (
+            c.permissionsFor(client.user).has('VIEW_CHANNEL') === true &&
+            c.permissionsFor(client.user).has('SEND_MESSAGES') === true
+          ) {
+            (c as TextChannel).send(embed);
+            found = 1;
+          }
+        } else {
+          guild.owner.send(embed);
         }
-      } else {
-        guild.owner.send(embed);
+        return;
       }
     } catch (err) {
       console.log(err);
