@@ -10,8 +10,8 @@ export default async function (client: CommandoClient, guild: Guild) {
   }
 
   const leaveEmbed = new MessageEmbed({
-    title: 'Left ${guild.name}!',
-    description: `Server ID: ${guild.id}\nOwner: ${guild.owner.user.username}\nMember Count: ${guild.memberCount}`,
+    title: `Left ${guild.name}!`,
+    description: `**Owner:** ${guild.owner.user.tag} (${guild.owner.user.id})\n\n**Server ID:** ${guild.id}\n**Member Count:** ${guild.memberCount}`,
     color: '#f0534b',
     thumbnail: { url: guild.iconURL({ dynamic: true }) },
   });

@@ -12,7 +12,7 @@ export default async function (client: CommandoClient, guild: Guild) {
 
   const joinEmbed = new MessageEmbed({
     title: `Joined ${guild.name}!`,
-    description: `**Server ID**: ${guild.id}\n**Owner**: ${guild.owner.user.username}\n**Member Count**: ${guild.memberCount}`,
+    description: `**Owner:** ${guild.owner.user.tag} (${guild.owner.user.id})\n\n**Server ID:** ${guild.id}\n**Member Count:** ${guild.memberCount}`,
     color: '#66BB6A',
     thumbnail: { url: guild.iconURL({ dynamic: true }) },
   });
