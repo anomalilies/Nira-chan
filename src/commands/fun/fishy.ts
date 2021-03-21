@@ -2,8 +2,8 @@
 import { MessageEmbed } from 'discord.js';
 import { PrismaClient } from '@prisma/client';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
-import { isInChannel, isDmChannel, isHomeGuild } from '../../util/checks';
-import { allChannels, prefix } from '../../config/config.json';
+//import { isInChannel, isDmChannel, isHomeGuild } from '../../util/checks';
+import { /*allChannels,*/ prefix } from '../../config/config.json';
 
 const prisma = new PrismaClient();
 import fish from '../../data/fish.json';
@@ -41,13 +41,26 @@ export default class FishyCommand extends Command {
     }
     const user = this.client.users.cache.get(userID);
 
-    const hasFished = await prisma.fishy.findMany({
-      where: {
-        include: { userId: user.id.toInt },
-      },
+    const userLimit = await prisma.fishy.findUnique({
+      where: { id: 10000 },
     });
 
-    if (isDmChannel(message) || isInChannel(message, allChannels.fishy) || !isHomeGuild(message)) {
+    if (userLimit === null) {
+      const hasFished = await prisma.fishy.findUnique({
+        where: {
+          userId: user.id,
+        },
+      });
+
+      if (hasFished === null) {
+        await prisma.fishy.create({
+          data: { userId: user.id },
+        });
+        console.log(`Added ${user.username} to database!`);
+      }
+      console.log(hasFished);
+
+      //if (isDmChannel(message) || isInChannel(message, allChannels.fishy) || !isHomeGuild(message)) {
       const total = fish.reduce((acc, cur) => acc + cur.weight, 0);
       const threshold = Math.random() * total;
 
@@ -63,8 +76,17 @@ export default class FishyCommand extends Command {
       if (group.catch.startsWith('Caught trash!')) {
         var reply = group.catch;
       } else {
-        const amount = Math.floor(Math.random() * (group.max - group.min) + group.min);
+        var amount = Math.floor(Math.random() * (group.max - group.min) + group.min);
         var reply = group.catch.replace('{amount}', amount.toString());
+
+        var newTotal = await prisma.fishy.update({
+          where: {
+            userId: user.id,
+          },
+          data: {
+            totalFish: +amount, //og totalfish + amount
+          },
+        });
       }
 
       const embed = new MessageEmbed({
@@ -77,11 +99,14 @@ export default class FishyCommand extends Command {
           },
         ],
         footer: {
-          text: `${user.tag} has {x} fishy`,
+          text: `${user.tag} has ${newTotal.totalFish} fishy`,
           iconURL: user.displayAvatarURL({ dynamic: true }),
         },
       });
       return await message.channel.send(embed.setTimestamp());
+      //}
+    } else {
+      message.channel.send('Database max reached!');
     }
   }
 }
