@@ -12,16 +12,24 @@ export default async function (client: CommandoClient, guild: Guild) {
   const guildLog = <TextChannel>await client.channels.fetch('823270262194569216');
   guildLog.send('Joined a new guild: ' + guild.name);
 
+  const greeting = 'Hello'
+
   let found = 0;
   guild.channels.cache.map((c) => {
-    if (found === 0 && c.type === 'text') {
-      if (
-        c.permissionsFor(client.user).has('VIEW_CHANNEL') === true &&
-        c.permissionsFor(client.user).has('SEND_MESSAGES') === true
-      ) {
-        (c as TextChannel).send(`Hello!`);
-        found = 1;
+    try {
+      if (found === 0 && c.type === 'text') {
+        if (
+          c.permissionsFor(client.user).has('VIEW_CHANNEL') === true &&
+          c.permissionsFor(client.user).has('SEND_MESSAGES') === true
+        ) {
+          (c as TextChannel).send(greeting);
+          found = 1;
+        }
+      } else {
+        guild.owner.send(greeting);
       }
+    } catch (err) {
+      console.log(err);
     }
   });
 }
