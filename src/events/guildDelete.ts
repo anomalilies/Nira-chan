@@ -9,6 +9,13 @@ export default async function (client: CommandoClient, guild: Guild) {
     return;
   }
 
+  const leaveEmbed = new MessageEmbed({
+    title: 'Left Guild!',
+    description: `Left ${guild.name} with ${guild.memberCount} members.`,
+    color: '#f0534b',
+    thumbnail: { url: guild.iconURL({ dynamic: true }) },
+  });
+
   const guildLog = <TextChannel>await client.channels.fetch('823270262194569216');
-  guildLog.send('Left a guild: ' + guild.name);
+  guildLog.send(leaveEmbed);
 }
