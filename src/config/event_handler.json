@@ -34,5 +34,7 @@
   "onMessageReactionAdd": true,
   "onGuildMemberAdd": true,
   "onGuildMemberRemove": true,
-  "onGuildMemberUpdate": true
+  "onGuildMemberUpdate": true,
+  "onGuildCreate": true,
+  "onGuildDelete": true
 }
