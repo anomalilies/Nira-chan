@@ -12,7 +12,7 @@ export default async function (client: CommandoClient, guild: Guild) {
 
   const joinEmbed = new MessageEmbed({
     title: `Joined ${guild.name}!`,
-    description: `Server ID: ${guild.id}\nOwner: ${guild.owner.user.username}\nMember Count: ${guild.memberCount}`,
+    description: `**Server ID**: ${guild.id}\n**Owner**: ${guild.owner.user.username}\n**Member Count**: ${guild.memberCount}`,
     color: '#66BB6A',
     thumbnail: { url: guild.iconURL({ dynamic: true }) },
   });
@@ -34,26 +34,17 @@ export default async function (client: CommandoClient, guild: Guild) {
     thumbnail: { url: 'https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/Nira.png' },
   });
 
-  let found = 0;
-  guild.channels.cache.map((c) => {
+  const channel = guild.channels.cache.find(
+    (c) => c.type === 'text' && c.permissionsFor(client.user).has('SEND_MESSAGES') === true,
+  );
+
+  if (channel) {
+    (channel as TextChannel).send(embed);
+  } else {
     try {
-      if (found === 0) {
-        if (c.type === 'text') {
-          if (
-            c.permissionsFor(client.user).has('VIEW_CHANNEL') === true &&
-            c.permissionsFor(client.user).has('SEND_MESSAGES') === true
-          ) {
-            (c as TextChannel).send(embed);
-            found = 1;
-          }
-        } else {
-          guild.owner.send(embed);
-          found = 1;
-        }
-        return;
-      }
+      guild.owner.send(embed);
     } catch (err) {
-      console.log(err);
+      console.log("Couldn't send DM!: " + err);
     }
-  });
+  }
 }
