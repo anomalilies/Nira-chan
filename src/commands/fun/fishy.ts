@@ -57,34 +57,29 @@ export default class FishyCommand extends Command {
           userId: user.id,
         },
       });
-      const ogAuthor = await prisma.fishy.findUnique({
-        where: {
-          userId: message.author.id,
-        },
-      });
-
-      if ((target || ogAuthor) === null) {
-        const loop = [
-          { property: target, id: user.id },
-          { property: ogAuthor, id: message.author.id },
-        ];
-        for (const key in loop) {
-          if (loop[key].property === null) {
-            await prisma.fishy.create({
-              data: { userId: loop[key].id },
-            });
-            console.log(`Added ${user.username} to database!`);
-          }
-        }
+      if (target === null) {
+        await prisma.fishy.create({
+          data: { userId: user.id },
+        });
       }
-
       let canFish = false;
-      if (gift === true && (ogAuthor.lastFish === null || Date.now() >= ogAuthor.lastFish.getTime() + 720) /*0000*/) {
-        canFish = true;
-      } else if (
-        gift === false &&
-        (target.lastFish === null || Date.now() >= target.lastFish.getTime() + 720) /*0000*/
-      ) {
+
+      if (gift === true) {
+        var ogAuthor = await prisma.fishy.findUnique({
+          where: {
+            userId: message.author.id,
+          },
+        });
+        if (ogAuthor === null) {
+          await prisma.fishy.create({
+            data: { userId: message.author.id },
+          });
+        }
+
+        if (ogAuthor.lastFish === null || Date.now() >= ogAuthor.lastFish.getTime() + 720 /*0000*/) {
+          canFish = true;
+        }
+      } else if (target.lastFish === null || Date.now() >= target.lastFish.getTime() + 720 /*0000*/) {
         canFish = true;
       }
 
