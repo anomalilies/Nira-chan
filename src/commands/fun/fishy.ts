@@ -51,60 +51,62 @@ export default class FishyCommand extends Command {
     const userLimit = await prisma.fishy.findUnique({
       where: { id: 10000 },
     });
-    if (userLimit === null && user !== undefined) {
-      const target = await prisma.fishy.findUnique({
-        where: {
-          userId: user.id,
-        },
-      });
-      if (target === null) {
-        await prisma.fishy.create({
-          data: { userId: user.id },
-        });
-      }
-      let canFish = false;
-
-      if (gift === true) {
-        var ogAuthor = await prisma.fishy.findUnique({
+    try {
+      if (userLimit === null && user !== undefined) {
+        const target = await prisma.fishy.findUnique({
           where: {
-            userId: message.author.id,
+            userId: user.id,
           },
         });
-        if (ogAuthor === null) {
+        if (target === null) {
           await prisma.fishy.create({
-            data: { userId: message.author.id },
+            data: { userId: user.id },
           });
         }
+        let canFish = false;
 
-        if (ogAuthor.lastFish === null || Date.now() >= ogAuthor.lastFish.getTime() + 720 /*0000*/) {
+        if (gift === true) {
+          var ogAuthor = await prisma.fishy.findUnique({
+            where: {
+              userId: message.author.id,
+            },
+          });
+          if (ogAuthor === null) {
+            await prisma.fishy.create({
+              data: { userId: message.author.id },
+            });
+          }
+
+          if (Date.now() >= ogAuthor.lastFish.getTime() + 720 /*0000*/) {
+            canFish = true;
+          }
+        } else if (Date.now() >= target.lastFish.getTime() + 720 /*0000*/) {
           canFish = true;
         }
-      } else if (target.lastFish === null || Date.now() >= target.lastFish.getTime() + 720 /*0000*/) {
-        canFish = true;
-      }
 
-      if (
-        canFish === true &&
-        (isDmChannel(message) || isInChannel(message, allChannels.fishy) || /*!*/ isHomeGuild(message))
-      ) {
-        const total = fish.reduce((acc, cur) => acc + cur.weight, 0);
-        const threshold = Math.random() * total;
+        if (
+          canFish === true &&
+          (isDmChannel(message) || isInChannel(message, allChannels.fishy) || /*!*/ isHomeGuild(message))
+        ) {
+          const total = fish.reduce((acc, cur) => acc + cur.weight, 0);
+          const threshold = Math.random() * total;
 
-        let sum = 0;
-        const group = fish.find((group) => {
-          sum += group.weight;
-          return sum >= threshold;
-        });
+          let sum = 0;
+          const group = fish.find((group) => {
+            sum += group.weight;
+            return sum >= threshold;
+          });
 
-        const index = Math.floor(Math.random() * group.puns.length);
-        const fishPun = group.puns[index];
+          const index = Math.floor(Math.random() * group.puns.length);
+          const fishPun = group.puns[index];
 
-        if (group.type === 'totalTrash') {
-          var reply = group.catch;
-          var amount = 0;
-        } else {
-          var amount = Math.floor(Math.random() * (group.max - group.min) + group.min);
-          var reply = group.catch.replace('{amount}', amount.toString());
+          if (group.type === 'totalTrash') {
+            var amount = 0;
+            var reply = group.catch;
+          } else {
+            var amount = Math.floor(Math.random() * (group.max - group.min) + group.min);
+            var reply = group.catch.replace('{amount}', amount.toString());
+          }
 
           var newTotal = await prisma.fishy.update({
             where: {
@@ -154,12 +156,15 @@ export default class FishyCommand extends Command {
             },
           });
           return await message.channel.send(embed.setTimestamp());
+        } else {
+          message.channel.send('fishy timer goes here...');
         }
-      } else {
-        message.channel.send('fishy timer goes here...');
       }
-    } else {
-      message.channel.send('anna oop sksksksk i made a wHoOPSIE!! >.<');
+    } catch (err) {
+      console.log(err);
     }
+    /*  else {
+      message.channel.send('anna oop sksksksk i made a wHoOPSIE!! >.<');
+    }*/
   }
 }
