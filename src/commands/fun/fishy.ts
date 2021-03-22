@@ -51,20 +51,20 @@ export default class FishyCommand extends Command {
     const userLimit = await prisma.fishy.findUnique({
       where: { id: 10000 },
     });
-    try {
-      if (userLimit === null && user !== undefined) {
-        const target = await prisma.fishy.findUnique({
-          where: {
-            userId: user.id,
-          },
+    if (userLimit === null && user !== undefined) {
+      const target = await prisma.fishy.findUnique({
+        where: {
+          userId: user.id,
+        },
+      });
+      if (target === null) {
+        await prisma.fishy.create({
+          data: { userId: user.id },
         });
-        if (target === null) {
-          await prisma.fishy.create({
-            data: { userId: user.id },
-          });
-        }
-        let canFish = false;
+      }
+      let canFish = false;
 
+      setTimeout(async () => {
         if (gift === true) {
           var ogAuthor = await prisma.fishy.findUnique({
             where: {
@@ -83,6 +83,7 @@ export default class FishyCommand extends Command {
         } else if (Date.now() >= target.lastFish.getTime() + 720 /*0000*/) {
           canFish = true;
         }
+        message.channel.startTyping();
 
         if (
           canFish === true &&
@@ -159,12 +160,11 @@ export default class FishyCommand extends Command {
         } else {
           message.channel.send('fishy timer goes here...');
         }
-      }
-    } catch (err) {
-      console.log(err);
-    }
-    /*  else {
+      }, 1000);
+      message.channel.stopTyping();
+      return message;
+    } else {
       message.channel.send('anna oop sksksksk i made a wHoOPSIE!! >.<');
-    }*/
+    }
   }
 }
