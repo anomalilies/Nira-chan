@@ -11,14 +11,14 @@ model Fishy {
   id                Int        @default(autoincrement()) @id
   userId            String     @unique
   totalFish         Int?
-  totalFishGifted   Int?
+  totalFishGifted   Int        @default(0)
   timesFished       Int?
   biggestFish       Int?
-  totalTrash        Int?
-  totalCommon       Int?
-  totalUncommon     Int?
-  totalRare         Int?
-  totalLegendary    Int?
+  totalTrash        Int        @default(0)
+  totalCommon       Int        @default(0)
+  totalUncommon     Int        @default(0)
+  totalRare         Int        @default(0)
+  totalLegendary    Int        @default(0)
   lastFish          DateTime   @updatedAt
 }
 

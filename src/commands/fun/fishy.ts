@@ -11,6 +11,7 @@ import fish from '../../data/fish.json';
 interface PromptArgs {
   name: string;
 }
+type FishyStat = 'totalTrash' | 'totalCommon' | 'totalUncommon' | 'totalRare' | 'totalLegendary';
 
 export default class FishyCommand extends Command {
   constructor(client: CommandoClient) {
@@ -110,6 +111,17 @@ export default class FishyCommand extends Command {
           var amount = Math.floor(Math.random() * (group.max - group.min) + group.min);
           var reply = group.catch.replace('{amount}', amount.toString());
 
+          var newTotal = await prisma.fishy.update({
+            where: {
+              userId: target.userId,
+            },
+            data: {
+              totalFish: target.totalFish + amount,
+              timesFished: target.timesFished + 1,
+              [group.type]: target[group.type as FishyStat] + 1,
+            },
+          });
+
           if (gift === true) {
             await prisma.fishy.update({
               where: {
@@ -121,16 +133,16 @@ export default class FishyCommand extends Command {
               },
             });
           }
-          var newTotal = await prisma.fishy.update({
-            where: {
-              userId: target.userId,
-            },
-            data: {
-              totalFish: target.totalFish + amount,
-              timesFished: target.timesFished + 1,
-              [group.type]: target.[group.type] + amount,
-            },
-          });
+          if (amount > target.biggestFish || target.biggestFish === null) {
+            await prisma.fishy.update({
+              where: {
+                userId: target.userId,
+              },
+              data: {
+                biggestFish: amount,
+              },
+            });
+          }
 
           const embed = new MessageEmbed({
             title: reply,
