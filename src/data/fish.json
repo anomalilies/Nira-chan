@@ -9,7 +9,8 @@
       "You caught an old shoe! Gross! Put your foot down and say NO to littering!"
     ],
     "weight": 3,
-    "reaction": "753491840321323039"
+    "reaction": "753491840321323039",
+    "type": "totalTrash"
   }, {
     "catch": "Caught trash! 🥫 Better luck next time.",
     "puns": [
@@ -20,7 +21,8 @@
       "You caught an empty can! Nasty! You can't throw it back in!"
     ],
     "weight": 3,
-    "reaction": "753491840321323039"
+    "reaction": "753491840321323039",
+    "type": "totalTrash"
   }, {
     "catch": "Caught trash! 🚗 Better luck next time.",
     "puns": [
@@ -31,7 +33,8 @@
       "You caught a tire! Blech! Roll on over to the dump and drop it off!"
     ],
     "weight": 3,
-    "reaction": "753491840321323039"
+    "reaction": "753491840321323039",
+    "type": "totalTrash"
   }, {
     "catch": "Caught only {amount} fishy! 🎣",
     "puns": [
@@ -44,6 +47,7 @@
     ],
     "weight": 2,
     "reaction": "753491840321323039",
+    "type": "totalCommon",
     "min": 1,
     "max": 1
   }, {
@@ -206,6 +210,7 @@
     ],
     "weight": 58,
     "reaction": "753491840380174407",
+    "type": "totalCommon",
     "min": 2,
     "max": 29
   },
@@ -281,6 +286,7 @@
     ],
     "weight": 20,
     "reaction": "753491840656998432",
+    "type": "totalUncommon",
     "min": 30,
     "max": 99
   },
@@ -330,6 +336,7 @@
     ],
     "weight": 10,
     "reaction": "753491840820314142",
+    "type": "totalRare",
     "min": 100,
     "max": 399
   },
@@ -362,6 +369,7 @@
     ],
     "weight": 1,
     "reaction": "753491840673775666",
+    "type": "totalLegendary",
     "min": 400,
     "max": 750
   }
