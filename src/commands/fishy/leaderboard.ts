@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-var */
-import { MessageEmbed } from 'discord.js';
+import { MessageEmbed, MessageReaction, User } from 'discord.js';
 import { PrismaClient } from '@prisma/client';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 import { isInChannel, isDmChannel, isHomeGuild } from '../../util/checks';
@@ -20,8 +19,6 @@ export default class LeaderboardCommand extends Command {
   }
 
   async run(message: CommandoMessage) {
-    // replace #1-3 with medal emojis, if user has fished before put their place in the footer (avatar, name is #${} in the fishy league | 1/?)
-
     const guild = message.guild;
     const users = await prisma.fishy.findMany({
       orderBy: {
@@ -30,50 +27,64 @@ export default class LeaderboardCommand extends Command {
     });
 
     let i: number;
-    var guildUsers: Array<string> = [];
+    var guildUsers = [];
+    var leaderboard: Array<string> = [];
 
     for (i = 0; i < users.length; i++) {
       const findUser = guild.members.cache.get(users[i].userId);
       if (findUser !== undefined) {
-        for (i = 1; i < guildUsers.length; i++) {
-          guildUsers.push('`#' + i + '` ' + `**${findUser.user.username} — ${users[i].totalFish}** fishy`);
-        }
+        guildUsers.push(`**${findUser.user.username} — ${users[i].totalFish}** fishy\n`);
       }
     }
-    console.log(guildUsers);
 
-    if (isDmChannel(message) || isInChannel(message, allChannels.fishy) || /*!*/ isHomeGuild(message)) {
+    let position: string;
+    const medals = ['🥇', '🥈', '🥉'];
+
+    for (i = 1; i < guildUsers.length; i++) {
+      if (i <= 3) {
+        position = `${medals[i - 1]} `;
+      } else {
+        position = '`#' + i + '` ';
+      }
+      leaderboard.push(position + guildUsers[i]);
+    }
+
+    if (isDmChannel(message) || isInChannel(message, allChannels.fishy) || !isHomeGuild(message)) {
       const generateEmbed = (index: number) => {
-        const currentPage = guildUsers.slice(index, index + 15);
-        const embed = new MessageEmbed({
+        const currentPage = leaderboard.slice(index, index + 15);
+        var embed = new MessageEmbed({
           title: `${guild.name} 🐟 Leaderboard`,
-          description: `${currentPage}`,
+          description: `${currentPage.join('')}`,
           color: '#F1D8F7',
         });
         return embed;
       };
 
-      message.channel.send(generateEmbed(0)).then((msg) => {
-        if (guildUsers.length <= 15) return;
+      message.channel.send(generateEmbed(0)).then(async (msg) => {
+        if (leaderboard.length <= 15) return;
 
         msg.react('➡️');
         const collector = msg.createReactionCollector(
-          (reaction: any, user: any) => ['⬅️', '➡️'].includes(reaction.emoji.name) && user.id === msg.author.id,
-          { time: 60000 },
+          (reaction: MessageReaction, user: User) =>
+            ['⬅️', '➡️'].includes(reaction.emoji.name) && user.id === message.author.id,
+          { time: 120000 },
         );
 
         let index = 0;
-        collector.on('collect', (reaction: any) => {
+        collector.on('collect', (reaction: MessageReaction) => {
           msg.reactions.removeAll().then(async () => {
             reaction.emoji.name === '⬅️' ? (index -= 15) : (index += 15);
             msg.edit(generateEmbed(index));
 
             if (index !== 0) await msg.react('⬅️');
-            if (index + 15 < guildUsers.length) await msg.react('➡️');
+            if (index + 15 < leaderboard.length) await msg.react('➡️');
           });
         });
+        collector.on('end', () => {
+          msg.reactions.removeAll();
+        });
       });
-      return message;
     }
+    return message;
   }
 }
