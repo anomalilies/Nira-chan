@@ -19,7 +19,6 @@ import { handleSubscriptionThankYouMessage } from './message/handleSubscriptionT
 import { handlePatPatCommandMessage } from './message/handlePatPatCommandMessage';
 import { handleNonNitroEmoji } from './message/handleNonNitroEmoji';
 import { handleServerRulesMessage } from './message/handleServerRulesMessage';
-import { handleFishyCommandsMessage, handleOtherFishyMessage } from './message/handleFishyCommandsMessage';
 import { handleQueenCommandMessage } from './message/handleQueenCommandMessage';
 import { handleContributorsRole } from './guildMemberUpdate/handleContributorsRole';
 import { handleLockRegularRole } from './guildMemberUpdate/handleLockRegularRole';
@@ -50,8 +49,6 @@ export {
   handlePatPatCommandMessage,
   handleNonNitroEmoji,
   handleServerRulesMessage,
-  handleFishyCommandsMessage,
-  handleOtherFishyMessage,
   handleQueenCommandMessage,
   handleContributorsRole,
   handleLockRegularRole,

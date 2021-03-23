@@ -20,8 +20,6 @@ import {
   handlePatPatCommandMessage,
   handleNonNitroEmoji,
   handleServerRulesMessage,
-  handleFishyCommandsMessage,
-  handleOtherFishyMessage,
   handleQueenCommandMessage,
 } from '../handler';
 import { onMessage } from '../config/event_handler.json';
@@ -54,10 +52,6 @@ export default async function (client: CommandoClient, message: CommandoMessage)
   await handleNonNitroEmoji(message, client);
 
   await handlePatPatCommandMessage(message, client.commandPrefix);
-
-  await handleFishyCommandsMessage(message, client.commandPrefix);
-
-  await handleOtherFishyMessage(message, client);
 
   await handleWorkInUniguriMessage(message);
 
