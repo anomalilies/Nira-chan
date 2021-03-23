@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
-    "lib": ["esnext"],
     "target": "esnext",
     "module": "commonjs",
+    "lib": ["esnext"],
+    "sourceMap": true,
     "outDir": "dist",
     "strict": true,
     "strictNullChecks": false,
@@ -12,6 +12,6 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
   }
 }
