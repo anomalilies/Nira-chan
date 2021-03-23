@@ -13,7 +13,7 @@ export default class AffiliatesCommand extends Command {
   constructor(client: CommandoClient) {
     super(client, {
       name: 'affiliate',
-      group: 'moderation',
+      group: 'server',
       memberName: 'affiliate',
       description: 'Embed an affiliates link.',
       args: [

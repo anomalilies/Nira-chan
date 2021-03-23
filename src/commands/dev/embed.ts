@@ -1,4 +1,4 @@
-import { Message, TextChannel } from 'discord.js';
+import { Message, MessageEmbed, TextChannel } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
 import { members } from '../../config/config.json';
@@ -6,15 +6,19 @@ import { members } from '../../config/config.json';
 interface PromptArgs {
   id: string;
   channelID: string;
+  title: string;
+  desc: string;
+  fieldTitle: string;
 }
 
-export default class EditCommand extends Command {
+export default class EmbedCommand extends Command {
   constructor(client: CommandoClient) {
     super(client, {
-      name: 'edit',
-      group: 'moderation',
-      memberName: 'edit',
-      description: "Edit one of Nira-chan's messages!",
+      name: 'embed',
+      aliases: ['editembed'],
+      group: 'dev',
+      memberName: 'embed',
+      description: "Edit one of Nira-chan's messages with an embed!",
       args: [
         {
           key: 'id',
@@ -26,20 +30,38 @@ export default class EditCommand extends Command {
           prompt: "What channel is your target message in? If you're unsure, respond with `N/A`.",
           type: 'string',
         },
+        {
+          key: 'title',
+          prompt: 'What would you like the title of the embed to be?',
+          type: 'string',
+        },
+        {
+          key: 'desc',
+          prompt: 'What would you like the description of the embed to be?',
+          type: 'string',
+        },
+        {
+          key: 'fieldTitle',
+          prompt: "If you'd like to add a field, what would you like the title to be? If not, respond with `N/A`.",
+          type: 'string',
+        },
       ],
       ownerOnly: true,
       guildOnly: true,
     });
   }
 
-  async run(message: CommandoMessage, { id, channelID }: PromptArgs) {
+  async run(message: CommandoMessage, { id, channelID, title, desc, fieldTitle }: PromptArgs) {
     const failure = `<@${message.author.id}>, Cancelled command.`;
 
     if (id.match(/^\d{18}$/)) {
       let targetMsg: Message;
 
       if (channelID.toUpperCase() === 'N/A') {
-        const channels = message.guild.channels.cache.filter((c) => c.type === 'text').map((c) => <TextChannel>c);
+        const channels = message.guild.channels.cache
+          .filter((c) => c.type === 'text')
+          .map((channel) => <TextChannel>channel);
+
         for (const index of channels) {
           targetMsg = await index.messages.fetch(id);
         }
@@ -51,23 +73,29 @@ export default class EditCommand extends Command {
         }
       }
 
-      if (targetMsg.id.match(/^\d{18}$/) && targetMsg.author.id === members.niraChan) {
+      const embed = new MessageEmbed({ color: '#F1D8F7', title, description: desc });
+
+      if (
+        fieldTitle.toUpperCase() !== 'N/A' &&
+        targetMsg.id.match(/^\d{18}$/) &&
+        targetMsg.author.id === members.niraChan
+      ) {
         await message.channel.send(
-          `<@${message.author.id}>, What would you like the new message to say?` +
+          `<@${message.author.id}>, What would you like this field to contain?` +
             '\nRespond with `cancel` to cancel the command. The command will automatically be cancelled in 30 seconds.',
         );
         const filter = (m: Message) => m.author.id === message.author.id;
-
         const collected = await message.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ['time'] });
-        const text = collected.first().content;
+        const fieldValue = collected.first().content;
 
-        if (text.toLowerCase() !== 'cancel') {
-          await targetMsg.edit(text);
+        if (fieldValue.toLowerCase() !== 'cancel') {
+          embed.addFields({ name: fieldTitle, value: fieldValue });
+          await targetMsg.edit('', embed);
         } else {
-          await message.channel.send(`<@${message.author.id}>, Cancelled command.`);
+          await message.channel.send(failure);
         }
       } else {
-        await message.channel.send(failure);
+        await targetMsg.edit('', embed);
       }
     } else {
       await message.channel.send(failure);

@@ -10,7 +10,7 @@ export default class HelpCommand extends Command {
       group: 'misc',
       memberName: 'help',
       aliases: ['commands'],
-      description: 'Displays a list of all commands',
+      description: 'Displays a list of all commands.',
       guarded: true,
     });
   }

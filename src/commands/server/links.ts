@@ -18,7 +18,7 @@ export default class LinkCommand extends Command {
   constructor(client: CommandoClient) {
     super(client, {
       name: 'link',
-      group: 'misc',
+      group: 'server',
       memberName: 'link',
       description: 'Embed a link.',
       args: [

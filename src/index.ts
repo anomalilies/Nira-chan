@@ -2,10 +2,10 @@
 require('dotenv').config();
 import fs from 'fs';
 import path from 'path';
+
 import { ClientEvents } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 import { updateChannelTitleJob } from './jobs/updateChannelTitle';
-
 import { prefix, members } from './config/config.json';
 import { initHandlers } from './handler/initHandlers';
 
@@ -33,10 +33,12 @@ import { initHandlers } from './handler/initHandlers';
   client.registry
     .registerGroups([
       ['fun', 'Fun'],
+      ['fishy', 'Fishy'],
       ['misc', 'Miscellaneous'],
+      ['dev', 'Developer Commands'],
+      ['server', 'Server-Specific'],
       ['util', 'Utility'],
-      ['commands', 'Commands'],
-      ['moderation', 'Moderation'],
+      ['commands', 'Command Debug'],
     ])
     .registerDefaultTypes()
     .registerDefaultCommands({

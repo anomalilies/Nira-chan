@@ -13,7 +13,7 @@ export default class FAQCommand extends Command {
   constructor(client: CommandoClient) {
     super(client, {
       name: 'faq',
-      group: 'moderation',
+      group: 'server',
       memberName: 'faq',
       description: 'Create a FAQ embed.',
       args: [
