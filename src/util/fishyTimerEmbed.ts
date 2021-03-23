@@ -1,9 +1,11 @@
 import { MessageEmbed, User } from 'discord.js';
 
 export const createDefaultEmbed = (
-  title: string,
-  description: string,
-  color: string | number = 15849719,
+  title: 'Hold Up!',
+  description: `You need to wait **${moment
+    .duration(Date.now() + 7200000 - target.lastFish.getTime())
+    .humanize()}** to fish again.`,
+  color: ,
   author?: User,
 ) => {
   const embed = new MessageEmbed({
@@ -13,7 +15,7 @@ export const createDefaultEmbed = (
   });
 
   if (author != null || author != undefined) {
-    embed.setAuthor(author.tag, author.avatarURL({ dynamic: true }));
+    embed.setAuthor(author.username, author.avatarURL({ dynamic: true }));
   }
 
   return embed;

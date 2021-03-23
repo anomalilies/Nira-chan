@@ -16,9 +16,9 @@ export default class IdsCommand extends Command {
   constructor(client: CommandoClient) {
     super(client, {
       name: 'ids',
-      group: 'moderation',
+      group: 'dev',
       memberName: 'ids',
-      description: 'Saves all role ids, channel ids & emoji ids into a json file',
+      description: 'Saves all role, channel, and emoji IDs into a JSON file.',
       guildOnly: true,
     });
   }
