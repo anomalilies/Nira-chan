@@ -50,7 +50,7 @@ export default async function (client: CommandoClient, guild: Guild) {
     try {
       guild.owner.send(embed);
     } catch (err) {
-      console.log("Couldn't send DM!: " + err);
+      console.log(`Couldn't send DM!: ${err}`);
     }
   }
 }
