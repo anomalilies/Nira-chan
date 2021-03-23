@@ -34,10 +34,12 @@ import { initHandlers } from './handler/initHandlers';
   client.registry
     .registerGroups([
       ['fun', 'Fun'],
+      ['fishy', 'Fishy'],
       ['misc', 'Miscellaneous'],
+      ['dev', 'Developer Commands'],
+      ['server', 'Server-Specific'],
       ['util', 'Utility'],
-      ['commands', 'Commands'],
-      ['moderation', 'Moderation'],
+      ['commands', 'Command Debug'],
     ])
     .registerDefaultTypes()
     .registerDefaultCommands({

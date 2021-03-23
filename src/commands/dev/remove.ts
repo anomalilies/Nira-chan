@@ -12,7 +12,7 @@ export default class RemoveCommand extends Command {
   constructor(client: CommandoClient) {
     super(client, {
       name: 'remove',
-      group: 'moderation',
+      group: 'dev',
       memberName: 'remove',
       description: "Remove one of Nira-chan's messages!",
       args: [

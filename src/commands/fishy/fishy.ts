@@ -3,7 +3,9 @@ import { MessageEmbed } from 'discord.js';
 import { PrismaClient } from '@prisma/client';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 import { isInChannel, isDmChannel, isHomeGuild } from '../../util/checks';
+import { createDefaultEmbed } from '../../util/createDefaultEmbed';
 import { allChannels } from '../../config/config.json';
+import moment from 'moment';
 
 const prisma = new PrismaClient();
 import fish from '../../data/fish.json';
@@ -18,7 +20,7 @@ export default class FishyCommand extends Command {
     super(client, {
       name: 'fishy',
       aliases: ['fish', 'fihy', 'fisy', 'foshy', 'fisyh', 'fsihy', 'fin'],
-      group: 'fun',
+      group: 'fishy',
       memberName: 'fishy',
       description: 'Go fish!',
       args: [
@@ -41,10 +43,10 @@ export default class FishyCommand extends Command {
     if (name === '') {
       var userID = message.author.id;
     } else {
+      gift = true;
       var userID = Object.values(name)
         .toString()
-        .replace(/[<@!>]/g, '');
-      gift = true;
+        .replace(/[\s,<@!>]/g, '');
     }
     const user = this.client.users.cache.find((u) => u.id === userID);
 
@@ -52,43 +54,37 @@ export default class FishyCommand extends Command {
       where: { id: 10000 },
     });
     if (userLimit === null && user !== undefined) {
-      const target = await prisma.fishy.findUnique({
-        where: {
-          userId: user.id,
-        },
+      const target = await prisma.fishy.upsert({
+        where: { userId: user.id },
+        update: {},
+        create: { userId: user.id },
       });
-      if (target === null) {
-        await prisma.fishy.create({
-          data: { userId: user.id },
-        });
-      }
+
       let canFish = false;
 
-      setTimeout(async () => {
-        if (gift === true) {
-          var ogAuthor = await prisma.fishy.findUnique({
-            where: {
-              userId: message.author.id,
-            },
-          });
-          if (ogAuthor === null) {
-            await prisma.fishy.create({
-              data: { userId: message.author.id },
-            });
-          }
+      if (gift === true) {
+        var ogAuthor = await prisma.fishy.upsert({
+          where: { userId: message.author.id },
+          update: {},
+          create: { userId: message.author.id },
+        });
 
-          if (Date.now() >= ogAuthor.lastFish.getTime() + 720 /*0000*/) {
-            canFish = true;
-          }
-        } else if (Date.now() >= target.lastFish.getTime() + 720 /*0000*/) {
+        if (ogAuthor.timesFished === null || Date.now() >= ogAuthor.lastFish.getTime() + 7200000) {
           canFish = true;
         }
-        message.channel.startTyping();
+      } else if (target.timesFished === null || Date.now() >= target.lastFish.getTime() + 7200000) {
+        canFish = true;
+      }
 
-        if (
-          canFish === true &&
-          (isDmChannel(message) || isInChannel(message, allChannels.fishy) || /*!*/ isHomeGuild(message))
-        ) {
+      const title = 'Hold Up!';
+      const description = `You need to wait **${moment
+        .duration(target.lastFish.getTime() + 7200000 - Date.now())
+        .humanize()}** to fish again.`;
+      let color: string;
+      const author = message.author;
+
+      if (isDmChannel(message) || isInChannel(message, allChannels.fishy) || !isHomeGuild(message)) {
+        if (canFish === true) {
           const total = fish.reduce((acc, cur) => acc + cur.weight, 0);
           const threshold = Math.random() * total;
 
@@ -131,7 +127,7 @@ export default class FishyCommand extends Command {
               },
             });
           }
-          if (amount > target.biggestFish || target.biggestFish === null) {
+          if (amount > target.biggestFish || target.biggestFish === 0) {
             await prisma.fishy.update({
               where: {
                 userId: target.userId,
@@ -158,13 +154,10 @@ export default class FishyCommand extends Command {
           });
           return await message.channel.send(embed.setTimestamp());
         } else {
-          message.channel.send('fishy timer goes here...');
+          const timerEmbed = createDefaultEmbed(title, description, color, author);
+          message.channel.send(timerEmbed);
         }
-      }, 1000);
-      message.channel.stopTyping();
-      return message;
-    } else {
-      message.channel.send('anna oop sksksksk i made a wHoOPSIE!! >.<');
+      }
     }
   }
 }
