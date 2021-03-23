@@ -4,9 +4,6 @@ import { CommandoClient } from 'discord.js-commando';
 import { emojis, allChannels } from '../../config/config.json';
 import { colours, dividers, miscellaneous, pronouns } from './rolePickerEmbeds';
 
-/**
- * Map<ReactionID, RoleID>
- */
 type Picker = {
   roles: Map<string, string>;
   hasPermission(user: GuildMember, role: string): boolean;
@@ -21,6 +18,7 @@ type RolePickerData = {
 
 const data: RolePickerData = {
   colours: {
+    // Map<ReactionID, RoleID>
     roles: new Map<string, string>([
       ['781294389241970688', '745380089457410192'],
       ['781295090617811004', '760695283871907841'],
@@ -47,6 +45,7 @@ const data: RolePickerData = {
       ['742096993731477505', '772657659635171348'],
       ['742096470462824468', '758482374232506397'],
       ['742090483446317107', '753248752332046467'],
+      ['742090783913541732', '820733048290410546'],
     ]),
     hasPermission: () => true,
   },

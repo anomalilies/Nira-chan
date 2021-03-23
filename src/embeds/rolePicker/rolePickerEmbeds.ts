@@ -29,6 +29,7 @@ export const miscellaneous = new MessageEmbed({
         <:niraSad:742096993731477505> : \`All Notifications\`
         <:niraEyeroll:742096470462824468> : \`Fishy League Pass\`
         <:niraScream:742090483446317107> : \`Serious Discussion Pass\`
+        <:nirritated:742090783913541732> : \`Health and Beauty Pass\`
       `,
     },
   ],

@@ -24,7 +24,6 @@ export default async function (client: CommandoClient, oldMessage: CommandoMessa
   if (newMessage.content === oldMessage.content) {
     return;
   }
-
   await handleNiraMessageReactions(newMessage, client);
 
   await handleNiraMojisInChannels(newMessage);

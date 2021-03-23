@@ -5,7 +5,6 @@ import path from 'path';
 
 import { ClientEvents } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
-
 import { sendMessageInCountdownJob } from './jobs/sendMessageInCountdown';
 import { updateChannelTitleJob } from './jobs/updateChannelTitle';
 import { prefix, members } from './config/config.json';
@@ -17,6 +16,7 @@ import { initHandlers } from './handler/initHandlers';
     owner: members.currentOwner,
     commandPrefix: prefix,
     disableMentions: 'everyone',
+    partials: ['REACTION', 'MESSAGE'],
   });
 
   // Events
@@ -58,5 +58,4 @@ import { initHandlers } from './handler/initHandlers';
 
   // Jobs
   (await updateChannelTitleJob(client)).start();
-  (await sendMessageInCountdownJob(client)).start();
 })();

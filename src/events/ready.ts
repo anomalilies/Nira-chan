@@ -1,6 +1,6 @@
 import serverInfoEmbed from '../embeds/serverInfoEmbed';
 
-import { TextChannel } from 'discord.js';
+import { TextChannel, ActivityOptions } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
 import { allChannels } from '../config/config.json';
@@ -12,8 +12,10 @@ import { contestCommands } from '../embeds/contest/contestCommands';
 import { botCommands } from '../embeds/bots/botCommands';
 import { archiveCommands } from '../embeds/archive/archiveCommands';
 import { aboutCommands } from '../embeds/about/aboutCommands';
+import { hachanJAJAJA } from '../jobs/hachanJAJAJA';
+import songsList from '../data/songs.json';
 
-const statuses = [
+const strings: Array<string> = [
   'you in disgust.',
   '(staring at) you.',
   'you in pain— owie!',
@@ -23,9 +25,16 @@ const statuses = [
   ';´༎ຶਊ ༎ຶ`;',
 ];
 
-const changeBotStatus = (client: CommandoClient) => {
-  client.user.setActivity(statuses[Math.floor(Math.random() * statuses.length)], { type: 'WATCHING' });
-};
+function changeBotStatus(client: CommandoClient) {
+  const songs = songsList.map((s) => s.engName);
+
+  const statuses: ActivityOptions[] = [
+    { name: strings[Math.floor(Math.random() * strings.length)], type: 'WATCHING' },
+    { name: `over ${client.guilds.cache.size} servers!`, type: 'WATCHING' },
+    { name: songs[Math.floor(Math.random() * songs.length)] + '!', type: 'LISTENING' },
+  ];
+  client.user.setActivity(statuses[Math.floor(Math.random() * statuses.length)]);
+}
 
 function checkLurkers(client: CommandoClient) {
   const list = client.guilds.cache.get('757726578309595238');
@@ -45,7 +54,7 @@ function checkNewbies(client: CommandoClient) {
 
   const newbiesRole = guild.roles.cache.find((role) => role.name === 'Newbies');
   const VIPRole = guild.roles.cache.find((role) => role.name === 'ZUTOMAYO V.I.P.');
-  const sticklerRole = guild.roles.cache.find((role) => role.name === 'Sticker for Rules').id;
+  const sticklerRole = guild.roles.cache.find((role) => role.name === 'Stickler for Rules').id;
 
   newbiesRole.members.forEach((member) => {
     if (Date.now() - member.joinedTimestamp > 259200000) {
@@ -57,6 +66,8 @@ function checkNewbies(client: CommandoClient) {
 }
 
 export default async function (client: CommandoClient) {
+  client.user.setActivity('over my deployment!', { type: 'WATCHING' });
+
   console.log(`${client.user.tag} activated!`);
   client.guilds.cache.forEach((guild) => {
     console.log(`${guild.name} | ${guild.id}`);
@@ -65,10 +76,9 @@ export default async function (client: CommandoClient) {
   setInterval(() => changeBotStatus(client), 1 * 60 * 1000);
 
   if (process.env.NODE_ENV === 'production') {
-    setInterval(checkLurkers, 1 * 60 * 60 * 1000);
-    setInterval(checkNewbies, 1 * 60 * 60 * 1000);
+    setInterval(() => checkLurkers(client), 1 * 60 * 60 * 1000);
+    setInterval(() => checkNewbies(client), 1 * 60 * 60 * 1000);
 
-    // TODO: Identify channels, ???
     const channel = <TextChannel>client.channels.cache.get(allChannels.archive);
     const msg = await channel.messages.fetch({ around: '776320801729019934', limit: 1 });
     const fetchedMsg = msg.first();
@@ -85,5 +95,6 @@ export default async function (client: CommandoClient) {
     rolePickerCommands(client);
     rolesListCommands(client);
     welcomeCommands(client);
+    hachanJAJAJA(client);
   }
 }
