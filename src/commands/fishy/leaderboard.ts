@@ -11,7 +11,7 @@ export default class LeaderboardCommand extends Command {
   constructor(client: CommandoClient) {
     super(client, {
       name: 'leaderboard',
-      aliases: ['fishyleaderboard', 'fishylb', 'lb', 'leaderboard fishy'],
+      aliases: ['fishyleaderboard', 'fishylb', 'lb'],
       group: 'fishy',
       memberName: 'leaderboard',
       description: 'Check out the current leaderboard of fishers.',

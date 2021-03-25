@@ -39,6 +39,8 @@ export default class FishyCommand extends Command {
   }
 
   async run(message: CommandoMessage, { name }: PromptArgs) {
+    console.log(Date());
+    // Defining user by whether or not they're the target for the fishy to be added to
     let gift = false;
     if (name === '') {
       var userID = message.author.id;
@@ -50,18 +52,23 @@ export default class FishyCommand extends Command {
     }
     const user = this.client.users.cache.find((u) => u.id === userID);
 
+    // Checking how many rows there are -- this can be changed to check row count exactly?
     const userLimit = await prisma.fishy.findUnique({
       where: { id: 10000 },
     });
+
     if (userLimit === null && user !== undefined) {
+      // Checking whether or not the target is in the database, and adding them if not
       const target = await prisma.fishy.upsert({
         where: { userId: user.id },
         update: {},
         create: { userId: user.id },
       });
 
+      // default value for being able to fish is false
       let canFish = false;
 
+      // Checking whether or not the person fishing (if different from target --defined by gift) is in the database, and adding them if not
       if (gift === true) {
         var ogAuthor = await prisma.fishy.upsert({
           where: { userId: message.author.id },
@@ -79,7 +86,7 @@ export default class FishyCommand extends Command {
       const title = 'Hold Up!';
       const description = `You need to wait **${moment
         .duration(target.lastFish.getTime() + 7200000 - Date.now())
-        .humanize()}** to fish again.`;
+        .humanize()}** to fish again.`; //this humaniser is shit ngl
       let color: string;
       const author = message.author;
 
@@ -116,6 +123,7 @@ export default class FishyCommand extends Command {
             },
           });
 
+          const time = new Date();
           if (gift === true) {
             await prisma.fishy.update({
               where: {
@@ -124,9 +132,20 @@ export default class FishyCommand extends Command {
               data: {
                 totalFishGifted: ogAuthor.totalFishGifted + amount,
                 timesFished: ogAuthor.timesFished + 1,
+                lastFish: time.toISOString(),
+              },
+            });
+          } else {
+            await prisma.fishy.update({
+              where: {
+                userId: target.userId,
+              },
+              data: {
+                lastFish: time.toISOString(),
               },
             });
           }
+
           if (amount > target.biggestFish || target.biggestFish === 0) {
             await prisma.fishy.update({
               where: {
