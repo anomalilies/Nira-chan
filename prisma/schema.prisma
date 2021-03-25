@@ -19,7 +19,7 @@ model Fishy {
   totalUncommon     Int        @default(0)
   totalRare         Int        @default(0)
   totalLegendary    Int        @default(0)
-  lastFish          DateTime   
+  lastFish          DateTime?
 }
 
 model Prefix {
