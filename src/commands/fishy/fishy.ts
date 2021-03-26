@@ -63,6 +63,7 @@ export default class FishyCommand extends Command {
       });
 
       let canFish = false;
+      var description = '';
 
       if (gift === true) {
         var ogAuthor = await prisma.fishy.upsert({
@@ -73,13 +74,13 @@ export default class FishyCommand extends Command {
 
         if (ogAuthor.timesFished === null || Date.now() >= ogAuthor.lastFish.getTime() + 7200000) {
           canFish = true;
-          var description = `You need to wait **${moment
+          description = `You need to wait **${moment
             .duration(ogAuthor.lastFish.getTime() + 7200000 - Date.now())
             .humanize()}** to fish again.`;
         }
       } else if (target.timesFished === null || Date.now() >= target.lastFish.getTime() + 7200000) {
         canFish = true;
-        var description = `You need to wait **${moment
+        description = `You need to wait **${moment
           .duration(target.lastFish.getTime() + 7200000 - Date.now())
           .humanize()}** to fish again.`;
       }
