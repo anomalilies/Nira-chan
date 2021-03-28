@@ -10,6 +10,7 @@ import moment from "moment";
 import { emojis } from "../../config/config.json";
 
 const COOLDOWN = 30000;
+const KIRB_GIVEN = "https://cdn.discordapp.com/attachments/764936595966918709/825593990589317150/map.png";
 let lastRequest = 0;
 
 export default class KirbTrackerCommand extends Command {
@@ -79,28 +80,31 @@ export default class KirbTrackerCommand extends Command {
 
     const lat = shipData.lat;
     const lon = shipData.lon;
+    const stopped = shipData.shipStatus === "Stopped";
 
-    try {
-      let res = await axios.get(
-        `https://maps.geoapify.com/v1/staticmap?style=osm-bright&width=600&height=400&center=lonlat:${lon},${lat}&zoom=15&marker=lonlat:${lon},${lat};type:awesome;color:%23fc7c93;strokecolor:%23ffffff;size:large;whitecircle:no&scaleFactor=2&apiKey=${process.env.GEOAPIFY_KEY}`,
-        { responseType: "stream" }
-      );
-      var mapData = res.data;
-    } catch (err) {
-      const embed = new MessageEmbed({
-        title: "Map API Error",
-        description: err.message,
-        color: 0xf0534b,
-      });
-      return response.edit({ content: "", embed });
-    }
+    if (!stopped) {
+      try {
+        let res = await axios.get(
+          `https://maps.geoapify.com/v1/staticmap?style=osm-bright&width=600&height=400&center=lonlat:${lon},${lat}&zoom=15&marker=lonlat:${lon},${lat};type:awesome;color:%23fc7c93;strokecolor:%23ffffff;size:large;whitecircle:no&scaleFactor=2&apiKey=${process.env.GEOAPIFY_KEY}`,
+          { responseType: "stream" }
+        );
+        var mapData = res.data;
+      } catch (err) {
+        const embed = new MessageEmbed({
+          title: "Map API Error",
+          description: err.message,
+          color: 0xf0534b,
+        });
+        return response.edit({ content: "", embed });
+      }
+  }
 
     const embed = new MessageEmbed({
       title: "Kirb Identification Radar Bot",
       description:
         `Kirb was last reported to be in **${
           shipData.areaCode
-        }** :flag_${shipData.arrivalPort.countryCode.toLowerCase()}:\n(${
+        }** :flag_${shipData.departurePort.countryCode.toLowerCase()}:\n(${
           shipData.areaName
         }) at **` +
         moment.unix(shipData.lastPos).format("HH:mm:ss") +
@@ -133,16 +137,17 @@ export default class KirbTrackerCommand extends Command {
       ],
       color: 0xf1d8f7,
       footer: {
-        text: `${message.author.tag}`,
+        text: message.author.tag,
         iconURL: message.author.displayAvatarURL({ dynamic: true }),
       },
     });
 
     embed
-      .attachFiles([new MessageAttachment(mapData, "map.png")])
+      .attachFiles([new MessageAttachment(stopped ? KIRB_GIVEN : mapData, "map.png")])
       .setImage("attachment://map.png")
       .setTimestamp();
 
-    return response.edit({ content: "", embed });
+    await response.delete();
+    return message.channel.send(embed);
   }
 }
