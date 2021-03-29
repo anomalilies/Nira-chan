@@ -93,7 +93,7 @@ export default class FishyCommand extends Command {
         }
       }
 
-      if (isDmChannel(message) || isInChannel(message, allChannels.fishy) || isHomeGuild(message)) {
+      if (isDmChannel(message) || isInChannel(message, allChannels.fishy) || !isHomeGuild(message)) {
         if (canFish === true) {
           const total = fish.reduce((acc, cur) => acc + cur.weight, 0);
           const threshold = Math.random() * total;
