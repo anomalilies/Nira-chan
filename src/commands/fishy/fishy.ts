@@ -39,7 +39,6 @@ export default class FishyCommand extends Command {
   }
 
   async run(message: CommandoMessage, { name }: PromptArgs) {
-    console.log(Date());
     let gift = false;
     if (name === '') {
       var userID = message.author.id;
@@ -63,7 +62,12 @@ export default class FishyCommand extends Command {
       });
 
       let canFish = false;
-      var description = '';
+
+      const title = 'Hold Up!';
+      let color: string;
+      const author = message.author;
+
+      var description: string;
 
       if (gift === true) {
         var ogAuthor = await prisma.fishy.upsert({
@@ -74,18 +78,22 @@ export default class FishyCommand extends Command {
 
         if (ogAuthor.timesFished === null || Date.now() >= ogAuthor.lastFish.getTime() + 7200000) {
           canFish = true;
+        } else {
           description = `You need to wait **${moment
             .duration(ogAuthor.lastFish.getTime() + 7200000 - Date.now())
             .humanize()}** to fish again.`;
         }
-      } else if (target.timesFished === null || Date.now() >= target.lastFish.getTime() + 7200000) {
-        canFish = true;
-        description = `You need to wait **${moment
-          .duration(target.lastFish.getTime() + 7200000 - Date.now())
-          .humanize()}** to fish again.`;
+      } else {
+        if (target.timesFished === null || Date.now() >= target.lastFish.getTime() + 7200000) {
+          canFish = true;
+        } else {
+          description = `You need to wait **${moment
+            .duration(target.lastFish.getTime() + 7200000 - Date.now())
+            .humanize()}** to fish again.`;
+        }
       }
 
-      if (isDmChannel(message) || isInChannel(message, allChannels.fishy) || !isHomeGuild(message)) {
+      if (isDmChannel(message) || isInChannel(message, allChannels.fishy) || isHomeGuild(message)) {
         if (canFish === true) {
           const total = fish.reduce((acc, cur) => acc + cur.weight, 0);
           const threshold = Math.random() * total;
@@ -168,10 +176,6 @@ export default class FishyCommand extends Command {
           });
           return await message.channel.send(embed.setTimestamp());
         } else {
-          const title = 'Hold Up!';
-          let color: string;
-          const author = message.author;
-
           const timerEmbed = createDefaultEmbed(title, description, color, author);
           message.channel.send(timerEmbed);
         }
