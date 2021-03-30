@@ -43,14 +43,14 @@ export const contestCommands = async (client: CommandoClient) => {
   }
 
   client.on('messageReactionAdd', async (reaction, user) => {
-    if (reaction.message.id === niraMessages.array()[1].id) {
+    if (reaction.message.id === niraMessages.array()[0].id) {
       if (!user.bot && reaction.emoji.id === '777269746722668565') {
         await reaction.message.guild.members.cache.get(user.id).roles.add('770792091353743401');
       }
     }
   });
   client.on('messageReactionRemove', async (reaction, user) => {
-    if (reaction.message.id === niraMessages.array()[1].id) {
+    if (reaction.message.id === niraMessages.array()[0].id) {
       if (!user.bot && reaction.emoji.id === '777269746722668565') {
         await reaction.message.guild.members.cache.get(user.id).roles.remove('770792091353743401');
       }
