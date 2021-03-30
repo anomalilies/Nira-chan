@@ -25,7 +25,9 @@ export const welcomeCommands = async (client: CommandoClient) => {
     channel.guild
       .fetchVanityData()
       .then((invite) => {
-        niraMessages.array()[0].edit(`https://discord.gg/${invite.code}`);
+        if (invite !== null) {
+          niraMessages.array()[0].edit(`https://discord.gg/${invite.code}`);
+        }
       })
       .catch(() => {
         niraMessages.array()[0].edit('https://discord.gg/htSDkHH');

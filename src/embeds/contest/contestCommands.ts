@@ -33,7 +33,7 @@ export const contestCommands = async (client: CommandoClient) => {
     await channel.send(emojis.spacer);
     await channel.send(entry);
     await channel.send('https://forms.gle/rLTpuoyrofgz1x6c8');
-  } else {
+  } else if (niraMessages.size >= 5) {
     niraMessages.array()[11].edit(contest1);
     niraMessages.array()[9].edit(contest2);
     niraMessages.array()[7].edit(contest3);
