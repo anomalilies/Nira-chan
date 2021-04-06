@@ -114,6 +114,8 @@ export const livesAndPerformances2 = new MessageEmbed({
 export const livesAndPerformances3 = new MessageEmbed({
   title: 'Music',
   color: '#F1D8F7',
+  description:
+    "**[Master Link](https://mega.nz/folder/tVlygDAK#nmpjhwIuSFI9FvWCQ8qUyg)**\nEvery non-streaming song of ZUTOMAYO/ACAね's put together into a master folder on MEGA.",
   fields: [
     { name: 'Official Instrumentals', value: '**[Download Link](https://piapro.jp/zutomayo)**' },
     {
