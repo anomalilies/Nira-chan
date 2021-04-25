@@ -1,4 +1,4 @@
-# Nira-chan
+# Nira-chan (W.I.P.)
 
 A Discord bot for ZUTOMAYO ZONE!
 
@@ -170,7 +170,7 @@ It is highly recommended to turn this feature on in VSCode. It will automaticall
 
 W.I.P.
 
-List all used technologies in this section. (it is a great reference for your portfolio)
+List all used technologies in this section.
 
 ## License
 
