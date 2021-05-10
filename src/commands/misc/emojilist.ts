@@ -18,7 +18,7 @@ export default class EmojiListCommand extends Command {
       guildOwner: guild.owner.user.username,
       emojis: guild.emojis.cache.map((e) => `${e}`),
     }));
-    const data = Buffer.from(JSON.stringify(emojis), 'utf8');
+    const data = Buffer.from(JSON.stringify(emojis, null, 2), 'utf8');
     return msg.say(new MessageAttachment(data, 'emoji.json'));
   }
 }
