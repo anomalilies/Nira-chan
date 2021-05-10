@@ -30,7 +30,7 @@ export default class FishyCommand extends Command {
           type: 'string',
           default: '',
           validate: (name: string) => {
-            if (name.match(/(^<@!\d{18}>$)/)) return true;
+            if (name.match(/^<@!?\d+>$/)) return true;
             return 'Invalid user!';
           },
         },
