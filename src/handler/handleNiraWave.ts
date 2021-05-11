@@ -9,7 +9,7 @@ export const handleNiraWave = async (message: CommandoMessage, client: CommandoC
     return;
   }
 
-  if (message.mentions.users.has(client.user.id)) {
+  if (message.mentions.has(client.user)) {
     message.react(emojis.wave);
   }
 };
