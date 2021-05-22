@@ -47,10 +47,10 @@ async function replaceMessageThroughWebhook(message: CommandoMessage, resendCont
 
 function findEmoji(client: CommandoClient, message: CommandoMessage, emojiName: string) {
   if (message.channel.type !== 'dm') {
-    const sameEmoji = (emoji: GuildEmoji) => emoji.name.toLowerCase() === emojiName.toLowerCase();
+    const sameEmoji = (emoji: GuildEmoji) => emoji.available && emoji.name.toLowerCase() === emojiName.toLowerCase();
     let match = message.guild.emojis.cache.find(sameEmoji);
 
-    if (match == undefined) {
+    if (!match) {
       match = client.guilds.cache.flatMap((guild) => guild.emojis.cache).find(sameEmoji);
     }
 
@@ -66,6 +66,8 @@ export const handleNonNitroEmoji = async (message: CommandoMessage, client: Comm
     return;
   }
 
+  if (!message.member || message.channel.id == allChannels.fishy) return;
+
   const emojiRegex = /<a?:\w+:\d+>|(?<!\\):(\w+):|^-(\w+)$/g;
   let needsToResend = false;
 
@@ -76,14 +78,13 @@ export const handleNonNitroEmoji = async (message: CommandoMessage, client: Comm
       if (emoji) {
         // We only need to resend if we replace any animated emoji
         needsToResend = needsToResend || emoji.animated || emoji.guild.id !== message.guild.id;
-        const type = emoji.animated ? 'a' : '';
-        return `<${type}:${emoji.name}:${emoji.id}>`;
+        return emoji.toString();
       }
     }
     return match;
   });
 
-  if (needsToResend && message.member && message.channel.id !== allChannels.fishy) {
+  if (needsToResend) {
     // If there were any GIF emoji added to the message
     await replaceMessageThroughWebhook(message, resendContent);
   }
