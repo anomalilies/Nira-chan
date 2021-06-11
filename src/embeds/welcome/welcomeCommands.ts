@@ -1,7 +1,7 @@
 import { TextChannel, User } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
-import { allChannels, emojis } from '../../config/config.json';
+import { allChannels, emojis, homeGuild } from '../../config/config.json';
 import { welcome1, welcome2 } from './welcomeEmbeds';
 
 export const welcomeCommands = async (client: CommandoClient) => {
@@ -22,16 +22,17 @@ export const welcomeCommands = async (client: CommandoClient) => {
     niraMessages.array()[1].edit(welcome2);
     niraMessages.array()[3].react('756679974953549914');
 
-    channel.guild
-      .fetchVanityData()
-      .then((invite) => {
-        if (invite !== null) {
-          niraMessages.array()[0].edit(`https://discord.gg/${invite.code}`);
-        }
-      })
-      .catch(() => {
-        niraMessages.array()[0].edit('https://discord.gg/htSDkHH');
-      });
+    function updateInvite() {
+      let code = channel.guild.vanityURLCode || 'htSDkHH';
+      niraMessages.array()[0].edit(`https://discord.gg/${code}`);
+    }
+    updateInvite();
+
+    client.on('guildUpdate', (oldGuild, newGuild) => {
+      if (newGuild.id == homeGuild && newGuild.vanityURLCode != oldGuild.vanityURLCode) {
+        updateInvite();
+      }
+    });
   }
 
   client.on('messageReactionAdd', async (reaction, user) => {
