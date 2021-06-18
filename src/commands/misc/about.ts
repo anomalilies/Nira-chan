@@ -21,7 +21,7 @@ export default class AboutCommand extends Command {
         '`' +
         `${prefix}help` +
         '` command.\n\n **Nira is currently in __' +
-        `${this.client.guilds.cache.size} servers__!**`,
+        `${this.client.guilds.cache.size} servers__**!`,
       fields: [
         {
           name: 'GitHub Repo',
@@ -42,7 +42,8 @@ export default class AboutCommand extends Command {
           name: 'Special Thanks',
           value: `Honestly, I can't thank everyone that's helped work on this project with me enough.\nBut, to **Hachan**, **Glup**, **Aravk**, and **Dave**, I wouldn't have gotten to this stage without your support— **I love you all so much**!\n
           Bonus shoutouts to **Elo**, **Kasu**, **Jonno**, and everyone else from ZUTOMAYO ZONE (especially the staff, ~~not because I'll be killed or anything if I don't mention them, nOOO~~)!\n
-          **Thank you for everything. <:niralove:811608668466446356>** You're all amazing!`,
+          And to my wonderful partner, thank you so much for always supporting the passion for my hobbies and dreams — Not only for the future regarding them, but everything else. You mean the world and beyond to me.\n
+          **Thank you for everything, everyone. <:niralove:811608668466446356>** You're all amazing!`,
         },
       ],
       thumbnail: { url: 'https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/Nira.png' },

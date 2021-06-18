@@ -1,6 +1,6 @@
 import { stripIndent } from 'common-tags';
 import { MessageEmbed, MessageReaction, TextChannel } from 'discord.js';
-import { emojis } from '../../config/config.json';
+import { emojis, homeGuild } from '../../config/config.json';
 
 const neededStars = 5;
 
@@ -12,7 +12,12 @@ export const handleStarReaction = async (reaction: MessageReaction, channelID: s
   const message = reaction.message;
   const stars = message.reactions.resolve(emojis.star).count;
 
-  if (stars < neededStars) {
+  if (message.guild.id !== homeGuild) {
+    return;
+  }
+
+  // Jank fix
+  if (stars !== neededStars) {
     return;
   }
 
