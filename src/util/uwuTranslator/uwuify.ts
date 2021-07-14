@@ -1,6 +1,8 @@
 import { Message, MessageEmbed } from 'discord.js';
 import emotions from './data';
 
+import { colour } from '../../config/config.json';
+
 export const uwuify = async function (text: string, message: Message) {
   if (text.slice(-1) == ' ') text = text.substring(0, text.length - 1);
 
@@ -29,7 +31,7 @@ export const uwuify = async function (text: string, message: Message) {
     const embed = new MessageEmbed({
       author: { name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
       description: text,
-      color: '#F1D8F7',
+      color: colour,
     });
 
     await message.channel.send(embed);

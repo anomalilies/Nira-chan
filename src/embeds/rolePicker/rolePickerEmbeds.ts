@@ -1,10 +1,12 @@
 import { oneLineTrim, stripIndent } from 'common-tags';
 import { MessageEmbed } from 'discord.js';
 
+import { colour } from '../../config/config.json';
+
 export const pronouns = new MessageEmbed({
   title: 'Pronouns',
   description: 'React to give yourself a role.',
-  color: '#F1D8F7',
+  color: colour,
   fields: [
     {
       name: 'Key',
@@ -21,7 +23,7 @@ export const pronouns = new MessageEmbed({
 export const miscellaneous = new MessageEmbed({
   title: 'Miscellaneous',
   description: 'Get access to opt-in channels and all server notifications.',
-  color: '#F1D8F7',
+  color: colour,
   fields: [
     {
       name: 'Key',
@@ -38,7 +40,7 @@ export const miscellaneous = new MessageEmbed({
 export const dividers = new MessageEmbed({
   title: 'Dividers',
   description: 'Want to divide your roles? Claim your handy dividers here!',
-  color: '#F1D8F7',
+  color: colour,
   fields: [
     {
       name: 'Key',
@@ -64,7 +66,7 @@ export const colours = new MessageEmbed({
     • If you'd like to remove a pre-existing role you already have, react with the corresponding emoji twice.\n
     • If you'd like to remove a given role, remove your reaction by reacting with the corresponding emoji again.
   `,
-  color: '#F1D8F7',
+  color: colour,
   fields: [
     {
       name: 'Key',

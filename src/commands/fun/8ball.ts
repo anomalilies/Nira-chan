@@ -3,6 +3,7 @@ import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
 import { doesUserHaveBotpass, isBotspamChannel, isDmChannel, isHomeGuild } from '../../util/checks';
 import responses from '../../data/8ball.json';
+import { colour } from '../../config/config.json';
 
 export default class EightBallCommand extends Command {
   constructor(client: CommandoClient) {
@@ -33,7 +34,7 @@ export default class EightBallCommand extends Command {
         description: `> **${Object.values(query)}?**\n\nThe magic 8-Ball responds: "**${
           responses[Math.floor(Math.random() * responses.length)]
         }**" `,
-        color: '#F1D8F7',
+        color: colour,
         author: { name: `${nickname} asked...`, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
       });
 

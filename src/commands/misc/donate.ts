@@ -3,6 +3,7 @@ import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
 import { isHomeGuild } from '../../util/checks';
+import { colour } from '../../config/config.json';
 
 export default class DonateCommand extends Command {
   constructor(client: CommandoClient) {
@@ -20,7 +21,7 @@ export default class DonateCommand extends Command {
       const embed = new MessageEmbed({
         title: `Support ${message.guild.name}`,
         thumbnail: { url: message.guild.iconURL({ dynamic: true }) },
-        color: '#F1D8F7',
+        color: colour,
         fields: [
           {
             name: 'Donations',

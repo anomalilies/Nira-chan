@@ -29,4 +29,11 @@ model Prefix {
   published         Boolean    @default(false)
 }
 
+model Auth {
+  id                Int        @default(autoincrement()) @id
+  guildId           Int
+  authentication    Boolean    @default(false)
+  published         Boolean    @default(false)
+}
+
 // npx prisma db push --preview-feature

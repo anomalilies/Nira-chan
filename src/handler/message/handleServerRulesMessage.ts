@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js';
 
 import rules from '../../embeds/ruleEmbeds.json';
-import { homeGuild, roles } from '../../config/config.json';
+import { homeGuild, roles, colour } from '../../config/config.json';
 import { serverRulesMessage } from '../../config/event_handler.json';
 import { keyv } from '../../database/keyv';
 import { CommandoMessage } from 'discord.js-commando';
@@ -21,7 +21,7 @@ export const handleServerRulesMessage = async (message: CommandoMessage, prefix:
         .map(
           (rule) =>
             new MessageEmbed({
-              color: '#F1D8F7',
+              color: colour,
               title: rule.title,
               description: rule.description,
               fields: [{ name: 'Moderation', value: rule.moderation }],

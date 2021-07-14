@@ -1,9 +1,11 @@
 import { oneLine, stripIndent } from 'common-tags';
 import { MessageEmbed } from 'discord.js';
 
+import { colour } from '../../config/config.json';
+
 export const bc1 = new MessageEmbed({
   title: '💰 | Economy and Income',
-  color: '#F1D8F7',
+  color: colour,
   fields: [
     { name: "Get the Server's Economy Stats", value: '`economy`' },
     { name: 'Desposit Money to Your Account', value: '`deposit`' },
@@ -19,7 +21,7 @@ export const bc1 = new MessageEmbed({
 
 export const bc2 = new MessageEmbed({
   title: '🎲 | Fun and Games',
-  color: '#F1D8F7',
+  color: colour,
   fields: [
     { name: 'Play Truth or Dare', value: '`truth-or-dare`\nExample: `!truth-or-dare truth` `!truth-or-dare dare`' },
     { name: 'Get a Random Dog Picture', value: '`dog`' },
@@ -31,7 +33,7 @@ export const bc2 = new MessageEmbed({
 
 export const bc3 = new MessageEmbed({
   title: '🎰 | Gambling',
-  color: '#F1D8F7',
+  color: colour,
   fields: [
     {
       name: 'Blackjack',
@@ -72,7 +74,7 @@ export const bc3 = new MessageEmbed({
 
 export const bc4 = new MessageEmbed({
   title: '🔨 | Tools and Utilities',
-  color: '#F1D8F7',
+  color: colour,
   fields: [
     { name: 'Calculator', value: '`calc/c/caluclate`\nExample: `-c 2+2`' },
     { name: 'Time', value: '`currentTime/ctime/gettime`\nExample: `-ctime GMT+1` `-ctime Tokyo` `-ctime Pacific`' },
@@ -93,7 +95,7 @@ export const bc4 = new MessageEmbed({
 
 export const bc5 = new MessageEmbed({
   title: '🎉 | Fun and Games',
-  color: '#F1D8F7',
+  color: colour,
   fields: [
     { name: 'Define Something Using Urban Dictionary', value: '`urban`\nExample: `-urban ZUTOMAYO`' },
     { name: 'Find Out the Weather Forecast', value: '`weather`\nExample: `-weather London`' },
@@ -111,7 +113,7 @@ export const bc5 = new MessageEmbed({
 });
 
 export const bc6 = new MessageEmbed({
-  color: '#F1D8F7',
+  color: colour,
   fields: [
     { name: 'Ask WolframAlpha', value: '`wolfram`\nExample: `-wolfram Tell me a joke`' },
     {
@@ -133,7 +135,7 @@ export const bc6 = new MessageEmbed({
 
 export const bc7 = new MessageEmbed({
   title: '🎧 | Last.fm',
-  color: '#F1D8F7',
+  color: colour,
   description: 'Connect your [Last.fm](https://www.last.fm/) account to track and compare your listening history!',
   fields: [
     { name: 'Connect Your Account', value: '`fm set`\nExample: `fm set anomalilies`' },
@@ -165,7 +167,7 @@ export const bc8 = new MessageEmbed({
     These commands will only work if you are in a voice channel!
     Spotify, Apple Music, and YouTube links are all supported!
   `,
-  color: '#F1D8F7',
+  color: colour,
   fields: [
     {
       name: 'Add a Song to the Queue',
@@ -188,7 +190,7 @@ export const bc8 = new MessageEmbed({
 
 export const bc9 = new MessageEmbed({
   title: '🏆 | Statistics and Leaderboards',
-  color: '#F1D8F7',
+  color: colour,
   fields: [
     { name: 'Crowns', value: '`leaderboard crowns`' },
     { name: 'Typing', value: '`leaderboard wpm`' },

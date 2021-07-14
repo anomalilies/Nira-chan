@@ -1,11 +1,11 @@
 import { oneLine, stripIndent } from 'common-tags';
 import { MessageEmbed } from 'discord.js';
 
-import { emojis } from '../../config/config.json';
+import { emojis, colour } from '../../config/config.json';
 
 export const contest1 = new MessageEmbed({
   title: 'ZUTOMAYO ZONE - Monthly Contest #3',
-  color: '#F1D8F7',
+  color: colour,
   description: oneLine`
     Sorry for the delay, everyone, but our 3rd competition is finally here!\n
     This time, instead of solely art entries, we're offering physical prizes this time around
@@ -46,7 +46,7 @@ export const contest1 = new MessageEmbed({
 });
 
 export const contest2 = new MessageEmbed({
-  color: '#F1D8F7',
+  color: colour,
   fields: [
     {
       name: 'Category #1: Art',
@@ -89,7 +89,7 @@ export const contest2 = new MessageEmbed({
 export const contest3 = new MessageEmbed({
   title: 'Rules and Regulations',
   description: 'By joining this contest, you hereby agree to have read the following rules and regulations;',
-  color: '#F1D8F7',
+  color: colour,
   fields: [
     {
       name: 'Plaigarism',
@@ -109,7 +109,7 @@ export const contest3 = new MessageEmbed({
 });
 
 export const contest4 = new MessageEmbed({
-  color: '#F1D8F7',
+  color: colour,
   fields: [
     {
       name: 'When is the Deadline?',
@@ -126,7 +126,7 @@ export const contest4 = new MessageEmbed({
 });
 
 export const contest5 = new MessageEmbed({
-  color: '#F1D8F7',
+  color: colour,
   description: oneLine`
     Regardless of your place in the final 3 if you are a shortlisted runner-up in the art category,
     your art will still be featured as February-March's server banner!

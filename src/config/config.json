@@ -95,7 +95,9 @@
     "ngy": "<:nirangy:777736569746227211>",
     "dead": "<:niraDead:756582453824454727>",
     "wine": "<:1945grandpaladin:802352890571653170>",
-    "star": "⭐"
+    "star": "⭐",
+    "yes": "✅",
+    "no": "❎"
   },
   "roles": {
     "regular": "751209585464836137",
@@ -122,5 +124,6 @@
     "Theorists",
     "Musicians",
     "Artists"
-  ]
+  ],
+  "colour": "#F1D8F7"
 }

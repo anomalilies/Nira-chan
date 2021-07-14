@@ -2,7 +2,7 @@ import { stripIndent } from 'common-tags';
 import { MessageEmbed, TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
-import { allChannels, emojis } from '../../config/config.json';
+import { allChannels, emojis, colour } from '../../config/config.json';
 import { contest1, contest2, contest3, contest4, contest5 } from './contestEmbeds';
 
 export const contestCommands = async (client: CommandoClient) => {
@@ -12,7 +12,7 @@ export const contestCommands = async (client: CommandoClient) => {
   const niraMessages = messages.filter((msg) => msg.author == client.user);
 
   const entry = new MessageEmbed({
-    color: '#F1D8F7',
+    color: colour,
     title: 'Contest Entry',
     description: stripIndent`
       Register your interest in joining this contest by **reacting with <:niraScoopYAY:777269746722668565>**!

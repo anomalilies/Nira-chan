@@ -1,6 +1,6 @@
 import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
-import { prefix } from '../../config/config.json';
+import { prefix, colour } from '../../config/config.json';
 
 export default class AboutCommand extends Command {
   constructor(client: CommandoClient) {
@@ -15,7 +15,7 @@ export default class AboutCommand extends Command {
   async run(message: CommandoMessage) {
     const embed = new MessageEmbed({
       title: `About ${this.client.user.username}`,
-      color: '#F1D8F7',
+      color: colour,
       description:
         `<@!${this.client.user.id}> is an open-source bot created by **[anomalilies](https://github.com/anomalilies)**.\n> To see a list of Nira's commands, use the ` +
         '`' +

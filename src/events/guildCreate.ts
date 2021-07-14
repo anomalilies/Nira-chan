@@ -1,7 +1,7 @@
 import { Guild, MessageEmbed, TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
-import { prefix } from '../config/config.json';
+import { prefix, colour, members } from '../config/config.json';
 import { onGuildCreate } from '../config/event_handler.json';
 import { keyv } from '../database/keyv';
 
@@ -33,10 +33,18 @@ export default async function (client: CommandoClient, guild: Guild) {
       {
         name: 'Terms of Use',
         value:
-          "Nira's main, and most-popular, functionality allows users to use emojis from any server the bot is in without a Nitro subscription.\nHowever, by using Nira, you agree to not upload **hateful, degoratory emojis**.\nAny such offending content found will result in the blacklist of your server's emojis from being used globally, or having Nira banned joining any (and all) servers the owner has the `Manage Emojis` permission in.",
+          "Nira's main, and most-popular, functionality allows users to use emojis from any server the bot is in without a Nitro subscription.\nHowever, by using Nira, you agree to not upload **hateful, degoratory, or NSFW emojis**, if you choose to opt-in to this feature.\nAny such offending content found will result in the permanent blacklist of your server's emojis from being used globally, or all servers the owner has the `Manage Emojis` permission in.\n\n**To opt in to global emoji sharing, use `" +
+          prefix +
+          'emojiauth`**; You can change these settings at any time.' +
+          `\nTo report an emoji, simply copy the ID, and contact ${members.currentOwner} directly, either via DM or the` +
+          '`' +
+          prefix +
+          'contact` command.\nAll emojis available for global use can be accessed using the `' +
+          prefix +
+          'emojilist` command.',
       },
     ],
-    color: '#F1D8F7',
+    color: colour,
     thumbnail: { url: 'https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/Nira.png' },
   });
 

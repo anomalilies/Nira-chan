@@ -3,6 +3,7 @@ import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
 import riddles from '../../data/riddles.json';
 import { doesUserHaveBotpass, isBotspamChannel, isDmChannel } from '../../util/checks';
+import { colour } from '../../config/config.json';
 
 export default class RiddleCommand extends Command {
   constructor(client: CommandoClient) {
@@ -20,7 +21,7 @@ export default class RiddleCommand extends Command {
 
       const embed = new MessageEmbed({
         author: { name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
-        color: '#F1D8F7',
+        color: colour,
         description: riddles[i].riddle,
         fields: [{ name: 'Answer', value: `||${riddles[i].answer}||` }],
       });

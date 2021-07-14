@@ -1,7 +1,7 @@
 import { Message, MessageEmbed, TextChannel } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { members } from '../../config/config.json';
+import { members, colour } from '../../config/config.json';
 
 interface PromptArgs {
   id: string;
@@ -73,7 +73,7 @@ export default class EmbedCommand extends Command {
         }
       }
 
-      const embed = new MessageEmbed({ color: '#F1D8F7', title, description: desc });
+      const embed = new MessageEmbed({ color: colour, title, description: desc });
 
       if (
         fieldTitle.toUpperCase() !== 'N/A' &&

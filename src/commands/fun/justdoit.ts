@@ -2,6 +2,8 @@ import { stripIndents } from 'common-tags';
 import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
+import { colour } from '../../config/config.json';
+
 export default class JustDoItCommand extends Command {
   constructor(client: CommandoClient) {
     super(client, {
@@ -15,7 +17,7 @@ export default class JustDoItCommand extends Command {
 
   async run(message: CommandoMessage) {
     const embed = new MessageEmbed({
-      color: '#F1D8F7',
+      color: colour,
       author: { name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
       description: stripIndents`
         Do it

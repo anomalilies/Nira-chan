@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { emojis } from '../../config/config.json';
+import { emojis, colour } from '../../config/config.json';
 import { doesUserHaveBotpass, isBotspamChannel, isDmChannel } from '../../util/checks';
 
 export default class StabStabStabCommand extends Command {
@@ -19,7 +19,7 @@ export default class StabStabStabCommand extends Command {
     if (isDmChannel(message) || isBotspamChannel(message) || doesUserHaveBotpass(message)) {
       const stabstabstab = new MessageEmbed({
         author: { name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
-        color: '#F1D8F7',
+        color: colour,
         description: `pokepokepoke ${emojis.fencing}`,
       });
 

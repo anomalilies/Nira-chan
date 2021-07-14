@@ -1,7 +1,7 @@
 import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { emojis } from '../../config/config.json';
+import { emojis, colour } from '../../config/config.json';
 import { doesUserHaveBotpass, isBotspamChannel, isDmChannel } from '../../util/checks';
 
 export default class DespairCommand extends Command {
@@ -19,7 +19,7 @@ export default class DespairCommand extends Command {
       const embed = new MessageEmbed({
         author: { name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
         description: `Aaaa, the tape is rewinding so fast! ${emojis.despair}`,
-        color: '#F1D8F7',
+        color: colour,
       });
 
       return await message.channel.send(embed);

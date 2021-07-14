@@ -1,10 +1,12 @@
 import { oneLine, stripIndent } from 'common-tags';
 import { MessageEmbed } from 'discord.js';
 
+import { colour } from '../../config/config.json';
+
 export const livesAndPerformances1 = new MessageEmbed({
   title: 'Lives and Performances',
   description: "If you missed a live show, here's your chance to catch-up!",
-  color: '#F1D8F7',
+  color: colour,
   author: {
     name: stripIndent`
       All content courtesy of our wonderful Stans!
@@ -85,7 +87,7 @@ export const livesAndPerformances1 = new MessageEmbed({
 
 export const livesAndPerformances2 = new MessageEmbed({
   title: 'Scans',
-  color: '#F1D8F7',
+  color: colour,
   fields: [
     {
       name: 'Hisohiso Banashi: Band Score',
@@ -113,7 +115,7 @@ export const livesAndPerformances2 = new MessageEmbed({
 
 export const livesAndPerformances3 = new MessageEmbed({
   title: 'Music',
-  color: '#F1D8F7',
+  color: colour,
   description:
     "**[Master Link](https://mega.nz/folder/tVlygDAK#nmpjhwIuSFI9FvWCQ8qUyg)**\nEvery non-streaming song of ZUTOMAYO/ACAね's put together into a master folder on MEGA.",
   fields: [

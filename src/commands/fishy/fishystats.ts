@@ -3,7 +3,7 @@ import { MessageEmbed } from 'discord.js';
 import { PrismaClient } from '@prisma/client';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 import { isInChannel, isDmChannel, isHomeGuild } from '../../util/checks';
-import { allChannels } from '../../config/config.json';
+import { allChannels, colour } from '../../config/config.json';
 
 const prisma = new PrismaClient();
 
@@ -84,7 +84,7 @@ export default class FishyStatsCommand extends Command {
 
           const embed = new MessageEmbed({
             title: 'Fishy Stats 🎣',
-            color: '#F1D8F7',
+            color: colour,
             description: fishyStats + `\nAverage fish: **${averageFish.toFixed(2)}**`,
             fields: [
               {

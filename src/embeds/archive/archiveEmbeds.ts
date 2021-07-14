@@ -1,9 +1,11 @@
 import { oneLine, stripIndent } from 'common-tags';
 import { MessageEmbed } from 'discord.js';
 
+import { colour } from '../../config/config.json';
+
 export const archive = new MessageEmbed({
   title: 'Archive',
-  color: '#F1D8F7',
+  color: colour,
   description: oneLine`
     Our beloved <@&770022309393334302> employees get exclusive access to the server's
     archive ~~which doesn't include much~~!
@@ -32,7 +34,7 @@ export const archive = new MessageEmbed({
 
 export const nitro = new MessageEmbed({
   title: 'Emojis',
-  color: '#F1D8F7',
+  color: colour,
   description: stripIndent`
     Are you a Nitro user, looking for more ZUTOMAYO emojis?
     Check out our affiliates!

@@ -1,7 +1,7 @@
 import { GuildMember, MessageEmbed, TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
 
-import { homeGuild, members, emojis, allChannels } from '../config/config.json';
+import { homeGuild, members, emojis, allChannels, colour } from '../config/config.json';
 import { onGuildMemberAdd } from '../config/event_handler.json';
 import { keyv } from '../database/keyv';
 
@@ -23,7 +23,7 @@ export default async function (client: CommandoClient, member: GuildMember) {
 
   const embed = new MessageEmbed({
     description: `<@${members.currentOwner}> tells me that **${member.user.username}** will join shortly... 🪄`,
-    color: '#F1D8F7',
+    color: colour,
   });
 
   modlog.send(`**${member.user.username}** joined! ${emojis.hello}`);

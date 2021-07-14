@@ -3,6 +3,7 @@ import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
 import abilities from '../../data/copyabilities.json';
 import { doesUserHaveBotpass, isBotspamChannel, isDmChannel, isHomeGuild } from '../../util/checks';
+import { colour } from '../../config/config.json';
 
 export default class KirbyCommand extends Command {
   constructor(client: CommandoClient) {
@@ -38,7 +39,7 @@ export default class KirbyCommand extends Command {
 
       const embed = new MessageEmbed({
         author: { name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
-        color: '#F1D8F7',
+        color: colour,
         description: `<:kirbsucc:757289104789471322> ${reply}`,
       });
       return await message.channel.send(embed);

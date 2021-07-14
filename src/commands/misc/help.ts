@@ -2,6 +2,7 @@ import { stripIndents } from 'common-tags';
 import { MessageEmbed } from 'discord.js';
 
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
+import { colour } from '../../config/config.json';
 
 export default class HelpCommand extends Command {
   constructor(client: CommandoClient) {
@@ -20,7 +21,7 @@ export default class HelpCommand extends Command {
     const showAll = true;
 
     const embed = new MessageEmbed({
-      color: '#F1D8F7',
+      color: colour,
       title: `${
         showAll ? `${this.client.user.username}'s Commands` : `Available commands in ${msg.guild || 'this DM'}`
       }`,

@@ -1,7 +1,7 @@
 import { MessageEmbed, TextChannel } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { homeGuild, emojis, allChannels } from '../../config/config.json';
+import { homeGuild, emojis, allChannels, colour } from '../../config/config.json';
 
 interface PromptArgs {
   title: string;
@@ -40,7 +40,7 @@ export default class AffiliatesCommand extends Command {
 
   async run(message: CommandoMessage, { title, description, link }: PromptArgs) {
     if (message.guild.id === homeGuild) {
-      const embed = new MessageEmbed({ title, description, color: '#F1D8F7' });
+      const embed = new MessageEmbed({ title, description, color: colour });
 
       const channel = <TextChannel>await this.client.channels.fetch(allChannels.affiliates);
 

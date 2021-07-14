@@ -3,7 +3,7 @@ import { MessageEmbed, MessageReaction, User } from 'discord.js';
 import { PrismaClient } from '@prisma/client';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 import { isInChannel, isDmChannel, isHomeGuild } from '../../util/checks';
-import { allChannels } from '../../config/config.json';
+import { allChannels, colour } from '../../config/config.json';
 
 const prisma = new PrismaClient();
 
@@ -55,7 +55,7 @@ export default class LeaderboardCommand extends Command {
         var embed = new MessageEmbed({
           title: `${guild.name} 🐟 Leaderboard`,
           description: `${currentPage.join('')}`,
-          color: '#F1D8F7',
+          color: colour,
         });
         return embed;
       };

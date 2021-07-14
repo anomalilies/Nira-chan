@@ -1,6 +1,8 @@
 import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
+import { colour } from '../../config/config.json';
+
 export default class ServerCountCommand extends Command {
   constructor(client: CommandoClient) {
     super(client, {
@@ -15,11 +17,10 @@ export default class ServerCountCommand extends Command {
   async run(message: CommandoMessage) {
     const embed = new MessageEmbed({
       author: { name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
-      title: 'Server Count',
-      description: `<@!${this.client.user.id}> currently in **__${this.client.guilds.cache.size} servers__**!`,
-      color: '#F1D8F7',
+      description: `<@!${this.client.user.id}> is currently in **__${this.client.guilds.cache.size} servers__**!`,
+      color: colour,
     });
 
-    return await message.channel.send(embed);
+    return await message.channel.send(embed.setTimestamp());
   }
 }

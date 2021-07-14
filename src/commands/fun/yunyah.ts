@@ -3,6 +3,7 @@ import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
 import { doesUserHaveBotpass, isBotspamChannel, isDmChannel, isHomeGuild } from '../../util/checks';
 import yunyahQuotes from '../../data/yunyah.json';
+import { colour } from '../../config/config.json';
 
 export default class YunyahCommand extends Command {
   constructor(client: CommandoClient) {
@@ -21,7 +22,7 @@ export default class YunyahCommand extends Command {
       const embed = new MessageEmbed({
         author: { name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
         description: quote,
-        color: '#F1D8F7',
+        color: colour,
       });
       await message.channel.send(embed);
     } else if (isBotspamChannel(message) || !isHomeGuild(message) || doesUserHaveBotpass(message)) {

@@ -35,6 +35,7 @@ import { initHandlers } from './handler/initHandlers';
       ['fun', 'Fun'],
       ['fishy', 'Fishy'],
       ['misc', 'Miscellaneous'],
+      ['data', 'Data Settings'],
       ['dev', 'Developer Commands'],
       ['server', 'Server-Specific'],
       ['util', 'Utility'],

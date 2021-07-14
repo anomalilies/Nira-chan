@@ -2,7 +2,7 @@ import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
 import { doesUserHaveBotpass, isBotspamChannel, isDmChannel, isHomeGuild, isInChannel } from '../../util/checks';
-import { allChannels } from '../../config/config.json';
+import { allChannels, colour } from '../../config/config.json';
 import fishpuns from '../../data/fishpuns.json';
 
 export default class FishpunCommand extends Command {
@@ -28,7 +28,7 @@ export default class FishpunCommand extends Command {
         title: 'Mr. Fish says...',
         thumbnail: { url: 'https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/Fishy.jpg' },
         description: fishpuns[Math.floor(Math.random() * fishpuns.length)],
-        color: '#F1D8F7',
+        color: colour,
       });
 
       return await message.channel.send(embed);

@@ -2,7 +2,7 @@ import { oneLine } from 'common-tags';
 import { MessageEmbed } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
-import { emojis } from '../../config/config.json';
+import { emojis, colour } from '../../config/config.json';
 import { doesUserHaveBotpass, isBotspamChannel, isDmChannel } from '../../util/checks';
 
 interface PromptArgs {
@@ -44,7 +44,7 @@ export default class DearMrFCommand extends Command {
             `,
           },
         ],
-        color: '#F1D8F7',
+        color: colour,
       });
 
       return await message.channel.send(embed);

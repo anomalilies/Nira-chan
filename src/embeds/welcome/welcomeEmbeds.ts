@@ -1,10 +1,12 @@
 import { MessageEmbed } from 'discord.js';
 
+import { colour } from '../../config/config.json';
+
 export const welcome1 = new MessageEmbed({
   title: 'Welcome to ZUTOMAYO ZONE!',
   description:
     "Thanks so much for joining us; It's an absolute pleasure to have you here!\nWe're a pretty laidback server as a whole, however to combat spam, we require you to have read the rules before chatting with us.\nPlease follow Discord's built-in tutorial on how to do so!",
-  color: '#F1D8F7',
+  color: colour,
   fields: [
     {
       name: 'Moderation of Rules',
@@ -15,7 +17,7 @@ export const welcome1 = new MessageEmbed({
 });
 
 export const welcome2 = new MessageEmbed({
-  color: '#F1D8F7',
+  color: colour,
   fields: [
     {
       name: 'What Should I Do Now?',

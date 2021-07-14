@@ -1,6 +1,7 @@
 import { Guild, MessageEmbed } from 'discord.js';
 
 import moment from 'moment';
+import { colour } from '../config/config.json';
 
 const guildRegionKeyToName = (regionKey: string): string => {
   switch (regionKey) {
@@ -62,7 +63,7 @@ export default async function (guild: Guild) {
   return new MessageEmbed({
     title: `About ${guild.name}`,
     thumbnail: { url: guild.iconURL({ dynamic: true }) },
-    color: '#F1D8F7',
+    color: colour,
     fields: [
       {
         name: 'General',
