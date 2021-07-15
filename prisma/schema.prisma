@@ -31,9 +31,9 @@ model Prefix {
 
 model Auth {
   id                Int        @default(autoincrement()) @id
-  guildId           Int
+  guildId           String     @unique
   authentication    Boolean    @default(false)
   published         Boolean    @default(false)
 }
 
-// npx prisma db push --preview-feature
+// npx prisma db push

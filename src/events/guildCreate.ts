@@ -1,14 +1,23 @@
 import { Guild, MessageEmbed, TextChannel } from 'discord.js';
 import { CommandoClient } from 'discord.js-commando';
+import { PrismaClient } from '@prisma/client';
 
 import { prefix, colour, members } from '../config/config.json';
 import { onGuildCreate } from '../config/event_handler.json';
 import { keyv } from '../database/keyv';
 
+const prisma = new PrismaClient();
+
 export default async function (client: CommandoClient, guild: Guild) {
   if ((await keyv.get(Object.keys({ onGuildCreate })[0])) === false) {
     return;
   }
+
+  await prisma.auth.create({
+    data: {
+      guildId: guild.id,
+    },
+  });
 
   let plural = '';
   if (guild.memberCount > 1) {

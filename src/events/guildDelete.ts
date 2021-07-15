@@ -1,13 +1,22 @@
 import { Guild, MessageEmbed, TextChannel } from 'discord.js';
+import { PrismaClient } from '@prisma/client';
 import { CommandoClient } from 'discord.js-commando';
 
 import { onGuildDelete } from '../config/event_handler.json';
 import { keyv } from '../database/keyv';
 
+const prisma = new PrismaClient();
+
 export default async function (client: CommandoClient, guild: Guild) {
   if ((await keyv.get(Object.keys({ onGuildDelete })[0])) === false) {
     return;
   }
+
+  await prisma.auth.delete({
+    where: {
+      guildId: guild.id,
+    },
+  });
 
   let plural = '';
   if (guild.memberCount > 1) {
