@@ -44,7 +44,7 @@ export default class InviteCommand extends Command {
       const filter = (r: MessageReaction, u: User) => u.id === message.author.id && [hello, cute].includes(r.emoji.id);
       const reactions = await msg.awaitReactions(filter, {
         max: 1,
-        time: 6000,
+        time: 60000,
       });
 
       if (reactions.has(hello)) {
