@@ -37,5 +37,7 @@
   "onGuildMemberUpdate": true,
   "onGuildCreate": true,
   "onGuildDelete": true,
-  "onGuildEmojiUpdate": true
+  "onGuildEmojiUpdate": true,
+  "onGuildEmojiCreate": true,
+  "onGuildEmojiDelete": true
 }

@@ -16,7 +16,7 @@ export const updateMap = async (client: CommandoClient) => {
       guild.emojis.cache
         .filter((e) => e.available)
         .forEach((e) => {
-          eMap.set(<string>e.name, e);
+          eMap.set(<string>e.name.toLowerCase(), e);
         });
     }
   });
