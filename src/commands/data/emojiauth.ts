@@ -4,6 +4,7 @@ import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 
 import { createDefaultEmbed } from '../../util/createDefaultEmbed';
 import { colour, prefix } from '../../config/config.json';
+import { updateMap } from '../../jobs/emojiMap';
 
 const prisma = new PrismaClient();
 
@@ -51,40 +52,45 @@ export default class EmojiAuthCommand extends Command {
         await msg.react(emojiIn);
         await msg.react(emojiOut);
 
-        const filter = (r: MessageReaction, u: User) =>
-          u.id === message.author.id && [emojiIn, emojiOut].includes(r.emoji.id);
+        const filter = (r: MessageReaction, u: User) => u.id === user.id && [emojiIn, emojiOut].includes(r.emoji.id);
         const reactions = await msg.awaitReactions(filter, {
           max: 1,
-          time: 6000,
+          time: 60000,
         });
 
-        if (reactions.has(emojiIn)) {
-          await prisma.auth.update({
-            where: {
-              guildId: message.guild.id,
-            },
-            data: {
-              authentication: true,
-            },
-          });
-        } else if (reactions.has(emojiOut)) {
-          await prisma.auth.update({
-            where: {
-              guildId: message.guild.id,
-            },
-            data: {
-              authentication: false,
-            },
-          });
+        if (reactions.size === 1) {
+          if (reactions.has(emojiIn)) {
+            await prisma.auth.update({
+              where: {
+                guildId: message.guild.id,
+              },
+              data: {
+                authentication: true,
+              },
+            });
+          } else if (reactions.has(emojiOut)) {
+            await prisma.auth.update({
+              where: {
+                guildId: message.guild.id,
+              },
+              data: {
+                authentication: false,
+              },
+            });
+          }
+          await msg.edit(
+            createDefaultEmbed(
+              'Changes Confirmed',
+              'Note that you can change these settings at any time by using `' + prefix + 'emojiauth`!',
+              colour,
+              user,
+            ),
+          );
+          updateMap(this.client);
+        } else {
+          await msg.edit(createDefaultEmbed('Cancelled Command', 'No changes made.', colour, user));
         }
-        await msg.edit(
-          createDefaultEmbed(
-            'Changes Confirmed',
-            'Note that you can change these settings at any time by using `' + prefix + 'emojiauth`!',
-            colour,
-            user,
-          ),
-        );
+
         return await msg.reactions.removeAll();
       }
     } else {

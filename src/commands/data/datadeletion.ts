@@ -35,7 +35,7 @@ export default class FishyDataDeletionCommand extends Command {
       u.id === message.author.id && [emojis.yes, emojis.no].includes(r.emoji.name);
     const reactions = await msg.awaitReactions(filter, {
       max: 1,
-      time: 6000,
+      time: 60000,
     });
 
     const target = await prisma.fishy.findUnique({

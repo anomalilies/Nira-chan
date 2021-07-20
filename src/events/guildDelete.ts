@@ -4,6 +4,7 @@ import { CommandoClient } from 'discord.js-commando';
 
 import { onGuildDelete } from '../config/event_handler.json';
 import { keyv } from '../database/keyv';
+import { updateMap } from '../jobs/emojiMap';
 
 const prisma = new PrismaClient();
 
@@ -33,4 +34,6 @@ export default async function (client: CommandoClient, guild: Guild) {
 
   const guildLog = <TextChannel>await client.channels.fetch('823270262194569216');
   guildLog.send(leaveEmbed);
+
+  updateMap(client);
 }
