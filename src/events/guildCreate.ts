@@ -5,6 +5,7 @@ import { PrismaClient } from '@prisma/client';
 import { prefix, colour, members } from '../config/config.json';
 import { onGuildCreate } from '../config/event_handler.json';
 import { keyv } from '../database/keyv';
+import { updateMap } from '../jobs/emojiMap';
 
 const prisma = new PrismaClient();
 
@@ -86,4 +87,6 @@ export default async function (client: CommandoClient, guild: Guild) {
       console.log(`Couldn't send DM!: ${err}`);
     }
   }
+
+  updateMap(client);
 }

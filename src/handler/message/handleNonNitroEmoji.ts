@@ -4,6 +4,7 @@ import { CommandoClient, CommandoMessage } from 'discord.js-commando';
 import { allChannels } from '../../config/config.json';
 import { nonNitroEmoji } from '../../config/event_handler.json';
 import { keyv } from '../../database/keyv';
+import { emojiMap } from '../../jobs/emojiMap';
 
 // Replace a regular message with a message sent through a webhook with the OP's name and avatar
 async function replaceMessageThroughWebhook(message: CommandoMessage, resendContent: string) {
@@ -51,7 +52,7 @@ function findEmoji(client: CommandoClient, message: CommandoMessage, emojiName: 
     let match = message.guild.emojis.cache.find(sameEmoji);
 
     if (!match) {
-      match = client.guilds.cache.flatMap((guild) => guild.emojis.cache).find(sameEmoji);
+      match = emojiMap().get(emojiName.toLowerCase());
     }
 
     return match;
