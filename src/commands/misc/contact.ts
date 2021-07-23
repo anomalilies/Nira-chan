@@ -6,6 +6,7 @@ export default class ContactCommand extends Command {
   constructor(client: CommandoClient) {
     super(client, {
       name: 'contact',
+      aliases: ['support'],
       group: 'misc',
       memberName: 'contact',
       description: 'Get support in using Nira, and suggest new features.',
@@ -24,6 +25,7 @@ export default class ContactCommand extends Command {
         },
       ],
       author: { name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) },
+      thumbnail: { url: 'https://raw.githubusercontent.com/anomalilies/Nira-chan/master/Images/Nira.png' },
     });
 
     return await message.channel.send(embed);
