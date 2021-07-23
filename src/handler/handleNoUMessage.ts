@@ -33,10 +33,9 @@ export const handleNoUMessage = async (message: CommandoMessage) => {
   }
 
   const isNoU = noUResponses.some((word) => message.content.toLowerCase() === word.toLowerCase());
-  const isNoUInfinityMember = members.noutimesinfinity.includes(message.author.id);
   const noUChance = Math.random() < 1 / 3;
 
-  if (isNoU && (noUChance || isNoUInfinityMember) && message.author.id !== message.client.user.id) {
+  if (isNoU && (noUChance || message.author.id === members.soldier) && message.author.id !== message.client.user.id) {
     const response = noUResponses[Math.floor(Math.random() * noUResponses.length)];
 
     message.say(response);

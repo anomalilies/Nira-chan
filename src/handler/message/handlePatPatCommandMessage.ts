@@ -22,11 +22,13 @@ export const handlePatPatCommandMessage = async (message: CommandoMessage, prefi
     const author = message.author;
     let description: string;
 
+    const dave = message.author.id === members.davetan;
+
     if (message.content.toLowerCase() === prefix + commandNames.patpatStart.name) {
       // PatPat: start new conversations
       whosTalkingWithPatPat.add(message.author.id);
 
-      if (members.friendsofnira9000.includes(message.author.id)) {
+      if (dave) {
         color = '#ffc2e8';
         title = 'Nira-chan has entered the chat';
         description = `${emojis.hal} Hewwo, Dave!~~ （＾∀＾）`;
@@ -44,7 +46,7 @@ export const handlePatPatCommandMessage = async (message: CommandoMessage, prefi
       // PatPat: end conversations
       whosTalkingWithPatPat.delete(message.author.id);
 
-      if (members.friendsofnira9000.includes(message.author.id)) {
+      if (dave) {
         color = '#ffc2e8';
         title = 'Nira-chan has left the chat';
         description = `${emojis.hal} D-Dave, this convewsation can sewve nyo puwpose anymoweu(⋟﹏⋞) Goodbyeu~`;
@@ -60,7 +62,7 @@ export const handlePatPatCommandMessage = async (message: CommandoMessage, prefi
 
     if (whosTalkingWithPatPat.has(message.author.id)) {
       // PatPat: ongoing conversations
-      if (message.author.id == members.davetan) {
+      if (dave) {
         color = '#ffc2e8';
         title = 'Nira-chan says...';
         description = `${emojis.hal} ${nira9000[Math.floor(Math.random() * nira9000.length)]}`;

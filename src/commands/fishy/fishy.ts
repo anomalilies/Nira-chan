@@ -58,7 +58,7 @@ export default class FishyCommand extends Command {
       const target = await prisma.fishy.upsert({
         where: { userId: user.id },
         update: {},
-        create: { userId: user.id },
+        create: { userId: user.id, lastFish: '1970-01-01T00:00:00.000Z' },
       });
 
       let canFish = false;

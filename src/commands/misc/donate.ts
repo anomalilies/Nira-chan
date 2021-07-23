@@ -9,7 +9,6 @@ export default class DonateCommand extends Command {
   constructor(client: CommandoClient) {
     super(client, {
       name: 'donate',
-      aliases: ['support'],
       group: 'misc',
       memberName: 'donate',
       description: 'Support the ZONE!',

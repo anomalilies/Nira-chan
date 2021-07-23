@@ -40,11 +40,8 @@ export const uwuify = async function (text: string, message: Message) {
     let webhook = webhooks.first();
 
     if (!webhook) {
-      // No webhook exists in this channel, so create one
       webhook = await message.channel.createWebhook('Nira-chan');
     }
-
-    // Resend the message with the OP's avatar and display name
     await webhook.send(text, {
       username: message.member.displayName,
       avatarURL: message.author.displayAvatarURL(),

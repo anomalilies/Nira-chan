@@ -9,7 +9,7 @@ export default class EightBallCommand extends Command {
   constructor(client: CommandoClient) {
     super(client, {
       name: '8ball',
-      aliases: ['eightball', 'eight ball', '8 ball', '8-ball', 'eight-ball'],
+      aliases: ['eightball', '8-ball', 'eight-ball'],
       group: 'fun',
       memberName: '8ball',
       description: 'Ask the magic 8-Ball!',
