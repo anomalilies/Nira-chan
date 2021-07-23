@@ -59,11 +59,11 @@ export const dividers = new MessageEmbed({
 export const colours = new MessageEmbed({
   title: 'Colours',
   description: `
-    Want to change your role colour? You've come to the right place!\n
-    With the <@&781295857706336296> role, you'll be able to change your roles infinite times.\n\n
-    **The highest role in the list below will become the colour for your username:**\n
-    • If you'd like to add a role you don't already have, react with the corresponding emoji once.\n
-    • If you'd like to remove a pre-existing role you already have, react with the corresponding emoji twice.\n
+    Want to change your role colour? You've come to the right place!
+    With the <@&781295857706336296> role, you'll be able to change your roles infinite times.\n
+    **The highest role in the list below will become the colour for your username:**
+    • If you'd like to add a role you don't already have, react with the corresponding emoji once.
+    • If you'd like to remove a pre-existing role you already have, react with the corresponding emoji twice.
     • If you'd like to remove a given role, remove your reaction by reacting with the corresponding emoji again.
   `,
   color: colour,
