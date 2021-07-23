@@ -174,7 +174,8 @@ export default class FishyCommand extends Command {
               iconURL: user.displayAvatarURL({ dynamic: true }),
             },
           });
-          return await message.channel.send(embed.setTimestamp());
+          await message.channel.send(embed.setTimestamp()).then((msg) => msg.react(group.reaction));
+          return message;
         } else {
           const timerEmbed = createDefaultEmbed(title, description, color, author);
           message.channel.send(timerEmbed);
