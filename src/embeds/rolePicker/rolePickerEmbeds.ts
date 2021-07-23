@@ -1,4 +1,4 @@
-import { oneLineTrim, stripIndent } from 'common-tags';
+import { stripIndent } from 'common-tags';
 import { MessageEmbed } from 'discord.js';
 
 import { colour } from '../../config/config.json';
@@ -58,7 +58,7 @@ export const dividers = new MessageEmbed({
 
 export const colours = new MessageEmbed({
   title: 'Colours',
-  description: oneLineTrim`
+  description: `
     Want to change your role colour? You've come to the right place!\n
     With the <@&781295857706336296> role, you'll be able to change your roles infinite times.\n\n
     **The highest role in the list below will become the colour for your username:**\n

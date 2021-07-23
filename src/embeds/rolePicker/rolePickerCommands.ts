@@ -101,7 +101,6 @@ export const rolePickerCommands = async (client: CommandoClient) => {
     await channel.send(dividers);
     await channel.send(emojis.spacer);
     await channel.send(colours);
-    return;
   }
 
   const embedMessages = niraMessages.filter((msg) => !msg.content.startsWith(emojis.spacer)).array();
