@@ -27,7 +27,7 @@ export const updateMap = async (client: CommandoClient) => {
       }
     });
 
-    if (target.authentication) {
+    if (target !== null && target.authentication) {
       guild.emojis.cache
         .filter((e) => e.available && !commands.has(e.name))
         .forEach((e) => {
