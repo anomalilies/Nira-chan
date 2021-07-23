@@ -111,7 +111,6 @@ export const rolePickerCommands = async (client: CommandoClient) => {
     const message = embedMessages[index];
 
     for (const reaction in value.roles) {
-      console.log('reacted')
       message.react(reaction);
     }
 
