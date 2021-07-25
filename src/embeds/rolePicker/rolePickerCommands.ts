@@ -106,22 +106,22 @@ export const rolePickerCommands = async (client: CommandoClient) => {
 
   const embedMessages = niraMessages.filter((msg) => !msg.content.startsWith(emojis.spacer)).array();
 
-  let index = 0;
-  for (const [, value] of Object.entries(data)) {
-    const message = embedMessages[index];
+  if (embedMessages.length === 4) {
+    let index = 0;
+    for (const [, value] of Object.entries(data)) {
+      const message = embedMessages[index];
 
-    for (const reaction in value.roles) {
-      message.react(reaction);
+      value.roles.forEach((role, reaction) => message.react(reaction));
+
+      const collector = message.createReactionCollector(
+        (reaction: MessageReaction) => value.roles.has(reaction.emoji.id),
+        { dispose: true },
+      );
+
+      collector.on('collect', (reaction, user) => handleReaction(reaction, value, user, true));
+      collector.on('remove', (reaction, user) => handleReaction(reaction, value, user, false));
+
+      index++;
     }
-
-    const collector = message.createReactionCollector(
-      (reaction: MessageReaction) => value.roles.has(reaction.emoji.id),
-      { dispose: true },
-    );
-
-    collector.on('collect', (reaction, user) => handleReaction(reaction, value, user, true));
-    collector.on('remove', (reaction, user) => handleReaction(reaction, value, user, false));
-
-    index++;
   }
 };
