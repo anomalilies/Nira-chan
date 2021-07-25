@@ -2,6 +2,7 @@ import { CommandoMessage } from 'discord.js-commando';
 
 import { subscriptionThankYouMessage } from '../../config/event_handler.json';
 import { keyv } from '../../database/keyv';
+import { isHomeGuild } from '../../util/checks';
 
 const subscriptionTypes = [
   'USER_PREMIUM_GUILD_SUBSCRIPTION',
@@ -15,7 +16,7 @@ export const handleSubscriptionThankYouMessage = async (message: CommandoMessage
     return;
   }
 
-  if (subscriptionTypes.includes(message.type)) {
+  if (subscriptionTypes.includes(message.type) && isHomeGuild) {
     message.say('Thank you so much! <:niraStar:777740701441064960>');
   }
 };
