@@ -16,7 +16,15 @@ export default class KirbTrackerCommand extends Command {
   constructor(client: CommandoClient) {
     super(client, {
       name: 'wherethefuckiskirb',
-      aliases: ['whereishe', 'kirbtracker', 'wherethefuckisntkirb', 'whereisnthe', 'wherethefuckwaskirb', 'wherewashe'],
+      aliases: [
+        'whereishe',
+        'kirbtracker',
+        'wherethefuckisntkirb',
+        'whereisnthe',
+        'wherethefuckwaskirb',
+        'wherewashe',
+        'evergiven',
+      ],
       group: 'fun',
       memberName: 'wherethefuckiskirb',
       description: 'WHERE IS HE?',
