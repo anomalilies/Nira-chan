@@ -1,8 +1,8 @@
 import { CommandoMessage } from 'discord.js-commando';
 
 import { subscriptionThankYouMessage } from '../../config/event_handler.json';
-import { keyv } from '../../database/';
-import { homeGuild } from '../config/config.json';
+import { keyv } from '../../database/keyv';
+import { homeGuild } from '../../config/config.json';
 
 const subscriptionTypes = [
   'USER_PREMIUM_GUILD_SUBSCRIPTION',
