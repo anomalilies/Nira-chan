@@ -27,11 +27,15 @@ const strings: Array<string> = [
 ];
 
 function changeBotStatus(client: CommandoClient) {
+  let plural = '';
+  if (client.guilds.cache.size > 1) {
+    plural = 's';
+  }
   const songs = songsList.map((s) => s.engName);
 
   const statuses: ActivityOptions[] = [
     { name: strings[Math.floor(Math.random() * strings.length)], type: 'WATCHING' },
-    { name: `over ${client.guilds.cache.size} servers!`, type: 'WATCHING' },
+    { name: `${client.guilds.cache.size} server${plural}!`, type: 'WATCHING' },
     { name: songs[Math.floor(Math.random() * songs.length)] + '!', type: 'LISTENING' },
   ];
   client.user.setActivity(statuses[Math.floor(Math.random() * statuses.length)]);
