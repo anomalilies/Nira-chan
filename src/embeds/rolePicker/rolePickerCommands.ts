@@ -61,11 +61,11 @@ const data: RolePickerData = {
 };
 
 function hasDividerPermission(user: GuildMember, role: string): boolean {
+  let doesRoleMatch = false;
   return user.guild.roles.cache
     .sorted((a, b) => a.comparePositionTo(b))
     .keyArray()
     .some((guildRole) => {
-      let doesRoleMatch = false;
       if (Array.from(data.dividers.roles.values()).includes(guildRole)) {
         doesRoleMatch = guildRole === role;
       }
