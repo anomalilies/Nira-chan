@@ -5,8 +5,8 @@ import { allChannels } from '../../config/config.json';
 import { nonNitroEmoji } from '../../config/event_handler.json';
 import { keyv } from '../../database/keyv';
 import { emojiMap } from '../../jobs/emojiMap';
+import { commandNames, prefix } from '../../config/config.json';
 
-// Replace a regular message with a message sent through a webhook with the OP's name and avatar
 async function replaceMessageThroughWebhook(message: CommandoMessage, resendContent: string) {
   if (message.channel.id === allChannels.counting) {
     return;
@@ -25,7 +25,6 @@ async function replaceMessageThroughWebhook(message: CommandoMessage, resendCont
 
   if (webhook === undefined) {
     try {
-      // No webhook exists in this channel, so create one
       const newWebhook = await (<TextChannel>message.channel).createWebhook('Nira-chan');
 
       newWebhook.send(resendContent, {
@@ -46,22 +45,38 @@ async function replaceMessageThroughWebhook(message: CommandoMessage, resendCont
   });
 }
 
-function findEmoji(client: CommandoClient, message: CommandoMessage, emojiName: string) {
+function findEmoji(client: CommandoClient, message: CommandoMessage, emojiName: string, hasNiraPrefix: boolean) {
   if (message.channel.type !== 'dm') {
     const sameEmoji = (emoji: GuildEmoji) => emoji.available && emoji.name.toLowerCase() === emojiName.toLowerCase();
     let match = message.guild.emojis.cache.find(sameEmoji);
 
     if (!match) {
-      match = emojiMap().get(emojiName.toLowerCase());
+      if (!hasNiraPrefix) {
+        match = emojiMap().get(emojiName.toLowerCase());
+      } else {
+        const commands = new Set();
+        const groups = client.registry.groups;
+
+        commands.add(commandNames.patpatStart.name).add(commandNames.patpatStop.name);
+        groups.forEach((grp) => {
+          for (const cmd of grp.commands.values()) {
+            commands.add(cmd.name);
+            cmd.aliases.forEach((a) => {
+              commands.add(a);
+            });
+          }
+        });
+
+        if (!commands.has(emojiName)) {
+          match = emojiMap().get(emojiName.toLowerCase());
+        } else return;
+      }
     }
 
     return match;
   }
 }
 
-// TODO: start rewrite this
-// Check for non-nitro user using GIF emoji to resend it with the GIF emoji
-// Capture group 1 will have the emoji name in this case
 export const handleNonNitroEmoji = async (message: CommandoMessage, client: CommandoClient) => {
   if ((await keyv.get(Object.keys({ nonNitroEmoji })[0])) === false) {
     return;
@@ -69,24 +84,29 @@ export const handleNonNitroEmoji = async (message: CommandoMessage, client: Comm
 
   if (!message.member || message.channel.id == allChannels.fishy) return;
 
-  const emojiRegex = /<a?:\w+:\d+>|(?<!\\):(\w+):|^-(\w+)$/g;
+  const emojiRegex = new RegExp(String.raw`<a?:\w+:\d+>|(?<!\\):(\w+):|^${prefix}(\w+)$`, 'g');
   let needsToResend = false;
 
-  const resendContent = message.content.replace(emojiRegex, (match: string, group1: string, group2: string) => {
-    const emojiMatch = group1 || group2;
-    if (emojiMatch) {
-      const emoji = findEmoji(client, message, emojiMatch);
+  const resendContent = message.content.replace(
+    emojiRegex,
+    (match: string, colonPrefix: string, niraPrefix: string) => {
+      let emoji: GuildEmoji;
+
+      if (colonPrefix) {
+        emoji = findEmoji(client, message, colonPrefix, false);
+      } else if (niraPrefix) {
+        emoji = findEmoji(client, message, niraPrefix, true);
+      }
+
       if (emoji) {
-        // We only need to resend if we replace any animated emoji
         needsToResend = needsToResend || emoji.animated || emoji.guild.id !== message.guild.id;
         return emoji.toString();
       }
-    }
-    return match;
-  });
+      return match;
+    },
+  );
 
   if (needsToResend) {
-    // If there were any GIF emoji added to the message
     await replaceMessageThroughWebhook(message, resendContent);
   }
 };

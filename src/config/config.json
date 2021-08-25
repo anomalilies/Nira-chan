@@ -91,12 +91,13 @@
     "wail": "<:niraWail:777736598854696980>",
     "cute": "<:niraCute:788632707789225985>",
     "loading": "<a:loading:791389606616236052>",
-    "ngy": "<:nirangy:777736569746227211>",
     "dead": "<:niraDead:756582453824454727>",
     "wine": "<:1945grandpaladin:802352890571653170>",
     "star": "⭐",
     "yes": "✅",
-    "no": "❎"
+    "no": "❎",
+    "teehee": "<:niraTeehee:756734704161390734>",
+    "angy": "<:nirangy:777736569746227211>"
   },
   "roles": {
     "regular": "751209585464836137",
@@ -124,5 +125,5 @@
     "Musicians",
     "Artists"
   ],
-  "colour": "#F1D8F7"
+  "colour": 15849719
 }

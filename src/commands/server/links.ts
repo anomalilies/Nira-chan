@@ -60,7 +60,7 @@ export default class LinkCommand extends Command {
           await channel.send(emojis.spacer);
           await message.channel.send('Successfully created embed!');
         } else {
-          await message.channel.send(emojis.ngy);
+          await message.channel.send(emojis.angy);
         }
         return message;
       }

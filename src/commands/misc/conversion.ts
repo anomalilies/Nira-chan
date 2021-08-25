@@ -4,7 +4,7 @@ import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 import axios from 'axios';
 
 import currencies from '../../data/currencies.json';
-import { colour } from '../../config/config.json';
+import { colour, emojis } from '../../config/config.json';
 import { createDefaultEmbed } from '../../util/createDefaultEmbed';
 
 interface PromptArgs {
@@ -31,19 +31,13 @@ export default class ConversionCommand extends Command {
           key: 'fromCurrency',
           prompt: "Input the original currency's 3-character currency code (eg: GBP).",
           type: 'string',
-          validate: (fromCurrency: string) => {
-            if (currencies.includes(fromCurrency.toUpperCase())) return true;
-            return 'Invalid currency! Please use the 3-character currency code.';
-          },
+          oneOf: currencies,
         },
         {
           key: 'toCurrency',
           prompt: "Input the original currency's 3-character currency code (eg: GBP).",
           type: 'string',
-          validate: (toCurrency: string) => {
-            if (currencies.includes(toCurrency.toUpperCase())) return true;
-            return 'Invalid currency! Please use the 3-character currency code.';
-          },
+          oneOf: currencies,
         },
       ],
     });
@@ -52,28 +46,39 @@ export default class ConversionCommand extends Command {
   async run(message: CommandoMessage, { amount, fromCurrency, toCurrency }: PromptArgs) {
     const query = fromCurrency + '_' + toCurrency;
 
-    try {
-      axios
-        .get(`https://free.currconv.com/api/v7/convert?q=${query}&compact=ultra&apiKey=${process.env.CONVERSION_KEY}`)
-        .then(async (res: any) => {
-          const val = <any>Object.values(res.data);
-          const conversion = (val * amount).toFixed(2);
+    if (toCurrency !== fromCurrency) {
+      try {
+        axios
+          .get(`https://free.currconv.com/api/v7/convert?q=${query}&compact=ultra&apiKey=${process.env.CONVERSION_KEY}`)
+          .then(async (res: any) => {
+            const val = <any>Object.values(res.data);
+            const conversion = (val * amount).toFixed(2);
 
-          const embed = new MessageEmbed({
-            author: { name: `💰 ${amount} ${fromCurrency.toUpperCase()} equals:` },
-            title: `${conversion} ${toCurrency.toUpperCase()}`,
-            footer: {
-              text: message.author.tag,
-              iconURL: message.author.displayAvatarURL({ dynamic: true }),
-            },
-            color: colour,
-            timestamp: Date.now(),
+            const embed = new MessageEmbed({
+              author: { name: `💰 ${amount} ${fromCurrency.toUpperCase()} equals:` },
+              title: `${conversion} ${toCurrency.toUpperCase()}`,
+              footer: {
+                text: message.author.tag,
+                iconURL: message.author.displayAvatarURL({ dynamic: true }),
+              },
+              color: colour,
+              timestamp: Date.now(),
+            });
+
+            return message.channel.send(embed);
           });
-
-          return message.channel.send(embed);
-        });
-    } catch (err) {
-      return message.channel.send(createDefaultEmbed('API Error', err.message, colour, message.author));
+      } catch (err) {
+        return message.channel.send(createDefaultEmbed('API Error', err.message, colour, message.author));
+      }
+    } else {
+      return message.channel.send(
+        createDefaultEmbed(
+          'Why Even Bother?',
+          `You can't convert from the same currency! ${emojis.teehee}`,
+          colour,
+          message.author,
+        ),
+      );
     }
   }
 }

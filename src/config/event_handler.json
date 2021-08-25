@@ -39,5 +39,6 @@
   "onGuildDelete": true,
   "onGuildEmojiUpdate": true,
   "onGuildEmojiCreate": true,
-  "onGuildEmojiDelete": true
+  "onGuildEmojiDelete": true,
+  "songInfo": true
 }

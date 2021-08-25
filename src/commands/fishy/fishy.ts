@@ -64,7 +64,7 @@ export default class FishyCommand extends Command {
       let canFish = false;
 
       const title = 'Hold Up!';
-      let color: string;
+      let color: number;
       const author = message.author;
 
       var description: string;

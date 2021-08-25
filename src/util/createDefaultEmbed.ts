@@ -3,7 +3,7 @@ import { MessageEmbed, User } from 'discord.js';
 export const createDefaultEmbed = (
   title: string,
   description: string,
-  color: string | number = 15849719,
+  color: number | number = 15849719,
   author?: User,
 ) => {
   const embed = new MessageEmbed({

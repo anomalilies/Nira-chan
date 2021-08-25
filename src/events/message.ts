@@ -21,6 +21,7 @@ import {
   handleNonNitroEmoji,
   handleServerRulesMessage,
   handleQueenCommandMessage,
+  handleSongInfo,
 } from '../handler';
 import { onMessage } from '../config/event_handler.json';
 import { keyv } from '../database/keyv';
@@ -68,4 +69,6 @@ export default async function (client: CommandoClient, message: CommandoMessage)
   await handleQueenCommandMessage(message);
 
   await handleServerRulesMessage(message, client.commandPrefix);
+
+  await handleSongInfo(message, client.commandPrefix);
 }

@@ -31,7 +31,7 @@ export default class FishyTimerCommand extends Command {
 
       const title = 'Hold Up!';
       let description: string;
-      let color: string;
+      let color: number;
       const author = message.author;
 
       if (isDmChannel(message) || isInChannel(message, allChannels.fishy) || !isHomeGuild(message)) {

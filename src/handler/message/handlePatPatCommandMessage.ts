@@ -1,6 +1,6 @@
 import { CommandoMessage } from 'discord.js-commando';
 
-import { members, commandNames, emojis } from '../../config/config.json';
+import { members, commandNames, emojis, colour } from '../../config/config.json';
 import patpatresponses from '../../data/patpatresponses.json';
 import nira9000 from '../../data/nira9000.json';
 import { createDefaultEmbed } from '../../util/createDefaultEmbed';
@@ -17,7 +17,7 @@ export const handlePatPatCommandMessage = async (message: CommandoMessage, prefi
 
   // Allowed in specific bot channels only
   if (isDmChannel(message) || isBotspamChannel(message) || !isHomeGuild(message) || doesUserHaveBotpass(message)) {
-    let color: string;
+    let color: number;
     let title: string;
     const author = message.author;
     let description: string;
@@ -29,11 +29,11 @@ export const handlePatPatCommandMessage = async (message: CommandoMessage, prefi
       whosTalkingWithPatPat.add(message.author.id);
 
       if (dave) {
-        color = '#ffc2e8';
+        color = colour;
         title = 'Nira-chan has entered the chat';
         description = `${emojis.hal} Hewwo, Dave!~~ （＾∀＾）`;
       } else {
-        color = '#99ff00';
+        color = 10092288;
         title = 'PatPat has entered the chat';
         description = `Salutations, gamer! ${emojis.patpat}`;
       }
@@ -47,11 +47,11 @@ export const handlePatPatCommandMessage = async (message: CommandoMessage, prefi
       whosTalkingWithPatPat.delete(message.author.id);
 
       if (dave) {
-        color = '#ffc2e8';
+        color = colour;
         title = 'Nira-chan has left the chat';
         description = `${emojis.hal} D-Dave, this convewsation can sewve nyo puwpose anymoweu(⋟﹏⋞) Goodbyeu~`;
       } else {
-        color = '#ff9900';
+        color = 16750848;
         title = 'PatPat has left the chat';
         description = `Gud niet yeahyeah— ${emojis.patpat}`;
       }
@@ -63,11 +63,11 @@ export const handlePatPatCommandMessage = async (message: CommandoMessage, prefi
     if (whosTalkingWithPatPat.has(message.author.id)) {
       // PatPat: ongoing conversations
       if (dave) {
-        color = '#ffc2e8';
+        color = colour;
         title = 'Nira-chan says...';
         description = `${emojis.hal} ${nira9000[Math.floor(Math.random() * nira9000.length)]}`;
       } else {
-        color = '#0099ff';
+        color = 39423;
         title = 'PatPat says...';
         description = `${patpatresponses[Math.floor(Math.random() * patpatresponses.length)]}`;
       }

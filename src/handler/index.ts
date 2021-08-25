@@ -26,6 +26,7 @@ import { handleMuteRole } from './guildMemberUpdate/handleMuteRole';
 import { handleServerBoosterRole } from './guildMemberUpdate/handleServerBoosterRole';
 import { handleStarboard } from './messageReactionAdd/handleStarboard';
 import { handleHallOfFame } from './messageReactionAdd/handleHallOfFame';
+import { handleSongInfo } from './handleSongInfo';
 
 export {
   handleCountingEditedMessage,
@@ -56,4 +57,5 @@ export {
   handleServerBoosterRole,
   handleStarboard,
   handleHallOfFame,
+  handleSongInfo,
 };
