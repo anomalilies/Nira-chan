@@ -88,16 +88,6 @@ export default async function (guild: Guild) {
         ],
         inline: true,
       },
-      {
-        name: 'Presence',
-        inline: true,
-        value: [
-          `**❯ Online:** ${members.filter((member) => member.presence.status === 'online').size}`,
-          `**❯ Idle:** ${members.filter((member) => member.presence.status === 'idle').size}`,
-          `**❯ Do Not Disturb:** ${members.filter((member) => member.presence.status === 'dnd').size}`,
-          `**❯ Offline:** ${members.filter((member) => member.presence.status === 'offline').size}`,
-        ],
-      },
     ],
     footer: { text: 'Last updated' },
     timestamp: Date.now(),
