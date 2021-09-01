@@ -16,24 +16,23 @@ export default class EmojiListCommand extends Command {
   }
 
   async run(msg: CommandoMessage) {
-    const target = await prisma.auth.findMany({});
-    const guilds = target.filter((guild) => guild.authentication);
+    const guildData = await prisma.auth.findMany();
+    const published = new Set(guildData.filter((guild) => guild.authentication).map((guild) => guild.guildId));
 
-    const emojiMap = new Map();
+    const emojis = this.client.guilds.cache
+      .filter((guild) => published.has(guild.id))
+      .map((guild) => ({
+        guildName: guild.name,
+        guildOwner: guild.ownerID,
+        emojis: guild.emojis.cache.filter((e) => e.available).map((e) => `${e}`),
+      }));
 
-    guilds.forEach(async (g) => {
-      const guild = this.client.guilds.cache.get(g.guildId);
-      guild.emojis.cache
-        .filter((e) => e.available)
-        .forEach((e) => {
-          emojiMap.set(e.guild.name, {
-            guildOwner: e.guild.owner.user.username,
-            emojis: guild.emojis.cache.map((e) => `${e}`),
-          });
-        });
-    });
+    for (const guild of emojis) {
+      const user = await this.client.users.fetch(guild.guildOwner);
+      guild.guildOwner = user.username;
+    }
 
-    const data = Buffer.from(JSON.stringify(Array.from(emojiMap.entries()), null, 2), 'utf8');
+    const data = Buffer.from(JSON.stringify(emojis, null, 2), 'utf8');
     return msg.say(new MessageAttachment(data, 'emoji.json'));
   }
 }
