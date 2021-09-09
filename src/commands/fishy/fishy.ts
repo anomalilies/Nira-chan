@@ -96,7 +96,7 @@ export default class FishyCommand extends Command {
       if (isDmChannel(message) || isInChannel(message, allChannels.fishy) || !isHomeGuild(message)) {
         if (canFish === true) {
           const total = fish.reduce((acc, cur) => acc + cur.weight, 0);
-          const threshold = Math.random() * total;
+          const threshold = (crypto.randomInt(0, 100000000000000) / 100000000000000) * total;
 
           let sum = 0;
           const group = fish.find((group) => {
@@ -104,14 +104,14 @@ export default class FishyCommand extends Command {
             return sum >= threshold;
           });
 
-          const index = Math.floor(Math.random() * group.puns.length);
+          const index = Math.floor((crypto.randomInt(0, 100000000000000) / 100000000000000) * group.puns.length);
           const fishPun = group.puns[index];
 
           if (group.type === 'totalTrash') {
             var amount = 0;
             var reply = group.catch;
           } else {
-            var amount = Math.floor(Math.random() * (group.max - group.min) + group.min);
+            var amount = Math.floor((crypto.randomInt(0, 100000000000000) / 100000000000000) * (group.max - group.min) + group.min);
             var reply = group.catch.replace('{amount}', amount.toString());
           }
 
