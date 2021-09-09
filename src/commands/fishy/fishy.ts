@@ -6,6 +6,7 @@ import { isInChannel, isDmChannel, isHomeGuild } from '../../util/checks';
 import { createDefaultEmbed } from '../../util/createDefaultEmbed';
 import { allChannels, colour } from '../../config/config.json';
 import moment from 'moment';
+import * as crypto from 'crypto';
 
 const prisma = new PrismaClient();
 import fish from '../../data/fish.json';
@@ -96,7 +97,7 @@ export default class FishyCommand extends Command {
       if (isDmChannel(message) || isInChannel(message, allChannels.fishy) || !isHomeGuild(message)) {
         if (canFish === true) {
           const total = fish.reduce((acc, cur) => acc + cur.weight, 0);
-          const threshold = Math.random() * total;
+          const threshold = crypto.randomInt(total);
 
           let sum = 0;
           const group = fish.find((group) => {
@@ -104,14 +105,14 @@ export default class FishyCommand extends Command {
             return sum >= threshold;
           });
 
-          const index = Math.floor(Math.random() * group.puns.length);
+          const index = crypto.randomInt(group.puns.length);
           const fishPun = group.puns[index];
 
           if (group.type === 'totalTrash') {
             var amount = 0;
             var reply = group.catch;
           } else {
-            var amount = Math.floor(Math.random() * (group.max - group.min) + group.min);
+            var amount = crypto.randomInt(group.min, group.max + 1);
             var reply = group.catch.replace('{amount}', amount.toString());
           }
 
