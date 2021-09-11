@@ -102,7 +102,7 @@ export default class FishyCommand extends Command {
           let sum = 0;
           const group = fish.find((group) => {
             sum += group.weight;
-            return sum >= threshold;
+            return sum > threshold;
           });
 
           const index = crypto.randomInt(group.puns.length);
