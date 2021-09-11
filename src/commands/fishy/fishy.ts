@@ -97,12 +97,12 @@ export default class FishyCommand extends Command {
       if (isDmChannel(message) || isInChannel(message, allChannels.fishy) || !isHomeGuild(message)) {
         if (canFish === true) {
           const total = fish.reduce((acc, cur) => acc + cur.weight, 0);
-          const threshold = crypto.randomInt(total + 1);
+          const threshold = crypto.randomInt(total);
 
           let sum = 0;
           const group = fish.find((group) => {
             sum += group.weight;
-            return sum >= threshold;
+            return sum > threshold;
           });
 
           const index = crypto.randomInt(group.puns.length);
