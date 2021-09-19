@@ -27,7 +27,7 @@ export default class YunyahCommand extends Command {
       await message.channel.send(embed);
     } else if (isBotspamChannel(message) || !isHomeGuild(message) || doesUserHaveBotpass(message)) {
       const webhooks = await (<TextChannel>message.channel).fetchWebhooks();
-      let webhook = webhooks.first();
+      let webhook = webhooks.find((w) => w.token != null);
 
       if (!webhook) {
         webhook = await (<TextChannel>message.channel).createWebhook('Nira-chan');

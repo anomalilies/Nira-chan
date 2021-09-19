@@ -37,7 +37,7 @@ export const uwuify = async function (text: string, message: Message) {
     await message.channel.send(embed);
   } else {
     const webhooks = await message.channel.fetchWebhooks();
-    let webhook = webhooks.first();
+    let webhook = webhooks.find((w) => w.token != null);
 
     if (!webhook) {
       webhook = await message.channel.createWebhook('Nira-chan');

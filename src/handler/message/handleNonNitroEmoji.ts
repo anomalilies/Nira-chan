@@ -17,26 +17,14 @@ async function replaceMessageThroughWebhook(message: CommandoMessage, resendCont
   }
 
   const webhooks = await (<TextChannel>message.channel).fetchWebhooks();
-  const webhook = webhooks.filter((w) => (<User>w.owner).id === message.client.user.id).first();
+  let webhook = webhooks.find((w) => w.token != null);
 
   const member = message.guild.member(message.author);
   const nickname = member ? member.displayName : null;
   const avatar = message.author.displayAvatarURL();
 
-  if (webhook === undefined) {
-    try {
-      const newWebhook = await (<TextChannel>message.channel).createWebhook('Nira-chan');
-
-      newWebhook.send(resendContent, {
-        username: nickname,
-        avatarURL: avatar,
-      });
-    } catch (error) {
-      console.error(error);
-    } finally {
-      // eslint-disable-next-line no-unsafe-finally
-      return;
-    }
+  if (!webhook) {
+    webhook = await (<TextChannel>message.channel).createWebhook('Nira-chan');
   }
 
   webhook.send(resendContent, {
