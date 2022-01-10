@@ -27,10 +27,8 @@ export default class EmojiListCommand extends Command {
         emojis: guild.emojis.cache.filter((e) => e.available).map((e) => `${e}`),
       }));
 
-    for (const guild of emojis) {
-      const user = await this.client.users.fetch(guild.guildOwner);
-      guild.guildOwner = user.username;
-    }
+    const promise = Promise.all(emojis.map(guild => this.client.users.fetch(guild.guildOwner)));
+    (await promise).forEach((owner, i) => emojis[i].guildOwner = owner.username);
 
     const data = Buffer.from(JSON.stringify(emojis, null, 2), 'utf8');
     return msg.say(new MessageAttachment(data, 'emoji.json'));
