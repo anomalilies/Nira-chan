@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-var-requires */
 require("dotenv").config();
 
@@ -6,9 +7,8 @@ import { REST } from "@discordjs/rest";
 import { Routes } from "discord-api-types/v9";
 import { clientId, guildId } from "./config/config.json";
 
-const commands = [];
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const commandFiles = fs.readdirSync("./commands").filter((file: any) => file.endsWith(".js" || ".ts"));
+const commands: any = [];
+const commandFiles = fs.readdirSync("./commands").filter((file: any) => file.endsWith(".js") || file.endsWith(".ts"));
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
@@ -19,5 +19,5 @@ const rest = new REST({ version: "9" }).setToken(process.env.CLIENT_TOKEN);
 
 rest
   .put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
-  .then(() => console.log("Successfully registered application commands."))
+  .then(() => console.log("Command registration successful!" + commands))
   .catch(console.error);

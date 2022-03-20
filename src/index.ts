@@ -14,7 +14,7 @@ for (const file of commandFiles) {
 }
 
 client.once("ready", () => {
-  console.log(commands);
+  console.log(`Ready!`);
 });
 
 client.on("interactionCreate", async (interaction: Interaction) => {
@@ -33,7 +33,7 @@ client.on("interactionCreate", async (interaction: Interaction) => {
   }
 });
 
-const eventFiles = fs.readdirSync("./src/events").filter((file) => file.endsWith(".ts"));
+const eventFiles = fs.readdirSync("./src/events").filter((file) => file.endsWith(".js") || file.endsWith(".ts"));
 
 for (const file of eventFiles) {
   const event = require(`./events/${file}`);
