@@ -2,10 +2,12 @@
 import fs from "node:fs";
 import { REST } from "@discordjs/rest";
 import { Routes } from "discord-api-types/v9";
-import { clientId, guildId } from "./config/config.json";
+import { guildId } from "./config/config.json";
+import { Client, Intents } from "discord.js";
 
 const commands = [];
-const commandFiles = fs.readdirSync("./commands").filter((file) => file.endsWith(".ts"));
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const commandFiles = fs.readdirSync("./commands").filter((file: any) => file.endsWith(".ts"));
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
@@ -14,7 +16,10 @@ for (const file of commandFiles) {
 
 const rest = new REST({ version: "9" }).setToken(process.env.CLIENT_TOKEN);
 
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+client.login(process.env.CLIENT_TOKEN);
+
 rest
-  .put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
+  .put(Routes.applicationGuildCommands(client.user.id, guildId), { body: commands })
   .then(() => console.log("Successfully registered application commands."))
   .catch(console.error);

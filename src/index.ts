@@ -1,13 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 require("dotenv").config();
 import fs from "node:fs";
-import { Client, Intents, Interaction } from "discord.js";
+import { Client, Collection, Intents, Interaction } from "discord.js";
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let commands: any;
-
+const commands = new Collection();
 const commandFiles = fs.readdirSync("./src/commands").filter((file) => file.endsWith(".ts"));
 
 for (const file of commandFiles) {
@@ -22,7 +20,8 @@ client.once("ready", () => {
 client.on("interactionCreate", async (interaction: Interaction) => {
   if (!interaction.isCommand()) return;
 
-  const command = commands.get(interaction.commandName);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const command: any = commands.get(interaction.commandName);
 
   if (!command) return;
 
@@ -33,5 +32,16 @@ client.on("interactionCreate", async (interaction: Interaction) => {
     await interaction.reply({ content: "There was an error while executing this command!", ephemeral: true });
   }
 });
+
+const eventFiles = fs.readdirSync("./src/events").filter((file) => file.endsWith(".ts"));
+
+for (const file of eventFiles) {
+  const event = require(`./events/${file}`);
+  if (event.once) {
+    client.once(event.name, (...args) => event.execute(...args));
+  } else {
+    client.on(event.name, (...args) => event.execute(...args));
+  }
+}
 
 client.login(process.env.CLIENT_TOKEN);
