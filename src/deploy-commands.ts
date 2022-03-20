@@ -8,7 +8,7 @@ import { clientId, guildId } from "./config/config.json";
 
 const commands = [];
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const commandFiles = fs.readdirSync("./commands").filter((file: any) => file.endsWith(".ts"));
+const commandFiles = fs.readdirSync("./commands").filter((file: any) => file.endsWith(".js" || ".ts"));
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);

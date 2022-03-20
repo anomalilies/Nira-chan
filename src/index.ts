@@ -6,7 +6,7 @@ import { Client, Collection, Intents, Interaction } from "discord.js";
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 const commands = new Collection();
-const commandFiles = fs.readdirSync("./src/commands").filter((file) => file.endsWith(".ts"));
+const commandFiles = fs.readdirSync("./src/commands").filter((file) => file.endsWith(".js" || ".ts"));
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
@@ -14,7 +14,7 @@ for (const file of commandFiles) {
 }
 
 client.once("ready", () => {
-  console.log("Ready!");
+  console.log(commands);
 });
 
 client.on("interactionCreate", async (interaction: Interaction) => {
