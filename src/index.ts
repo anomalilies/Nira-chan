@@ -1,26 +1,28 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 require("dotenv").config();
 import fs from "node:fs";
-import { Client, Collection, Intents } from "discord.js";
+import { Client, Intents, Interaction } from "discord.js";
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
-client.commands = new Collection();
-const commandFiles = fs.readdirSync("./commands").filter((file) => file.endsWith(".ts"));
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let commands: any;
+
+const commandFiles = fs.readdirSync("./src/commands").filter((file) => file.endsWith(".ts"));
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
-  client.commands.set(command.data.name, command);
+  commands.set(command.data.name, command);
 }
 
 client.once("ready", () => {
   console.log("Ready!");
 });
 
-client.on("interactionCreate", async (interaction) => {
+client.on("interactionCreate", async (interaction: Interaction) => {
   if (!interaction.isCommand()) return;
 
-  const command = client.commands.get(interaction.commandName);
+  const command = commands.get(interaction.commandName);
 
   if (!command) return;
 
