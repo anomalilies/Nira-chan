@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+require("dotenv").config();
+
 import fs from "node:fs";
 import { REST } from "@discordjs/rest";
 import { Routes } from "discord-api-types/v9";
-import { guildId } from "./config/config.json";
-import { Client, Intents } from "discord.js";
+import { clientId, guildId } from "./config/config.json";
 
 const commands = [];
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -16,10 +17,7 @@ for (const file of commandFiles) {
 
 const rest = new REST({ version: "9" }).setToken(process.env.CLIENT_TOKEN);
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
-client.login(process.env.CLIENT_TOKEN);
-
 rest
-  .put(Routes.applicationGuildCommands(client.user.id, guildId), { body: commands })
+  .put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
   .then(() => console.log("Successfully registered application commands."))
   .catch(console.error);
