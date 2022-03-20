@@ -19,5 +19,5 @@ const rest = new REST({ version: "9" }).setToken(process.env.CLIENT_TOKEN);
 
 rest
   .put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
-  .then(() => console.log("Command registration successful!" + commands))
+  .then(() => console.log("Command registration successful!\n" + commands))
   .catch(console.error);

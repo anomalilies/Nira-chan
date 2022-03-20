@@ -6,7 +6,7 @@ import { Client, Collection, Intents, Interaction } from "discord.js";
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 const commands = new Collection();
-const commandFiles = fs.readdirSync("./src/commands").filter((file) => file.endsWith(".js" || ".ts"));
+const commandFiles = fs.readdirSync("./src/commands").filter((file) => file.endsWith(".js") || file.endsWith(".ts"));
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
