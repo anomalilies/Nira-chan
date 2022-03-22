@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-var-requires */
 require("dotenv").config();
 import fs from "node:fs";
 import { Client, Collection, Intents, Interaction } from "discord.js";
+import { ownerId, guildId } from "./config/config.json";
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
@@ -13,18 +15,27 @@ for (const file of commandFiles) {
   commands.set(command.data.name, command);
 }
 
-client.once("ready", () => {
-  console.log(`Ready!`);
+client.on("ready", async () => {
+  const command: any = await client.guilds.cache.get(guildId)?.commands.fetch("955566413714702336");
+  if (command.defaultPermission === false) {
+    const permissions = [
+      {
+        id: ownerId,
+        type: "USER",
+        permission: true,
+      },
+    ];
+
+    await command.permissions.add({ permissions });
+  }
 });
 
 client.on("interactionCreate", async (interaction: Interaction) => {
   if (!interaction.isCommand()) return;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const command: any = commands.get(interaction.commandName);
 
   if (!command) return;
-
   try {
     await command.execute(interaction);
   } catch (error) {

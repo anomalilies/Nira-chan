@@ -1,9 +1,9 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
+import { CommandInteraction } from "discord.js";
 
 module.exports = {
-  data: new SlashCommandBuilder().setName("ping").setDescription("Replies with Pong!"),
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  async execute(interaction: any) {
-    return interaction.reply("Pong!");
+  data: new SlashCommandBuilder().setName("ping").setDescription("Check if Nira is alive."),
+  async execute(interaction: CommandInteraction) {
+    return interaction.reply({ content: "Pong! 🏓", ephemeral: true });
   },
 };

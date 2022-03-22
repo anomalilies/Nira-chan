@@ -5,9 +5,9 @@
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run dev",
+    "start": "npm run reg && npm run dev",
     "dev": "nodemon --config nodemon.json src/index.ts",
-    "postinstall": "tsc"
+    "reg": "ts-node src/deploy-commands.ts"
   },
   "author": "anomalilies ft. ZUTOMAYO ZONE (cubetastic33, davetan2, Glup3, jy761 and niradisgust)",
   "license": "ISC",
