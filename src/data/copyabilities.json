@@ -65,7 +65,9 @@
       "Whip",
       "Wing",
       "Wrestler",
-      "Yo-Yo"
+      "Yo-Yo",
+      "Ranger",
+      "Drill"
     ],
     "weight": 45
   },
@@ -159,9 +161,13 @@
       "Byleth",
       "Min Min",
       "Steve",
-      "Sephiroth"
+      "Sephiroth",
+      "Pyra",
+      "Mythra",
+      "Kazuya",
+      "Sora"
     ],
-    "weight": 20
+    "weight": 9
   },
   {
     "name": "starAllies",
@@ -208,7 +214,59 @@
       "Sizzle Yo-Yo",
       "Sizzle Staff"
     ],
-    "weight": 10
+    "weight": 9
+  },
+  {
+    "name": "mouthfulMode",
+    "format": "Kirby finds himself in the strange, Forgotten Land. When inhaling **{name}**, he gets the **{ability} Mouth** ability!",
+    "abilities": [
+      "Car",
+      "Arch",
+      "Big-Rig",
+      "Cone",
+      "Dome",
+      "Light-Bulb",
+      "Pipe",
+      "Ring",
+      "Coaster",
+      "Scissor-Lift",
+      "Stairs",
+      "Storage",
+      "Vending",
+      "Water-Balloon"
+    ],
+    "weight": 9
+  },
+  {
+    "name": "forgottenLand",
+    "format": "Power-up! Kirby got the **{ability}** ability when inhaling **{name}**!",
+    "abilities": [
+      "Noble Ranger",
+      "Space Ranger",
+      "Toy Hammer",
+      "Wild Hammer",
+      "Time Crash",
+      "Volcano Fire",
+      "Dragon Fire",
+      "Chakram Cutter",
+      "Buzz-Saw Cutter",
+      "Gigant Sword",
+      "Meta Knight Sword",
+      "Chain Bomb",
+      "Homing Bomb",
+      "Fleur Tornado",
+      "Storm Tornado",
+      "Pencil Drill",
+      "Twin Drill",
+      "Deep Sleep",
+      "Clutter Needle",
+      "Crystal Needle",
+      "Frosty Ice",
+      "Blizzard Ice",
+      "Masked Hammer",
+      "Morpho Knight Sword"
+    ],
+    "weight": 9
   },
   {
     "name": "comboAbilities",
@@ -241,7 +299,7 @@
       "Light Saber",
       "Super Boomerang"
     ],
-    "weight": 5
+    "weight": 3
   },
   {
     "name": "superAbilities",
@@ -258,13 +316,13 @@
       "Beam Mage",
       "Doctor Healmore"
     ],
-    "weight": 4
+    "weight": 3
   },
   {
     "name": "epicYarn",
     "format": "Kirby inhaled **{name}** and... Turned into yarn? He uses the **{ability}** move!",
     "abilities": ["Car", "Note", "Parachute", "Pendulum", "Sleigh", "Snake", "Strength", "Submarine", "Top", "Weight"],
-    "weight": 4
+    "weight": 3
   },
   {
     "name": "planetRobobot",
@@ -317,13 +375,13 @@
       "Thundersplash",
       "Zap Splasher"
     ],
-    "weight": 3
+    "weight": 1.5
   },
   {
     "name": "animeOnly",
     "format": "Wow! Kirby inhaled **{name}** and got the rare **{ability}** ability!",
     "abilities": ["Baton", "Iron", "Top", "Kabuki"],
-    "weight": 2
+    "weight": 1.5
   },
   {
     "name": "ravelAbilities",
@@ -371,25 +429,44 @@
     "format": "No way... Kirby inhaled **{name}** and got the ultra-rare **{ability}** ability!",
     "abilities": [
       "Baseball",
+      "Basketball",
+      "Block",
+      "Card",
+      "Carpenter",
+      "Cheerleading",
+      "Comedian",
       "Conductor",
       "Construction Worker",
       "Cowboy",
-      "Explorer",
+      "Donate",
       "Ekiben Seller",
+      "Explorer",
+      "Firefighter",
+      "Flower",
+      "Grenade",
+      "Idol",
       "Kyary Pamyu Pamyu",
       "Lumberjack",
+      "Mantle",
       "Mechanic",
       "Morgana",
+      "Pilot",
       "Police Officer",
+      "Pâtissier",
+      "Rugby",
+      "Rush",
       "Sailor",
       "Samurai",
+      "Satellite",
+      "Soccer",
+      "Summon",
+      "Swimming",
+      "Tennis",
+      "Tonosama",
       "Tour Guide",
-      "Pâtissier",
-      "Comedian",
-      "Firefighter",
-      "Idol",
-      "Pilot",
-      "Carpenter"
+      "Track and Field",
+      "Volleyball",
+      "Weightlifting"
     ],
     "weight": 0.9
   },
