@@ -320,7 +320,7 @@
   },
   {
     "name": "epicYarn",
-    "format": "Kirby inhaled **{name}** and... Turned into yarn? He uses the **{ability}** move!",
+    "format": "Kirby inhaled **{name}** and... Turned into yarn? He uses the **{ability}** ability!",
     "abilities": ["Car", "Note", "Parachute", "Pendulum", "Sleigh", "Snake", "Strength", "Submarine", "Top", "Weight"],
     "weight": 3
   },
