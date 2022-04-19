@@ -42,7 +42,9 @@ module.exports = {
           Fishing data will be stored indefinitely until manually deleted.\n\n**By using Nira-chan, you agree to having *only* the aforementioned data stored.** 
           If you have any queries, please contact <@${ownerId}> at anytime via DM!`,
         },
-      );
+      )
+      .setFooter({ text: "Last updated" })
+      .setTimestamp();
 
     return interaction.reply({ embeds: [embed] });
   },

@@ -36,7 +36,7 @@ module.exports = {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const filter = (i: any) => i.user.id === interaction.user.id;
-    const collector = interaction.channel.createMessageComponentCollector({ filter, time: 60000 });
+    const collector = interaction.channel.createMessageComponentCollector({ filter, max: 1, time: 60000 });
 
     collector.on("collect", async (i) => {
       if (i.customId === "yes") {
