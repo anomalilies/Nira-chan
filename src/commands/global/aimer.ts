@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import { colour } from "../config/config.json";
+import { colour } from "../../config/config.json";
 import { oneLine } from "common-tags";
 
 module.exports = {

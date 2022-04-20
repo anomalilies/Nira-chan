@@ -7,19 +7,38 @@ import { REST } from "@discordjs/rest";
 import { Routes } from "discord-api-types/v9";
 import { clientId, guildId } from "./config/config.json";
 
-const commandPath = __dirname + "/commands/";
+// TO-DO: Split by folder
+const guildCommandPath = __dirname + "/commands/guild/";
+const globalCommandPath = __dirname + "/commands/global/";
 
-const commands: any = [];
-const commandFiles = fs.readdirSync(commandPath).filter((file: any) => file.endsWith(".js") || file.endsWith(".ts"));
+const guildCommands: any = [];
+const globalCommands: any = [];
 
-for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
-  commands.push(command.data.toJSON());
+const guildCommandFiles = fs
+  .readdirSync(guildCommandPath)
+  .filter((file: any) => file.endsWith(".js") || file.endsWith(".ts"));
+const globalCommandFiles = fs
+  .readdirSync(globalCommandPath)
+  .filter((file: any) => file.endsWith(".js") || file.endsWith(".ts"));
+
+let command: any;
+for (const file of guildCommandFiles) {
+  command = require(`./commands/guild/${file}`);
+  guildCommands.push(command.data.toJSON());
+}
+for (const file of globalCommandFiles) {
+  command = require(`./commands/global/${file}`);
+  globalCommands.push(command.data.toJSON());
 }
 
 const rest = new REST({ version: "9" }).setToken(process.env.CLIENT_TOKEN);
 
 rest
-  .put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
-  .then(() => console.log("Command registration successful!"))
+  .put(Routes.applicationGuildCommands(clientId, guildId), { body: guildCommands })
+  .then(() => console.log("Guild command registration successful!"))
+  .catch(console.error);
+
+rest
+  .put(Routes.applicationCommands(clientId), { body: globalCommands })
+  .then(() => console.log("Global command registration successful!"))
   .catch(console.error);

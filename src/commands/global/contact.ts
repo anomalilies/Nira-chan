@@ -1,9 +1,11 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import { colour } from "../config/config.json";
+import { colour, ownerId, invite } from "../../config/config.json";
 
 module.exports = {
-  data: new SlashCommandBuilder().setName("servercount").setDescription("Find out how many servers Nira is in."),
+  data: new SlashCommandBuilder()
+    .setName("contact")
+    .setDescription("Get support in using Nira, and suggest new features."),
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async execute(interaction: CommandInteraction) {
     let nickname: string;
@@ -21,10 +23,11 @@ module.exports = {
     const embed = new MessageEmbed()
       .setColor(colour)
       .setAuthor({ name: nickname, iconURL: avatar })
+      .setTitle("Support")
       .setDescription(
-        `<@!${interaction.client.user.id}> is currently in **${interaction.client.guilds.cache.size} servers**!`,
+        `Need support in using <@!${interaction.client.user.id}>?\nContact <@!${ownerId}> through DMs, or **through the support server found below**:`,
       )
-      .setTimestamp();
+      .addFields({ name: "Discord Server", value: `[Link](https://discord.gg/${invite})` });
 
     return interaction.reply({ embeds: [embed] });
   },

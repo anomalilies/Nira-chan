@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import { colour } from "../config/config.json";
 import axios from "axios";
-import currencies from "../data/currencies.json";
+import { colour } from "../../config/config.json";
+import currencies from "../../data/currencies.json";
 
 module.exports = {
   data: new SlashCommandBuilder()

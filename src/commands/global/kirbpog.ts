@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
 import { stripIndents } from "common-tags";
-import { emojis } from "../config/config.json";
+import { emojis } from "../../config/config.json";
 
 module.exports = {
   data: new SlashCommandBuilder().setName("kirbpog").setDescription("Poggers."),

@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import { colour, ownerId } from "../config/config.json";
+import { colour, ownerId } from "../../config/config.json";
 
 module.exports = {
   data: new SlashCommandBuilder().setName("tos").setDescription("Review Nira's Terms of Service and Privacy Policy."),

@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import { colour, ownerId, invite } from "../config/config.json";
+import { colour, ownerId, invite } from "../../config/config.json";
 
 module.exports = {
   data: new SlashCommandBuilder().setName("about").setDescription("Learn more about Nira-chan."),

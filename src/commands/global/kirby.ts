@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import { emojis, colour } from "../config/config.json";
-import abilities from "../data/copyabilities.json";
+import { emojis, colour } from "../../config/config.json";
+import abilities from "../../data/copyabilities.json";
 
 module.exports = {
   data: new SlashCommandBuilder()

@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import { colour } from "../config/config.json";
-import riddles from "../data/riddles.json";
+import { colour } from "../../config/config.json";
+import riddles from "../../data/riddles.json";
 
 module.exports = {
   data: new SlashCommandBuilder().setName("riddle").setDescription("Really lousy riddles."),

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed, MessageActionRow, MessageButton } from "discord.js";
-import { colour, guildId, invite } from "../config/config.json";
+import { colour, guildId, invite } from "../../config/config.json";
 
 module.exports = {
   data: new SlashCommandBuilder().setName("invite").setDescription("Create an invitation."),

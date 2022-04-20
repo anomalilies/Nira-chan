@@ -1,13 +1,19 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
+import { oneLine } from "common-tags";
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import { colour, ownerId, invite } from "../config/config.json";
+import { colour, emojis } from "../../config/config.json";
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("contact")
-    .setDescription("Get support in using Nira, and suggest new features."),
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .setName("dearmrf")
+    .setDescription("Write your own personal letter to Mr. F.")
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    .addStringOption((option: any) =>
+      option.setName("message").setDescription("Your message to Mr. F.").setRequired(true),
+    ),
+
   async execute(interaction: CommandInteraction) {
+    const message: string = interaction.options.getString("message");
     let nickname: string;
     let avatar: string;
 
@@ -23,11 +29,14 @@ module.exports = {
     const embed = new MessageEmbed()
       .setColor(colour)
       .setAuthor({ name: nickname, iconURL: avatar })
-      .setTitle("Support")
-      .setDescription(
-        `Need support in using <@!${interaction.client.user.id}>?\nContact <@!${ownerId}> through DMs, or **through the support server found below**:`,
-      )
-      .addFields({ name: "Discord Server", value: `[Link](https://discord.gg/${invite})` });
+      .addFields(
+        { name: "Dear Mr. F,", value: message },
+        {
+          name: "Your Response",
+          value: oneLine`Mr. F, I have no idea what **${nickname}** is saying, but something 
+          tells me you best pay really close attention! ${emojis.wince}`,
+        },
+      );
 
     return interaction.reply({ embeds: [embed] });
   },

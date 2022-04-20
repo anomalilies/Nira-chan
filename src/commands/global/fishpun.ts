@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import { colour, guildId } from "../config/config.json";
-import fishpuns from "../data/fishpuns.json";
+import { colour, guildId } from "../../config/config.json";
+import fishpuns from "../../data/fishpuns.json";
 
 module.exports = {
   data: new SlashCommandBuilder().setName("fishpun").setDescription("Something seems fishy about this command..."),

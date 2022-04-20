@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
-import { uwuify } from "../util/uwuTranslator/uwuify";
-import { emojis } from "../config/config.json";
+import { uwuify } from "../../util/uwuTranslator/uwuify";
+import { emojis } from "../../config/config.json";
 
 module.exports = {
   data: new SlashCommandBuilder()
