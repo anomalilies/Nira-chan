@@ -6,6 +6,7 @@ import yunyah from "../data/yunyah.json";
 module.exports = {
   data: new SlashCommandBuilder().setName("yunyah").setDescription("is unigory part of zutto mayonaka cinama universe"),
   async execute(interaction: CommandInteraction) {
+    // TO-DO: ZTMY ZONE/DM ONLY -- EDIT FOR DM
     const channel = (await interaction.client.channels.fetch(interaction.channel.id)) as TextChannel;
     const webhooks = await channel.fetchWebhooks();
     let webhook = webhooks.find((w) => w.token != null);

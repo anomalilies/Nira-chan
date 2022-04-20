@@ -18,7 +18,7 @@ module.exports = {
     let avatar: string;
 
     if (interaction.inGuild()) {
-      // this shouldn't have to be written for every command
+      // TO-DO: This shouldn't have to be written for every command
       const userId = interaction.guild.members.cache.find((user) => user.id === interaction.user.id);
       nickname = userId.displayName;
       avatar = userId.displayAvatarURL({ dynamic: true });

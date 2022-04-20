@@ -9,7 +9,7 @@ module.exports = {
     let nickname: string;
     let avatar: string;
 
-    //guild only
+    // TO-DO: ZTMY ZONE/DM ONLY
     if (interaction.inGuild()) {
       const userId = interaction.guild.members.cache.find((user) => user.id === interaction.user.id);
       nickname = userId.displayName;

@@ -9,6 +9,7 @@ module.exports = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .addStringOption((option: any) => option.setName("message").setDescription("[REDACTED]").setRequired(true)),
   async execute(interaction: CommandInteraction) {
+    // TO-DO: NO DM!
     const message = interaction.options.getString("message");
     interaction.deferReply({ ephemeral: true });
     await interaction.channel.sendTyping();
