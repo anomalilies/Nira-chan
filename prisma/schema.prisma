@@ -22,18 +22,10 @@ model Fishy {
   lastFish          DateTime?
 }
 
-model Prefix {
-  id                Int        @default(autoincrement()) @id
-  guildId           Int
-  prefix            String
-  published         Boolean    @default(false)
-}
-
 model Auth {
   id                Int        @default(autoincrement()) @id
   guildId           String     @unique
   authentication    Boolean    @default(false)
-  published         Boolean    @default(false)
 }
 
 // npx prisma db push
