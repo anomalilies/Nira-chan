@@ -32,12 +32,12 @@ export const aboutCommands = async (client: CommandoClient) => {
     return;
   }
 
-  niraMessages.array()[16].edit(about1);
+  /*niraMessages.array()[16].edit(about1);
   niraMessages.array()[14].edit(about2);
   niraMessages.array()[12].edit(about3);
   niraMessages.array()[9].edit(cd1);
   niraMessages.array()[7].edit(cd2);
   niraMessages.array()[5].edit(cd3);
   niraMessages.array()[3].edit(cd4);
-  niraMessages.array()[1].edit(cd5);
+  niraMessages.array()[1].edit(cd5);*/
 };

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MessageAttachment } from 'discord.js';
 import { Command, CommandoClient, CommandoMessage } from 'discord.js-commando';
 import { PrismaClient } from '@prisma/client';
@@ -17,7 +18,9 @@ export default class EmojiListCommand extends Command {
 
   async run(msg: CommandoMessage) {
     const guildData = await prisma.auth.findMany();
-    const published = new Set(guildData.filter((guild) => guild.authentication).map((guild) => guild.guildId));
+    const published = new Set(
+      guildData.filter((guild: any) => guild.authentication).map((guild: any) => guild.guildId),
+    );
 
     const emojis = this.client.guilds.cache
       .filter((guild) => published.has(guild.id))
