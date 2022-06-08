@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
+import { nicknameCheck } from "../../util/nicknameCheck";
 
 module.exports = {
   data: new SlashCommandBuilder().setName("akinator").setDescription("Akinator... But with ACAね for once!"),
@@ -10,17 +11,8 @@ module.exports = {
     );
     const percent = Math.floor(Math.random() * (99 - 75 + 1) + 75);
 
-    let nickname: string;
-    let avatar: string;
-
-    if (interaction.inGuild()) {
-      const userId = interaction.guild.members.cache.find((user) => user.id === interaction.user.id);
-      nickname = userId.displayName;
-      avatar = userId.displayAvatarURL({ dynamic: true });
-    } else {
-      nickname = interaction.user.username;
-      avatar = interaction.user.avatarURL({ dynamic: true });
-    }
+    const avatar = nicknameCheck(interaction).avatar;
+    const nickname = nicknameCheck(interaction).nickname;
 
     const embed = new MessageEmbed()
       .setAuthor({ name: nickname, iconURL: avatar })
@@ -36,7 +28,7 @@ module.exports = {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const filter = (i: any) => i.user.id === interaction.user.id;
-    const collector = interaction.channel.createMessageComponentCollector({ filter, max: 1, time: 60000 });
+    const collector = interaction.channel!.createMessageComponentCollector({ filter, max: 1, time: 60000 });
 
     collector.on("collect", async (i) => {
       if (i.customId === "yes") {
@@ -50,12 +42,6 @@ module.exports = {
           .setFooter({ text: "You have no choice in the matter; This is correct." });
         await i.update({ embeds: [altResponse], components: [] });
       }
-    });
-    collector.on("end", () => {
-      for (let i = 0; i < row.components.length; i++) {
-        row.components[i].setDisabled(true);
-      }
-      interaction.editReply({ components: [row] });
     });
   },
 };

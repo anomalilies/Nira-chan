@@ -6,8 +6,8 @@ import fs from "node:fs";
 import { REST } from "@discordjs/rest";
 import { Routes } from "discord-api-types/v9";
 import { clientId, guildId } from "./config/config.json";
+import { ownerId } from "./config/config.json";
 
-// TO-DO: Split by folder
 const guildCommandPath = __dirname + "/commands/guild/";
 const globalCommandPath = __dirname + "/commands/global/";
 
@@ -28,10 +28,22 @@ for (const file of guildCommandFiles) {
 }
 for (const file of globalCommandFiles) {
   command = require(`./commands/global/${file}`);
+  if (file === "say.ts" || file === "say.js") {
+    if (command.defaultPermission === false) {
+      const permissions = [
+        {
+          id: ownerId,
+          type: "USER",
+          permission: true,
+        },
+      ];
+      command.permissions.add({ permissions });
+    }
+  }
   globalCommands.push(command.data.toJSON());
 }
 
-const rest = new REST({ version: "9" }).setToken(process.env.CLIENT_TOKEN);
+const rest = new REST({ version: "9" }).setToken(process.env.CLIENT_TOKEN!);
 
 rest
   .put(Routes.applicationGuildCommands(clientId, guildId), { body: guildCommands })

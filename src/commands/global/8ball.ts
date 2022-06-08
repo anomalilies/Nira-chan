@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
+import { nicknameCheck } from "../../util/nicknameCheck";
 import responses from "../../data/8ball.json";
 import { colour } from "../../config/config.json";
 
@@ -12,20 +13,10 @@ module.exports = {
       option.setName("query").setDescription("What do you want to ask Nira?").setRequired(true),
     ),
   async execute(interaction: CommandInteraction) {
-    let query: string = interaction.options.getString("query");
+    let query: string = interaction.options.getString("query")!;
 
-    let nickname: string;
-    let avatar: string;
-
-    if (interaction.inGuild()) {
-      // TO-DO: This shouldn't have to be written for every command
-      const userId = interaction.guild.members.cache.find((user) => user.id === interaction.user.id);
-      nickname = userId.displayName;
-      avatar = userId.displayAvatarURL({ dynamic: true });
-    } else {
-      nickname = interaction.user.username;
-      avatar = interaction.user.avatarURL({ dynamic: true });
-    }
+    const avatar = nicknameCheck(interaction).avatar;
+    const nickname = nicknameCheck(interaction).nickname;
 
     if (!query.endsWith("?")) {
       query = query.concat("?");

@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
-import axios from "axios";
+import { nicknameCheck } from "../../util/nicknameCheck";
 import { colour } from "../../config/config.json";
+import axios from "axios";
 import currencies from "../../data/currencies.json";
 
 module.exports = {
@@ -26,24 +27,20 @@ module.exports = {
     ),
   async execute(interaction: CommandInteraction) {
     const value = interaction.options.getNumber("value");
-    const fromCurrency = interaction.options.getString("fromcurrency").toUpperCase();
-    const toCurrency = interaction.options.getString("tocurrency").toUpperCase();
+    const fromCurrency = interaction.options.getString("fromcurrency")!.toUpperCase();
+    const toCurrency = interaction.options.getString("tocurrency")!.toUpperCase();
 
-    if (currencies.includes(toCurrency) && currencies.includes(fromCurrency) && toCurrency !== fromCurrency) {
+    if (
+      currencies.includes(toCurrency) &&
+      currencies.includes(fromCurrency) &&
+      toCurrency !== fromCurrency &&
+      value! > 0
+    ) {
       axios
         .get(`https://api.exchangerate.host/convert?from=${fromCurrency}&to=${toCurrency}&amount=${value}`)
         .then(async (res: any) => {
-          let nickname: string;
-          let avatar: string;
-
-          if (interaction.inGuild()) {
-            const userId = interaction.guild.members.cache.find((user) => user.id === interaction.user.id);
-            nickname = userId.displayName;
-            avatar = userId.displayAvatarURL({ dynamic: true });
-          } else {
-            nickname = interaction.user.username;
-            avatar = interaction.user.avatarURL({ dynamic: true });
-          }
+          const avatar = nicknameCheck(interaction).avatar;
+          const nickname = nicknameCheck(interaction).nickname;
 
           const newValue = res.data.result.toFixed(2);
 

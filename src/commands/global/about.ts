@@ -1,29 +1,23 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
+import { nicknameCheck } from "../../util/nicknameCheck";
 import { colour, ownerId, invite } from "../../config/config.json";
 
 module.exports = {
   data: new SlashCommandBuilder().setName("about").setDescription("Learn more about Nira-chan."),
 
   async execute(interaction: CommandInteraction) {
-    let nickname: string;
-    let avatar: string;
-
-    if (interaction.inGuild()) {
-      const userId = interaction.guild.members.cache.find((user) => user.id === interaction.user.id);
-      nickname = userId.displayName;
-      avatar = userId.displayAvatarURL({ dynamic: true });
-    } else {
-      nickname = interaction.user.username;
-      avatar = interaction.user.avatarURL({ dynamic: true });
-    }
+    const avatar = nicknameCheck(interaction).avatar;
+    const nickname = nicknameCheck(interaction).nickname;
 
     const embed = new MessageEmbed()
       .setColor(colour)
       .setAuthor({ name: nickname, iconURL: avatar })
-      .setTitle(`About ${interaction.client.user.username}`)
+      .setTitle(`About ${interaction.client.user!.username}`)
       .setDescription(
-        `<@!${interaction.client.user.id}> is an open-source bot created by **<@!${ownerId}>**.\n\n> To see a list of Nira's commands, use the ` +
+        `<@!${
+          interaction.client.user!.id
+        }> is an open-source bot created by **<@!${ownerId}>**.\n\n> To see a list of Nira's commands, use the ` +
           "`/help` command.\n\n**Nira is currently in __" +
           `${interaction.client.guilds.cache.size} servers__!**`,
       )

@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
+import { nicknameCheck } from "../../util/nicknameCheck";
 import { colour } from "../../config/config.json";
 import { oneLine } from "common-tags";
 
@@ -11,20 +12,11 @@ module.exports = {
     .addStringOption((option: any) => option.setName("input").setDescription("Who you want to obsess over.")),
 
   async execute(interaction: CommandInteraction) {
-    const input: string = interaction.options.getString("input");
+    const input: string = interaction.options.getString("input")!;
 
     if (!input || input.length <= 133) {
-      let nickname: string;
-      let avatar: string;
-
-      if (interaction.inGuild()) {
-        const userId = interaction.guild.members.cache.find((user) => user.id === interaction.user.id);
-        nickname = userId.displayName;
-        avatar = userId.displayAvatarURL({ dynamic: true });
-      } else {
-        nickname = interaction.user.username;
-        avatar = interaction.user.avatarURL({ dynamic: true });
-      }
+      const avatar = nicknameCheck(interaction).avatar;
+      const nickname = nicknameCheck(interaction).nickname;
       const embed = new MessageEmbed().setColor(colour).setAuthor({ name: nickname, iconURL: avatar });
 
       if (!input || input.toLowerCase() === "aimer") {

@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
+import { nicknameCheck } from "../../util/nicknameCheck";
 import { colour } from "../../config/config.json";
 import riddles from "../../data/riddles.json";
 
@@ -7,17 +8,8 @@ module.exports = {
   data: new SlashCommandBuilder().setName("riddle").setDescription("Really lousy riddles."),
 
   async execute(interaction: CommandInteraction) {
-    let nickname: string;
-    let avatar: string;
-
-    if (interaction.inGuild()) {
-      const userId = interaction.guild.members.cache.find((user) => user.id === interaction.user.id);
-      nickname = userId.displayName;
-      avatar = userId.displayAvatarURL({ dynamic: true });
-    } else {
-      nickname = interaction.user.username;
-      avatar = interaction.user.avatarURL({ dynamic: true });
-    }
+    const avatar = nicknameCheck(interaction).avatar;
+    const nickname = nicknameCheck(interaction).nickname;
 
     const i = Math.floor(Math.random() * riddles.length);
 

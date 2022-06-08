@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
+import { nicknameCheck } from "../../util/nicknameCheck";
 import { colour } from "../../config/config.json";
 
 module.exports = {
@@ -19,31 +20,24 @@ module.exports = {
         .addChoice("°F", "F"),
     ),
   async execute(interaction: CommandInteraction) {
-    const value = interaction.options.getNumber("value");
+    const value = interaction.options.getNumber("value")!;
     const unit = interaction.options.getString("unit");
 
     let toUnit: string;
     let response: string;
 
-    if (unit === "C") {
+    if (unit === "C" && value > -237.15) {
       toUnit = "F";
       response = `${(value * (9 / 5) + 32).toFixed(1)}°${toUnit}`;
-    } else {
+    } else if (unit === "F" && value > -459.7) {
       toUnit = "C";
       response = `${(((value - 32) * 5) / 9).toFixed(1)}°${toUnit}`;
-    }
-
-    let nickname: string;
-    let avatar: string;
-
-    if (interaction.inGuild()) {
-      const userId = interaction.guild.members.cache.find((user) => user.id === interaction.user.id);
-      nickname = userId.displayName;
-      avatar = userId.displayAvatarURL({ dynamic: true });
     } else {
-      nickname = interaction.user.username;
-      avatar = interaction.user.avatarURL({ dynamic: true });
+      return interaction.reply({ content: "Invalid request.", ephemeral: true })
     }
+
+    const avatar = nicknameCheck(interaction).avatar;
+    const nickname = nicknameCheck(interaction).nickname;
 
     const embed = new MessageEmbed()
       .setColor(colour)

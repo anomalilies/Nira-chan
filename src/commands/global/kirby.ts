@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction, MessageEmbed } from "discord.js";
+import { nicknameCheck } from "../../util/nicknameCheck";
 import { emojis, colour } from "../../config/config.json";
 import abilities from "../../data/copyabilities.json";
 
@@ -18,22 +19,13 @@ module.exports = {
       return sum >= threshold;
     });
 
-    const index = Math.floor(Math.random() * group.abilities.length);
-    const ability = group.abilities[index];
+    const index = Math.floor(Math.random() * group!.abilities.length);
+    const ability = group!.abilities[index];
 
-    let nickname: string;
-    let avatar: string;
+    const avatar = nicknameCheck(interaction).avatar;
+    const nickname = nicknameCheck(interaction).nickname;
 
-    if (interaction.inGuild()) {
-      const userId = interaction.guild.members.cache.find((user) => user.id === interaction.user.id);
-      nickname = userId.displayName;
-      avatar = userId.displayAvatarURL({ dynamic: true });
-    } else {
-      nickname = interaction.user.username;
-      avatar = interaction.user.avatarURL({ dynamic: true });
-    }
-
-    const reply = group.format.replace("{ability}", ability).replace("{name}", nickname);
+    const reply = group!.format.replace("{ability}", ability).replace("{name}", nickname);
 
     const embed = new MessageEmbed()
       .setColor(colour)

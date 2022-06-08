@@ -3,32 +3,30 @@
 require("dotenv").config();
 import fs from "node:fs";
 import { Client, Collection, Intents, Interaction } from "discord.js";
-import { ownerId, guildId } from "./config/config.json";
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 const commands = new Collection();
-const commandFiles = fs.readdirSync("./src/commands").filter((file) => file.endsWith(".js") || file.endsWith(".ts"));
+const guildCommandPath = __dirname + "/commands/guild/";
+const globalCommandPath = __dirname + "/commands/global/";
 
-for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
+const guildCommandFiles = fs
+  .readdirSync(guildCommandPath)
+  .filter((file: any) => file.endsWith(".js") || file.endsWith(".ts"));
+const globalCommandFiles = fs
+  .readdirSync(globalCommandPath)
+  .filter((file: any) => file.endsWith(".js") || file.endsWith(".ts"));
+
+let command: any;
+
+for (const file of guildCommandFiles) {
+  command = require(`./commands/guild/${file}`);
   commands.set(command.data.name, command);
 }
-
-client.on("ready", async () => {
-  const command: any = await client.guilds.cache.get(guildId)?.commands.fetch("955566413714702336");
-  if (command.defaultPermission === false) {
-    const permissions = [
-      {
-        id: ownerId,
-        type: "USER",
-        permission: true,
-      },
-    ];
-
-    await command.permissions.add({ permissions });
-  }
-});
+for (const file of globalCommandFiles) {
+  command = require(`./commands/global/${file}`);
+  commands.set(command.data.name, command);
+}
 
 client.on("interactionCreate", async (interaction: Interaction) => {
   if (!interaction.isCommand()) return;

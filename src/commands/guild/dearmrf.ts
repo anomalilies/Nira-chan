@@ -1,6 +1,7 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
 import { oneLine } from "common-tags";
 import { CommandInteraction, MessageEmbed } from "discord.js";
+import { nicknameCheck } from "../../util/nicknameCheck";
 import { colour, emojis } from "../../config/config.json";
 
 module.exports = {
@@ -13,18 +14,9 @@ module.exports = {
     ),
 
   async execute(interaction: CommandInteraction) {
-    const message: string = interaction.options.getString("message");
-    let nickname: string;
-    let avatar: string;
-
-    if (interaction.inGuild()) {
-      const userId = interaction.guild.members.cache.find((user) => user.id === interaction.user.id);
-      nickname = userId.displayName;
-      avatar = userId.displayAvatarURL({ dynamic: true });
-    } else {
-      nickname = interaction.user.username;
-      avatar = interaction.user.avatarURL({ dynamic: true });
-    }
+    const message: string = interaction.options.getString("message")!;
+    const avatar = nicknameCheck(interaction).avatar;
+    const nickname = nicknameCheck(interaction).nickname;
 
     const embed = new MessageEmbed()
       .setColor(colour)
