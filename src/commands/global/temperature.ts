@@ -33,7 +33,7 @@ module.exports = {
       toUnit = "C";
       response = `${(((value - 32) * 5) / 9).toFixed(1)}°${toUnit}`;
     } else {
-      return interaction.reply({ content: "Invalid request.", ephemeral: true })
+      return interaction.reply({ content: "Invalid request.", ephemeral: true });
     }
 
     const avatar = nicknameCheck(interaction).avatar;

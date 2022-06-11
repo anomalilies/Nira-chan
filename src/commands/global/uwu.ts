@@ -12,7 +12,6 @@ module.exports = {
       option.setName("message").setDescription("What would you like to translate?").setRequired(true),
     ),
   async execute(interaction: CommandInteraction) {
-    // TO-DO: DM VER, BLACKLIST EDU
     const text: string = interaction.options.getString("message")!;
 
     interaction.reply(emojis.loading);
