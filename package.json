@@ -16,7 +16,7 @@
     "axios": "^0.21.4",
     "common-tags": "^1.8.0",
     "cron": "^1.8.2",
-    "discord.js": "12.5.3",
+    "discord.js": "github:niradisgust/discord.js#v12",
     "discord.js-commando": "^0.12.2",
     "dotenv": "^8.2.0",
     "keyv": "^4.0.3",
