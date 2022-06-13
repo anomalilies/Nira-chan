@@ -24,9 +24,13 @@ export default async function (client: CommandoClient, guild: Guild) {
     plural = 's';
   }
 
+  const tag = await client.users.fetch(guild.ownerID)
+    .then(user => user.tag)
+    .catch(() => '');
+
   const leaveEmbed = new MessageEmbed({
     title: `Left ${guild.name}!`,
-    description: `**Owner:** ${guild.owner.user.tag}\n**Owner ID:** ${guild.owner.user.id}`,
+    description: `**Owner:** ${tag}\n**Owner ID:** ${guild.ownerID}`,
     color: '#f0534b',
     thumbnail: { url: guild.iconURL({ dynamic: true }) },
     footer: { text: `${guild.name} (${guild.id}) now has ${guild.memberCount} member${plural}.` },
