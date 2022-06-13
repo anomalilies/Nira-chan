@@ -85,7 +85,7 @@ export default class FishyCommand extends Command {
             .humanize()}** to fish again.`;
         }
       } else {
-        if (target.timesFished === null || Date.now() >= target.lastFish?.getTime() + 7200000) {
+        if (target.timesFished === null || Date.now() >= target.lastFish.getTime() + 7200000) {
           canFish = true;
         } else {
           description = `You need to wait **${moment
