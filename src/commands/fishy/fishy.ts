@@ -89,7 +89,7 @@ export default class FishyCommand extends Command {
           canFish = true;
         } else {
           description = `You need to wait **${moment
-            .duration(target.lastFish?.getTime() + 7200000 - Date.now())
+            .duration(target.lastFish.getTime() + 7200000 - Date.now())
             .humanize()}** to fish again.`;
         }
       }
