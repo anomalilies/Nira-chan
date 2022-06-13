@@ -62,7 +62,7 @@ export default class FishyCommand extends Command {
         create: { userId: user.id, lastFish: '1970-01-01T00:00:00.000Z' },
       });
 
-      let canFish = false;
+      let canFish = true; // til New Nira
 
       const title = 'Hold Up!';
       let color: number;
@@ -85,11 +85,11 @@ export default class FishyCommand extends Command {
             .humanize()}** to fish again.`;
         }
       } else {
-        if (target.timesFished === null || Date.now() >= target.lastFish.getTime() + 7200000) {
+        if (target.timesFished === null || Date.now() >= target.lastFish?.getTime() + 7200000) {
           canFish = true;
         } else {
           description = `You need to wait **${moment
-            .duration(target.lastFish.getTime() + 7200000 - Date.now())
+            .duration(target.lastFish?.getTime() + 7200000 - Date.now())
             .humanize()}** to fish again.`;
         }
       }
@@ -121,8 +121,8 @@ export default class FishyCommand extends Command {
               userId: target.userId,
             },
             data: {
-              totalFish: target.totalFish + amount,
-              timesFished: target.timesFished + 1,
+              totalFish: target.totalFish! + amount,
+              timesFished: target.timesFished! + 1,
               [group.type]: target[group.type as FishyStat] + 1,
             },
           });
@@ -150,7 +150,7 @@ export default class FishyCommand extends Command {
             });
           }
 
-          if (amount > target.biggestFish || target.biggestFish === 0) {
+          if (target.biggestFish === 0 || amount > target.biggestFish!) {
             await prisma.fishy.update({
               where: {
                 userId: target.userId,
