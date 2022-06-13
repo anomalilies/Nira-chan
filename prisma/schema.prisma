@@ -1,31 +1,29 @@
-datasource db {
-  provider = "postgres"
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
 model Fishy {
-  id                Int        @default(autoincrement()) @id
-  userId            String     @unique
-  totalFish         Int?       @default(0)
-  totalFishGifted   Int        @default(0)
-  timesFished       Int?
-  biggestFish       Int?       @default(0)
-  totalTrash        Int        @default(0)
-  totalCommon       Int        @default(0)
-  totalUncommon     Int        @default(0)
-  totalRare         Int        @default(0)
-  totalLegendary    Int        @default(0)
-  lastFish          DateTime?
+  id              Int       @id @default(autoincrement())
+  userId          String    @unique
+  totalFish       Int?      @default(0)
+  totalFishGifted Int       @default(0)
+  timesFished     Int?
+  biggestFish     Int?      @default(0)
+  totalTrash      Int       @default(0)
+  totalCommon     Int       @default(0)
+  totalUncommon   Int       @default(0)
+  totalRare       Int       @default(0)
+  totalLegendary  Int       @default(0)
+  lastFish        DateTime?
 }
 
 model Auth {
-  id                Int        @default(autoincrement()) @id
-  guildId           String     @unique
-  authentication    Boolean    @default(false)
+  id             Int     @id @default(autoincrement())
+  guildId        String  @unique
+  authentication Boolean @default(false)
 }
-
-// npx prisma db push

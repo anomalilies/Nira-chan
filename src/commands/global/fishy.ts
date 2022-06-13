@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction, Message, MessageEmbed, MessageInteraction } from "discord.js";
+import { CommandInteraction, MessageEmbed } from "discord.js";
 import { PrismaClient } from "@prisma/client";
 import { colour } from "../../config/config.json";
 import moment from "moment";
@@ -11,12 +11,22 @@ const prisma = new PrismaClient();
 type FishyStat = "totalTrash" | "totalCommon" | "totalUncommon" | "totalRare" | "totalLegendary";
 
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("fishytest")
+  _data: new SlashCommandBuilder()
+    .setName("fishy")
     .setDescription("Go fishing!")
     .addStringOption((option: any) => option.setName("name").setDescription("Who you want to fish for.")),
+  get data() {
+    return this._data;
+  },
+  set data(value) {
+    this._data = value;
+  },
 
   async execute(interaction: CommandInteraction) {
+    console.log(interaction);
+
+    if (!interaction.inCachedGuild()) return;
+
     await interaction.deferReply({ fetchReply: true });
     const name: string = interaction.options.getString("name")!;
 
@@ -31,11 +41,7 @@ module.exports = {
     }
     const user = await interaction.client.users.fetch(userID);
 
-    const userLimit = await prisma.fishy.findUnique({
-      where: { id: 10000 },
-    });
-
-    if (userLimit === null && user !== undefined) {
+    if (user !== undefined) {
       const target = await prisma.fishy.upsert({
         where: { userId: user.id },
         update: {},
@@ -92,6 +98,26 @@ module.exports = {
           },
         })) as any;
 
+        const embed = new MessageEmbed()
+          .setColor(colour)
+          .setTitle(reply)
+          .addFields([
+            {
+              name: "Mr. Fish says...",
+              value: `> ${fishPun}`,
+            },
+          ])
+          .setFooter({
+            text: `${user.tag} has ${newTotal.totalFish} fishy`,
+            iconURL: user.displayAvatarURL({ dynamic: true }),
+          })
+          .setTimestamp();
+
+        const message = await interaction.editReply({
+          embeds: [embed],
+        });
+        message.react(group.reaction);
+
         const time = new Date();
         if (gift === true) {
           await prisma.fishy.update({
@@ -125,26 +151,6 @@ module.exports = {
             },
           });
         }
-
-        const embed = new MessageEmbed()
-          .setColor(colour)
-          .setTitle(reply)
-          .addFields([
-            {
-              name: "Mr. Fish says...",
-              value: `> ${fishPun}`,
-            },
-          ])
-          .setFooter({
-            text: `${user.tag} has ${newTotal.totalFish} fishy`,
-            iconURL: user.displayAvatarURL({ dynamic: true }),
-          })
-          .setTimestamp();
-
-        const message = await interaction.editReply({
-          embeds: [embed],
-        });
-        //await message.react(group.reaction);
       } else {
         const timerEmbed = new MessageEmbed()
           .setColor(colour)
