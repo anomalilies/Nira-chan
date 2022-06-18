@@ -23,8 +23,6 @@ module.exports = {
   },
 
   async execute(interaction: CommandInteraction) {
-    console.log(interaction);
-
     if (!interaction.inCachedGuild()) return;
 
     await interaction.deferReply({ fetchReply: true });
@@ -39,7 +37,7 @@ module.exports = {
       gift = true;
       userID = name.replace(/[\s,<@!>]/g, "");
     }
-    const user = await interaction.client.users.fetch(userID);
+    const user = await interaction.guild!.members.cache.find((user) => user.id === userID)!;
 
     if (user !== undefined) {
       const target = await prisma.fishy.upsert({
@@ -108,7 +106,7 @@ module.exports = {
             },
           ])
           .setFooter({
-            text: `${user.tag} has ${newTotal.totalFish} fishy`,
+            text: `${user.user.tag} has ${newTotal.totalFish} fishy`,
             iconURL: user.displayAvatarURL({ dynamic: true }),
           })
           .setTimestamp();
