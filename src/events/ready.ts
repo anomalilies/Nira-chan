@@ -78,6 +78,12 @@ export default async function (client: CommandoClient) {
     console.log(`${guild.name} | ${guild.id}`);
   });
 
+  let userCount = 0;
+  client.guilds.cache.forEach((guild) => {
+    userCount = userCount + guild.memberCount;
+  });
+  console.log(`${userCount} users.`);
+
   setInterval(() => changeBotStatus(client), 1 * 60 * 1000);
 
   if (process.env.NODE_ENV === 'production') {
