@@ -1,25 +1,24 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction, MessageEmbed } from "discord.js";
-import { nicknameCheck } from "../../util/nicknameCheck";
+import { CommandInteraction, EmbedBuilder } from "discord.js";
 import { colour } from "../../config/config.json";
+import { getFooterData } from "../../util/profile";
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("temperature")
     .setDescription("Convert a temperature from Celsius to Fahrenheit, and vice-versa.")
-    .addNumberOption((option: any) =>
+    .addNumberOption((option) =>
       option.setName("value").setDescription("The value of the temperature you're converting from.").setRequired(true),
     )
-    .addStringOption((option: any) =>
+    .addStringOption((option) =>
       option
         .setName("unit")
         .setDescription("The unit of temperature you're converting from.")
         .setRequired(true)
-        .addChoice("°C", "C")
-        .addChoice("°F", "F"),
+        .addChoices({ name: "°C", value: "C" }, { name: "°F", value: "F" }),
     ),
   async execute(interaction: CommandInteraction) {
+    if (!interaction.isChatInputCommand()) return;
     const value = interaction.options.getNumber("value")!;
     const unit = interaction.options.getString("unit");
 
@@ -36,14 +35,11 @@ module.exports = {
       return interaction.reply({ content: "Invalid request.", ephemeral: true });
     }
 
-    const avatar = nicknameCheck(interaction).avatar;
-    const nickname = nicknameCheck(interaction).nickname;
-
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setColor(colour)
       .setAuthor({ name: `🌡️ ${value}°${unit} equals:` })
       .setTitle(response)
-      .setFooter({ text: nickname, iconURL: avatar });
+      .setFooter(getFooterData(interaction));
 
     interaction.reply({ embeds: [embed] });
   },

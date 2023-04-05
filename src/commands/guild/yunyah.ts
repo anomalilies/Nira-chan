@@ -1,29 +1,27 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction, TextChannel } from "discord.js";
+import { CommandInteraction } from "discord.js";
 import { emojis } from "../../config/config.json";
 import yunyah from "../../data/yunyah.json";
+import { getWebhook } from "../../util/webhook";
 
 module.exports = {
   data: new SlashCommandBuilder().setName("yunyah").setDescription("is unigory part of zutto mayonaka cinama universe"),
   async execute(interaction: CommandInteraction) {
-    const channel = (await interaction.client.channels.fetch(interaction.channel!.id)) as TextChannel;
-    const webhooks = await channel.fetchWebhooks();
-    let webhook = webhooks.find((w) => w.token != null);
+    const quote = yunyah[Math.floor(Math.random() * yunyah.length)];
 
-    if (!webhook) {
-      webhook = await channel.createWebhook("Nira-chan", {
-        avatar: interaction.client.user!.avatarURL(),
+    const channel = interaction.channel;
+    if (channel && !channel.isDMBased() && !channel.isThread()) {
+      const webhook = await getWebhook(channel);
+
+      await interaction.reply(emojis.loading);
+      await interaction.deleteReply();
+      await webhook.send({
+        content: quote,
+        username: "yunyah",
+        avatarURL: interaction.client.user!.defaultAvatarURL,
       });
+    } else {
+      await interaction.reply(quote);
     }
-
-    interaction.reply(emojis.loading);
-    interaction.deleteReply().then(
-      async () =>
-        await await webhook!.send({
-          content: yunyah[Math.floor(Math.random() * yunyah.length)],
-          username: "yunyah",
-          avatarURL: interaction.client.user!.defaultAvatarURL,
-        }),
-    );
   },
 };

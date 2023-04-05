@@ -1,16 +1,14 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction, MessageEmbed } from "discord.js";
+import { CommandInteraction, EmbedBuilder } from "discord.js";
 import { PrismaClient } from "@prisma/client";
-import { nicknameCheck } from "../../util/nicknameCheck";
 import { colour } from "../../config/config.json";
 import moment from "moment";
-
-const prisma = new PrismaClient();
+import { getAuthorData } from "../../util/profile";
 
 module.exports = {
   data: new SlashCommandBuilder().setName("fishytimer").setDescription("Check when you can next fish."),
-  async execute(interaction: CommandInteraction) {
-    const user = await interaction.guild!.members.cache.find((user) => user.id === interaction.user.id)!;
+  async execute(interaction: CommandInteraction, prisma: PrismaClient) {
+    const user = interaction.guild!.members.cache.find((user) => user.id === interaction.user.id);
 
     if (user !== undefined) {
       const target = await prisma.fishy.findUnique({
@@ -19,13 +17,7 @@ module.exports = {
         },
       });
 
-      const avatar = nicknameCheck(interaction).avatar;
-      const nickname = nicknameCheck(interaction).nickname;
-
-      const defaultEmbed = new MessageEmbed()
-        .setColor(colour)
-        .setAuthor({ name: nickname, iconURL: avatar })
-        .setTimestamp();
+      const defaultEmbed = new EmbedBuilder().setColor(colour).setAuthor(getAuthorData(interaction)).setTimestamp();
 
       if (target === null) {
         interaction.reply({

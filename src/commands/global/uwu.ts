@@ -2,19 +2,33 @@ import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
 import { uwuify } from "../../util/uwuTranslator/uwuify";
 import { emojis } from "../../config/config.json";
+import { getWebhook } from "../../util/webhook";
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("uwu")
     .setDescription("Uwu-ify your message!")
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    .addStringOption((option: any) =>
+    .addStringOption((option) =>
       option.setName("message").setDescription("What would you like to translate?").setRequired(true),
     ),
   async execute(interaction: CommandInteraction) {
-    const text: string = interaction.options.getString("message")!;
+    if (!interaction.isChatInputCommand()) return;
+    const text = interaction.options.getString("message")!;
+    const uwuified = uwuify(text);
 
-    interaction.reply(emojis.loading);
-    interaction.deleteReply().then(async () => await uwuify(text, interaction));
+    const channel = interaction.channel;
+    if (interaction.inCachedGuild() && channel && !channel.isDMBased() && !channel.isThread()) {
+      const webhook = await getWebhook(channel);
+
+      await interaction.reply(emojis.loading);
+      await interaction.deleteReply();
+      await webhook.send({
+        content: uwuified,
+        username: interaction.member.displayName,
+        avatarURL: interaction.member.displayAvatarURL(),
+      });
+    } else {
+      await interaction.reply(uwuified);
+    }
   },
 };

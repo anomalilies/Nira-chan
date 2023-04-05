@@ -1,28 +1,21 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction, MessageEmbed } from "discord.js";
+import { CommandInteraction, EmbedBuilder } from "discord.js";
 import { PrismaClient } from "@prisma/client";
 import { colour } from "../../config/config.json";
 import moment from "moment";
 import * as crypto from "crypto";
 import fish from "../../data/fish.json";
 
-const prisma = new PrismaClient();
 type FishyStat = "totalTrash" | "totalCommon" | "totalUncommon" | "totalRare" | "totalLegendary";
 
 module.exports = {
-  _data: new SlashCommandBuilder()
+  data: new SlashCommandBuilder()
     .setName("fishy")
     .setDescription("Go fishing!")
-    .addStringOption((option: any) => option.setName("name").setDescription("Who you want to fish for.")),
-  get data() {
-    return this._data;
-  },
-  set data(value) {
-    this._data = value;
-  },
+    .addStringOption((option) => option.setName("name").setDescription("Who you want to fish for.")),
 
-  async execute(interaction: CommandInteraction) {
+  async execute(interaction: CommandInteraction, prisma: PrismaClient) {
+    if (!interaction.isChatInputCommand()) return;
     if (!interaction.inCachedGuild()) return;
 
     await interaction.deferReply({ fetchReply: true });
@@ -37,7 +30,7 @@ module.exports = {
       gift = true;
       userID = name.replace(/[\s,<@!>]/g, "");
     }
-    const user = await interaction.guild!.members.cache.find((user) => user.id === userID)!;
+    const user = interaction.guild.members.cache.find((user) => user.id === userID);
 
     if (user !== undefined) {
       const target = await prisma.fishy.upsert({
@@ -46,15 +39,15 @@ module.exports = {
         create: { userId: user.id, lastFish: "1970-01-01T00:00:00.000Z" },
       });
 
-      const ogAuthor = (await prisma.fishy.upsert({
+      const ogAuthor = await prisma.fishy.upsert({
         where: { userId: interaction.user.id },
         update: {},
         create: { userId: interaction.user.id },
-      })) as any;
+      });
 
       let canFish = false;
       if (gift === true) {
-        if (ogAuthor.timesFished === null || Date.now() >= ogAuthor.lastFish.getTime() + 7200000) {
+        if (ogAuthor.lastFish === null || Date.now() >= ogAuthor.lastFish.getTime() + 7200000) {
           canFish = true;
         }
       } else if (target.timesFished === null || Date.now() >= target.lastFish!.getTime() + 7200000) {
@@ -85,7 +78,7 @@ module.exports = {
           reply = group.catch.replace("{amount}", amount.toString());
         }
 
-        const newTotal = (await prisma.fishy.update({
+        const newTotal = await prisma.fishy.update({
           where: {
             userId: target.userId,
           },
@@ -94,9 +87,9 @@ module.exports = {
             timesFished: target.timesFished! + 1,
             [group.type]: target[group.type as FishyStat] + 1,
           },
-        })) as any;
+        });
 
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
           .setColor(colour)
           .setTitle(reply)
           .addFields([
@@ -107,14 +100,14 @@ module.exports = {
           ])
           .setFooter({
             text: `${user.user.tag} has ${newTotal.totalFish} fishy`,
-            iconURL: user.displayAvatarURL({ dynamic: true }),
+            iconURL: user.displayAvatarURL(),
           })
           .setTimestamp();
 
         const message = await interaction.editReply({
           embeds: [embed],
         });
-        message.react(group.reaction);
+        await message.react(group.reaction);
 
         const time = new Date();
         if (gift === true) {
@@ -150,12 +143,12 @@ module.exports = {
           });
         }
       } else {
-        const timerEmbed = new MessageEmbed()
+        const timerEmbed = new EmbedBuilder()
           .setColor(colour)
           .setTitle("Hold Up!")
           .setDescription(
             `You need to wait **${moment
-              .duration(ogAuthor.lastFish.getTime() + 7200000 - Date.now())
+              .duration(ogAuthor.lastFish!.getTime() + 7200000 - Date.now())
               .humanize()}** to fish again.`,
           );
 

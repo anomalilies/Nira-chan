@@ -1,20 +1,16 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction, MessageEmbed } from "discord.js";
-import { nicknameCheck } from "../../util/nicknameCheck";
+import { CommandInteraction, EmbedBuilder } from "discord.js";
 import { colour, ownerId, invite } from "../../config/config.json";
+import { getAuthorData } from "../../util/profile";
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("contact")
     .setDescription("Get support in using Nira, and suggest new features."),
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async execute(interaction: CommandInteraction) {
-    const avatar = nicknameCheck(interaction).avatar;
-    const nickname = nicknameCheck(interaction).nickname;
-
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setColor(colour)
-      .setAuthor({ name: nickname, iconURL: avatar })
+      .setAuthor(getAuthorData(interaction))
       .setTitle("Support")
       .setDescription(
         `Need support in using <@!${

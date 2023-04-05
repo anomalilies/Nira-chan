@@ -1,21 +1,18 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction, MessageEmbed } from "discord.js";
-import { nicknameCheck } from "../../util/nicknameCheck";
+import { CommandInteraction, EmbedBuilder } from "discord.js";
 import { colour } from "../../config/config.json";
 import riddles from "../../data/riddles.json";
+import { getAuthorData } from "../../util/profile";
 
 module.exports = {
   data: new SlashCommandBuilder().setName("riddle").setDescription("Really lousy riddles."),
 
   async execute(interaction: CommandInteraction) {
-    const avatar = nicknameCheck(interaction).avatar;
-    const nickname = nicknameCheck(interaction).nickname;
-
     const i = Math.floor(Math.random() * riddles.length);
 
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setColor(colour)
-      .setAuthor({ name: nickname, iconURL: avatar })
+      .setAuthor(getAuthorData(interaction))
       .setDescription(riddles[i].riddle)
       .addFields({
         name: "Answer",

@@ -1,19 +1,16 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction, MessageEmbed } from "discord.js";
-import { nicknameCheck } from "../../util/nicknameCheck";
+import { CommandInteraction, EmbedBuilder } from "discord.js";
 import { colour, ownerId, invite } from "../../config/config.json";
+import { getAuthorData } from "../../util/profile";
 
 module.exports = {
   data: new SlashCommandBuilder().setName("about").setDescription("Learn more about Nira-chan."),
 
   async execute(interaction: CommandInteraction) {
-    const avatar = nicknameCheck(interaction).avatar;
-    const nickname = nicknameCheck(interaction).nickname;
-
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setColor(colour)
-      .setAuthor({ name: nickname, iconURL: avatar })
-      .setTitle(`About ${interaction.client.user!.username}`)
+      .setAuthor(getAuthorData(interaction))
+      .setTitle(`About ${interaction.client.user.username}`)
       .setDescription(
         `<@!${
           interaction.client.user!.id

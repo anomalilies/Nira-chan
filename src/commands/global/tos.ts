@@ -1,18 +1,15 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { CommandInteraction, MessageEmbed } from "discord.js";
-import { nicknameCheck } from "../../util/nicknameCheck";
+import { CommandInteraction, EmbedBuilder } from "discord.js";
 import { colour, ownerId } from "../../config/config.json";
+import { getAuthorData } from "../../util/profile";
 
 module.exports = {
   data: new SlashCommandBuilder().setName("tos").setDescription("Review Nira's Terms of Service and Privacy Policy."),
 
   async execute(interaction: CommandInteraction) {
-    const avatar = nicknameCheck(interaction).avatar;
-    const nickname = nicknameCheck(interaction).nickname;
-
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setColor(colour)
-      .setAuthor({ name: nickname, iconURL: avatar })
+      .setAuthor(getAuthorData(interaction))
       .addFields(
         {
           name: "Terms of Service",

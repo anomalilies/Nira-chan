@@ -1,56 +1,52 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-var-requires */
-require("dotenv").config();
-import fs from "node:fs";
-import { Client, Collection, Intents, Interaction } from "discord.js";
+import * as dotenv from "dotenv";
+dotenv.config();
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+import { Client, IntentsBitField } from "discord.js";
+import { Command } from "./commands/command";
+import { loadModules } from "./loader";
+import { PrismaClient } from "@prisma/client";
 
-const commands = new Collection();
-const guildCommandPath = __dirname + "/commands/guild/";
-const globalCommandPath = __dirname + "/commands/global/";
-
-const guildCommandFiles = fs
-  .readdirSync(guildCommandPath)
-  .filter((file: any) => file.endsWith(".js") || file.endsWith(".ts"));
-const globalCommandFiles = fs
-  .readdirSync(globalCommandPath)
-  .filter((file: any) => file.endsWith(".js") || file.endsWith(".ts"));
-
-let command: any;
-
-for (const file of guildCommandFiles) {
-  command = require(`./commands/guild/${file}`);
-  commands.set(command.data.name, command);
-}
-for (const file of globalCommandFiles) {
-  command = require(`./commands/global/${file}`);
-  commands.set(command.data.name, command);
+if (process.env.CLIENT_TOKEN === undefined) {
+  console.log("CLIENT_TOKEN is not set");
+  process.exit(1);
 }
 
-client.on("interactionCreate", async (interaction: Interaction) => {
+const client = new Client({
+  intents: [
+    IntentsBitField.Flags.Guilds,
+    IntentsBitField.Flags.GuildMembers,
+    IntentsBitField.Flags.GuildEmojisAndStickers,
+    IntentsBitField.Flags.GuildWebhooks,
+    IntentsBitField.Flags.GuildMessages,
+    IntentsBitField.Flags.GuildMessageReactions,
+    IntentsBitField.Flags.DirectMessages,
+    IntentsBitField.Flags.DirectMessageReactions,
+  ],
+});
+const prisma = new PrismaClient();
+
+const commands = new Map<string, Command>();
+
+client.on("interactionCreate", async (interaction) => {
   if (!interaction.isCommand()) return;
 
-  const command: any = commands.get(interaction.commandName);
-
+  const command = commands.get(interaction.commandName);
   if (!command) return;
+
   try {
-    await command.execute(interaction);
+    await command.execute(interaction, prisma);
   } catch (error) {
     console.error(error);
     await interaction.reply({ content: "There was an error while executing this command!", ephemeral: true });
   }
 });
 
-const eventFiles = fs.readdirSync("./src/events").filter((file) => file.endsWith(".js") || file.endsWith(".ts"));
+client.once("ready", () => console.log(`${client.user!.tag} activated!`));
 
-for (const file of eventFiles) {
-  const event = require(`./events/${file}`);
-  if (event.once) {
-    client.once(event.name, (...args) => event.execute(...args));
-  } else {
-    client.on(event.name, (...args) => event.execute(...args));
-  }
-}
+(async (token) => {
+  (await loadModules<Command>("./commands/global"))
+    .concat(await loadModules<Command>("./commands/guild"))
+    .forEach((command) => commands.set(command.data.name, command));
 
-client.login(process.env.CLIENT_TOKEN);
+  client.login(token);
+})(process.env.CLIENT_TOKEN);

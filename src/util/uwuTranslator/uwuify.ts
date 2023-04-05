@@ -1,9 +1,6 @@
-import { CommandInteraction, MessageEmbed, TextChannel, DMChannel } from "discord.js";
-import { nicknameCheck } from "../nicknameCheck";
-import { colour } from "../../config/config.json";
-import emotions from "./data";
+import emotions from "./emotes.json";
 
-export const uwuify = async function (text: string, interaction: CommandInteraction) {
+export function uwuify(text: string): string {
   if (text.slice(-1) == " ") text = text.substring(0, text.length - 1);
 
   emotions.forEach((emoteClass) => {
@@ -26,33 +23,5 @@ export const uwuify = async function (text: string, interaction: CommandInteract
   if (text[0].match(/[a-z]/i)) text = text[0] + "-" + text;
   if (text[text.length - 1].match(/[a-z]/i)) text = text + "~~";
 
-  const avatar = nicknameCheck(interaction).avatar;
-  const nickname = nicknameCheck(interaction).nickname;
-
-  if (interaction.inGuild()) {
-    const channel = (await interaction.client.channels.fetch(interaction.channel!.id)) as TextChannel;
-    const webhooks = await channel.fetchWebhooks();
-    let webhook = webhooks.find((w) => w.token != null);
-
-    if (!webhook) {
-      webhook = await channel.createWebhook("Nira-chan", {
-        avatar: interaction.client.user!.avatarURL(),
-      });
-    }
-
-    await webhook.send({
-      content: text,
-      username: nickname,
-      avatarURL: avatar,
-    });
-  } else {
-    const channel = (await interaction.user.createDM()) as DMChannel;
-
-    const embed = new MessageEmbed()
-      .setColor(colour)
-      .setAuthor({ name: nickname, iconURL: avatar })
-      .setDescription(text);
-
-    return channel.send({ embeds: [embed] });
-  }
-};
+  return text;
+}

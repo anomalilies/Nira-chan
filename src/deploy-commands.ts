@@ -1,56 +1,32 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-var-requires */
-require("dotenv").config();
+import * as dotenv from "dotenv";
+dotenv.config();
 
-import fs from "node:fs";
-import { REST } from "@discordjs/rest";
-import { Routes } from "discord-api-types/v9";
+import { REST, Routes } from "discord.js";
+import { loadModules } from "./loader";
+import { Command } from "./commands/command";
 import { clientId, guildId } from "./config/config.json";
-import { ownerId } from "./config/config.json";
 
-const guildCommandPath = __dirname + "/commands/guild/";
-const globalCommandPath = __dirname + "/commands/global/";
-
-const guildCommands: any = [];
-const globalCommands: any = [];
-
-const guildCommandFiles = fs
-  .readdirSync(guildCommandPath)
-  .filter((file: any) => file.endsWith(".js") || file.endsWith(".ts"));
-const globalCommandFiles = fs
-  .readdirSync(globalCommandPath)
-  .filter((file: any) => file.endsWith(".js") || file.endsWith(".ts"));
-
-let command: any;
-for (const file of guildCommandFiles) {
-  command = require(`./commands/guild/${file}`);
-  guildCommands.push(command.data.toJSON());
-}
-for (const file of globalCommandFiles) {
-  command = require(`./commands/global/${file}`);
-  if (file === "say.ts" || file === "say.js") {
-    if (command.defaultPermission === false) {
-      const permissions = [
-        {
-          id: ownerId,
-          type: "USER",
-          permission: true,
-        },
-      ];
-      command.permissions.add({ permissions });
-    }
-  }
-  globalCommands.push(command.data.toJSON());
+if (process.env.CLIENT_TOKEN === undefined) {
+  console.log("CLIENT_TOKEN is not set");
+  process.exit(1);
 }
 
-const rest = new REST({ version: "9" }).setToken(process.env.CLIENT_TOKEN!);
+(async (token) => {
+  const globalCommands = await loadModules<Command>("./commands/global");
+  const guildCommands = await loadModules<Command>("./commands/guild");
 
-rest
-  .put(Routes.applicationGuildCommands(clientId, guildId), { body: guildCommands })
-  .then(() => console.log("Guild command registration successful!"))
-  .catch(console.error);
+  const globalCommandsJSON = globalCommands.map((command) => command.data.toJSON());
+  const guildCommandsJSON = guildCommands.map((command) => command.data.toJSON());
 
-rest
-  .put(Routes.applicationCommands(clientId), { body: globalCommands })
-  .then(() => console.log("Global command registration successful!"))
-  .catch(console.error);
+  const rest = new REST({ version: "10" }).setToken(token);
+
+  rest
+    .put(Routes.applicationCommands(clientId), { body: globalCommandsJSON })
+    .then(() => console.log("Global command registration successful!"))
+    .catch(console.error);
+
+  rest
+    .put(Routes.applicationGuildCommands(clientId, guildId), { body: guildCommandsJSON })
+    .then(() => console.log("Guild command registration successful!"))
+    .catch(console.error);
+})(process.env.CLIENT_TOKEN);

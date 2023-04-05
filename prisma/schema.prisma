@@ -10,10 +10,10 @@ datasource db {
 model Fishy {
   id              Int       @id @default(autoincrement())
   userId          String    @unique
-  totalFish       Int?      @default(0)
+  totalFish       Int       @default(0)
   totalFishGifted Int       @default(0)
-  timesFished     Int?
-  biggestFish     Int?      @default(0)
+  timesFished     Int       @default(0)
+  biggestFish     Int       @default(0)
   totalTrash      Int       @default(0)
   totalCommon     Int       @default(0)
   totalUncommon   Int       @default(0)
