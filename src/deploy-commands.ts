@@ -3,7 +3,7 @@ dotenv.config();
 
 import { REST, Routes } from "discord.js";
 import { loadModules } from "./loader";
-import { Command } from "./commands/command";
+import { Command } from "./interfaces";
 import { clientId, guildId } from "./config/config.json";
 
 if (process.env.CLIENT_TOKEN === undefined) {

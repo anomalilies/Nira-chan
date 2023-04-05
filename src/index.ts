@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 import { Client, IntentsBitField } from "discord.js";
-import { Command } from "./commands/command";
+import { Command, Module } from "./interfaces";
 import { loadModules } from "./loader";
 import { PrismaClient } from "@prisma/client";
 
@@ -42,11 +42,16 @@ client.on("interactionCreate", async (interaction) => {
 });
 
 client.once("ready", () => console.log(`${client.user!.tag} activated!`));
+client.on("error", (err) => console.error(err));
 
 (async (token) => {
+  // load commands
   (await loadModules<Command>("./commands/global"))
     .concat(await loadModules<Command>("./commands/guild"))
     .forEach((command) => commands.set(command.data.name, command));
+
+  // load modules
+  (await loadModules<Module>("./modules")).forEach((module) => module.register(client, prisma));
 
   client.login(token);
 })(process.env.CLIENT_TOKEN);
