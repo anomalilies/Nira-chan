@@ -1,0 +1,34 @@
+services:
+  app:
+    build: .
+    stop_signal: SIGKILL
+    environment:
+      CLIENT_TOKEN:
+      DATABASE_URL: postgresql://postgres:password@db/postgres
+    depends_on:
+      db:
+        condition: service_healthy
+      seed-db:
+        condition: service_completed_successfully
+
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: password
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 5s
+      timeout: 5s
+
+  seed-db:
+    build: .
+    environment:
+      DATABASE_URL: postgresql://postgres:password@db/postgres
+    volumes:
+      - /state
+    command: sh -c "[ -f /state/seeded ] || npx prisma migrate dev --name init && touch /state/seeded"
+    depends_on:
+      db:
+        condition: service_healthy
