@@ -77,8 +77,11 @@ async function registerCollectors(messages: Collection<string, Message<true>>) {
 }
 
 async function handleReaction(reaction: MessageReaction, picker: Picker, user: User, added: boolean) {
+  // the emoji ID if it is a guild emoji, or the unicode representation otherwise
+  const emoji = reaction.emoji.id || reaction.emoji.toString();
+
   // get roleId corresponding to reaction
-  const roleId = picker.roles.get(reaction.emoji.toString());
+  const roleId = picker.roles.get(emoji);
   if (!roleId) {
     console.error(`rolepicker: role for emoji ${reaction.emoji} not found`);
     return;
