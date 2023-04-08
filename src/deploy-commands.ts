@@ -20,13 +20,11 @@ if (process.env.CLIENT_TOKEN === undefined) {
 
   const rest = new REST({ version: "10" }).setToken(token);
 
-  rest
+  await rest
     .put(Routes.applicationCommands(clientId), { body: globalCommandsJSON })
-    .then(() => console.log("Global command registration successful!"))
-    .catch(console.error);
+    .then(() => console.log("Global command registration successful!"));
 
-  rest
+  await rest
     .put(Routes.applicationGuildCommands(clientId, guildId), { body: guildCommandsJSON })
-    .then(() => console.log("Guild command registration successful!"))
-    .catch(console.error);
+    .then(() => console.log("Guild command registration successful!"));
 })(process.env.CLIENT_TOKEN);
